@@ -1,446 +1,350 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Glow Studio — Agence digitale en Belgique | Création de sites web</title>
-  <meta name="description" content="Glow Studio fait rayonner les entreprises dans le digital : création de sites web, SEO local & Google Business, photo & vidéo, contenus, stratégie et automatisation IA. Agence digitale en Belgique.">
-  <meta name="theme-color" content="#0f0f0f">
-  <meta property="og:title" content="Glow Studio — Designed to shine.">
-  <meta property="og:description" content="Agence digitale en Belgique : sites web, visibilité locale, contenus professionnels et outils intelligents.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="fr_BE">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0A0B">
+<title>Glow Studio — Agence digitale en Belgique | Création de sites web, SEO local, photo & vidéo</title>
+<meta name="description" content="Glow Studio fait rayonner les entreprises dans le digital : création de sites web, SEO local & Google Business, photo & vidéo, contenus, stratégie digitale et automatisation IA. Agence digitale en Belgique.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Glow Studio">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Glow Studio — Designed to shine.">
+<meta property="og:description" content="Agence digitale en Belgique : sites web, visibilité locale, contenus professionnels et outils intelligents.">
+<meta property="og:locale" content="fr_BE">
+<meta property="og:site_name" content="Glow Studio">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Glow Studio",
+  "slogan": "Designed to shine.",
+  "description": "Agence digitale : création de sites web, SEO local, Google Business, photo & vidéo, contenus, stratégie digitale et automatisation IA.",
+  "areaServed": { "@type": "Country", "name": "Belgique" },
+  "address": { "@type": "PostalAddress", "addressCountry": "BE" },
+  "email": "contact@glowstudio.be"
+}
+</script>
 </head>
+
 <body>
 
-  <!-- ============ PRELOADER ============ -->
-  <div class="preloader" aria-hidden="true">
-    <div class="preloader__inner">
-      <img class="preloader__logo" src="assets/logo-light.svg" alt="">
-      <div class="preloader__bar"><span></span></div>
-      <div class="preloader__count"><span class="preloader__num">0</span>%</div>
-    </div>
+<!-- FOND DERIVANT AU SCROLL -->
+<div id="scrollBg" aria-hidden="true">
+  <div class="sbg-track" id="sbgTrack">
+    <div class="sbg-layer sbg-hero active" data-zone="hero"></div>
+    <div class="sbg-layer sbg-services" data-zone="services"></div>
+    <div class="sbg-layer sbg-method" data-zone="methode"></div>
+    <div class="sbg-layer sbg-offres" data-zone="offres"></div>
   </div>
+</div>
 
-  <!-- ============ CURSOR ============ -->
-  <div class="cursor" aria-hidden="true"><span class="cursor__label">Voir</span></div>
-  <div class="cursor-dot" aria-hidden="true"></div>
+<!-- INTRO : le logo se dessine puis se remplit -->
+<div id="intro" aria-hidden="true">
+  <div class="intro-grad"></div>
+  <svg class="intro-logo" viewBox="175 235 1420 440">
+    <path class="intro-glow" transform="translate(170 225)" d="M175.0 349.4C156.0 347.4 150.4 346.5 140.2 344.0C79.6 329.1 30.6 278.9 18.9 219.5C16.7 208.6 17.0 176.6 19.3 166.5C23.8 147.1 31.6 127.2 40.2 113.5C53.5 92.4 78.2 68.2 101.5 53.5C120.3 41.6 143.3 32.1 163.2 28.0C182.1 24.1 189.6 23.9 278.0 24.2L363.5 24.5L370.0 27.6C378.3 31.5 384.5 37.8 388.4 46.0C391.0 51.5 391.4 53.6 391.4 60.5C391.4 67.4 391.0 69.5 388.4 75.0C384.9 82.4 377.2 90.5 370.5 93.9C360.9 98.7 358.7 98.8 267.3 98.9C172.8 99.1 175.0 99.0 157.8 105.4C143.9 110.6 133.8 117.2 122.4 128.5C107.7 143.0 99.4 158.3 95.5 177.9C93.4 188.2 93.9 208.1 96.5 218.0C101.1 235.3 109.8 250.0 122.4 261.7C131.4 270.1 138.5 274.4 149.4 278.1C163.0 282.8 168.8 283.1 231.0 282.8C287.0 282.5 288.6 282.4 293.1 280.4C299.1 277.6 304.6 272.6 307.3 267.6C310.3 261.8 310.3 250.2 307.3 244.5C304.6 239.5 299.8 234.9 294.0 231.9L289.5 229.5L234.5 229.0C183.1 228.5 179.3 228.4 176.0 226.6C169.2 222.9 167.1 220.9 164.1 214.8C157.1 201.0 162.4 185.2 176.4 177.7C180.5 175.6 181.0 175.5 255.5 174.7C342.9 173.8 351.8 174.0 362.2 177.3C386.2 184.9 401.8 207.8 402.0 235.6C402.1 265.9 392.3 291.7 373.5 310.5C357.5 326.6 333.2 339.5 305.7 346.7L295.5 349.4L237.0 349.6C204.8 349.7 176.9 349.6 175.0 349.4ZM492.0 347.5C455.4 340.1 426.3 308.6 420.5 270.0C418.3 255.9 418.3 63.8 420.5 53.7C424.9 32.7 443.5 18.5 462.0 22.0C478.3 25.1 490.8 37.9 494.0 54.9C494.6 58.3 495.0 93.2 495.0 150.2L495.0 240.1L497.5 247.7C502.1 261.4 510.6 271.4 522.4 276.9C531.4 281.2 537.4 282.1 560.0 282.7C588.3 283.4 597.4 285.8 607.4 295.0C623.3 309.7 620.6 338.2 602.6 346.6L597.5 349.0L548.0 348.9C511.5 348.8 496.8 348.5 492.0 347.5ZM716.5 339.4C668.5 334.2 623.3 307.3 597.3 268.2C581.1 243.9 571.8 217.1 570.2 189.6C567.7 148.0 581.2 109.0 609.3 76.9C633.9 48.7 671.0 27.7 706.8 21.6C739.7 15.9 777.8 21.2 807.7 35.6C857.4 59.5 889.3 107.2 894.1 165.1C899.5 229.7 863.8 292.4 804.6 322.0C780.4 334.2 762.2 338.8 736.5 339.4C727.7 339.6 718.7 339.6 716.5 339.4ZM1021.1 338.9C1004.8 335.7 988.9 326.9 976.9 314.4C962.6 299.3 958.4 290.5 946.6 249.4C929.4 189.8 914.0 128.1 914.0 119.0C914.0 98.8 927.2 82.6 946.5 79.1C967.6 75.3 989.0 91.4 998.9 118.6C1002.2 127.8 1004.2 136.2 1015.5 190.5C1020.1 212.5 1024.8 233.1 1026.0 236.2C1029.2 244.7 1036.7 252.6 1043.5 254.6C1057.6 258.7 1067.2 251.4 1083.9 224.0C1098.8 199.6 1103.2 193.0 1110.1 185.1C1117.2 176.8 1128.8 167.1 1135.9 163.6C1157.9 152.4 1186.2 155.5 1208.4 171.4C1220.7 180.2 1229.8 191.8 1241.0 212.9C1247.0 224.3 1253.3 232.0 1258.0 234.0C1259.7 234.7 1263.3 235.1 1266.4 234.8C1276.4 234.0 1281.1 227.9 1287.4 207.6C1289.9 199.8 1297.8 174.4 1305.0 151.1C1324.7 87.6 1328.9 77.4 1339.9 65.7C1353.7 50.9 1378.0 45.4 1394.6 53.2C1405.6 58.3 1413.9 69.9 1415.9 82.8C1417.7 94.4 1418.4 92.4 1389.0 167.0C1379.6 190.9 1365.8 226.0 1358.4 245.0C1340.4 291.0 1333.2 304.1 1318.3 318.0C1297.8 337.1 1271.0 340.2 1248.4 325.9C1239.1 320.0 1230.0 309.6 1214.4 286.9C1196.6 261.0 1190.5 254.3 1179.2 248.7C1171.0 244.7 1170.3 244.5 1161.6 244.6C1151.2 244.6 1144.2 246.7 1136.3 252.1C1128.5 257.4 1122.4 264.5 1106.8 286.1C1098.8 297.3 1089.5 309.6 1086.3 313.5C1079.7 321.3 1069.2 329.8 1061.2 333.6C1049.4 339.2 1033.4 341.3 1021.1 338.9ZM752.9 272.5C769.8 268.4 784.7 260.1 797.0 248.0C810.8 234.5 819.8 219.0 824.0 201.9C831.9 169.3 822.7 137.4 798.1 112.9C779.3 94.2 757.5 85.1 731.2 85.0C704.4 85.0 682.5 94.1 663.5 113.4C650.2 126.9 643.2 139.0 638.3 157.0C636.9 162.0 636.5 167.2 636.6 180.0C636.6 195.0 636.9 197.3 639.3 205.3C644.5 222.2 652.9 236.1 665.0 248.0C677.7 260.4 696.5 270.2 713.7 273.5C723.3 275.3 743.7 274.8 752.9 272.5Z"/>
+    <g class="intro-studio" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path transform="translate(495 622)" d="M28 2H10Q2 2 2 10V12.5Q2 20.5 10 20.5H20Q28 20.5 28 28.5V31Q28 39 20 39H2"/>
+      <path transform="translate(645 622)" d="M0 2H30M15 2V39"/>
+      <path transform="translate(795 622)" d="M2 2V29Q2 39 12 39H18Q28 39 28 29V2"/>
+      <path transform="translate(945 622)" d="M0 2H12Q28 2 28 20.5Q28 39 12 39H0"/>
+      <path transform="translate(1095 622)" d="M15 2V39"/>
+      <path transform="translate(1245 622)" d="M15 2H13Q2 2 2 13V28Q2 39 13 39H17Q28 39 28 28V13Q28 2 17 2Z"/>
+    </g>
+  </svg>
+</div>
 
-  <!-- ============ SCROLL PROGRESS ============ -->
-  <div class="progress" aria-hidden="true"><span></span></div>
+<!-- HEADER -->
+<header id="header">
+  <a class="brand" href="#hero" aria-label="Glow Studio — accueil">
+    <img src="assets/logo-light.svg" alt="Glow Studio" width="128" height="40">
+  </a>
+  <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  <nav id="nav">
+    <a href="#services">Services</a>
+    <a href="#methode">Méthode</a>
+    <a href="#offres">Offres</a>
+    <a href="#contact">Contact</a>
+    <a class="nav-cta" href="#contact">Démarrer un projet</a>
+  </nav>
+</header>
 
-  <!-- ============ HEADER ============ -->
-  <header class="header">
-    <a href="#top" class="header__logo" aria-label="Glow Studio — accueil">
-      <img src="assets/logo-light.svg" alt="Glow Studio" width="140" height="44">
-    </a>
-    <nav class="nav" aria-label="Navigation principale">
-      <a href="#agence" class="nav__link">Agence</a>
-      <a href="#services" class="nav__link">Services</a>
-      <a href="#methode" class="nav__link">Méthode</a>
-      <a href="#offres" class="nav__link">Offres</a>
-      <a href="#faq" class="nav__link">FAQ</a>
-    </nav>
-    <a href="#contact" class="btn btn--glow btn--sm header__cta magnetic"><span>Parlons projet</span></a>
-    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">
-      <span></span><span></span>
-    </button>
-  </header>
-
-  <!-- Mobile menu -->
-  <div class="menu" id="menu" aria-hidden="true">
-    <nav class="menu__nav" aria-label="Menu mobile">
-      <a href="#agence"><span>01</span>Agence</a>
-      <a href="#services"><span>02</span>Services</a>
-      <a href="#methode"><span>03</span>Méthode</a>
-      <a href="#offres"><span>04</span>Offres</a>
-      <a href="#faq"><span>05</span>FAQ</a>
-      <a href="#contact"><span>06</span>Contact</a>
-    </nav>
-    <p class="menu__foot">Designed to shine.</p>
-  </div>
-
-  <main id="top">
-
-    <!-- ============ HERO ============ -->
-    <section class="hero" data-theme="dark">
-      <div class="hero__glow" aria-hidden="true"></div>
-      <div class="hero__orb hero__orb--1" aria-hidden="true"></div>
-      <div class="hero__orb hero__orb--2" aria-hidden="true"></div>
-      <div class="hero__grid" aria-hidden="true"></div>
-
-      <div class="container hero__content">
-        <p class="eyebrow hero__eyebrow"><span class="dot"></span>Agence digitale — Belgique</p>
-        <h1 class="hero__title">
-          <span class="line"><span class="word">Faire</span> <span class="word">rayonner</span></span>
-          <span class="line"><span class="word">les</span> <span class="word">entreprises</span></span>
-          <span class="line"><span class="word">dans</span> <span class="word">le</span> <span class="word shine">digital.</span></span>
-        </h1>
-        <div class="hero__bottom">
-          <p class="hero__lead">Glow Studio construit une présence digitale complète&nbsp;: site web, visibilité locale, contenus professionnels et outils intelligents.</p>
-          <div class="hero__ctas">
-            <a href="#contact" class="btn btn--glow magnetic"><span>Démarrer mon projet</span><i class="arrow" aria-hidden="true">→</i></a>
-            <a href="#services" class="btn btn--ghost magnetic"><span>Nos services</span></a>
-          </div>
-        </div>
-      </div>
-
-      <a href="#agence" class="hero__scroll" aria-label="Défiler vers le bas">
-        <span>Scroll</span><i></i>
+<!-- HERO -->
+<section id="hero">
+  <!-- Pour ajouter une vidéo de fond : décommentez et remplacez src
+  <video class="hero-video" autoplay muted loop playsinline src="assets/hero.mp4"></video>
+  -->
+  <div class="hero-mesh"></div>
+  <div class="hero-video-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow two"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow"><span class="dot"></span>Agence digitale · Belgique</span>
+    <h1 class="hero-title">Faire <em>rayonner</em><br>les entreprises<br>dans le digital</h1>
+    <p class="hero-sub">Glow Studio construit une présence digitale complète&nbsp;: site web, visibilité locale, contenus professionnels et outils intelligents.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Lancer mon projet
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-    </section>
+      <a class="btn btn-ghost" href="#services">Découvrir nos services</a>
+    </div>
+  </div>
+  <a href="#services" class="hero-scroll" aria-label="Défiler vers les services"><span></span></a>
+</section>
 
-    <!-- ============ MARQUEE ============ -->
-    <section class="marquee" aria-label="Nos expertises">
-      <div class="marquee__track">
-        <div class="marquee__group">
-          <span>Sites web</span><b>✦</b><span>SEO local</span><b>✦</b><span>Google Business</span><b>✦</b><span>Photo &amp; vidéo</span><b>✦</b><span>Contenus &amp; réseaux</span><b>✦</b><span>Stratégie digitale</span><b>✦</b><span>Publicité</span><b>✦</b><span>IA &amp; automatisation</span><b>✦</b>
-        </div>
-        <div class="marquee__group" aria-hidden="true">
-          <span>Sites web</span><b>✦</b><span>SEO local</span><b>✦</b><span>Google Business</span><b>✦</b><span>Photo &amp; vidéo</span><b>✦</b><span>Contenus &amp; réseaux</span><b>✦</b><span>Stratégie digitale</span><b>✦</b><span>Publicité</span><b>✦</b><span>IA &amp; automatisation</span><b>✦</b>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ POSITIONNEMENT ============ -->
-    <section class="section about" id="agence">
-      <div class="container">
-        <div class="about__head">
-          <p class="eyebrow reveal">Notre positionnement</p>
-          <h2 class="title split">Une agence simple à comprendre, complète à utiliser.</h2>
-          <p class="lead reveal">Notre cœur de métier reste la création de sites web. Autour de ce socle, nous ajoutons la photographie, la vidéo, le SEO local, Google Business, la stratégie digitale et, lorsque c’est utile, des automatisations et usages IA concrets.</p>
-        </div>
-
-        <div class="pillars">
-          <article class="pillar spotlight">
-            <span class="pillar__num">01</span>
-            <div class="pillar__icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48"><rect x="5" y="9" width="38" height="28" rx="5"/><path d="M5 17h38M17 43h14M24 37v6"/></svg>
-            </div>
+<!-- SERVICES -->
+<section id="services" class="sec-pad">
+  <div class="services-bg" aria-hidden="true">
+    <div class="sb-glow sb-web"></div>
+    <div class="sb-glow sb-content"></div>
+    <div class="sb-glow sb-visi"></div>
+    <div class="sb-glow sb-ia"></div>
+  </div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Notre positionnement</span>
+      <h2 class="sec-title">Simple à comprendre,<br>complète à utiliser</h2>
+      <p class="sec-desc">Notre cœur de métier reste la création de sites web. Autour de ce socle&nbsp;: photo, vidéo, SEO local, Google Business, stratégie digitale et, quand c’est utile, des automatisations IA concrètes.</p>
+    </div>
+    <div class="cards">
+      <a class="fcard web reveal" href="#offres" data-zone="web">
+        <div class="glow"></div>
+        <div class="face">
+          <div>
+            <div class="icn"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <span class="fnum">01</span>
             <h3>Web</h3>
-            <p>Sites vitrines, refontes, landing pages et expériences rapides, claires et mobile-first.</p>
-          </article>
-          <article class="pillar spotlight">
-            <span class="pillar__num">02</span>
-            <div class="pillar__icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48"><rect x="5" y="13" width="38" height="26" rx="5"/><circle cx="24" cy="26" r="7"/><path d="M16 13l3-5h10l3 5"/></svg>
-            </div>
+            <p>Sites vitrines, refontes, landing pages et expériences rapides, claires et mobile-first. Design sur mesure, formulaires, intégrations et maintenance.</p>
+          </div>
+          <ul><li>Sites vitrines</li><li>Refontes</li><li>Landing pages</li><li>Applications</li><li>Maintenance</li></ul>
+        </div>
+      </a>
+      <a class="fcard content reveal" href="#offres" data-zone="content">
+        <div class="glow"></div>
+        <div class="face">
+          <div>
+            <div class="icn"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+            <span class="fnum">02</span>
             <h3>Contenu</h3>
-            <p>Photographie, vidéo, portraits, produits, locaux et contenus prêts pour le web et les réseaux.</p>
-          </article>
-          <article class="pillar spotlight">
-            <span class="pillar__num">03</span>
-            <div class="pillar__icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48"><circle cx="21" cy="21" r="13"/><path d="M31 31l11 11M21 14v14M14 21h14"/></svg>
-            </div>
+            <p>Shooting sur place&nbsp;: portraits, équipe, produits, locaux, chantiers, avant/après, vidéo de présentation et visuels prêts pour les réseaux.</p>
+          </div>
+          <ul><li>Photo</li><li>Vidéo</li><li>Portraits</li><li>Produits</li><li>Réseaux sociaux</li></ul>
+        </div>
+      </a>
+      <a class="fcard visi reveal" href="#offres" data-zone="visi">
+        <div class="glow"></div>
+        <div class="face">
+          <div>
+            <div class="icn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/><path d="M11 8v6M8 11h6"/></svg></div>
+            <span class="fnum">03</span>
             <h3>Visibilité</h3>
-            <p>SEO local, Google Business, structure de contenu et présence pensée pour être trouvée.</p>
-          </article>
-          <article class="pillar spotlight">
-            <span class="pillar__num">04</span>
-            <div class="pillar__icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48"><path d="M24 4l4.5 11.5L40 20l-11.5 4.5L24 36l-4.5-11.5L8 20l11.5-4.5z"/><path d="M38 34l1.8 4.2L44 40l-4.2 1.8L38 46l-1.8-4.2L32 40l4.2-1.8z"/></svg>
-            </div>
+            <p>SEO local, fiche Google Business, pages ciblées, structure de contenu et publicité Google / Meta quand le projet le justifie. Pensé pour être trouvé.</p>
+          </div>
+          <ul><li>SEO local</li><li>Google Business</li><li>Google Ads</li><li>Meta Ads</li><li>Stratégie</li></ul>
+        </div>
+      </a>
+      <a class="fcard ia reveal" href="#offres" data-zone="ia">
+        <div class="glow"></div>
+        <div class="face">
+          <div>
+            <div class="icn"><svg viewBox="0 0 24 24"><path d="M12 2l2.2 5.8L20 10l-5.8 2.2L12 18l-2.2-5.8L4 10l5.8-2.2z"/><path d="M19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9z"/></svg></div>
+            <span class="fnum">04</span>
             <h3>IA &amp; Automation</h3>
-            <p>Des outils simples pour réduire les tâches répétitives et aider les équipes à gagner du temps.</p>
-          </article>
+            <p>Des outils simples pour réduire les tâches répétitives&nbsp;: rédaction assistée, réponses, organisation, CRM et workflows. Les équipes gagnent du temps.</p>
+          </div>
+          <ul><li>Rédaction assistée</li><li>CRM</li><li>Workflows</li><li>Réponses auto</li></ul>
         </div>
+      </a>
+    </div>
+  </div>
+</section>
 
-        <div class="stats">
-          <div class="stat reveal"><span class="stat__num" data-count="8">0</span><span class="stat__label">expertises réunies<br>sous un même toit</span></div>
-          <div class="stat reveal"><span class="stat__num" data-count="5">0</span><span class="stat__label">étapes claires,<br>de l’idée au lancement</span></div>
-          <div class="stat reveal"><span class="stat__num" data-count="1">0</span><span class="stat__label">interlocuteur unique<br>pour tout votre digital</span></div>
-          <div class="stat reveal"><span class="stat__num" data-count="100" data-suffix="%">0</span><span class="stat__label">des sites pensés<br>mobile-first</span></div>
+<!-- LA GLOW METHOD -->
+<section id="methode" class="sec-pad">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">The Glow Method</span>
+      <h2 class="sec-title">5 étapes<br>pour <em>briller</em></h2>
+      <p class="sec-desc">Une présence digitale complète, pensée comme un seul système. Un seul interlocuteur, de l’idée à la mise en ligne — et après.</p>
+    </div>
+    <ol class="steps">
+      <li class="step reveal"><span class="step-num">01</span><h3>Discover</h3><p>Audit de l’existant, écoute de vos objectifs, priorités et plan d’action.</p></li>
+      <li class="step reveal"><span class="step-num">02</span><h3>Capture</h3><p>Shooting photo &amp; vidéo sur place, textes et contenus qui vous ressemblent.</p></li>
+      <li class="step reveal"><span class="step-num">03</span><h3>Build</h3><p>Design et développement d’un site rapide, clair, mobile-first et optimisé SEO.</p></li>
+      <li class="step reveal"><span class="step-num">04</span><h3>Automate</h3><p>Formulaires, CRM, réponses, workflows&nbsp;: on automatise ce qui vous fait perdre du temps.</p></li>
+      <li class="step reveal"><span class="step-num">05</span><h3>Shine</h3><p>Mise en ligne, Google Business, suivi et optimisation continue. Vous rayonnez.</p></li>
+    </ol>
+
+    <div class="forwho reveal">
+      <span class="sec-tag">Pour qui&nbsp;?</span>
+      <ul class="forwho-list">
+        <li>PME</li><li>Indépendants</li><li>Artisans</li><li>Commerces</li><li>Professions libérales</li><li>Restaurants</li><li>Entreprises locales</li>
+      </ul>
+      <p>…qui veulent professionnaliser leur présence en ligne.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFFRES -->
+<section id="offres" class="sec-pad">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Offres &amp; formules</span>
+      <h2 class="sec-title">Des formules<br>claires</h2>
+      <p class="sec-desc">Un pack complet pour démarrer, des services à la carte et un suivi dans la durée. Chaque projet fait l’objet d’un devis gratuit, adapté à vos besoins réels.</p>
+    </div>
+
+    <div class="tabs reveal" role="tablist" aria-label="Type d’offre">
+      <button class="tab active" data-tab="packs" role="tab" aria-selected="true" aria-controls="tab-packs">Packs</button>
+      <button class="tab" data-tab="carte" role="tab" aria-selected="false" aria-controls="tab-carte">À la carte</button>
+      <button class="tab" data-tab="suivi" role="tab" aria-selected="false" aria-controls="tab-suivi">Suivi</button>
+    </div>
+
+    <!-- PACKS -->
+    <div class="tab-panel active" id="tab-packs" role="tabpanel">
+      <div class="tiers tiers-2">
+        <div class="tier featured reveal">
+          <span class="badge">Offre principale</span>
+          <div class="name">Pack Présence Digitale</div>
+          <div class="price">Sur devis</div>
+          <div class="ptag">Tout pour exister, être trouvé et convaincre en ligne</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Site web professionnel, responsive &amp; rapide</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>SEO local &amp; structure optimisée</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Création / optimisation Google Business</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Shooting photo sur place</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Stratégie digitale &amp; plan d’action</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Un seul interlocuteur du début à la fin</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Demander un devis</a>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ SERVICES ============ -->
-    <section class="section services" id="services" data-theme="dark">
-      <div class="services__glow" aria-hidden="true"></div>
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow reveal">Notre offre</p>
-          <h2 class="title split">Une présence digitale complète, pensée comme un seul système.</h2>
+        <div class="tier reveal">
+          <span class="badge badge-ghost">Besoins spécifiques</span>
+          <div class="name">Sur mesure</div>
+          <div class="price">Sur devis</div>
+          <div class="ptag">Pour les projets qui vont plus loin</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Applications web</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Branding &amp; identité visuelle</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Campagnes Google Ads / Meta Ads</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Automatisations &amp; projets IA avancés</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">En parler</a>
         </div>
-
-        <ul class="services__list">
-          <li class="service" data-cursor="Découvrir">
-            <button class="service__head" aria-expanded="false">
-              <span class="service__num">01</span>
-              <span class="service__name">Sites web &amp; applications</span>
-              <span class="service__plus" aria-hidden="true"></span>
-            </button>
-            <div class="service__body"><p>Création ou refonte de sites professionnels, design sur mesure, responsive, formulaires, intégrations et maintenance.</p></div>
-          </li>
-          <li class="service" data-cursor="Découvrir">
-            <button class="service__head" aria-expanded="false">
-              <span class="service__num">02</span>
-              <span class="service__name">SEO local &amp; Google Business</span>
-              <span class="service__plus" aria-hidden="true"></span>
-            </button>
-            <div class="service__body"><p>Optimisation de la visibilité locale&nbsp;: pages ciblées, structure SEO, fiche Google Business et suivi des performances.</p></div>
-          </li>
-          <li class="service" data-cursor="Découvrir">
-            <button class="service__head" aria-expanded="false">
-              <span class="service__num">03</span>
-              <span class="service__name">Photo &amp; vidéo</span>
-              <span class="service__plus" aria-hidden="true"></span>
-            </button>
-            <div class="service__body"><p>Shooting sur place&nbsp;: portraits, équipe, produits, locaux, chantiers, avant/après et vidéo de présentation.</p></div>
-          </li>
-          <li class="service" data-cursor="Découvrir">
-            <button class="service__head" aria-expanded="false">
-              <span class="service__num">04</span>
-              <span class="service__name">Contenus &amp; réseaux</span>
-              <span class="service__plus" aria-hidden="true"></span>
-            </button>
-            <div class="service__body"><p>Visuels cohérents avec la marque, contenus prêts à publier et déclinaisons pour les principaux canaux.</p></div>
-          </li>
-          <li class="service" data-cursor="Découvrir">
-            <button class="service__head" aria-expanded="false">
-              <span class="service__num">05</span>
-              <span class="service__name">Stratégie digitale</span>
-              <span class="service__plus" aria-hidden="true"></span>
-            </button>
-            <div class="service__body"><p>Audit de l’existant, priorités, plan d’action, choix des canaux et recommandations adaptées au business.</p></div>
-          </li>
-          <li class="service" data-cursor="Découvrir">
-            <button class="service__head" aria-expanded="false">
-              <span class="service__num">06</span>
-              <span class="service__name">Publicité digitale</span>
-              <span class="service__plus" aria-hidden="true"></span>
-            </button>
-            <div class="service__body"><p>Campagnes Google Ads / Meta Ads lorsque le projet le justifie, avec suivi des conversions et optimisation.</p></div>
-          </li>
-          <li class="service" data-cursor="Découvrir">
-            <button class="service__head" aria-expanded="false">
-              <span class="service__num">07</span>
-              <span class="service__name">IA &amp; automatisation</span>
-              <span class="service__plus" aria-hidden="true"></span>
-            </button>
-            <div class="service__body"><p>Mise en place progressive d’outils simples&nbsp;: rédaction assistée, réponses, organisation, CRM, workflows ou tâches répétitives.</p></div>
-          </li>
-          <li class="service" data-cursor="Découvrir">
-            <button class="service__head" aria-expanded="false">
-              <span class="service__num">08</span>
-              <span class="service__name">Suivi &amp; optimisation</span>
-              <span class="service__plus" aria-hidden="true"></span>
-            </button>
-            <div class="service__body"><p>Maintenance, mises à jour, rapports simples, ajustements SEO, contenus et amélioration continue après la mise en ligne.</p></div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ============ METHOD (horizontal scroll) ============ -->
-    <section class="method" id="methode" data-theme="dark">
-      <div class="method__pin">
-        <div class="method__intro container">
-          <p class="eyebrow">The Glow Method</p>
-          <h2 class="title">5 étapes pour <span class="shine">briller</span>.</h2>
-          <div class="method__progress" aria-hidden="true"><span></span></div>
-        </div>
-        <div class="method__track">
-          <article class="step">
-            <span class="step__num">01</span>
-            <h3 class="step__title">Discover</h3>
-            <p>On écoute, on analyse votre activité, vos clients et votre présence actuelle pour définir les priorités.</p>
-          </article>
-          <article class="step">
-            <span class="step__num">02</span>
-            <h3 class="step__title">Capture</h3>
-            <p>Shooting photo &amp; vidéo, textes et contenus&nbsp;: on rassemble tout ce qui fera la différence.</p>
-          </article>
-          <article class="step">
-            <span class="step__num">03</span>
-            <h3 class="step__title">Build</h3>
-            <p>Design et développement d’un site rapide, clair et mobile-first, optimisé pour être trouvé.</p>
-          </article>
-          <article class="step">
-            <span class="step__num">04</span>
-            <h3 class="step__title">Automate</h3>
-            <p>Formulaires, CRM, réponses, workflows&nbsp;: on automatise ce qui vous fait perdre du temps.</p>
-          </article>
-          <article class="step">
-            <span class="step__num">05</span>
-            <h3 class="step__title">Shine</h3>
-            <p>Mise en ligne, Google Business, suivi et optimisation continue. Votre entreprise rayonne.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ FOR WHO ============ -->
-    <section class="section forwho">
-      <div class="container">
-        <p class="eyebrow reveal">Pour qui&nbsp;?</p>
-        <p class="forwho__text scrub-text">PME, indépendants, artisans, commerces, professions libérales, restaurants et entreprises locales qui veulent professionnaliser leur présence en ligne.</p>
-        <ul class="tags">
-          <li>PME</li><li>Indépendants</li><li>Artisans</li><li>Commerces</li><li>Professions libérales</li><li>Restaurants</li><li>Entreprises locales</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ============ OFFERS ============ -->
-    <section class="section offers" id="offres">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow reveal">Nos formules</p>
-          <h2 class="title split">Une offre claire. Ou du sur-mesure.</h2>
-        </div>
-        <div class="offers__grid">
-          <article class="offer offer--main tilt">
-            <div class="offer__badge">Offre principale</div>
-            <h3 class="offer__title">Pack Présence Digitale</h3>
-            <p class="offer__desc">Tout ce qu’il faut pour exister, être trouvé et convaincre en ligne — en un seul projet.</p>
-            <ul class="offer__list">
-              <li>Site web professionnel, responsive &amp; rapide</li>
-              <li>SEO local &amp; optimisation Google Business</li>
-              <li>Shooting photo sur place</li>
-              <li>Stratégie digitale &amp; plan d’action</li>
-            </ul>
-            <a href="#contact" class="btn btn--glow magnetic" data-offer="Pack Présence Digitale"><span>Demander un devis</span><i class="arrow" aria-hidden="true">→</i></a>
-          </article>
-          <article class="offer offer--custom tilt">
-            <div class="offer__badge">Besoins spécifiques</div>
-            <h3 class="offer__title">Sur mesure</h3>
-            <p class="offer__desc">Pour les projets qui vont plus loin, on construit une solution adaptée à vos objectifs.</p>
-            <ul class="offer__list">
-              <li>Applications web</li>
-              <li>Branding &amp; identité visuelle</li>
-              <li>Campagnes Google Ads / Meta Ads</li>
-              <li>Automatisations &amp; projets IA avancés</li>
-            </ul>
-            <a href="#contact" class="btn btn--dark magnetic" data-offer="Projet sur mesure"><span>Parlons-en</span><i class="arrow" aria-hidden="true">→</i></a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ FAQ ============ -->
-    <section class="section faq" id="faq">
-      <div class="container faq__wrap">
-        <div class="faq__head">
-          <p class="eyebrow reveal">FAQ</p>
-          <h2 class="title split">Vos questions, nos réponses.</h2>
-          <p class="lead reveal">Une autre question&nbsp;? <a href="#contact" class="link">Écrivez-nous</a>, on vous répond rapidement.</p>
-        </div>
-        <div class="faq__list">
-          <details class="faq__item">
-            <summary>Combien coûte un site web&nbsp;?<span aria-hidden="true"></span></summary>
-            <div class="faq__answer"><p>Chaque projet est différent. Après un premier échange, nous vous envoyons un devis clair et détaillé, sans frais cachés, adapté à vos besoins réels.</p></div>
-          </details>
-          <details class="faq__item">
-            <summary>Combien de temps faut-il pour créer mon site&nbsp;?<span aria-hidden="true"></span></summary>
-            <div class="faq__answer"><p>Cela dépend de l’ampleur du projet et de la disponibilité des contenus. Un planning précis vous est communiqué dès le devis, avec chaque étape de la Glow Method.</p></div>
-          </details>
-          <details class="faq__item">
-            <summary>Mon site sera-t-il adapté aux mobiles&nbsp;?<span aria-hidden="true"></span></summary>
-            <div class="faq__answer"><p>Oui, toujours. Tous nos sites sont conçus mobile-first&nbsp;: rapides, lisibles et agréables sur smartphone, tablette et ordinateur.</p></div>
-          </details>
-          <details class="faq__item">
-            <summary>Pouvez-vous améliorer ma visibilité sur Google&nbsp;?<span aria-hidden="true"></span></summary>
-            <div class="faq__answer"><p>C’est l’un de nos piliers&nbsp;: SEO local, pages ciblées, structure de contenu et optimisation de votre fiche Google Business pour être trouvé par les clients près de chez vous.</p></div>
-          </details>
-          <details class="faq__item">
-            <summary>Et après la mise en ligne&nbsp;?<span aria-hidden="true"></span></summary>
-            <div class="faq__answer"><p>On reste à vos côtés&nbsp;: maintenance, mises à jour, rapports simples, ajustements SEO et nouveaux contenus pour continuer à progresser.</p></div>
-          </details>
-          <details class="faq__item">
-            <summary>L’IA, concrètement, ça m’apporte quoi&nbsp;?<span aria-hidden="true"></span></summary>
-            <div class="faq__answer"><p>Du temps. Nous mettons en place, progressivement et seulement quand c’est utile, des outils simples&nbsp;: rédaction assistée, réponses automatiques, organisation, CRM ou workflows.</p></div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CONTACT ============ -->
-    <section class="contact" id="contact" data-theme="dark">
-      <div class="contact__glow" aria-hidden="true"></div>
-      <div class="container">
-        <div class="contact__head">
-          <p class="eyebrow reveal">Contact</p>
-          <h2 class="contact__title split">Prêt à <span class="shine">briller</span>&nbsp;?</h2>
-          <p class="lead reveal">Parlez-nous de votre projet. Premier échange gratuit et sans engagement.</p>
-        </div>
-
-        <div class="contact__grid">
-          <form class="form reveal" id="contact-form" novalidate>
-            <div class="form__row">
-              <label class="field"><input type="text" name="name" required placeholder=" " autocomplete="name"><span>Nom &amp; prénom</span></label>
-              <label class="field"><input type="text" name="company" placeholder=" " autocomplete="organization"><span>Entreprise</span></label>
-            </div>
-            <div class="form__row">
-              <label class="field"><input type="email" name="email" required placeholder=" " autocomplete="email"><span>Email</span></label>
-              <label class="field"><input type="tel" name="phone" placeholder=" " autocomplete="tel"><span>Téléphone</span></label>
-            </div>
-            <fieldset class="chips">
-              <legend>Votre besoin</legend>
-              <label><input type="checkbox" name="need" value="Site web"><span>Site web</span></label>
-              <label><input type="checkbox" name="need" value="SEO local & Google Business"><span>SEO local</span></label>
-              <label><input type="checkbox" name="need" value="Photo & vidéo"><span>Photo &amp; vidéo</span></label>
-              <label><input type="checkbox" name="need" value="Contenus & réseaux"><span>Contenus</span></label>
-              <label><input type="checkbox" name="need" value="Publicité digitale"><span>Publicité</span></label>
-              <label><input type="checkbox" name="need" value="IA & automatisation"><span>IA &amp; automatisation</span></label>
-            </fieldset>
-            <label class="field field--area"><textarea name="message" rows="4" required placeholder=" "></textarea><span>Votre projet en quelques mots</span></label>
-            <button type="submit" class="btn btn--glow btn--lg magnetic"><span>Envoyer ma demande</span><i class="arrow" aria-hidden="true">→</i></button>
-            <p class="form__status" role="status" aria-live="polite"></p>
-          </form>
-
-          <aside class="contact__info reveal">
-            <a href="mailto:contact@glowstudio.be" class="contact__mail">contact@glowstudio.be</a>
-            <ul class="contact__list">
-              <li><span>Téléphone</span><a href="tel:+32400000000">+32 4XX XX XX XX</a></li>
-              <li><span>Zone</span>Belgique</li>
-              <li><span>Réseaux</span>
-                <span class="socials">
-                  <a href="#" aria-label="Instagram">Instagram</a>
-                  <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                  <a href="#" aria-label="Facebook">Facebook</a>
-                </span>
-              </li>
-            </ul>
-          </aside>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer" data-theme="dark">
-    <div class="container">
-      <div class="footer__top">
-        <p class="footer__tag">Designed to shine.</p>
-        <nav class="footer__nav" aria-label="Pied de page">
-          <a href="#agence">Agence</a>
-          <a href="#services">Services</a>
-          <a href="#methode">Méthode</a>
-          <a href="#offres">Offres</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <button class="to-top magnetic" aria-label="Retour en haut">↑</button>
-      </div>
-      <div class="footer__logo">
-        <img src="assets/logo-light.svg" alt="Glow Studio">
-      </div>
-      <div class="footer__bottom">
-        <span>© <span class="year">2026</span> Glow Studio — Agence digitale, Belgique</span>
-        <span>Sites web · SEO local · Contenus · IA</span>
       </div>
     </div>
-  </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-  <script src="js/main.js" defer></script>
+    <!-- A LA CARTE -->
+    <div class="tab-panel" id="tab-carte" role="tabpanel">
+      <div class="tiers tiers-4">
+        <div class="tier reveal">
+          <div class="name">Web</div>
+          <div class="ptag">Création &amp; refonte</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Sites vitrines &amp; landing pages</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Design sur mesure</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Formulaires &amp; intégrations</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Demander</a>
+        </div>
+        <div class="tier reveal">
+          <div class="name">Photo &amp; vidéo</div>
+          <div class="ptag">Shooting sur place</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Portraits, équipe, produits</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Locaux, chantiers, avant/après</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Vidéo de présentation</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Demander</a>
+        </div>
+        <div class="tier featured reveal">
+          <span class="badge">Essentiel</span>
+          <div class="name">SEO local</div>
+          <div class="ptag">&amp; Google Business</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Pages ciblées &amp; structure SEO</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Fiche Google Business</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Suivi des performances</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Demander</a>
+        </div>
+        <div class="tier reveal">
+          <div class="name">IA &amp; automatisation</div>
+          <div class="ptag">Gagnez du temps</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Rédaction assistée &amp; réponses</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>CRM &amp; organisation</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Workflows automatisés</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Demander</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUIVI -->
+    <div class="tab-panel" id="tab-suivi" role="tabpanel">
+      <div class="abo-card reveal">
+        <div class="abo-left">
+          <span class="badge">Dans la durée</span>
+          <div class="name">Suivi &amp; optimisation</div>
+          <div class="price">Sur devis</div>
+          <p class="abo-desc">Votre site ne s’arrête pas à la mise en ligne. On reste à vos côtés pour le faire vivre, le sécuriser et l’améliorer en continu — sans que vous ayez à vous en occuper.</p>
+          <a href="#contact" class="btn btn-primary">Composer mon suivi</a>
+        </div>
+        <div class="abo-right">
+          <div class="abo-inc">Peut inclure</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Maintenance &amp; mises à jour</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Rapports simples</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Ajustements SEO</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Nouveaux contenus &amp; visuels réseaux</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Suivi des campagnes publicitaires</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Amélioration continue</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <div class="cglow"></div>
+      <span class="sec-tag">Designed to shine.</span>
+      <h2>Prêt à<br><em>briller</em>&nbsp;?</h2>
+      <p>Parlez-nous de votre activité et de ce que vous voulez construire. Réponse rapide, devis gratuit et sans engagement.</p>
+      <div class="contact-actions">
+        <a href="mailto:contact@glowstudio.be" class="btn btn-primary">contact@glowstudio.be</a>
+        <a href="https://instagram.com/" class="btn btn-ghost" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img class="fbrand" src="assets/logo-light.svg" alt="Glow Studio" width="110" height="34">
+  <div class="fmeta">© <span id="year">2026</span> — Agence digitale, Belgique</div>
+  <div class="fsoc">
+    <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    <a href="mailto:contact@glowstudio.be">Email</a>
+    <a href="#hero">Haut de page</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>
