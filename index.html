@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>J-Clean Auto — Detailing mobile premium</title>
+  <meta name="description" content="Nettoyage et detailing automobile premium à domicile en Belgique. Demandez votre devis J-Clean Auto." />
+  <meta name="theme-color" content="#090a0c" />
+  <link rel="icon" href="assets/jclean-logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="is-loading">
+
+  <!-- Préchargeur -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader-inner">
+      <img src="assets/jclean-logo-white.png" alt="" class="preloader-logo" />
+      <div class="preloader-bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- Curseur personnalisé (desktop) -->
+  <div class="cursor" aria-hidden="true"><span class="cursor-dot"></span><span class="cursor-ring"></span></div>
+
+  <!-- Barre de progression de scroll -->
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header" data-header>
+    <a class="brand" href="#accueil" aria-label="Retour à l'accueil">
+      <img src="assets/jclean-logo-white.png" alt="J-Clean Auto" class="brand-logo" />
+    </a>
+
+    <nav class="site-nav" data-nav>
+      <a href="#services">Services</a>
+      <a href="#processus">Méthode</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#resultats">Résultats</a>
+      <a href="#pourquoi">Pourquoi J-Clean</a>
+      <a href="#contact">Contact</a>
+      <span class="nav-indicator" aria-hidden="true"></span>
+    </nav>
+
+    <a class="header-cta magnetic" href="https://wa.me/32471543221" target="_blank" rel="noreferrer">
+      <span>WhatsApp</span>
+    </a>
+
+    <button class="menu-button" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-menu-button>
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="accueil" aria-label="Accueil J-Clean Auto">
+      <div class="hero-media" data-parallax="0.25">
+        <img class="hero-poster" src="assets/hero-eau-ruissellement.jpg" alt="" aria-hidden="true" fetchpriority="high" />
+        <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1" poster="assets/hero-eau-ruissellement.jpg">
+          <source src="assets/hero-eau-ruissellement.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="hero-scrim"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="noise" aria-hidden="true"></div>
+      <canvas class="hero-drops" aria-hidden="true"></canvas>
+
+      <div class="container hero-content">
+        <p class="hero-kicker" data-hero-item><span class="pulse-dot"></span> Detailing mobile · Belgique</p>
+        <h1 class="hero-title" data-split>Le detailing mobile <em>nouvelle génération.</em></h1>
+        <p class="hero-lead" data-hero-item>Un nettoyage professionnel et minutieux, directement à votre domicile ou sur votre lieu de travail.</p>
+        <div class="hero-actions" data-hero-item>
+          <a class="btn btn-primary magnetic" href="https://wa.me/32471543221" target="_blank" rel="noreferrer"><span>Demander un devis</span><i class="btn-arrow" aria-hidden="true">→</i></a>
+          <a class="btn btn-ghost magnetic" href="tel:+32471543221"><span>Appeler maintenant</span></a>
+        </div>
+
+        <dl class="hero-stats" data-hero-item>
+          <div><dt><span data-count="20">0</span> km</dt><dd>Déplacement offert</dd></div>
+          <div><dt><span data-count="3">0</span> mois</dt><dd>Protection hydrophobe</dd></div>
+          <div><dt><span data-count="100">0</span>%</dt><dd>Sur votre lieu</dd></div>
+        </dl>
+      </div>
+
+      <a class="scroll-cue" href="#services" aria-label="Découvrir les services">
+        <span class="scroll-mouse"><span></span></span>
+        <span>Découvrir</span>
+      </a>
+    </section>
+
+    <!-- BANDEAU DÉFILANT -->
+    <section class="marquee" aria-label="Points forts">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span>Intervention rapide</span><i>✦</i>
+          <span>Déplacement sur site</span><i>✦</i>
+          <span>Produits premium</span><i>✦</i>
+          <span>Résultat garanti</span><i>✦</i>
+          <span>Polissage</span><i>✦</i>
+          <span>Protection hydrophobe</span><i>✦</i>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <span>Intervention rapide</span><i>✦</i>
+          <span>Déplacement sur site</span><i>✦</i>
+          <span>Produits premium</span><i>✦</i>
+          <span>Résultat garanti</span><i>✦</i>
+          <span>Polissage</span><i>✦</i>
+          <span>Protection hydrophobe</span><i>✦</i>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section section-light" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow" data-reveal>Services</p>
+          <h2 data-split>Nos prestations.</h2>
+          <p class="section-sub" data-reveal>Quatre formules pour redonner à votre véhicule — et même à votre canapé — l’éclat du premier jour.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card featured tilt" data-reveal>
+            <div class="card-glow" aria-hidden="true"></div>
+            <div class="card-top">
+              <p class="tag">Offre complète</p>
+              <span class="card-num">01</span>
+            </div>
+            <h3>Pack Signature</h3>
+            <p>Nettoyage intérieur et extérieur avec shampoing, traitement cuir, protection UV et protection hydrophobe longue durée.</p>
+            <ul>
+              <li>Intérieur complet</li>
+              <li>Lavage au gant</li>
+              <li>Protection pneus</li>
+              <li>Hydrophobe 3 mois</li>
+            </ul>
+            <a href="#tarifs" class="text-link">Voir les prix <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="service-card tilt" data-reveal>
+            <div class="card-glow" aria-hidden="true"></div>
+            <div class="card-top">
+              <p class="tag">Entretien</p>
+              <span class="card-num">02</span>
+            </div>
+            <h3>Pack Confort</h3>
+            <p>Le soin régulier pour conserver un habitacle propre et une carrosserie entretenue au quotidien.</p>
+            <ul>
+              <li>Aspiration complète</li>
+              <li>Plastiques et vitres</li>
+              <li>Prélavage + lavage</li>
+              <li>Hydrophobe 1 mois</li>
+            </ul>
+            <a href="#tarifs" class="text-link">Voir les prix <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="service-card tilt" data-reveal>
+            <div class="card-glow" aria-hidden="true"></div>
+            <div class="card-top">
+              <p class="tag">Correction</p>
+              <span class="card-num">03</span>
+            </div>
+            <h3>Polissage</h3>
+            <p>Correction visuelle, profondeur de brillance et finition adaptée à l’état réel du véhicule.</p>
+            <div class="price-mini">Dès <strong><span data-count="400">0</span>€</strong></div>
+            <a href="https://wa.me/32471543221" target="_blank" rel="noreferrer" class="text-link">Demander une estimation <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="service-card tilt" data-reveal>
+            <div class="card-glow" aria-hidden="true"></div>
+            <div class="card-top">
+              <p class="tag">Textile</p>
+              <span class="card-num">04</span>
+            </div>
+            <h3>Nettoyage canapé</h3>
+            <p>Extraction et nettoyage en profondeur des tissus selon la taille, la matière et le niveau d’encrassement.</p>
+            <div class="price-mini"><strong>Sur devis</strong></div>
+            <a href="https://wa.me/32471543221" target="_blank" rel="noreferrer" class="text-link">Envoyer des photos <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESSUS -->
+    <section class="section section-dark process" id="processus">
+      <div class="container">
+        <div class="section-heading light">
+          <p class="eyebrow" data-reveal>Méthode</p>
+          <h2 data-split>Chaque étape, structurée.</h2>
+        </div>
+
+        <ol class="process-line" data-process>
+          <span class="process-rail" aria-hidden="true"><span class="process-fill"></span></span>
+          <li data-reveal><span class="process-dot"></span><strong>Aspiration</strong><p>Habitacle, tapis, sièges et recoins.</p></li>
+          <li data-reveal><span class="process-dot"></span><strong>Lavage</strong><p>Prélavage puis lavage au gant.</p></li>
+          <li data-reveal><span class="process-dot"></span><strong>Traitement</strong><p>Cuir, plastiques, vitres et textiles.</p></li>
+          <li data-reveal><span class="process-dot"></span><strong>Protection</strong><p>UV, pneus et hydrophobe longue durée.</p></li>
+          <li data-reveal><span class="process-dot"></span><strong>Finition</strong><p>Contrôle final, détail par détail.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- TARIFS -->
+    <section class="section section-muted" id="tarifs">
+      <div class="container pricing-layout">
+        <div class="pricing-intro">
+          <p class="eyebrow" data-reveal>Tarifs HTVA</p>
+          <h2 data-split>Des formules pensées pour chaque type de véhicule.</h2>
+          <div class="supplements" data-reveal>
+            <span>Nettoyage moteur : 50€</span>
+            <span>Poils d’animaux : 25€</span>
+          </div>
+        </div>
+
+        <div class="pricing-panel" data-reveal>
+          <div class="pricing-tabs" role="tablist" aria-label="Choisir un pack">
+            <span class="tab-indicator" aria-hidden="true"></span>
+            <button class="tab active" type="button" role="tab" aria-selected="true" data-pack="signature">Signature</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-pack="confort">Confort</button>
+          </div>
+
+          <div class="price-table" data-table>
+            <div class="table-row table-head"><span>Véhicule</span><span>Intérieur</span><span>Extérieur</span><span>Complet</span></div>
+            <div class="table-row"><strong>Citadine</strong>
+              <span data-price data-signature="75" data-confort="55">75€</span>
+              <span data-price data-signature="65" data-confort="45">65€</span>
+              <span data-price data-signature="135" data-confort="85" class="highlight">135€</span></div>
+            <div class="table-row"><strong>SUV</strong>
+              <span data-price data-signature="95" data-confort="65">95€</span>
+              <span data-price data-signature="85" data-confort="55">85€</span>
+              <span data-price data-signature="165" data-confort="105" class="highlight">165€</span></div>
+            <div class="table-row"><strong>Camionnette / Range</strong>
+              <span data-price data-signature="105" data-confort="75">105€</span>
+              <span data-price data-signature="95" data-confort="65">95€</span>
+              <span data-price data-signature="185" data-confort="125" class="highlight">185€</span></div>
+          </div>
+
+          <a class="btn btn-primary full magnetic" href="https://wa.me/32471543221" target="_blank" rel="noreferrer"><span>Réserver sur WhatsApp</span><i class="btn-arrow" aria-hidden="true">→</i></a>
+          <p class="pricing-note">Déplacement offert dans un rayon de 20 km. Frais possibles selon la zone.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RÉSULTATS -->
+    <section class="section section-dark results" id="resultats">
+      <div class="container">
+        <div class="section-heading light">
+          <p class="eyebrow" data-reveal>Résultats</p>
+          <h2 data-split>Avant / après.</h2>
+        </div>
+
+        <div class="compare-layout">
+          <div class="comparison" data-compare data-reveal>
+            <img class="compare-img after" src="assets/interieur-bmw-apres.webp" alt="Habitacle BMW après nettoyage" />
+            <div class="before-wrap" data-before-wrap>
+              <img class="compare-img before" src="assets/interieur-bmw-avant.webp" alt="Habitacle BMW avant nettoyage" />
+            </div>
+            <input class="compare-range" type="range" min="0" max="100" value="50" aria-label="Comparer avant après" data-compare-range />
+            <div class="compare-handle" data-compare-handle><span>⟷</span></div>
+            <span class="label-before">Avant</span>
+            <span class="label-after">Après</span>
+          </div>
+
+          <div class="result-copy">
+            <p class="tag" data-reveal>Habitacle BMW</p>
+            <h3 data-reveal>Nettoyage intérieur complet</h3>
+            <p data-reveal>Aspiration complète et nettoyage en profondeur de l’habitacle, avec une finition soignée des tapis, des plastiques et des surfaces.</p>
+            <blockquote data-reveal>“Travail très propre, ponctuel et résultat visible immédiatement.”</blockquote>
+          </div>
+        </div>
+
+        <div class="gallery-grid" aria-label="Galerie de réalisations">
+          <figure class="g-tall" data-reveal="clip"><img src="assets/interieur-premium.webp" alt="Finition habitacle réalisée par J-Clean Auto" loading="lazy" /><figcaption>Finition habitacle</figcaption></figure>
+          <figure data-reveal="clip"><img src="assets/tesla-detailing.webp" alt="Tesla après detailing J-Clean Auto" loading="lazy" /><figcaption>Detailing extérieur</figcaption></figure>
+          <figure data-reveal="clip"><img src="assets/console-interieure.webp" alt="Console automobile nettoyée par J-Clean Auto" loading="lazy" /><figcaption>Détail intérieur</figcaption></figure>
+          <figure class="g-tall" data-reveal="clip"><img src="assets/sieges-cuir.webp" alt="Sièges nettoyés par J-Clean Auto" loading="lazy" /><figcaption>Sièges ravivés</figcaption></figure>
+          <figure data-reveal="clip"><img src="assets/bmw-exterieur.webp" alt="BMW après nettoyage J-Clean Auto" loading="lazy" /><figcaption>Finition carrosserie</figcaption></figure>
+          <figure data-reveal="clip"><img src="assets/alfa-romeo.webp" alt="Alfa Romeo après prestation J-Clean Auto" loading="lazy" /><figcaption>Résultat final</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- POURQUOI -->
+    <section class="section section-light why-section" id="pourquoi">
+      <div class="container split-grid">
+        <div class="section-heading sticky">
+          <p class="eyebrow" data-reveal>Pourquoi J-Clean</p>
+          <h2 data-split>Un service mobile pensé pour éviter les pertes de temps.</h2>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit" data-reveal><span>01</span><h3>Gain de temps</h3><p>Le nettoyage se fait chez vous, au travail ou à l’endroit où le véhicule est garé.</p></article>
+          <article class="benefit" data-reveal><span>02</span><h3>Matériel autonome</h3><p>L’unité mobile se déplace avec le matériel nécessaire pour travailler proprement.</p></article>
+          <article class="benefit" data-reveal><span>03</span><h3>Méthode précise</h3><p>Chaque étape est structurée : aspiration, lavage, traitement, protection et finition.</p></article>
+          <article class="benefit" data-reveal><span>04</span><h3>Transparence</h3><p>Le devis est validé avant l’intervention selon le pack, le gabarit et l’état du véhicule.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="cta-section" id="contact">
+      <div class="container">
+        <div class="cta-card" data-reveal>
+          <div class="cta-orb" aria-hidden="true"></div>
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2 data-split>Un devis clair avant intervention.</h2>
+            <p>Envoyez le modèle du véhicule, le pack souhaité, votre localisation et quelques photos si le véhicule est très sale.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn-primary magnetic" href="https://wa.me/32471543221" target="_blank" rel="noreferrer"><span>WhatsApp</span><i class="btn-arrow" aria-hidden="true">→</i></a>
+            <a class="btn btn-ghost magnetic" href="tel:+32471543221"><span>Appeler</span></a>
+            <a class="social-link" href="https://www.instagram.com/j.cleanauto" target="_blank" rel="noreferrer">Instagram ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <img src="assets/jclean-logo-white.png" alt="J-Clean Auto" class="footer-logo" />
+        <p>Nettoyage automobile, detailing mobile, polissage et nettoyage textile.</p>
+      </div>
+      <div>
+        <span>Contact</span>
+        <a href="tel:+32471543221">+32 471 543 221</a>
+        <a href="mailto:contact@jcleanauto.be">contact@jcleanauto.be</a>
+      </div>
+      <div>
+        <span>Zone</span>
+        <p>Intervention mobile en Belgique. Déplacement offert dans un rayon de 20 km.</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span data-year></span> J-Clean Auto</span>
+      <a href="#accueil" class="back-top">Haut de page ↑</a>
+    </div>
+    <div class="footer-giant" aria-hidden="true">J-CLEAN</div>
+  </footer>
+
+  <!-- Bouton WhatsApp flottant -->
+  <a class="fab-whatsapp" href="https://wa.me/32471543221" target="_blank" rel="noreferrer" aria-label="Contacter J-Clean Auto sur WhatsApp">
+    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2m5.8 14.02c-.24.68-1.41 1.3-1.95 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.18-4.94-4.37-.14-.19-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.66.5.24.58.82 2.01.89 2.16.07.14.12.31.02.5-.1.19-.14.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.3-.13.59.17.29.74 1.22 1.59 1.97 1.09.97 2.01 1.27 2.3 1.41.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.65-.14.26.1 1.68.79 1.97.94.29.14.48.22.55.34.07.12.07.68-.17 1.36z"/></svg>
+  </a>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
