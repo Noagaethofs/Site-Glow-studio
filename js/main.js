@@ -13,7 +13,7 @@
     document.body.classList.add("loaded");
     document.body.classList.remove("is-loading");
   };
-  window.addEventListener("load", () => setTimeout(finishLoading, reduceMotion ? 0 : 900));
+  window.addEventListener("load", () => setTimeout(finishLoading, reduceMotion ? 0 : 1200));
   setTimeout(finishLoading, 3500); // sécurité si une ressource traîne
 
   /* ---------- Année footer ---------- */
@@ -203,108 +203,16 @@
     if (reduceMotion) video.pause();
   }
 
-  /* ---------- Gouttes d'eau animées sur le hero ---------- */
-  const canvas = $(".hero-drops");
-  if (canvas && !reduceMotion) {
-    const ctx = canvas.getContext("2d");
-    let w, h, drops = [], running = true;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const resize = () => {
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.round((w * h) / 26000);
-      drops = Array.from({ length: count }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 2.2 + 0.6,
-        vy: Math.random() * 0.35 + 0.08,
-        a: Math.random() * 0.5 + 0.15,
-      }));
-    };
-    const draw = () => {
-      if (!running) return;
-      ctx.clearRect(0, 0, w, h);
-      drops.forEach((d) => {
-        d.y += d.vy;
-        if (d.y > h + 10) { d.y = -10; d.x = Math.random() * w; }
-        const g = ctx.createRadialGradient(d.x - d.r * 0.3, d.y - d.r * 0.3, 0, d.x, d.y, d.r * 2);
-        g.addColorStop(0, `rgba(255,255,255,${d.a})`);
-        g.addColorStop(1, "rgba(255,255,255,0)");
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r * 2, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      requestAnimationFrame(draw);
-    };
-    resize();
-    draw();
-    window.addEventListener("resize", resize);
-    new IntersectionObserver(([e]) => {
-      const wasRunning = running;
-      running = e.isIntersecting;
-      if (running && !wasRunning) draw();
-    }).observe(canvas);
-  }
-
-  /* ---------- Curseur personnalisé ---------- */
-  const cursor = $(".cursor");
-  if (cursor && finePointer && !reduceMotion) {
-    const dot = $(".cursor-dot", cursor);
-    const ring = $(".cursor-ring", cursor);
-    let mx = -100, my = -100, rx = -100, ry = -100;
-    window.addEventListener("mousemove", (e) => {
-      mx = e.clientX;
-      my = e.clientY;
-      dot.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
-      cursor.classList.remove("is-hidden");
-    });
-    document.addEventListener("mouseleave", () => cursor.classList.add("is-hidden"));
-    const loop = () => {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
-      ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
-      requestAnimationFrame(loop);
-    };
-    loop();
-    $$("a, button, .comparison, .gallery-grid figure").forEach((el) => {
-      el.addEventListener("mouseenter", () => cursor.classList.add("is-hover"));
-      el.addEventListener("mouseleave", () => cursor.classList.remove("is-hover"));
-    });
-  }
-
-  /* ---------- Boutons magnétiques ---------- */
+  /* ---------- Halo discret qui suit la souris sur les cartes ---------- */
   if (finePointer && !reduceMotion) {
-    $$(".magnetic").forEach((el) => {
-      el.addEventListener("mousemove", (e) => {
-        const r = el.getBoundingClientRect();
-        const x = e.clientX - r.left - r.width / 2;
-        const y = e.clientY - r.top - r.height / 2;
-        el.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
-      });
-      el.addEventListener("mouseleave", () => {
-        el.style.transition = "transform .6s cubic-bezier(.16,1,.3,1)";
-        el.style.transform = "";
-        setTimeout(() => (el.style.transition = ""), 600);
-      });
-    });
-  }
-
-  /* ---------- Cartes 3D + halo qui suit la souris ---------- */
-  if (finePointer && !reduceMotion) {
-    $$(".tilt").forEach((card) => {
+    $$(".service-card").forEach((card) => {
       card.addEventListener("mousemove", (e) => {
         const r = card.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width;
         const py = (e.clientY - r.top) / r.height;
         card.style.setProperty("--mx", `${px * 100}%`);
         card.style.setProperty("--my", `${py * 100}%`);
-        card.style.transform = `perspective(900px) rotateX(${(0.5 - py) * 8}deg) rotateY(${(px - 0.5) * 10}deg) translateY(-6px)`;
       });
-      card.addEventListener("mouseleave", () => (card.style.transform = ""));
     });
   }
 
