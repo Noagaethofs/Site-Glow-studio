@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Les 50 ans de Co, Kris et San</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap">
+<style>
+  /* Layout : un carton d'invitation imprimé, posé sur une nappe. Thème unique, choisi volontairement. */
+  :root {
+    --nappe: #2b1d27;       /* aubergine profond, le fond derrière le carton */
+    --papier: #f1e4dc;      /* papier rosé */
+    --encre: #2b1d27;       /* texte principal */
+    --encre-douce: #6b5562; /* texte secondaire */
+    --or: #a87e3f;          /* dorure */
+    --or-clair: #d8b878;
+    --f-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+    --f-script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
+    --f-body: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--nappe);
+    background-image: radial-gradient(ellipse at 50% 0%, #3d2a37 0%, var(--nappe) 70%);
+    color: var(--encre);
+    font-family: var(--f-body);
+    font-weight: 300;
+    min-height: 100vh;
+    padding-inline: 16px;
+    padding-block: 40px;
+    display: grid;
+    place-items: center;
+  }
+  .carton {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    background: var(--papier);
+    padding: clamp(28px, 7vw, 56px) clamp(22px, 6vw, 52px);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55), 0 2px 0 rgba(255, 255, 255, .4) inset;
+    text-align: center;
+    display: grid;
+    gap: 26px;
+    animation: poser 900ms cubic-bezier(.2, .7, .2, 1) both;
+  }
+  .carton::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid var(--or);
+    pointer-events: none;
+  }
+  .carton::after {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border: .5px solid var(--or-clair);
+    pointer-events: none;
+  }
+  @keyframes poser {
+    from { transform: translateY(14px) rotate(-.6deg); opacity: .4; }
+    to { transform: none; opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .carton { animation: none; } }
+
+  .hotes {
+    font-family: var(--f-body);
+    font-weight: 500;
+    font-size: .8rem;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--encre-douce);
+    margin: 0;
+  }
+  .hotes strong { color: var(--encre); font-weight: 500; }
+
+  .cinquante {
+    margin: 0;
+    line-height: .85;
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+  }
+  .cinquante .chiffre {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(7rem, 34vw, 11rem);
+    letter-spacing: -.02em;
+    background: linear-gradient(160deg, var(--or-clair) 0%, var(--or) 45%, #7d5a26 70%, var(--or-clair) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--or);
+    -webkit-text-fill-color: transparent;
+  }
+  .cinquante .ans {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--encre);
+  }
+
+  .devise {
+    font-family: var(--f-script);
+    font-size: clamp(2rem, 8vw, 2.6rem);
+    line-height: 1.15;
+    color: var(--encre);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .devise small {
+    display: block;
+    font-family: var(--f-body);
+    font-size: .72rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 6px;
+  }
+
+  .filet {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--or);
+    margin-inline: auto;
+    width: 70%;
+  }
+  .filet::before, .filet::after { content: ""; flex: 1; height: 1px; background: currentColor; }
+  .filet span { font-family: var(--f-display); font-size: .9rem; }
+
+  .infos {
+    display: grid;
+    gap: 18px;
+    margin: 0;
+  }
+  .infos dt {
+    font-size: .68rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--or);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .infos dd {
+    margin: 0;
+    font-family: var(--f-display);
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+  .infos dd em { font-style: italic; color: var(--encre-douce); }
+  .infos a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--or-clair);
+  }
+  .infos a:hover, .infos a:focus-visible { border-bottom-color: var(--or); }
+  a:focus-visible { outline: 2px solid var(--or); outline-offset: 3px; }
+
+  .dessins {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(28px, 10vw, 56px);
+  }
+  .dessins figure { margin: 0; display: grid; gap: 8px; justify-items: center; }
+  .dessins svg { width: 84px; height: auto; max-width: 100%; }
+  .dessins figcaption {
+    font-family: var(--f-script);
+    font-size: 1.35rem;
+    color: var(--encre-douce);
+  }
+  .trait { fill: none; stroke: var(--or); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .aplat { fill: var(--papier); stroke: var(--or); stroke-width: 1.6; stroke-linejoin: round; }
+
+  .rsvp {
+    margin: 0;
+    font-size: .9rem;
+    letter-spacing: .04em;
+    color: var(--encre-douce);
+  }
+  .rsvp strong {
+    display: block;
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--encre);
+    margin-top: 2px;
+  }
+</style>
+</head>
+<body>
+  <main class="carton" aria-label="Invitation">
+    <p class="hotes"><strong>Co</strong>, <strong>Kris</strong> &amp; <strong>San</strong><br>vous invitent</p>
+
+    <h1 class="cinquante">
+      <span class="chiffre">50</span>
+      <span class="ans">ans</span>
+    </h1>
+
+    <p class="devise"><small>Soirée</small>chic et sans chichi</p>
+
+    <div class="filet" aria-hidden="true"><span>✦</span></div>
+
+    <dl class="infos">
+      <div>
+        <dt>Quand</dt>
+        <dd>Samedi 14 novembre 2026<br><em>dès 20 h</em></dd>
+      </div>
+      <div>
+        <dt>Où</dt>
+        <dd>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Le+Nazareth+Rue+de+Nazareth+11+4651+Battice" target="_blank" rel="noopener">Le Nazareth</a><br>
+          <em>Rue de Nazareth, 11 · 4651 Battice</em>
+        </dd>
+      </div>
+      <div>
+        <dt>Au menu</dt>
+        <dd>Sandwich bar</dd>
+      </div>
+    </dl>
+
+    <div class="filet" aria-hidden="true"><span>✦</span></div>
+
+    <div class="dessins">
+      <figure>
+        <!-- Cadeau -->
+        <svg viewBox="0 0 80 80" role="img" aria-label="Dessin d'un cadeau">
+          <path class="trait" d="M40 22 C 32 8, 18 12, 24 20 C 27 24, 36 22, 40 22 Z"/>
+          <path class="trait" d="M40 22 C 48 8, 62 12, 56 20 C 53 24, 44 22, 40 22 Z"/>
+          <path class="trait" d="M38 23 L 30 32 M42 23 L 50 32"/>
+          <rect class="aplat" x="12" y="22" width="56" height="13" rx="1.5"/>
+          <rect class="aplat" x="16" y="35" width="48" height="36" rx="1.5"/>
+          <path class="trait" d="M36 22 V 71 M44 22 V 71"/>
+        </svg>
+        <figcaption>un cadeau</figcaption>
+      </figure>
+      <figure>
+        <!-- Urne -->
+        <svg viewBox="0 0 80 80" role="img" aria-label="Dessin d'une urne">
+          <path class="aplat" d="M18 30 L 62 30 L 58 72 L 22 72 Z"/>
+          <path class="aplat" d="M14 22 L 66 22 L 66 30 L 14 30 Z"/>
+          <path class="trait" d="M30 26 H 50" stroke-width="2.6"/>
+          <path class="aplat" d="M33 26 L 33 8 L 49 12 L 47 26"/>
+          <path class="trait" d="M36 14 L 45 16"/>
+          <path class="trait" d="M30 50 C 34 44, 46 44, 50 50 M 34 56 H 46"/>
+        </svg>
+        <figcaption>une urne</figcaption>
+      </figure>
+    </div>
+
+    <p class="rsvp">Réponse souhaitée pour le<strong>dimanche 1<sup>er</sup> novembre</strong></p>
+  </main>
+</body>
+</html>
