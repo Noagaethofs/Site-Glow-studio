@@ -39,14 +39,17 @@
   .intro p { font-size:21px; max-width:32ch; margin:20px 0 24px; background:rgba(255,247,239,.75); border-radius:12px; }
   .intro .actions { display:flex; flex-wrap:wrap; gap:12px; }
 
-  .cap { position:absolute; right:max(16px, calc((100vw - 1180px)/2)); top:50%; width:min(380px, calc(100vw - 32px)); z-index:5;
+  .cap { position:absolute; right:max(16px, calc((100vw - 1180px)/2)); top:50%; width:min(420px, calc(100vw - 32px)); z-index:5;
          background:#fff; border:2px solid var(--ink); border-radius:28px; padding:24px 26px; box-shadow:8px 8px 0 var(--ink);
          opacity:0; transform:translateY(-40%) scale(.92) rotate(2deg); transition:opacity .35s, transform .35s; pointer-events:none; }
   .cap.on { opacity:1; transform:translateY(-50%) scale(1) rotate(-1deg); }
-  .cap .n { display:inline-block; font-weight:800; font-size:14px; background:var(--ink); color:#fff; border-radius:999px; padding:3px 12px; margin-bottom:10px; }
+  .cap .n { display:table; font-weight:800; font-size:14px; background:var(--ink); color:#fff; border-radius:999px; padding:3px 12px; margin-bottom:10px; }
   .cap h3 { font-size:42px; margin-bottom:8px; }
-  .cap p { margin:0; font-size:18px; }
-  .cap .benefit { display:inline-block; margin-top:14px; font-weight:600; background:var(--c); border:2px solid var(--ink); border-radius:999px; padding:4px 12px; font-size:15px; }
+  .cap .name { display:inline-block; background:var(--c); border-radius:.2em; padding:0 .12em; transform:rotate(-1.5deg); margin-bottom:14px; }
+  .cap p { margin:0; font-size:17px; line-height:1.45; }
+  .cap .why { font-weight:600; font-size:19px; margin-bottom:12px; }
+  .cap .role { padding-top:12px; border-top:2px dashed var(--ink); }
+  .cap .role b { display:inline-block; font-size:13px; text-transform:uppercase; letter-spacing:.06em; background:var(--ink); color:#fff; border-radius:999px; padding:1px 10px; margin-right:6px; }
   .cap.left { right:auto; left:max(16px, calc((100vw - 1180px)/2)); }
 
   .rail { position:absolute; right:22px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:10px; z-index:6; }
@@ -87,7 +90,11 @@
     .intro p { font-size:18px; }
     .cap, .cap.left { top:auto; bottom:80px; left:16px; right:16px; width:auto; transform:translateY(20px) scale(.95); }
     .cap.on { transform:none; }
-    .cap h3 { font-size:32px; }
+    .cap h3 { font-size:30px; }
+    .cap { padding:18px 20px; }
+    .cap .why { font-size:16px; margin-bottom:8px; }
+    .cap p { font-size:15px; }
+    .cap .role { padding-top:8px; }
     .rail { display:none; }
   }
 </style>
@@ -112,11 +119,31 @@
       <div class="actions"><a class="btn" href="tel:+32496267127">0496 / 26 71 27</a><a class="btn alt" href="#approche">Comment ça marche ?</a></div>
     </div>
 
-    <div class="cap" data-k="1" style="--c:var(--yellow)"><span class="n">1 / 6</span><h3>Le chien</h3><p>Le premier à vous accueillir. Prénom à venir.</p><span class="benefit">Facilite la relation de confiance</span></div>
-    <div class="cap left" data-k="2" style="--c:var(--pink)"><span class="n">2 / 6</span><h3>Lapin n°1</h3><p>Prénom à venir.</p><span class="benefit">Apporte une sécurité au patient</span></div>
-    <div class="cap" data-k="3" style="--c:var(--mint)"><span class="n">3 / 6</span><h3>Lapin n°2</h3><p>Prénom à venir.</p><span class="benefit">Permet d'être dans le moment présent</span></div>
-    <div class="cap left" data-k="4" style="--c:var(--yellow)"><span class="n">4 / 6</span><h3>Lapin n°3</h3><p>Prénom à venir.</p><span class="benefit">Facilite la communication non verbale</span></div>
-    <div class="cap" data-k="5" style="--c:var(--pink)"><span class="n">5 &amp; 6 / 6</span><h3>Les hamsters</h3><p>Le duo de l'équipe. Prénoms à venir.</p><span class="benefit">Apporte un plaisir dans le travail personnel</span></div>
+    <div class="cap" data-k="1" style="--c:var(--yellow)">
+      <span class="n">Le chien · 1 / 6</span><h3 class="name">Prénom</h3>
+      <p class="why">Il va spontanément vers l'enfant : sa joie et sa fidélité créent le lien et mettent en confiance dès la première rencontre.</p>
+      <p class="role"><b>En séance</b> Promenades, jeux, petits exercices d'éducation : l'enfant apprend à communiquer, à poser un cadre et à prendre confiance en lui.</p>
+    </div>
+    <div class="cap left" data-k="2" style="--c:var(--pink)">
+      <span class="n">Lapin · 2 / 6</span><h3 class="name">Prénom</h3>
+      <p class="why">Doux et un peu craintif, le lapin ne s'approche que si l'on est calme.</p>
+      <p class="role"><b>En séance</b> L'enfant apprend à ralentir, à canaliser son énergie et à respecter le rythme de l'autre.</p>
+    </div>
+    <div class="cap" data-k="3" style="--c:var(--mint)">
+      <span class="n">Lapin · 3 / 6</span><h3 class="name">Prénom</h3>
+      <p class="why">Il ne parle pas, mais il réagit à tout : un geste brusque, une main douce, une voix apaisée.</p>
+      <p class="role"><b>En séance</b> Observer ses réactions aide l'enfant à comprendre la communication non verbale… et ses propres émotions.</p>
+    </div>
+    <div class="cap left" data-k="4" style="--c:var(--yellow)">
+      <span class="n">Lapin · 4 / 6</span><h3 class="name">Prénom</h3>
+      <p class="why">Prendre soin de lui (le nourrir, le brosser, préparer son espace) donne un vrai rôle à l'enfant.</p>
+      <p class="role"><b>En séance</b> L'enfant se sent utile et responsable : un levier pour l'estime de soi et l'autonomie.</p>
+    </div>
+    <div class="cap" data-k="5" style="--c:var(--pink)">
+      <span class="n">Les hamsters · 5 &amp; 6 / 6</span><h3 class="name">Prénom &amp; Prénom</h3>
+      <p class="why">Tout petits et fragiles, ils captent immédiatement l'attention.</p>
+      <p class="role"><b>En séance</b> Les manipuler demande concentration, précision et délicatesse : idéal pour travailler l'attention et être dans le moment présent.</p>
+    </div>
 
     <div class="rail" id="rail"><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="hint" id="hint">Faites défiler</div>
