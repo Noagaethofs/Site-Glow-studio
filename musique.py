@@ -1,5 +1,5 @@
 # Ambiance originale synthétisée de zéro : une soirée entendue d'un peu loin.
-# Musique house étouffée « à travers le mur », brouhaha de conversations et verres qui trinquent.
+# Musique house étouffée « à travers le mur », sans voix.
 import numpy as np, wave, sys
 from scipy import signal
 SR = 44100
@@ -75,58 +75,12 @@ while t0 + i * B < DUR:
     i += 1
 # à travers le mur : on ne garde que les graves, plus un soupçon de médiums
 graves = filtre(mus, 380, 'low', 4)
-mediums = filtre(mus, [600, 1800], 'band', 2) * 0.07
+mediums = filtre(mus, [500, 1500], 'band', 2) * 0.1
 mus = reverb(graves * 1.4 + mediums, 0.7, 1200, 0.3)
-
-# ---------------- le brouhaha ----------------
-foule = vide()
-voyelles = [(730, 1090, 2440), (530, 1840, 2480), (270, 2290, 3010), (570, 840, 2410),
-            (300, 870, 2240), (660, 1720, 2410), (490, 1350, 1690)]
-def voix(f0, echelle, debut, fin, pan, gain):
-    t = debut
-    while t < fin:
-        phrase_fin = t + rng.uniform(0.8, 2.4)
-        while t < min(phrase_fin, fin):
-            d = rng.uniform(0.09, 0.22); n = int(d * SR)
-            tt = np.arange(n) / SR
-            f = f0 * (1 + 0.08 * np.sin(2*np.pi*rng.uniform(1, 3)*tt + rng.uniform(0, 6))) * rng.uniform(0.92, 1.1)
-            ph = np.cumsum(f) / SR
-            src = (2 * (ph % 1) - 1)                       # cordes vocales
-            src = src + bruit(n) * 0.25 * np.exp(-tt / 0.02)  # petite consonne
-            v = voyelles[rng.integers(len(voyelles))]
-            s = np.zeros(n)
-            for k, (fc, bw, g) in enumerate(zip(v, (90, 110, 160), (1.0, 0.6, 0.3))):
-                fc *= echelle
-                s += filtre(src, [max(80, fc - bw), min(SR / 2 - 100, fc + bw)], 'band', 2) * g
-            s *= np.sin(np.pi * np.arange(n) / n) ** 0.7 * rng.uniform(0.5, 1.0)
-            ajoute(foule, s, t, gain, pan)
-            t += d * rng.uniform(0.85, 1.05)
-        t += rng.uniform(0.25, 1.0)
-
-for k in range(16):
-    femme = k % 2 == 0
-    voix(rng.uniform(190, 240) if femme else rng.uniform(95, 135), 1.15 if femme else 1.0,
-         rng.uniform(-1.0, 0.3), DUR, rng.uniform(-0.8, 0.8), rng.uniform(0.5, 1.0))
-foule = filtre(foule, 2600, 'low', 2)
-foule = reverb(foule, 0.8, 3500, 0.4)
-
-# ---------------- verres qui trinquent ----------------
-verres = vide()
-def tchin(t, pan):
-    for j in range(rng.integers(1, 3)):
-        n = int(0.9 * SR); tt = np.arange(n) / SR; s = np.zeros(n)
-        base = rng.uniform(2300, 3200)
-        for r, g in ((1, 1), (2.32, 0.5), (4.25, 0.25), (6.8, 0.12)):
-            s += g * np.sin(2*np.pi*base*r*tt) * np.exp(-tt / (0.35 / r ** 0.5))
-        s[:30] *= np.linspace(0, 1, 30)
-        ajoute(verres, s, t + j * rng.uniform(0.03, 0.08), 0.05, pan)
-for t in (0.5, 1.9, 2.25, 3.7, 5.2, 6.4, 7.6):
-    tchin(t + rng.uniform(-0.1, 0.1), rng.uniform(-0.7, 0.7))
-verres = reverb(verres, 1.0, 5000, 0.45)
 
 # ---------------- mixage ----------------
 def norm(x): return x / (np.sqrt((x ** 2).mean()) + 1e-9)
-mix = norm(mus) * 1.0 + norm(foule) * 0.42 + norm(verres) * 0.12
+mix = norm(mus)
 fi = int(0.5 * SR); mix[:fi] *= np.linspace(0, 1, fi)[:, None]
 fo = int(0.7 * SR); mix[-fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.2
 mix /= np.percentile(np.abs(mix), 99.8)
