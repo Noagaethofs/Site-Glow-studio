@@ -6,21 +6,21 @@
 <title>Les 50 ans de Co, Kris et San</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Limelight&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap">
 <style>
-  /* Layout : un carton Art déco noir et or, avec soleil levant derrière le « 50 »,
-     bulles de champagne qui montent dans le fond et un coupon-réponse détachable.
-     Thème sombre unique, choisi volontairement. */
+  /* Layout : un carton d'invitation noir et or qui sort d'une enveloppe à l'ouverture,
+     puis reste posé seul au centre. Thème sombre unique, choisi volontairement. */
   :root {
-    --nappe: #0a090b;       /* noir velours */
-    --papier: #161419;      /* carton anthracite */
-    --papier-2: #1d1a20;
-    --encre: #efe6d6;       /* ivoire */
-    --encre-douce: #a89c8c;
-    --or: #c9a35e;
-    --or-clair: #ecd49c;
-    --or-sombre: #7e5f2b;
-    --f-deco: "Limelight", "Bodoni Moda", Georgia, serif;
+    --nappe: #070608;       /* noir profond, légèrement chaud */
+    --nappe-halo: #1a1619;
+    --papier: #121013;      /* carton noir velours */
+    --papier-haut: #1b181c;
+    --encre: #f1e9da;       /* ivoire */
+    --encre-douce: #a99d8d;
+    --or: #c9a35e;          /* dorure */
+    --or-clair: #ead39d;
+    --or-sombre: #8a6a33;
+    --cire: #6e1f24;        /* cachet de cire */
     --f-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
     --f-script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
     --f-body: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
@@ -30,445 +30,392 @@
   html, body { margin: 0; }
   body {
     background-color: var(--nappe);
-    /* écailles Art déco à peine visibles */
-    background-image:
-      radial-gradient(circle at 50% 100%, transparent 58%, rgba(201, 163, 94, .07) 59%, rgba(201, 163, 94, .07) 61%, transparent 62%),
-      radial-gradient(circle at 50% 100%, transparent 38%, rgba(201, 163, 94, .05) 39%, rgba(201, 163, 94, .05) 41%, transparent 42%);
-    background-size: 56px 28px;
+    background-image: radial-gradient(ellipse 90% 60% at 50% 0%, var(--nappe-halo) 0%, var(--nappe) 75%);
     color: var(--encre);
     font-family: var(--f-body);
     font-weight: 300;
     min-height: 100vh;
     padding-inline: 16px;
-    padding-block: 48px;
+    padding-block: 40px;
     display: grid;
     place-items: center;
     overflow-x: hidden;
   }
-  #bulles {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
 
+  /* ---------- Le carton ---------- */
   .carton {
     position: relative;
-    z-index: 1;
     width: 100%;
-    max-width: 540px;
-    background:
-      radial-gradient(ellipse at 50% 18%, rgba(201, 163, 94, .12), transparent 55%),
-      linear-gradient(180deg, var(--papier-2), var(--papier));
-    padding: clamp(40px, 9vw, 64px) clamp(26px, 7vw, 56px) 0;
-    box-shadow: 0 50px 90px -30px #000, 0 0 0 1px rgba(201, 163, 94, .22);
+    max-width: 520px;
+    background-color: var(--papier);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+      linear-gradient(170deg, var(--papier-haut) 0%, var(--papier) 45%, #0c0a0d 100%);
+    padding: clamp(28px, 7vw, 56px) clamp(22px, 6vw, 52px);
+    box-shadow: 0 50px 90px -30px #000, 0 0 0 1px rgba(201, 163, 94, .2);
     text-align: center;
     display: grid;
-    gap: 28px;
-    animation: poser 1s cubic-bezier(.2, .7, .2, 1) both;
+    gap: 26px;
   }
-  /* double cadre à pans coupés */
-  .cadre {
+  .carton::before {
+    content: "";
     position: absolute;
     inset: 12px;
+    border: 1px solid var(--or);
     pointer-events: none;
-    --c: 22px;
-    clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% var(--c), 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, var(--c) 100%, 0 calc(100% - var(--c)), 0 var(--c));
-    background: var(--or);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-    padding: 1px;
   }
-  .cadre.interieur { inset: 18px; --c: 18px; opacity: .45; }
-  .coin {
+  .carton::after {
+    content: "";
     position: absolute;
-    width: 46px;
-    height: 46px;
+    inset: 16px;
+    border: .5px solid var(--or-clair);
+    opacity: .4;
     pointer-events: none;
-  }
-  .coin.hg { top: 6px; left: 6px; }
-  .coin.hd { top: 6px; right: 6px; transform: scaleX(-1); }
-  .coin.bg { bottom: 6px; left: 6px; transform: scaleY(-1); }
-  .coin.bd { bottom: 6px; right: 6px; transform: scale(-1, -1); }
-  .coin path { fill: none; stroke: var(--or); stroke-width: 1.2; }
-  .coin circle { fill: var(--or); }
-
-  @keyframes poser {
-    from { transform: translateY(18px); opacity: .5; }
-    to { transform: none; opacity: 1; }
   }
 
   .hotes {
-    margin: 0;
-    display: grid;
-    gap: 10px;
-    justify-items: center;
-  }
-  .hotes .noms {
-    font-family: var(--f-deco);
-    font-size: clamp(1.5rem, 6vw, 1.9rem);
-    letter-spacing: .14em;
-    color: var(--encre);
-  }
-  .hotes .noms i {
-    font-family: var(--f-script);
-    font-style: normal;
-    color: var(--or);
-    letter-spacing: 0;
-    margin-inline: .25em;
-  }
-  .hotes .invitent {
-    font-size: .72rem;
-    letter-spacing: .4em;
+    font-weight: 500;
+    font-size: .8rem;
+    letter-spacing: .32em;
     text-transform: uppercase;
     color: var(--encre-douce);
-  }
-
-  /* le soleil levant */
-  .soleil {
-    position: relative;
-    display: grid;
-    place-items: center;
-    margin-inline: auto;
-    width: min(100%, 380px);
-    aspect-ratio: 1.35;
-    max-width: 100%;
-    margin-bottom: -14%;
-  }
-  .soleil::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-conic-gradient(from -90deg at 50% 78%, rgba(201, 163, 94, .55) 0deg 1.2deg, transparent 1.2deg 9deg);
-    -webkit-mask: radial-gradient(circle at 50% 78%, transparent 26%, #000 27%, #000 52%, transparent 70%);
-            mask: radial-gradient(circle at 50% 78%, transparent 26%, #000 27%, #000 52%, transparent 70%);
-    clip-path: inset(0 0 22% 0);
-  }
-  .soleil::after {
-    content: "";
-    position: absolute;
-    left: 8%; right: 8%;
-    bottom: 22%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--or), transparent);
-  }
-  .cinquante {
-    position: relative;
     margin: 0;
-    line-height: .8;
+  }
+  .hotes strong { color: var(--encre); font-weight: 500; }
+
+  .cinquante {
+    margin: 0;
+    line-height: .85;
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+  }
+  .chiffre {
     font-family: var(--f-display);
     font-weight: 400;
-    font-size: clamp(7.5rem, 36vw, 12rem);
-    letter-spacing: -.03em;
-    transform: translateY(-6%);
-    background: linear-gradient(110deg, var(--or-sombre) 0%, var(--or) 25%, var(--or-clair) 45%, #fff6dc 50%, var(--or-clair) 55%, var(--or) 75%, var(--or-sombre) 100%);
-    background-size: 250% 100%;
-    background-position: 100% 0;
+    font-size: clamp(7rem, 34vw, 11rem);
+    letter-spacing: -.02em;
+    background: linear-gradient(160deg, var(--or-clair) 0%, var(--or) 45%, var(--or-sombre) 70%, var(--or-clair) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: var(--or);
     -webkit-text-fill-color: transparent;
-    animation: reflet 5s ease-in-out 1s infinite;
   }
   .cinquante .ans {
-    position: absolute;
-    right: -.1em;
-    bottom: -.05em;
-    font-family: var(--f-script);
-    font-size: .28em;
-    letter-spacing: 0;
-    -webkit-text-fill-color: var(--encre);
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 1.6rem;
     color: var(--encre);
-    transform: rotate(-8deg);
-  }
-  @keyframes reflet {
-    0%, 55% { background-position: 100% 0; }
-    100% { background-position: -50% 0; }
   }
 
   .devise {
-    margin: -8px 0 0;
     font-family: var(--f-script);
-    font-size: clamp(2.1rem, 9vw, 2.8rem);
-    line-height: 1.1;
+    font-size: clamp(2rem, 8vw, 2.6rem);
+    line-height: 1.15;
     color: var(--encre);
+    margin: 0;
     text-wrap: balance;
   }
   .devise small {
     display: block;
-    font-family: var(--f-deco);
-    font-size: .8rem;
-    letter-spacing: .5em;
+    font-family: var(--f-body);
+    font-size: .72rem;
+    letter-spacing: .3em;
     text-transform: uppercase;
     color: var(--or);
-    margin-bottom: 8px;
-    padding-left: .5em;
+    margin-bottom: 6px;
   }
-  .devise i { font-style: normal; color: var(--or); }
 
-  .losange {
+  .filet {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
+    gap: 12px;
     color: var(--or);
+    margin-inline: auto;
+    width: 70%;
   }
-  .losange::before, .losange::after {
-    content: "";
-    width: 70px;
-    height: 5px;
-    border-block: 1px solid currentColor;
-  }
-  .losange span {
-    width: 9px; height: 9px;
-    background: currentColor;
-    transform: rotate(45deg);
-  }
+  .filet::before, .filet::after { content: ""; flex: 1; height: 1px; background: currentColor; }
+  .filet span { font-family: var(--f-display); font-size: .9rem; }
 
-  /* trois médaillons d'infos */
-  .infos {
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-  }
-  .infos > div {
-    min-width: 0;
-    padding: 18px 8px 16px;
-    border: 1px solid rgba(201, 163, 94, .35);
-    border-radius: 999px 999px 4px 4px;
-    display: grid;
-    align-content: start;
-    gap: 8px;
-  }
+  .infos { display: grid; gap: 18px; margin: 0; }
   .infos dt {
-    font-family: var(--f-deco);
-    font-size: .72rem;
-    letter-spacing: .28em;
+    font-size: .68rem;
+    letter-spacing: .3em;
     text-transform: uppercase;
     color: var(--or);
-    padding-left: .28em;
+    font-weight: 500;
+    margin-bottom: 4px;
   }
   .infos dd {
     margin: 0;
     font-family: var(--f-display);
-    font-size: 1.02rem;
-    line-height: 1.35;
-    overflow-wrap: anywhere;
+    font-size: 1.2rem;
+    line-height: 1.4;
   }
-  .infos .gros {
-    display: block;
-    font-size: 2.2rem;
-    line-height: 1;
-    color: var(--or-clair);
-  }
-  .infos em { font-style: italic; color: var(--encre-douce); font-size: .9rem; }
+  .infos dd em { font-style: italic; color: var(--encre-douce); }
   .infos a {
     color: inherit;
     text-decoration: none;
     border-bottom: 1px solid var(--or-sombre);
   }
   .infos a:hover, .infos a:focus-visible { border-bottom-color: var(--or-clair); }
-  a:focus-visible { outline: 2px solid var(--or); outline-offset: 3px; }
-  @media (max-width: 460px) {
-    .infos { grid-template-columns: minmax(0, 1fr); }
-    .infos > div { border-radius: 4px; padding-inline: 14px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--or); outline-offset: 3px; }
+
+  .urne { display: grid; justify-items: center; }
+  .urne svg { width: 70px; height: auto; max-width: 100%; }
+  .trait { fill: none; stroke: var(--or); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .aplat { fill: var(--papier); stroke: var(--or); stroke-width: 1.6; stroke-linejoin: round; }
+
+  .rsvp {
+    margin: 0;
+    font-size: .9rem;
+    letter-spacing: .04em;
+    color: var(--encre-douce);
+  }
+  .rsvp strong {
+    display: block;
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--encre);
+    margin-top: 2px;
   }
 
-  .dessins {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: clamp(28px, 12vw, 70px);
-  }
-  .dessins figure { margin: 0; display: grid; gap: 6px; justify-items: center; }
-  .dessins svg { width: 78px; height: auto; max-width: 100%; }
-  .dessins figcaption { font-family: var(--f-script); font-size: 1.4rem; color: var(--encre-douce); }
-  .trait { fill: none; stroke: var(--or); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-  .aplat { fill: var(--papier); stroke: var(--or); stroke-width: 1.5; stroke-linejoin: round; }
-  .cadeau-svg { transform-origin: 50% 100%; animation: sautille 4s ease-in-out 2s infinite; }
-  @keyframes sautille {
-    0%, 86%, 100% { transform: none; }
-    90% { transform: translateY(-5px) rotate(-3deg); }
-    94% { transform: translateY(0) rotate(2deg); }
-  }
-
-  /* coupon-réponse détachable */
-  .coupon {
+  .revoir {
     position: relative;
-    margin-inline: calc(-1 * clamp(26px, 7vw, 56px));
-    padding: 26px 24px 34px;
-    border-top: 2px dashed rgba(201, 163, 94, .5);
-    display: grid;
-    gap: 4px;
+    justify-self: center;
+    margin-top: 4px;
+    background: none;
+    border: 1px solid rgba(201, 163, 94, .4);
+    color: var(--encre-douce);
+    font: 400 .68rem/1 var(--f-body);
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    padding: 9px 16px 9px 18px;
+    border-radius: 999px;
+    cursor: pointer;
   }
-  .coupon::before, .coupon::after {
+  .revoir:hover { color: var(--or-clair); border-color: var(--or); }
+
+  /* ---------- L'enveloppe ---------- */
+  .scene {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    padding-inline: 16px;
+    background-color: var(--nappe);
+    background-image: radial-gradient(ellipse 90% 60% at 50% 0%, var(--nappe-halo) 0%, var(--nappe) 75%);
+    perspective: 1400px;
+    pointer-events: none;
+  }
+  .enveloppe {
+    --l: min(86vw, 420px);
+    position: relative;
+    width: var(--l);
+    height: calc(var(--l) * .66);
+    max-width: 100%;
+    margin-top: 28vh;
+  }
+  .env-dos, .env-poche, .env-rabat { position: absolute; inset: 0; }
+  .env-dos {
+    background: linear-gradient(180deg, #1c191d, #0f0d10);
+    box-shadow: 0 40px 70px -25px #000;
+    outline: 1px solid rgba(201, 163, 94, .25);
+  }
+  /* doublure dorée visible quand le rabat s'ouvre */
+  .env-dos::before {
     content: "";
     position: absolute;
-    top: -13px;
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: var(--nappe);
+    left: 6%; right: 6%; top: 0;
+    height: 60%;
+    background: repeating-linear-gradient(45deg, rgba(201, 163, 94, .28) 0 2px, transparent 2px 9px), #2a2219;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
   }
-  .coupon::before { left: -12px; }
-  .coupon::after { right: -12px; }
-  .coupon .ciseaux {
+  .mini {
     position: absolute;
-    top: -12px;
-    left: 34px;
-    font-size: 1rem;
-    color: var(--or);
-    background: var(--papier);
-    padding-inline: 6px;
-    line-height: 1.4;
+    left: 7%; right: 7%;
+    top: 6%;
+    height: 90%;
+    z-index: 1;
+    background: linear-gradient(170deg, var(--papier-haut), var(--papier));
+    outline: 1px solid var(--or);
+    outline-offset: -8px;
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    padding-top: 7%;
+    gap: 2px;
+    box-shadow: 0 -6px 18px rgba(0, 0, 0, .5);
   }
-  .coupon p { margin: 0; }
-  .coupon .label {
-    font-family: var(--f-deco);
-    font-size: .75rem;
-    letter-spacing: .4em;
-    text-transform: uppercase;
-    color: var(--or);
-    padding-left: .4em;
+  .mini .m-hotes { font-size: clamp(.5rem, 2.2vw, .65rem); letter-spacing: .3em; color: var(--encre-douce); text-transform: uppercase; }
+  .mini .m-50 {
+    font-family: var(--f-display);
+    font-size: clamp(3.6rem, 18vw, 5.6rem);
+    line-height: 1;
+    background: linear-gradient(160deg, var(--or-clair), var(--or) 45%, var(--or-sombre) 70%, var(--or-clair));
+    -webkit-background-clip: text; background-clip: text;
+    color: var(--or); -webkit-text-fill-color: transparent;
   }
-  .coupon .date {
+  .mini .m-devise { font-family: var(--f-script); font-size: clamp(1.1rem, 5vw, 1.5rem); color: var(--encre); }
+  .env-poche {
+    z-index: 2;
+    background: linear-gradient(180deg, #19161a, #0d0b0e);
+    clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%);
+  }
+  .env-poche::after {
+    /* plis de l'enveloppe */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top right, transparent calc(50% - .6px), rgba(201, 163, 94, .35) 50%, transparent calc(50% + .6px)) left / 50% 100% no-repeat,
+      linear-gradient(to top left, transparent calc(50% - .6px), rgba(201, 163, 94, .35) 50%, transparent calc(50% + .6px)) right / 50% 100% no-repeat;
+    clip-path: polygon(0 100%, 50% 52%, 100% 100%);
+  }
+  .env-rabat {
+    height: 58%;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    z-index: 3;
+  }
+  .env-rabat .face, .env-rabat .dos-rabat {
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    backface-visibility: hidden;
+  }
+  .env-rabat .face { background: linear-gradient(180deg, #221e23, #151216); }
+  .env-rabat .face::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom right, transparent calc(50% - .6px), rgba(201, 163, 94, .45) 50%, transparent calc(50% + .6px)) left / 50% 100% no-repeat,
+                linear-gradient(to bottom left, transparent calc(50% - .6px), rgba(201, 163, 94, .45) 50%, transparent calc(50% + .6px)) right / 50% 100% no-repeat;
+  }
+  .env-rabat .dos-rabat {
+    transform: rotateX(180deg);
+    background: repeating-linear-gradient(45deg, rgba(201, 163, 94, .28) 0 2px, transparent 2px 9px), #2a2219;
+  }
+  .cachet {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 54px; height: 54px;
+    margin: -30px 0 0 -27px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #9a3a3f, var(--cire) 55%, #3f1013);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .6), inset 0 0 0 4px rgba(0, 0, 0, .18);
+    display: grid;
+    place-items: center;
     font-family: var(--f-display);
     font-style: italic;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
+    color: #e6b9a0;
+    backface-visibility: hidden;
   }
 
+  /* chronologie de l'animation, environ 4 secondes */
+  .joue .enveloppe { animation: arrive .7s cubic-bezier(.2, .8, .2, 1) both, part .7s ease-in 3s forwards; }
+  .joue .cachet { animation: cachet .35s ease-in .8s forwards; }
+  .joue .env-rabat { animation: ouvre .8s cubic-bezier(.5, 0, .3, 1) 1s forwards; }
+  .joue .mini { animation: sort 1.1s cubic-bezier(.3, .7, .2, 1) 1.8s forwards; }
+  .joue.scene { animation: fond .6s ease 3.5s forwards; }
+  .joue ~ .carton { animation: apparait .8s cubic-bezier(.2, .7, .2, 1) 3.2s both; }
+
+  @keyframes arrive { from { transform: translateY(40px) rotate(-3deg); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes cachet { to { transform: scale(.6); opacity: 0; } }
+  @keyframes ouvre { 0% { transform: rotateX(0); z-index: 3; } 49% { z-index: 3; } 50% { z-index: 0; } 100% { transform: rotateX(180deg); z-index: 0; } }
+  @keyframes sort { to { transform: translateY(-68%); } }
+  @keyframes part { to { transform: translateY(40vh) scale(.92); opacity: 0; } }
+  @keyframes fond { to { opacity: 0; visibility: hidden; } }
+  @keyframes apparait { from { transform: translateY(30px) scale(.94); opacity: 0; } to { transform: none; opacity: 1; } }
+
+  .scene:not(.joue) { display: none; }
   @media (prefers-reduced-motion: reduce) {
-    .carton, .cinquante, .cadeau-svg { animation: none; }
-    #bulles { display: none; }
+    .scene { display: none !important; }
+    .carton { animation: none !important; }
   }
 </style>
 </head>
 <body>
-  <canvas id="bulles" aria-hidden="true"></canvas>
+  <div class="scene joue" id="scene" aria-hidden="true">
+    <div class="enveloppe">
+      <div class="env-dos"></div>
+      <div class="mini">
+        <span class="m-hotes">Co, Kris &amp; San</span>
+        <span class="m-50">50</span>
+        <span class="m-devise">Chic et sans chichi</span>
+      </div>
+      <div class="env-poche"></div>
+      <div class="env-rabat">
+        <div class="face"></div>
+        <div class="dos-rabat"></div>
+        <div class="cachet">50</div>
+      </div>
+    </div>
+  </div>
 
   <main class="carton" aria-label="Invitation">
-    <span class="cadre" aria-hidden="true"></span>
-    <span class="cadre interieur" aria-hidden="true"></span>
-    <svg class="coin hg" viewBox="0 0 46 46" aria-hidden="true"><path d="M2 30 V2 H30 M8 22 V8 H22 M14 14 L26 26"/><circle cx="28" cy="28" r="2.2"/></svg>
-    <svg class="coin hd" viewBox="0 0 46 46" aria-hidden="true"><path d="M2 30 V2 H30 M8 22 V8 H22 M14 14 L26 26"/><circle cx="28" cy="28" r="2.2"/></svg>
-    <svg class="coin bg" viewBox="0 0 46 46" aria-hidden="true"><path d="M2 30 V2 H30 M8 22 V8 H22 M14 14 L26 26"/><circle cx="28" cy="28" r="2.2"/></svg>
-    <svg class="coin bd" viewBox="0 0 46 46" aria-hidden="true"><path d="M2 30 V2 H30 M8 22 V8 H22 M14 14 L26 26"/><circle cx="28" cy="28" r="2.2"/></svg>
+    <p class="hotes"><strong>Co</strong>, <strong>Kris</strong> &amp; <strong>San</strong><br>vous invitent</p>
 
-    <p class="hotes">
-      <span class="noms">CO<i>,</i>KRIS<i>&amp;</i>SAN</span>
-      <span class="invitent">vous invitent à fêter</span>
-    </p>
+    <h1 class="cinquante">
+      <span class="chiffre">50</span>
+      <span class="ans">ans</span>
+    </h1>
 
-    <div class="soleil">
-      <h1 class="cinquante">50<span class="ans">ans</span></h1>
-    </div>
+    <p class="devise"><small>Soirée</small>Chic et sans chichi</p>
 
-    <p class="devise"><small>Soirée</small>chic <i>et</i> sans chichi</p>
-
-    <div class="losange" aria-hidden="true"><span></span></div>
+    <div class="filet" aria-hidden="true"><span>✦</span></div>
 
     <dl class="infos">
       <div>
         <dt>Quand</dt>
-        <dd>Samedi<span class="gros">14</span>novembre 2026<br><em>dès 20 h</em></dd>
+        <dd>Samedi 14 novembre 2026<br><em>dès 20 h</em></dd>
       </div>
       <div>
         <dt>Où</dt>
         <dd>
           <a href="https://www.google.com/maps/search/?api=1&amp;query=Le+Nazareth+Rue+de+Nazareth+11+4651+Battice" target="_blank" rel="noopener">Le Nazareth</a><br>
-          <em>Rue de Nazareth, 11<br>4651 Battice</em>
+          <em>Rue de Nazareth, 11 · 4651 Battice</em>
         </dd>
       </div>
       <div>
-        <dt>Menu</dt>
-        <dd>Sandwich<br>bar</dd>
+        <dt>Au menu</dt>
+        <dd>Sandwich bar</dd>
       </div>
     </dl>
 
-    <div class="dessins">
-      <figure>
-        <svg class="cadeau-svg" viewBox="0 0 80 80" role="img" aria-label="Dessin d'un cadeau">
-          <path class="trait" d="M40 22 C 32 8, 18 12, 24 20 C 27 24, 36 22, 40 22 Z"/>
-          <path class="trait" d="M40 22 C 48 8, 62 12, 56 20 C 53 24, 44 22, 40 22 Z"/>
-          <rect class="aplat" x="12" y="22" width="56" height="13" rx="1.5"/>
-          <rect class="aplat" x="16" y="35" width="48" height="36" rx="1.5"/>
-          <path class="trait" d="M36 22 V 71 M44 22 V 71"/>
-          <path class="trait" d="M22 48 L 30 56 M58 48 L 50 56" opacity=".6"/>
-        </svg>
-        <figcaption>un cadeau</figcaption>
-      </figure>
-      <figure>
-        <svg viewBox="0 0 80 80" role="img" aria-label="Dessin d'une urne">
-          <path class="aplat" d="M33 26 L 33 8 L 49 12 L 47 26"/>
-          <path class="trait" d="M36 14 L 45 16"/>
-          <path class="aplat" d="M18 30 L 62 30 L 58 72 L 22 72 Z"/>
-          <path class="aplat" d="M14 22 L 66 22 L 66 30 L 14 30 Z"/>
-          <path class="trait" d="M30 26 H 50" stroke-width="2.6"/>
-          <path class="trait" d="M40 40 L 48 51 L 40 62 L 32 51 Z"/>
-          <path class="trait" d="M40 46 L 44 51 L 40 56 L 36 51 Z"/>
-        </svg>
-        <figcaption>une urne</figcaption>
-      </figure>
+    <div class="filet" aria-hidden="true"><span>✦</span></div>
+
+    <div class="urne">
+      <svg viewBox="0 0 80 80" role="img" aria-label="Urne">
+        <path class="aplat" d="M33 26 L 33 8 L 49 12 L 47 26"/>
+        <path class="trait" d="M36 14 L 45 16"/>
+        <path class="aplat" d="M18 30 L 62 30 L 58 72 L 22 72 Z"/>
+        <path class="aplat" d="M14 22 L 66 22 L 66 30 L 14 30 Z"/>
+        <path class="trait" d="M30 26 H 50" stroke-width="2.6"/>
+        <path class="trait" d="M40 41 L 47 51 L 40 61 L 33 51 Z"/>
+      </svg>
     </div>
 
-    <div class="coupon">
-      <span class="ciseaux" aria-hidden="true">✂</span>
-      <p class="label">Réponse souhaitée</p>
-      <p class="date">pour le dimanche 1<sup>er</sup> novembre</p>
-    </div>
+    <p class="rsvp">Réponse souhaitée pour le<strong>dimanche 1<sup>er</sup> novembre</strong></p>
+
+    <button class="revoir" id="revoir" type="button">Rouvrir l'enveloppe</button>
   </main>
 
 <script>
-  (function () {
-    var c = document.getElementById('bulles');
-    if (!c || !c.getContext) return;
-    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var ctx = c.getContext('2d');
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var w, h, bulles = [];
-    function taille() {
-      w = c.clientWidth; h = c.clientHeight;
-      c.width = w * dpr; c.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    function nouvelle(auHasard) {
-      return {
-        x: Math.random() * w,
-        y: auHasard ? Math.random() * h : h + 10,
-        r: 0.8 + Math.random() * 2.6,
-        v: 0.25 + Math.random() * 0.7,
-        o: Math.random() * Math.PI * 2,
-        a: 0.15 + Math.random() * 0.35
-      };
-    }
-    taille();
-    var n = Math.round(Math.min(70, w * h / 18000));
-    for (var i = 0; i < n; i++) bulles.push(nouvelle(true));
-    window.addEventListener('resize', taille);
-    (function boucle() {
-      ctx.clearRect(0, 0, w, h);
-      for (var i = 0; i < bulles.length; i++) {
-        var b = bulles[i];
-        b.y -= b.v;
-        b.o += 0.02;
-        var x = b.x + Math.sin(b.o) * 1.5;
-        if (b.y < -10) bulles[i] = nouvelle(false);
-        ctx.beginPath();
-        ctx.arc(x, b.y, b.r, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(236, 212, 156,' + b.a + ')';
-        ctx.lineWidth = 0.8;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(x - b.r * 0.35, b.y - b.r * 0.35, b.r * 0.3, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 246, 220,' + (b.a * 0.8) + ')';
-        ctx.fill();
-      }
-      requestAnimationFrame(boucle);
-    })();
-  })();
+  document.getElementById('revoir').addEventListener('click', function () {
+    var s = document.getElementById('scene');
+    var c = document.querySelector('.carton');
+    s.classList.remove('joue');
+    c.style.animation = 'none';
+    void s.offsetWidth;
+    s.classList.add('joue');
+    c.style.animation = '';
+    window.scrollTo(0, 0);
+  });
 </script>
 </body>
 </html>
