@@ -8,24 +8,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap">
 <style>
-  /* Layout : un carton d'invitation imprimé, posé sur une nappe. Thème unique, choisi volontairement. */
+  /* Layout : un carton d'invitation imprimé, posé sur une nappe. Thème sombre unique, choisi volontairement. */
   :root {
-    --nappe: #2b1d27;       /* aubergine profond, le fond derrière le carton */
-    --papier: #f1e4dc;      /* papier rosé */
-    --encre: #2b1d27;       /* texte principal */
-    --encre-douce: #6b5562; /* texte secondaire */
-    --or: #a87e3f;          /* dorure */
-    --or-clair: #d8b878;
+    --nappe: #0b0a0c;       /* noir velours, le fond derrière le carton */
+    --papier: #17151a;      /* carton noir anthracite */
+    --encre: #efe6d6;       /* texte principal, ivoire */
+    --encre-douce: #a89c8c; /* texte secondaire */
+    --or: #c9a35e;          /* dorure */
+    --or-clair: #e6cc93;
     --f-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
     --f-script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
     --f-body: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
-    color-scheme: light;
+    color-scheme: dark;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
   body {
     background: var(--nappe);
-    background-image: radial-gradient(ellipse at 50% 0%, #3d2a37 0%, var(--nappe) 70%);
+    background-image: radial-gradient(ellipse at 50% 0%, #221e24 0%, var(--nappe) 70%);
     color: var(--encre);
     font-family: var(--f-body);
     font-weight: 300;
@@ -41,7 +41,8 @@
     max-width: 520px;
     background: var(--papier);
     padding: clamp(28px, 7vw, 56px) clamp(22px, 6vw, 52px);
-    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55), 0 2px 0 rgba(255, 255, 255, .4) inset;
+    box-shadow: 0 40px 80px -24px rgba(0, 0, 0, .9), 0 0 0 1px rgba(201, 163, 94, .18);
+    background-image: linear-gradient(165deg, rgba(255, 255, 255, .035) 0%, transparent 40%);
     text-align: center;
     display: grid;
     gap: 26px;
@@ -59,6 +60,7 @@
     position: absolute;
     inset: 16px;
     border: .5px solid var(--or-clair);
+    opacity: .45;
     pointer-events: none;
   }
   @keyframes poser {
@@ -90,7 +92,7 @@
     font-weight: 400;
     font-size: clamp(7rem, 34vw, 11rem);
     letter-spacing: -.02em;
-    background: linear-gradient(160deg, var(--or-clair) 0%, var(--or) 45%, #7d5a26 70%, var(--or-clair) 100%);
+    background: linear-gradient(160deg, var(--or-clair) 0%, var(--or) 45%, #8a6730 70%, var(--or-clair) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: var(--or);
