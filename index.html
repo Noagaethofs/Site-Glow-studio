@@ -6,16 +6,21 @@
 <title>Les 50 ans de Co, Kris et San</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Limelight&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap">
 <style>
-  /* Layout : un carton d'invitation imprimé, posé sur une nappe. Thème sombre unique, choisi volontairement. */
+  /* Layout : un carton Art déco noir et or, avec soleil levant derrière le « 50 »,
+     bulles de champagne qui montent dans le fond et un coupon-réponse détachable.
+     Thème sombre unique, choisi volontairement. */
   :root {
-    --nappe: #0b0a0c;       /* noir velours, le fond derrière le carton */
-    --papier: #17151a;      /* carton noir anthracite */
-    --encre: #efe6d6;       /* texte principal, ivoire */
-    --encre-douce: #a89c8c; /* texte secondaire */
-    --or: #c9a35e;          /* dorure */
-    --or-clair: #e6cc93;
+    --nappe: #0a090b;       /* noir velours */
+    --papier: #161419;      /* carton anthracite */
+    --papier-2: #1d1a20;
+    --encre: #efe6d6;       /* ivoire */
+    --encre-douce: #a89c8c;
+    --or: #c9a35e;
+    --or-clair: #ecd49c;
+    --or-sombre: #7e5f2b;
+    --f-deco: "Limelight", "Bodoni Moda", Georgia, serif;
     --f-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
     --f-script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
     --f-body: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
@@ -24,238 +29,446 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; }
   body {
-    background: var(--nappe);
-    background-image: radial-gradient(ellipse at 50% 0%, #221e24 0%, var(--nappe) 70%);
+    background-color: var(--nappe);
+    /* écailles Art déco à peine visibles */
+    background-image:
+      radial-gradient(circle at 50% 100%, transparent 58%, rgba(201, 163, 94, .07) 59%, rgba(201, 163, 94, .07) 61%, transparent 62%),
+      radial-gradient(circle at 50% 100%, transparent 38%, rgba(201, 163, 94, .05) 39%, rgba(201, 163, 94, .05) 41%, transparent 42%);
+    background-size: 56px 28px;
     color: var(--encre);
     font-family: var(--f-body);
     font-weight: 300;
     min-height: 100vh;
     padding-inline: 16px;
-    padding-block: 40px;
+    padding-block: 48px;
     display: grid;
     place-items: center;
+    overflow-x: hidden;
   }
+  #bulles {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   .carton {
     position: relative;
+    z-index: 1;
     width: 100%;
-    max-width: 520px;
-    background: var(--papier);
-    padding: clamp(28px, 7vw, 56px) clamp(22px, 6vw, 52px);
-    box-shadow: 0 40px 80px -24px rgba(0, 0, 0, .9), 0 0 0 1px rgba(201, 163, 94, .18);
-    background-image: linear-gradient(165deg, rgba(255, 255, 255, .035) 0%, transparent 40%);
+    max-width: 540px;
+    background:
+      radial-gradient(ellipse at 50% 18%, rgba(201, 163, 94, .12), transparent 55%),
+      linear-gradient(180deg, var(--papier-2), var(--papier));
+    padding: clamp(40px, 9vw, 64px) clamp(26px, 7vw, 56px) 0;
+    box-shadow: 0 50px 90px -30px #000, 0 0 0 1px rgba(201, 163, 94, .22);
     text-align: center;
     display: grid;
-    gap: 26px;
-    animation: poser 900ms cubic-bezier(.2, .7, .2, 1) both;
+    gap: 28px;
+    animation: poser 1s cubic-bezier(.2, .7, .2, 1) both;
   }
-  .carton::before {
-    content: "";
+  /* double cadre à pans coupés */
+  .cadre {
     position: absolute;
     inset: 12px;
-    border: 1px solid var(--or);
     pointer-events: none;
+    --c: 22px;
+    clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% var(--c), 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, var(--c) 100%, 0 calc(100% - var(--c)), 0 var(--c));
+    background: var(--or);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    padding: 1px;
   }
-  .carton::after {
-    content: "";
+  .cadre.interieur { inset: 18px; --c: 18px; opacity: .45; }
+  .coin {
     position: absolute;
-    inset: 16px;
-    border: .5px solid var(--or-clair);
-    opacity: .45;
+    width: 46px;
+    height: 46px;
     pointer-events: none;
   }
+  .coin.hg { top: 6px; left: 6px; }
+  .coin.hd { top: 6px; right: 6px; transform: scaleX(-1); }
+  .coin.bg { bottom: 6px; left: 6px; transform: scaleY(-1); }
+  .coin.bd { bottom: 6px; right: 6px; transform: scale(-1, -1); }
+  .coin path { fill: none; stroke: var(--or); stroke-width: 1.2; }
+  .coin circle { fill: var(--or); }
+
   @keyframes poser {
-    from { transform: translateY(14px) rotate(-.6deg); opacity: .4; }
+    from { transform: translateY(18px); opacity: .5; }
     to { transform: none; opacity: 1; }
   }
-  @media (prefers-reduced-motion: reduce) { .carton { animation: none; } }
 
   .hotes {
-    font-family: var(--f-body);
-    font-weight: 500;
-    font-size: .8rem;
-    letter-spacing: .32em;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+    justify-items: center;
+  }
+  .hotes .noms {
+    font-family: var(--f-deco);
+    font-size: clamp(1.5rem, 6vw, 1.9rem);
+    letter-spacing: .14em;
+    color: var(--encre);
+  }
+  .hotes .noms i {
+    font-family: var(--f-script);
+    font-style: normal;
+    color: var(--or);
+    letter-spacing: 0;
+    margin-inline: .25em;
+  }
+  .hotes .invitent {
+    font-size: .72rem;
+    letter-spacing: .4em;
     text-transform: uppercase;
     color: var(--encre-douce);
-    margin: 0;
   }
-  .hotes strong { color: var(--encre); font-weight: 500; }
 
-  .cinquante {
-    margin: 0;
-    line-height: .85;
+  /* le soleil levant */
+  .soleil {
+    position: relative;
     display: grid;
-    justify-items: center;
-    gap: 4px;
+    place-items: center;
+    margin-inline: auto;
+    width: min(100%, 380px);
+    aspect-ratio: 1.35;
+    max-width: 100%;
+    margin-bottom: -14%;
   }
-  .cinquante .chiffre {
+  .soleil::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(from -90deg at 50% 78%, rgba(201, 163, 94, .55) 0deg 1.2deg, transparent 1.2deg 9deg);
+    -webkit-mask: radial-gradient(circle at 50% 78%, transparent 26%, #000 27%, #000 52%, transparent 70%);
+            mask: radial-gradient(circle at 50% 78%, transparent 26%, #000 27%, #000 52%, transparent 70%);
+    clip-path: inset(0 0 22% 0);
+  }
+  .soleil::after {
+    content: "";
+    position: absolute;
+    left: 8%; right: 8%;
+    bottom: 22%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--or), transparent);
+  }
+  .cinquante {
+    position: relative;
+    margin: 0;
+    line-height: .8;
     font-family: var(--f-display);
     font-weight: 400;
-    font-size: clamp(7rem, 34vw, 11rem);
-    letter-spacing: -.02em;
-    background: linear-gradient(160deg, var(--or-clair) 0%, var(--or) 45%, #8a6730 70%, var(--or-clair) 100%);
+    font-size: clamp(7.5rem, 36vw, 12rem);
+    letter-spacing: -.03em;
+    transform: translateY(-6%);
+    background: linear-gradient(110deg, var(--or-sombre) 0%, var(--or) 25%, var(--or-clair) 45%, #fff6dc 50%, var(--or-clair) 55%, var(--or) 75%, var(--or-sombre) 100%);
+    background-size: 250% 100%;
+    background-position: 100% 0;
     -webkit-background-clip: text;
     background-clip: text;
     color: var(--or);
     -webkit-text-fill-color: transparent;
+    animation: reflet 5s ease-in-out 1s infinite;
   }
   .cinquante .ans {
-    font-family: var(--f-display);
-    font-style: italic;
-    font-size: 1.6rem;
+    position: absolute;
+    right: -.1em;
+    bottom: -.05em;
+    font-family: var(--f-script);
+    font-size: .28em;
+    letter-spacing: 0;
+    -webkit-text-fill-color: var(--encre);
     color: var(--encre);
+    transform: rotate(-8deg);
+  }
+  @keyframes reflet {
+    0%, 55% { background-position: 100% 0; }
+    100% { background-position: -50% 0; }
   }
 
   .devise {
+    margin: -8px 0 0;
     font-family: var(--f-script);
-    font-size: clamp(2rem, 8vw, 2.6rem);
-    line-height: 1.15;
+    font-size: clamp(2.1rem, 9vw, 2.8rem);
+    line-height: 1.1;
     color: var(--encre);
-    margin: 0;
     text-wrap: balance;
   }
   .devise small {
     display: block;
-    font-family: var(--f-body);
-    font-size: .72rem;
-    letter-spacing: .3em;
+    font-family: var(--f-deco);
+    font-size: .8rem;
+    letter-spacing: .5em;
     text-transform: uppercase;
     color: var(--or);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    padding-left: .5em;
   }
+  .devise i { font-style: normal; color: var(--or); }
 
-  .filet {
+  .losange {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    gap: 10px;
     color: var(--or);
-    margin-inline: auto;
-    width: 70%;
   }
-  .filet::before, .filet::after { content: ""; flex: 1; height: 1px; background: currentColor; }
-  .filet span { font-family: var(--f-display); font-size: .9rem; }
+  .losange::before, .losange::after {
+    content: "";
+    width: 70px;
+    height: 5px;
+    border-block: 1px solid currentColor;
+  }
+  .losange span {
+    width: 9px; height: 9px;
+    background: currentColor;
+    transform: rotate(45deg);
+  }
 
+  /* trois médaillons d'infos */
   .infos {
-    display: grid;
-    gap: 18px;
     margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .infos > div {
+    min-width: 0;
+    padding: 18px 8px 16px;
+    border: 1px solid rgba(201, 163, 94, .35);
+    border-radius: 999px 999px 4px 4px;
+    display: grid;
+    align-content: start;
+    gap: 8px;
   }
   .infos dt {
-    font-size: .68rem;
-    letter-spacing: .3em;
+    font-family: var(--f-deco);
+    font-size: .72rem;
+    letter-spacing: .28em;
     text-transform: uppercase;
     color: var(--or);
-    font-weight: 500;
-    margin-bottom: 4px;
+    padding-left: .28em;
   }
   .infos dd {
     margin: 0;
     font-family: var(--f-display);
-    font-size: 1.2rem;
-    line-height: 1.4;
+    font-size: 1.02rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
   }
-  .infos dd em { font-style: italic; color: var(--encre-douce); }
+  .infos .gros {
+    display: block;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--or-clair);
+  }
+  .infos em { font-style: italic; color: var(--encre-douce); font-size: .9rem; }
   .infos a {
     color: inherit;
     text-decoration: none;
-    border-bottom: 1px solid var(--or-clair);
+    border-bottom: 1px solid var(--or-sombre);
   }
-  .infos a:hover, .infos a:focus-visible { border-bottom-color: var(--or); }
+  .infos a:hover, .infos a:focus-visible { border-bottom-color: var(--or-clair); }
   a:focus-visible { outline: 2px solid var(--or); outline-offset: 3px; }
+  @media (max-width: 460px) {
+    .infos { grid-template-columns: minmax(0, 1fr); }
+    .infos > div { border-radius: 4px; padding-inline: 14px; }
+  }
 
   .dessins {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: clamp(28px, 10vw, 56px);
+    gap: clamp(28px, 12vw, 70px);
   }
-  .dessins figure { margin: 0; display: grid; gap: 8px; justify-items: center; }
-  .dessins svg { width: 84px; height: auto; max-width: 100%; }
-  .dessins figcaption {
-    font-family: var(--f-script);
-    font-size: 1.35rem;
-    color: var(--encre-douce);
+  .dessins figure { margin: 0; display: grid; gap: 6px; justify-items: center; }
+  .dessins svg { width: 78px; height: auto; max-width: 100%; }
+  .dessins figcaption { font-family: var(--f-script); font-size: 1.4rem; color: var(--encre-douce); }
+  .trait { fill: none; stroke: var(--or); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .aplat { fill: var(--papier); stroke: var(--or); stroke-width: 1.5; stroke-linejoin: round; }
+  .cadeau-svg { transform-origin: 50% 100%; animation: sautille 4s ease-in-out 2s infinite; }
+  @keyframes sautille {
+    0%, 86%, 100% { transform: none; }
+    90% { transform: translateY(-5px) rotate(-3deg); }
+    94% { transform: translateY(0) rotate(2deg); }
   }
-  .trait { fill: none; stroke: var(--or); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-  .aplat { fill: var(--papier); stroke: var(--or); stroke-width: 1.6; stroke-linejoin: round; }
 
-  .rsvp {
-    margin: 0;
-    font-size: .9rem;
-    letter-spacing: .04em;
-    color: var(--encre-douce);
+  /* coupon-réponse détachable */
+  .coupon {
+    position: relative;
+    margin-inline: calc(-1 * clamp(26px, 7vw, 56px));
+    padding: 26px 24px 34px;
+    border-top: 2px dashed rgba(201, 163, 94, .5);
+    display: grid;
+    gap: 4px;
   }
-  .rsvp strong {
-    display: block;
+  .coupon::before, .coupon::after {
+    content: "";
+    position: absolute;
+    top: -13px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--nappe);
+  }
+  .coupon::before { left: -12px; }
+  .coupon::after { right: -12px; }
+  .coupon .ciseaux {
+    position: absolute;
+    top: -12px;
+    left: 34px;
+    font-size: 1rem;
+    color: var(--or);
+    background: var(--papier);
+    padding-inline: 6px;
+    line-height: 1.4;
+  }
+  .coupon p { margin: 0; }
+  .coupon .label {
+    font-family: var(--f-deco);
+    font-size: .75rem;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    color: var(--or);
+    padding-left: .4em;
+  }
+  .coupon .date {
     font-family: var(--f-display);
-    font-weight: 400;
     font-style: italic;
-    font-size: 1.15rem;
-    color: var(--encre);
-    margin-top: 2px;
+    font-size: 1.3rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carton, .cinquante, .cadeau-svg { animation: none; }
+    #bulles { display: none; }
   }
 </style>
 </head>
 <body>
+  <canvas id="bulles" aria-hidden="true"></canvas>
+
   <main class="carton" aria-label="Invitation">
-    <p class="hotes"><strong>Co</strong>, <strong>Kris</strong> &amp; <strong>San</strong><br>vous invitent</p>
+    <span class="cadre" aria-hidden="true"></span>
+    <span class="cadre interieur" aria-hidden="true"></span>
+    <svg class="coin hg" viewBox="0 0 46 46" aria-hidden="true"><path d="M2 30 V2 H30 M8 22 V8 H22 M14 14 L26 26"/><circle cx="28" cy="28" r="2.2"/></svg>
+    <svg class="coin hd" viewBox="0 0 46 46" aria-hidden="true"><path d="M2 30 V2 H30 M8 22 V8 H22 M14 14 L26 26"/><circle cx="28" cy="28" r="2.2"/></svg>
+    <svg class="coin bg" viewBox="0 0 46 46" aria-hidden="true"><path d="M2 30 V2 H30 M8 22 V8 H22 M14 14 L26 26"/><circle cx="28" cy="28" r="2.2"/></svg>
+    <svg class="coin bd" viewBox="0 0 46 46" aria-hidden="true"><path d="M2 30 V2 H30 M8 22 V8 H22 M14 14 L26 26"/><circle cx="28" cy="28" r="2.2"/></svg>
 
-    <h1 class="cinquante">
-      <span class="chiffre">50</span>
-      <span class="ans">ans</span>
-    </h1>
+    <p class="hotes">
+      <span class="noms">CO<i>,</i>KRIS<i>&amp;</i>SAN</span>
+      <span class="invitent">vous invitent à fêter</span>
+    </p>
 
-    <p class="devise"><small>Soirée</small>chic et sans chichi</p>
+    <div class="soleil">
+      <h1 class="cinquante">50<span class="ans">ans</span></h1>
+    </div>
 
-    <div class="filet" aria-hidden="true"><span>✦</span></div>
+    <p class="devise"><small>Soirée</small>chic <i>et</i> sans chichi</p>
+
+    <div class="losange" aria-hidden="true"><span></span></div>
 
     <dl class="infos">
       <div>
         <dt>Quand</dt>
-        <dd>Samedi 14 novembre 2026<br><em>dès 20 h</em></dd>
+        <dd>Samedi<span class="gros">14</span>novembre 2026<br><em>dès 20 h</em></dd>
       </div>
       <div>
         <dt>Où</dt>
         <dd>
           <a href="https://www.google.com/maps/search/?api=1&amp;query=Le+Nazareth+Rue+de+Nazareth+11+4651+Battice" target="_blank" rel="noopener">Le Nazareth</a><br>
-          <em>Rue de Nazareth, 11 · 4651 Battice</em>
+          <em>Rue de Nazareth, 11<br>4651 Battice</em>
         </dd>
       </div>
       <div>
-        <dt>Au menu</dt>
-        <dd>Sandwich bar</dd>
+        <dt>Menu</dt>
+        <dd>Sandwich<br>bar</dd>
       </div>
     </dl>
 
-    <div class="filet" aria-hidden="true"><span>✦</span></div>
-
     <div class="dessins">
       <figure>
-        <!-- Cadeau -->
-        <svg viewBox="0 0 80 80" role="img" aria-label="Dessin d'un cadeau">
+        <svg class="cadeau-svg" viewBox="0 0 80 80" role="img" aria-label="Dessin d'un cadeau">
           <path class="trait" d="M40 22 C 32 8, 18 12, 24 20 C 27 24, 36 22, 40 22 Z"/>
           <path class="trait" d="M40 22 C 48 8, 62 12, 56 20 C 53 24, 44 22, 40 22 Z"/>
-          <path class="trait" d="M38 23 L 30 32 M42 23 L 50 32"/>
           <rect class="aplat" x="12" y="22" width="56" height="13" rx="1.5"/>
           <rect class="aplat" x="16" y="35" width="48" height="36" rx="1.5"/>
           <path class="trait" d="M36 22 V 71 M44 22 V 71"/>
+          <path class="trait" d="M22 48 L 30 56 M58 48 L 50 56" opacity=".6"/>
         </svg>
         <figcaption>un cadeau</figcaption>
       </figure>
       <figure>
-        <!-- Urne -->
         <svg viewBox="0 0 80 80" role="img" aria-label="Dessin d'une urne">
+          <path class="aplat" d="M33 26 L 33 8 L 49 12 L 47 26"/>
+          <path class="trait" d="M36 14 L 45 16"/>
           <path class="aplat" d="M18 30 L 62 30 L 58 72 L 22 72 Z"/>
           <path class="aplat" d="M14 22 L 66 22 L 66 30 L 14 30 Z"/>
           <path class="trait" d="M30 26 H 50" stroke-width="2.6"/>
-          <path class="aplat" d="M33 26 L 33 8 L 49 12 L 47 26"/>
-          <path class="trait" d="M36 14 L 45 16"/>
-          <path class="trait" d="M30 50 C 34 44, 46 44, 50 50 M 34 56 H 46"/>
+          <path class="trait" d="M40 40 L 48 51 L 40 62 L 32 51 Z"/>
+          <path class="trait" d="M40 46 L 44 51 L 40 56 L 36 51 Z"/>
         </svg>
         <figcaption>une urne</figcaption>
       </figure>
     </div>
 
-    <p class="rsvp">Réponse souhaitée pour le<strong>dimanche 1<sup>er</sup> novembre</strong></p>
+    <div class="coupon">
+      <span class="ciseaux" aria-hidden="true">✂</span>
+      <p class="label">Réponse souhaitée</p>
+      <p class="date">pour le dimanche 1<sup>er</sup> novembre</p>
+    </div>
   </main>
+
+<script>
+  (function () {
+    var c = document.getElementById('bulles');
+    if (!c || !c.getContext) return;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var ctx = c.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w, h, bulles = [];
+    function taille() {
+      w = c.clientWidth; h = c.clientHeight;
+      c.width = w * dpr; c.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function nouvelle(auHasard) {
+      return {
+        x: Math.random() * w,
+        y: auHasard ? Math.random() * h : h + 10,
+        r: 0.8 + Math.random() * 2.6,
+        v: 0.25 + Math.random() * 0.7,
+        o: Math.random() * Math.PI * 2,
+        a: 0.15 + Math.random() * 0.35
+      };
+    }
+    taille();
+    var n = Math.round(Math.min(70, w * h / 18000));
+    for (var i = 0; i < n; i++) bulles.push(nouvelle(true));
+    window.addEventListener('resize', taille);
+    (function boucle() {
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < bulles.length; i++) {
+        var b = bulles[i];
+        b.y -= b.v;
+        b.o += 0.02;
+        var x = b.x + Math.sin(b.o) * 1.5;
+        if (b.y < -10) bulles[i] = nouvelle(false);
+        ctx.beginPath();
+        ctx.arc(x, b.y, b.r, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(236, 212, 156,' + b.a + ')';
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(x - b.r * 0.35, b.y - b.r * 0.35, b.r * 0.3, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 246, 220,' + (b.a * 0.8) + ')';
+        ctx.fill();
+      }
+      requestAnimationFrame(boucle);
+    })();
+  })();
+</script>
 </body>
 </html>
