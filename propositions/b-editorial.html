@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposition B · Éditorial minimal</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f3f2ee; --ink:#121212; --muted:#6b6b66; --accent:#ff4f1f; --line:#121212; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:400 17px/1.6 "Inter Tight", system-ui, sans-serif; }
+  .wrap { width:min(1280px, 100% - 32px); margin-inline:auto; }
+  .serif { font-family:"Instrument Serif", Georgia, serif; font-weight:400; }
+  nav { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:22px 0; border-bottom:1px solid var(--line); font-size:14px; text-transform:uppercase; letter-spacing:.08em; }
+  nav .r { justify-self:end; display:flex; gap:28px; }
+  nav .c { font-family:"Instrument Serif"; font-size:26px; text-transform:none; letter-spacing:0; }
+  .dot { width:9px; height:9px; border-radius:50%; background:var(--accent); display:inline-block; margin-right:8px; }
+  .hero { padding:60px 0 0; }
+  .hero h1 { font-family:"Instrument Serif"; font-weight:400; font-size:clamp(64px, 12.5vw, 200px); line-height:.86; letter-spacing:-.035em; margin:0; }
+  .hero h1 em { color:var(--accent); }
+  .hero-meta { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); margin-top:56px; }
+  .hero-meta div { padding:18px 18px 18px 0; border-right:1px solid var(--line); font-size:15px; }
+  .hero-meta div + div { padding-left:18px; }
+  .hero-meta div:last-child { border-right:0; }
+  .k { display:block; font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:6px; }
+  .visual { margin-top:0; height:440px; background:var(--ink); position:relative; overflow:hidden; }
+  .visual svg { position:absolute; inset:0; width:100%; height:100%; }
+  .visual .cap { position:absolute; left:24px; bottom:20px; color:#f3f2ee; font-size:13px; text-transform:uppercase; letter-spacing:.1em; }
+  section { padding:110px 0; border-bottom:1px solid var(--line); }
+  .grid { display:grid; grid-template-columns:repeat(12,1fr); gap:24px; }
+  .idx { grid-column:span 2; font-size:13px; text-transform:uppercase; letter-spacing:.1em; }
+  .idx b { color:var(--accent); font-weight:500; }
+  h2 { grid-column:span 4; font-family:"Instrument Serif"; font-weight:400; font-size:clamp(44px,5vw,76px); line-height:.95; margin:0; letter-spacing:-.02em; }
+  .body { grid-column:span 6; font-size:24px; line-height:1.4; }
+  .body p { margin:0 0 20px; }
+  .body .s { font-size:17px; color:var(--muted); }
+  .list3 { grid-column:3 / span 10; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); margin-top:48px; }
+  .list3 > div { padding:24px 24px 0 0; }
+  .list3 > div + div { padding-left:24px; border-left:1px solid var(--line); }
+  .list3 h3 { font-family:"Instrument Serif"; font-style:italic; font-weight:400; font-size:34px; margin:0 0 14px; }
+  .list3 ol { margin:0; padding:0; list-style:none; counter-reset:n; }
+  .list3 li { counter-increment:n; padding:10px 0; border-bottom:1px solid #d6d5cf; display:flex; gap:12px; }
+  .list3 li::before { content:counter(n, decimal-leading-zero); color:var(--accent); font-size:13px; padding-top:3px; }
+  .quote { background:var(--accent); color:var(--ink); border:0; }
+  .quote p { font-family:"Instrument Serif"; font-size:clamp(36px,5vw,72px); line-height:1.02; letter-spacing:-.02em; margin:0; max-width:20ch; }
+  .quote span { display:block; margin-top:28px; font-size:14px; text-transform:uppercase; letter-spacing:.1em; }
+  .contact h2 { grid-column:span 12; font-size:clamp(56px,9vw,140px); }
+  .contact h2 a { color:var(--ink); text-decoration-thickness:2px; text-underline-offset:10px; }
+  .contact .row { grid-column:span 12; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); margin-top:40px; }
+  .contact .row div { padding:18px 0; font-size:20px; }
+  .label { position:fixed; left:16px; bottom:16px; background:var(--ink); color:#fff; padding:8px 14px; border-radius:999px; font-size:14px; z-index:9; }
+  @media (max-width:860px){ nav{grid-template-columns:1fr auto} nav .l{display:none} nav .r{display:none} .hero-meta{grid-template-columns:1fr 1fr} .idx,h2,.body,.list3{grid-column:1/-1} .list3,.contact .row{grid-template-columns:1fr} .list3>div+div{border-left:0;padding-left:0} }
+</style>
+</head>
+<body>
+<div class="label">Proposition B · Éditorial minimal</div>
+<div class="wrap">
+  <nav><div class="l"><span class="dot"></span>Charneux, Belgique</div><div class="c">Coralie Simonis</div><div class="r"><span>Approche</span><span>Bienfaits</span><span>Contact</span></div></nav>
+  <div class="hero">
+    <h1>Thérapie<br>assistée par<br><em>l'animal.</em></h1>
+    <div class="hero-meta">
+      <div><span class="k">Psychologue</span>Enfants &amp; adolescents</div>
+      <div><span class="k">Méthode</span>L'animal, partenaire du thérapeute</div>
+      <div><span class="k">Lieu</span>Charneux, prairies &amp; chemins</div>
+      <div><span class="k">Rendez-vous</span>0496 / 26 71 27</div>
+    </div>
+  </div>
+</div>
+<div class="visual" aria-hidden="true">
+  <svg viewBox="0 0 1440 440" preserveAspectRatio="xMidYMid slice">
+    <rect width="1440" height="440" fill="#121212"/>
+    <circle cx="1080" cy="150" r="90" fill="#ff4f1f"/>
+    <path d="M0 330 C300 260 520 300 760 280 S1200 240 1440 300 V440 H0Z" fill="#2a2a2a"/>
+    <path d="M0 380 C340 330 640 370 900 350 S1260 330 1440 360 V440 H0Z" fill="#3a3a3a"/>
+  </svg>
+  <span class="cap">Emplacement photo · Coralie et ses animaux</span>
+</div>
+<div class="wrap">
+  <section class="grid">
+    <div class="idx"><b>01</b> — L'approche</div>
+    <h2>C'est quoi&nbsp;?</h2>
+    <div class="body">
+      <p>Une méthode où l'animal est partenaire du thérapeute. De par son pouvoir attractif et d'attachement, il va stimuler le patient.</p>
+      <p class="s">Le thérapeute va proposer, sur base des observations, des activités thérapeutiques qui vont répondre aux objectifs thérapeutiques.</p>
+    </div>
+  </section>
+  <section class="grid">
+    <div class="idx"><b>02</b> — Bienfaits</div>
+    <h2>Pourquoi&nbsp;?</h2>
+    <div class="list3">
+      <div><h3>Apporte</h3><ol><li>De l'humour et de la souplesse</li><li>Un plaisir dans le travail personnel</li><li>Une sécurité au patient</li><li>Un contact avec la nature</li></ol></div>
+      <div><h3>Facilite</h3><ol><li>La relation de confiance</li><li>La levée des défenses</li><li>Le transfert</li><li>La communication non verbale</li></ol></div>
+      <div><h3>Permet</h3><ol><li>Le moment présent, le lâcher-prise</li><li>Plus d'investissement à l'école</li><li>Le développement de l'autonomie</li><li>La socialisation</li></ol></div>
+    </div>
+  </section>
+</div>
+<section class="quote"><div class="wrap"><p>«&nbsp;L'animal les accepte pour ce qu'ils sont et non pas pour ce qu'ils devraient être.&nbsp;»</p><span>Boris Levinson</span></div></section>
+<div class="wrap">
+  <section class="grid contact" style="border:0">
+    <div class="idx" style="grid-column:span 12"><b>04</b> — Contact</div>
+    <h2><a href="#">Prendre rendez-vous&nbsp;→</a></h2>
+    <div class="row"><div>0496 / 26 71 27</div><div>simoniscoralie@gmail.com</div><div>Hesselles 536 B, 4654 Charneux</div></div>
+  </section>
+</div>
+</body>
+</html>

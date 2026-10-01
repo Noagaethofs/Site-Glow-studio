@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposition A · Pop &amp; ludique</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --blue:#2340ff; --pink:#ff8fb8; --yellow:#ffd23f; --mint:#7ee0c3; --ink:#111; --bg:#fff7ef; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:400 18px/1.55 "Bricolage Grotesque", system-ui, sans-serif; }
+  .wrap { width:min(1180px, 100% - 32px); margin-inline:auto; }
+  h1,h2,h3 { margin:0; font-weight:800; letter-spacing:-.03em; line-height:.95; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:22px 0; }
+  .logo { font-weight:800; font-size:22px; display:flex; align-items:center; gap:10px; }
+  .logo i { width:34px; height:34px; border-radius:50%; background:var(--blue); display:inline-block; box-shadow:12px 0 0 var(--pink); margin-right:12px; }
+  nav ul { display:flex; gap:28px; list-style:none; margin:0; padding:0; font-weight:600; }
+  .btn { display:inline-block; background:var(--ink); color:#fff; padding:14px 26px; border-radius:999px; font-weight:600; text-decoration:none; border:2px solid var(--ink); }
+  .btn.alt { background:#fff; color:var(--ink); box-shadow:4px 4px 0 var(--ink); }
+  .hero { position:relative; padding:40px 0 90px; }
+  .hero h1 { font-size:clamp(56px, 10vw, 150px); }
+  .hero h1 .hl { background:var(--yellow); padding:0 .12em; border-radius:.2em; display:inline-block; transform:rotate(-2deg); }
+  .hero h1 .bl { color:var(--blue); }
+  .hero-row { display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:end; margin-top:36px; }
+  .hero p { font-size:22px; max-width:30ch; margin:0 0 24px; }
+  .sticker { position:absolute; right:4%; top:30px; width:150px; height:150px; border-radius:50%; background:var(--pink); display:grid; place-items:center; text-align:center; font-weight:800; font-size:17px; line-height:1.1; transform:rotate(12deg); border:2px solid var(--ink); animation:spin 14s linear infinite; }
+  @keyframes spin { to { transform:rotate(372deg); } }
+  .blobs { display:flex; gap:14px; justify-content:flex-end; }
+  .blob { width:120px; height:160px; border-radius:60px; border:2px solid var(--ink); display:grid; place-items:center; }
+  .blob svg { width:64px; }
+  .b1 { background:var(--blue); } .b2 { background:var(--mint); transform:translateY(-30px); } .b3 { background:var(--yellow); }
+  section.block { padding:90px 0; }
+  .blue-sec { background:var(--blue); color:#fff; border-radius:48px; margin:0 16px; }
+  .blue-sec h2 { font-size:clamp(44px,6vw,84px); }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+  .blue-sec p { font-size:22px; }
+  .tagline { display:inline-block; background:var(--yellow); color:var(--ink); padding:6px 14px; border-radius:999px; font-weight:600; font-size:15px; margin-bottom:20px; }
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:44px; }
+  .card { border:2px solid var(--ink); border-radius:28px; padding:30px; background:#fff; box-shadow:8px 8px 0 var(--ink); }
+  .card h3 { font-size:40px; margin-bottom:16px; }
+  .card:nth-child(1) { background:var(--pink); } .card:nth-child(2) { background:var(--mint); } .card:nth-child(3) { background:var(--yellow); }
+  .card ul { margin:0; padding-left:20px; }
+  .card li { margin:6px 0; }
+  .big-h { font-size:clamp(44px,6vw,84px); }
+  .marquee { overflow:hidden; border-block:2px solid var(--ink); background:var(--ink); color:var(--yellow); padding:16px 0; font-weight:800; font-size:28px; white-space:nowrap; }
+  .marquee span { display:inline-block; animation:mq 30s linear infinite; }
+  @keyframes mq { to { transform:translateX(-50%); } }
+  .quote { font-size:clamp(30px,4vw,52px); font-weight:600; letter-spacing:-.02em; line-height:1.1; text-align:center; max-width:22ch; margin:0 auto; }
+  .quote small { display:block; font-size:18px; margin-top:20px; color:var(--blue); }
+  footer { background:var(--pink); padding:60px 0; border-top:2px solid var(--ink); }
+  footer h2 { font-size:clamp(44px,7vw,100px); }
+  footer a { color:var(--ink); }
+  .contacts { display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+  .label { position:fixed; left:16px; bottom:16px; background:var(--ink); color:#fff; padding:8px 14px; border-radius:999px; font-size:14px; z-index:9; }
+  @media (max-width:860px){ nav ul{display:none} .hero-row,.two,.cards{grid-template-columns:1fr} .sticker{width:110px;height:110px;font-size:13px} .blobs{justify-content:flex-start} }
+</style>
+</head>
+<body>
+<div class="label">Proposition A · Pop &amp; ludique</div>
+<header class="wrap">
+  <nav>
+    <div class="logo"><i></i>Coralie Simonis</div>
+    <ul><li>L'approche</li><li>Bienfaits</li><li>Pour qui</li></ul>
+    <a class="btn" href="#">Me contacter</a>
+  </nav>
+</header>
+<section class="hero wrap">
+  <div class="sticker">Psy enfants<br>&amp; ados</div>
+  <h1>La thérapie<br><span class="hl">avec</span> des <span class="bl">animaux</span>.</h1>
+  <div class="hero-row">
+    <div>
+      <p>Coralie Simonis, psychologue pour enfants et ados à Charneux. Ici, l'animal est le partenaire du thérapeute.</p>
+      <a class="btn" href="#">0496 / 26 71 27</a> &nbsp; <a class="btn alt" href="#">Comment ça marche ?</a>
+    </div>
+    <div class="blobs" aria-hidden="true">
+      <div class="blob b1"><svg viewBox="0 0 64 64" fill="#fff"><ellipse cx="32" cy="42" rx="14" ry="12"/><circle cx="16" cy="24" r="6"/><circle cx="27" cy="16" r="6"/><circle cx="38" cy="16" r="6"/><circle cx="48" cy="24" r="6"/></svg></div>
+      <div class="blob b2"><svg viewBox="0 0 64 64" fill="#111"><path d="M32 6c10 0 18 9 18 22S42 58 32 58 14 41 14 28 22 6 32 6z"/></svg></div>
+      <div class="blob b3"><svg viewBox="0 0 64 64" fill="#111"><path d="M32 8l6 16 17 1-13 11 4 17-14-9-14 9 4-17L9 25l17-1z"/></svg></div>
+    </div>
+  </div>
+</section>
+<div class="marquee"><span>Confiance ✦ Plaisir ✦ Sécurité ✦ Nature ✦ Lâcher-prise ✦ Autonomie ✦ Socialisation ✦ Confiance ✦ Plaisir ✦ Sécurité ✦ Nature ✦ Lâcher-prise ✦ Autonomie ✦ Socialisation ✦&nbsp;</span></div>
+<section class="block">
+  <div class="blue-sec"><div class="wrap two" style="padding:80px 0">
+    <div><span class="tagline">C'est quoi ?</span><h2>L'animal, partenaire du thérapeute.</h2></div>
+    <div><p>De par son pouvoir attractif et d'attachement, l'animal va stimuler le patient.</p><p>Le thérapeute va proposer, sur base des observations, des activités thérapeutiques qui vont répondre aux objectifs thérapeutiques.</p></div>
+  </div></div>
+</section>
+<section class="block wrap" style="padding-top:20px">
+  <h2 class="big-h">Pourquoi ça marche ?</h2>
+  <div class="cards">
+    <div class="card"><h3>Apporte</h3><ul><li>De l'humour et de la souplesse</li><li>Un plaisir dans le travail personnel</li><li>Une sécurité au patient</li><li>Un contact avec la nature</li></ul></div>
+    <div class="card"><h3>Facilite</h3><ul><li>La relation de confiance</li><li>La levée des défenses</li><li>Le transfert</li><li>La communication non verbale</li></ul></div>
+    <div class="card"><h3>Permet</h3><ul><li>D'être dans le moment présent</li><li>Plus d'investissement à l'école</li><li>Le développement de l'autonomie</li><li>La socialisation</li></ul></div>
+  </div>
+</section>
+<section class="block wrap"><p class="quote">«&nbsp;L'animal accepte les humains pour ce qu'ils sont et non pas pour ce qu'ils devraient être.&nbsp;»<small>Boris Levinson</small></p></section>
+<footer><div class="wrap">
+  <h2>On se rencontre ?</h2>
+  <div class="contacts"><a class="btn" href="#">0496 / 26 71 27</a><a class="btn alt" href="#">simoniscoralie@gmail.com</a><a class="btn alt" href="#">Hesselles 536 B, Charneux</a></div>
+</div></footer>
+</body>
+</html>

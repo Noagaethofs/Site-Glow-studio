@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposition C · Doux &amp; lumineux</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1d1838; --muted:#625c80; --lilac:#c8b6ff; --peach:#ffc6a5; --sky:#a9d6ff; --rose:#ffb3d1; --bg:#fbfaff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:400 17px/1.6 "Plus Jakarta Sans", system-ui, sans-serif; overflow-x:hidden; }
+  .wrap { width:min(1160px, 100% - 32px); margin-inline:auto; position:relative; }
+  h1,h2,h3 { margin:0; letter-spacing:-.035em; line-height:1.02; font-weight:800; }
+  .mesh { position:absolute; inset:0 0 auto 0; height:900px; overflow:hidden; z-index:-1; }
+  .mesh i { position:absolute; border-radius:50%; filter:blur(70px); opacity:.85; animation:drift 14s ease-in-out infinite alternate; }
+  .m1 { width:520px; height:520px; background:var(--lilac); left:-120px; top:-80px; }
+  .m2 { width:460px; height:460px; background:var(--peach); right:-80px; top:40px; animation-delay:-4s; }
+  .m3 { width:420px; height:420px; background:var(--sky); left:35%; top:320px; animation-delay:-8s; }
+  @keyframes drift { to { transform:translate(40px, 30px) scale(1.08); } }
+  nav { display:flex; justify-content:space-between; align-items:center; margin-top:18px; padding:12px 14px 12px 22px; background:rgba(255,255,255,.55); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,.8); border-radius:999px; }
+  nav b { font-weight:800; }
+  nav ul { display:flex; gap:26px; list-style:none; margin:0; padding:0; color:var(--muted); font-weight:500; }
+  .btn { display:inline-flex; align-items:center; gap:10px; background:var(--ink); color:#fff; padding:13px 22px; border-radius:999px; text-decoration:none; font-weight:700; font-size:15px; }
+  .btn.ghost { background:rgba(255,255,255,.7); color:var(--ink); }
+  .hero { text-align:center; padding:110px 0 80px; }
+  .chip { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.7); border-radius:999px; padding:7px 14px 7px 8px; font-weight:500; font-size:14px; }
+  .chip span { background:var(--ink); color:#fff; border-radius:999px; padding:2px 10px; font-size:12px; }
+  .hero h1 { font-size:clamp(48px, 8vw, 112px); margin:26px auto 22px; max-width:12ch; }
+  .grad { background:linear-gradient(90deg, #7b5cff, #ff7aa8 60%, #ff9a5a); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero p { font-size:21px; color:var(--muted); max-width:46ch; margin:0 auto 32px; }
+  .glass { background:rgba(255,255,255,.6); backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,.9); border-radius:32px; box-shadow:0 20px 60px -30px rgba(60,40,140,.35); }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:64px; text-align:left; }
+  .stats .glass { padding:22px 24px; }
+  .stats b { display:block; font-size:22px; }
+  .stats span { color:var(--muted); font-size:15px; }
+  section { padding:90px 0; }
+  .what { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .what .glass { padding:44px; }
+  .what .color { background:linear-gradient(135deg, var(--lilac), var(--rose)); border:0; display:flex; flex-direction:column; justify-content:flex-end; min-height:360px; }
+  .what h2 { font-size:clamp(36px,4.5vw,60px); }
+  .eyebrow { font-size:13px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#7b5cff; margin-bottom:14px; display:block; }
+  .center { text-align:center; }
+  .center h2 { font-size:clamp(40px,5vw,68px); }
+  .bento { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:44px; }
+  .bento .glass { padding:32px; }
+  .bento h3 { font-size:28px; margin-bottom:14px; }
+  .bento ul { list-style:none; margin:0; padding:0; }
+  .bento li { padding:9px 0 9px 30px; position:relative; color:var(--muted); }
+  .bento li::before { content:""; position:absolute; left:0; top:13px; width:16px; height:16px; border-radius:50%; background:var(--c); }
+  .q { padding:70px 56px; text-align:center; background:linear-gradient(135deg, var(--sky), var(--lilac)); border-radius:40px; }
+  .q p { font-size:clamp(28px,3.6vw,46px); font-weight:700; letter-spacing:-.03em; line-height:1.15; margin:0 auto; max-width:24ch; }
+  .q span { display:block; margin-top:20px; color:var(--muted); font-weight:500; }
+  .contact { display:flex; justify-content:space-between; align-items:center; gap:24px; padding:44px; flex-wrap:wrap; }
+  .contact h2 { font-size:clamp(34px,4vw,54px); }
+  .label { position:fixed; left:16px; bottom:16px; background:var(--ink); color:#fff; padding:8px 14px; border-radius:999px; font-size:14px; z-index:9; }
+  @media (max-width:860px){ nav ul{display:none} .stats,.what,.bento{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="label">Proposition C · Doux &amp; lumineux</div>
+<div class="mesh" aria-hidden="true"><i class="m1"></i><i class="m2"></i><i class="m3"></i></div>
+<div class="wrap">
+  <nav><b>Coralie Simonis</b><ul><li>L'approche</li><li>Bienfaits</li><li>Pour qui</li></ul><a class="btn" href="#">Prendre rendez-vous</a></nav>
+  <div class="hero">
+    <span class="chip"><span>Psy</span> Enfants &amp; ados · Charneux</span>
+    <h1>La thérapie assistée par <span class="grad">l'animal</span></h1>
+    <p>Un accompagnement psychologique où l'animal devient le partenaire du thérapeute, pour avancer en confiance et en douceur.</p>
+    <a class="btn" href="#">0496 / 26 71 27 →</a> &nbsp; <a class="btn ghost" href="#">Découvrir l'approche</a>
+    <div class="stats">
+      <div class="glass"><b>Confiance</b><span>La relation avec le thérapeute se crée plus facilement</span></div>
+      <div class="glass"><b>Plaisir</b><span>De l'humour et de la souplesse dans le travail personnel</span></div>
+      <div class="glass"><b>Nature</b><span>Des séances en prairies et chemins environnants</span></div>
+    </div>
+  </div>
+</div>
+<section class="wrap what">
+  <div class="glass color"><span class="eyebrow" style="color:var(--ink)">L'approche</span><h2>C'est quoi&nbsp;?</h2></div>
+  <div class="glass"><p style="font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.35;margin-top:0">Une méthode où l'animal est partenaire du thérapeute.</p><p style="color:var(--muted)">De par son pouvoir attractif et d'attachement, il va stimuler le patient. Le thérapeute va proposer, sur base des observations, des activités thérapeutiques qui vont répondre aux objectifs thérapeutiques.</p></div>
+</section>
+<section class="wrap center">
+  <span class="eyebrow">Les bienfaits</span><h2>Pourquoi&nbsp;?</h2>
+  <div class="bento" style="text-align:left">
+    <div class="glass" style="--c:var(--lilac)"><h3>Apporte</h3><ul><li>De l'humour et de la souplesse</li><li>Un plaisir dans le travail personnel</li><li>Une sécurité au patient</li><li>Un contact avec la nature</li></ul></div>
+    <div class="glass" style="--c:var(--peach)"><h3>Facilite</h3><ul><li>La relation de confiance</li><li>La levée des défenses</li><li>Le transfert</li><li>La communication non verbale</li></ul></div>
+    <div class="glass" style="--c:var(--sky)"><h3>Permet</h3><ul><li>Le moment présent, le lâcher-prise</li><li>Plus d'investissement à l'école</li><li>Le développement de l'autonomie</li><li>La socialisation</li></ul></div>
+  </div>
+</section>
+<section class="wrap" style="padding-top:0"><div class="q"><p>«&nbsp;L'animal les accepte pour ce qu'ils sont et non pas pour ce qu'ils devraient être.&nbsp;»</p><span>Boris Levinson</span></div></section>
+<section class="wrap" style="padding-top:0"><div class="glass contact"><h2>Faisons connaissance.</h2><div><a class="btn" href="#">0496 / 26 71 27</a> &nbsp; <a class="btn ghost" href="#">simoniscoralie@gmail.com</a></div></div></section>
+</body>
+</html>
