@@ -8,18 +8,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap">
 <style>
-  /* Layout : un carton d'invitation noir et or qui sort d'une enveloppe à l'ouverture,
+  /* Layout : un carton d'invitation noir et argent qui sort d'une enveloppe à l'ouverture,
      puis reste posé seul au centre. Thème sombre unique, choisi volontairement. */
   :root {
     --nappe: #070608;       /* noir profond, légèrement chaud */
-    --nappe-halo: #1a1619;
+    --nappe-halo: #18171b;
     --papier: #121013;      /* carton noir velours */
     --papier-haut: #1b181c;
-    --encre: #f1e9da;       /* ivoire */
-    --encre-douce: #a99d8d;
-    --or: #c9a35e;          /* dorure */
-    --or-clair: #ead39d;
-    --or-sombre: #8a6a33;
+    --encre: #efede8;       /* blanc cassé */
+    --encre-douce: #9c9aa2;
+    --or: #b9bdc5;          /* argent platine */
+    --or-clair: #eceef2;
+    --or-sombre: #5f646d;
     --cire: #6e1f24;        /* cachet de cire */
     --f-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
     --f-script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
@@ -52,7 +52,7 @@
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
       linear-gradient(170deg, var(--papier-haut) 0%, var(--papier) 45%, #0c0a0d 100%);
     padding: clamp(28px, 7vw, 56px) clamp(22px, 6vw, 52px);
-    box-shadow: 0 50px 90px -30px #000, 0 0 0 1px rgba(201, 163, 94, .2);
+    box-shadow: 0 50px 90px -30px #000, 0 0 0 1px rgba(185, 189, 197, .2);
     text-align: center;
     display: grid;
     gap: 26px;
@@ -187,7 +187,7 @@
     justify-self: center;
     margin-top: 4px;
     background: none;
-    border: 1px solid rgba(201, 163, 94, .4);
+    border: 1px solid rgba(185, 189, 197, .4);
     color: var(--encre-douce);
     font: 400 .68rem/1 var(--f-body);
     letter-spacing: .25em;
@@ -223,15 +223,15 @@
   .env-dos {
     background: linear-gradient(180deg, #1c191d, #0f0d10);
     box-shadow: 0 40px 70px -25px #000;
-    outline: 1px solid rgba(201, 163, 94, .25);
+    outline: 1px solid rgba(185, 189, 197, .25);
   }
-  /* doublure dorée visible quand le rabat s'ouvre */
+  /* doublure argentée visible quand le rabat s'ouvre */
   .env-dos::before {
     content: "";
     position: absolute;
     left: 6%; right: 6%; top: 0;
     height: 60%;
-    background: repeating-linear-gradient(45deg, rgba(201, 163, 94, .28) 0 2px, transparent 2px 9px), #2a2219;
+    background: repeating-linear-gradient(45deg, rgba(185, 189, 197, .28) 0 2px, transparent 2px 9px), #1e1f24;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
   }
   .mini {
@@ -271,8 +271,8 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to top right, transparent calc(50% - .6px), rgba(201, 163, 94, .35) 50%, transparent calc(50% + .6px)) left / 50% 100% no-repeat,
-      linear-gradient(to top left, transparent calc(50% - .6px), rgba(201, 163, 94, .35) 50%, transparent calc(50% + .6px)) right / 50% 100% no-repeat;
+      linear-gradient(to top right, transparent calc(50% - .6px), rgba(185, 189, 197, .35) 50%, transparent calc(50% + .6px)) left / 50% 100% no-repeat,
+      linear-gradient(to top left, transparent calc(50% - .6px), rgba(185, 189, 197, .35) 50%, transparent calc(50% + .6px)) right / 50% 100% no-repeat;
     clip-path: polygon(0 100%, 50% 52%, 100% 100%);
   }
   .env-rabat {
@@ -291,12 +291,12 @@
   .env-rabat .face::after {
     content: "";
     position: absolute; inset: 0;
-    background: linear-gradient(to bottom right, transparent calc(50% - .6px), rgba(201, 163, 94, .45) 50%, transparent calc(50% + .6px)) left / 50% 100% no-repeat,
-                linear-gradient(to bottom left, transparent calc(50% - .6px), rgba(201, 163, 94, .45) 50%, transparent calc(50% + .6px)) right / 50% 100% no-repeat;
+    background: linear-gradient(to bottom right, transparent calc(50% - .6px), rgba(185, 189, 197, .45) 50%, transparent calc(50% + .6px)) left / 50% 100% no-repeat,
+                linear-gradient(to bottom left, transparent calc(50% - .6px), rgba(185, 189, 197, .45) 50%, transparent calc(50% + .6px)) right / 50% 100% no-repeat;
   }
   .env-rabat .dos-rabat {
     transform: rotateX(180deg);
-    background: repeating-linear-gradient(45deg, rgba(201, 163, 94, .28) 0 2px, transparent 2px 9px), #2a2219;
+    background: repeating-linear-gradient(45deg, rgba(185, 189, 197, .28) 0 2px, transparent 2px 9px), #1e1f24;
   }
   .cachet {
     position: absolute;
