@@ -101,12 +101,12 @@
     justify-items: center;
   }
   .chiffre {
-    font-family: var(--f-display);
-    font-weight: 800;
-    font-size: clamp(6.5rem, 37vw, 10.5rem);
-    line-height: 1;
-    letter-spacing: -.05em;
-    padding-right: .05em;
+    font-family: var(--f-script);
+    font-weight: 400;
+    font-size: clamp(9rem, 50vw, 14rem);
+    line-height: .82;
+    letter-spacing: -.03em;
+    padding-right: .03em;
     background: linear-gradient(115deg, var(--or-sombre) 0%, var(--or) 28%, var(--or-clair) 44%, #ffffff 50%, var(--or-clair) 56%, var(--or) 72%, var(--or-sombre) 100%);
     background-size: 260% 100%;
     background-position: 100% 0;
@@ -162,11 +162,11 @@
     background: linear-gradient(90deg, transparent, var(--or), transparent);
   }
 
-  /* trois colonnes : quand, où, à table */
+  /* deux colonnes : quand, où */
   .infos {
     margin: 0;
     display: grid;
-    grid-template-columns: 1fr 1.25fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
   }
   .infos > div {
@@ -217,13 +217,9 @@
   }
   .infos a:hover, .infos a:focus-visible { border-bottom-color: var(--or-clair); }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--or); outline-offset: 3px; }
-  .sandwich { width: 76px; height: auto; max-width: 100%; margin-top: 2px; }
-  @media (max-width: 420px) {
-    .infos { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-    .infos > div + div { border-left: 0; border-top: 1px solid rgba(185, 189, 197, .2); padding-top: 18px; }
-  }
+  .sandwich { width: 84px; height: auto; max-width: 100%; margin-bottom: 4px; }
 
-  .urne { display: grid; justify-items: center; }
+  .urne { display: flex; justify-content: center; align-items: flex-end; gap: 44px; }
   .urne svg { width: 62px; height: auto; max-width: 100%; }
   .trait { fill: none; stroke: var(--or); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
   .aplat { fill: var(--papier); stroke: var(--or); stroke-width: 1.6; stroke-linejoin: round; }
@@ -318,9 +314,9 @@
   }
   .mini .m-hotes { font-family: var(--f-display); font-weight: 600; font-size: clamp(.55rem, 2.4vw, .7rem); letter-spacing: .3em; color: var(--encre-douce); text-transform: uppercase; }
   .mini .m-50 {
-    font-family: var(--f-display);
-    font-weight: 800;
-    letter-spacing: -.06em;
+    font-family: var(--f-script);
+    font-weight: 400;
+    letter-spacing: -.03em;
     font-size: clamp(3.6rem, 18vw, 5.6rem);
     line-height: 1;
     background: linear-gradient(160deg, var(--or-clair), var(--or) 45%, var(--or-sombre) 70%, var(--or-clair));
@@ -449,22 +445,17 @@
           <em>Rue de Nazareth, 11<br>4651 Battice</em>
         </dd>
       </div>
-      <div>
-        <dt>À table</dt>
-        <dd>
-          <svg class="sandwich" viewBox="0 0 80 50" role="img" aria-label="Sandwich bar">
-            <path class="aplat" d="M7 33 H 73 C 72 40, 8 40, 7 33 Z"/>
-            <path class="trait" d="M5 29 Q 9 25, 13 29 T 21 29 T 29 29 T 37 29 T 45 29 T 53 29 T 61 29 T 69 29 T 77 29"/>
-            <path class="aplat" d="M3 25 C 14 9, 66 9, 77 25 Z"/>
-            <path class="trait" d="M20 20 l 6 -6 M32 19 l 6 -6 M44 19 l 6 -6 M56 20 l 5 -5"/>
-          </svg>
-        </dd>
-      </div>
     </dl>
 
     <div class="filet" aria-hidden="true"></div>
 
     <div class="urne">
+      <svg class="sandwich" viewBox="0 0 80 50" role="img" aria-label="Sandwich bar">
+        <path class="aplat" d="M7 33 H 73 C 72 40, 8 40, 7 33 Z"/>
+        <path class="trait" d="M5 29 Q 9 25, 13 29 T 21 29 T 29 29 T 37 29 T 45 29 T 53 29 T 61 29 T 69 29 T 77 29"/>
+        <path class="aplat" d="M3 25 C 14 9, 66 9, 77 25 Z"/>
+        <path class="trait" d="M20 20 l 6 -6 M32 19 l 6 -6 M44 19 l 6 -6 M56 20 l 5 -5"/>
+      </svg>
       <svg viewBox="0 0 80 80" role="img" aria-label="Urne">
         <path class="aplat" d="M33 26 L 33 8 L 49 12 L 47 26"/>
         <path class="trait" d="M36 14 L 45 16"/>
