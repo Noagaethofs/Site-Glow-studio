@@ -3,7 +3,7 @@
 import numpy as np, wave, sys
 from scipy import signal
 SR = 44100
-DUR = 8.8
+DUR = float(sys.argv[2]) if len(sys.argv) > 2 else 13.3
 N = int(SR * DUR)
 rng = np.random.default_rng(1450)
 
