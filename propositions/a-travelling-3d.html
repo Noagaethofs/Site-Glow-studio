@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototype · Travelling 3D (DA A)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --blue:#2340ff; --pink:#ff8fb8; --yellow:#ffd23f; --mint:#7ee0c3; --ink:#111; --bg:#fff7ef; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:400 18px/1.55 "Bricolage Grotesque", system-ui, sans-serif; }
+  .wrap { width:min(1180px, 100% - 32px); margin-inline:auto; }
+  h1,h2,h3 { margin:0; font-weight:800; letter-spacing:-.03em; line-height:.95; }
+  .btn { display:inline-block; background:var(--ink); color:#fff; padding:14px 26px; border-radius:999px; font-weight:600; text-decoration:none; border:2px solid var(--ink); transition:transform .2s; }
+  .btn:hover { transform:translateY(-2px); }
+  .btn.alt { background:#fff; color:var(--ink); box-shadow:4px 4px 0 var(--ink); }
+
+  /* Navigation flottante */
+  .topbar { position:fixed; inset:0 0 auto 0; z-index:20; pointer-events:none; }
+  .topbar nav { pointer-events:auto; display:flex; justify-content:space-between; align-items:center; padding:18px 0; }
+  .logo { font-weight:800; font-size:22px; display:flex; align-items:center; gap:10px; background:#fff; border:2px solid var(--ink); border-radius:999px; padding:6px 18px 6px 8px; text-decoration:none; color:var(--ink); }
+  .logo i { width:28px; height:28px; border-radius:50%; background:var(--blue); display:inline-block; box-shadow:10px 0 0 var(--pink); margin-right:10px; }
+  .navlinks { display:flex; gap:6px; background:#fff; border:2px solid var(--ink); border-radius:999px; padding:6px; }
+  .navlinks a { color:var(--ink); text-decoration:none; font-weight:600; padding:8px 14px; border-radius:999px; }
+  .navlinks a:hover { background:var(--yellow); }
+  .navlinks a.cta { background:var(--ink); color:#fff; }
+
+  /* Travelling */
+  .travel { position:relative; height:700vh; }
+  .stage { position:sticky; top:0; height:100vh; height:100svh; overflow:hidden; background:linear-gradient(#ffd6e6, #fff7ef 70%); }
+  #scene { position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .intro { position:absolute; left:max(16px, calc((100vw - 1180px)/2)); bottom:12vh; max-width:640px; z-index:5; transition:opacity .4s, transform .4s; }
+  .intro .tag { display:inline-block; background:var(--pink); border:2px solid var(--ink); border-radius:999px; padding:6px 14px; font-weight:600; font-size:15px; margin-bottom:18px; transform:rotate(-2deg); }
+  .intro h1 { font-size:clamp(48px, 8vw, 118px); }
+  .intro h1 .hl { background:var(--yellow); padding:0 .12em; border-radius:.2em; display:inline-block; transform:rotate(-2deg); }
+  .intro h1 .bl { color:var(--blue); }
+  .intro p { font-size:21px; max-width:32ch; margin:20px 0 24px; background:rgba(255,247,239,.75); border-radius:12px; }
+  .intro .actions { display:flex; flex-wrap:wrap; gap:12px; }
+
+  .cap { position:absolute; right:max(16px, calc((100vw - 1180px)/2)); top:50%; width:min(380px, calc(100vw - 32px)); z-index:5;
+         background:#fff; border:2px solid var(--ink); border-radius:28px; padding:24px 26px; box-shadow:8px 8px 0 var(--ink);
+         opacity:0; transform:translateY(-40%) scale(.92) rotate(2deg); transition:opacity .35s, transform .35s; pointer-events:none; }
+  .cap.on { opacity:1; transform:translateY(-50%) scale(1) rotate(-1deg); }
+  .cap .n { display:inline-block; font-weight:800; font-size:14px; background:var(--ink); color:#fff; border-radius:999px; padding:3px 12px; margin-bottom:10px; }
+  .cap h3 { font-size:42px; margin-bottom:8px; }
+  .cap p { margin:0; font-size:18px; }
+  .cap .benefit { display:inline-block; margin-top:14px; font-weight:600; background:var(--c); border:2px solid var(--ink); border-radius:999px; padding:4px 12px; font-size:15px; }
+  .cap.left { right:auto; left:max(16px, calc((100vw - 1180px)/2)); }
+
+  .rail { position:absolute; right:22px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:10px; z-index:6; }
+  .rail span { width:12px; height:12px; border-radius:50%; border:2px solid var(--ink); background:#fff; transition:background .3s, transform .3s; }
+  .rail span.on { background:var(--blue); transform:scale(1.3); }
+  .hint { position:absolute; left:50%; bottom:22px; transform:translateX(-50%); z-index:6; font-weight:600; font-size:14px; background:#fff; border:2px solid var(--ink); border-radius:999px; padding:6px 14px; transition:opacity .3s; }
+  .hint::after { content:" ↓"; display:inline-block; animation:bob 1.2s ease-in-out infinite; }
+  @keyframes bob { 50% { transform:translateY(4px); } }
+  .fallback { position:absolute; inset:0; display:none; place-items:center; font-size:20px; }
+
+  /* Suite de la page (identique proposition A) */
+  section.block { padding:90px 0; }
+  .marquee { overflow:hidden; border-block:2px solid var(--ink); background:var(--ink); color:var(--yellow); padding:16px 0; font-weight:800; font-size:28px; white-space:nowrap; }
+  .marquee span { display:inline-block; animation:mq 30s linear infinite; }
+  @keyframes mq { to { transform:translateX(-50%); } }
+  .blue-sec { background:var(--blue); color:#fff; border-radius:48px; margin:0 16px; }
+  .blue-sec h2 { font-size:clamp(44px,6vw,84px); }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+  .blue-sec p { font-size:22px; }
+  .tagline { display:inline-block; background:var(--yellow); color:var(--ink); padding:6px 14px; border-radius:999px; font-weight:600; font-size:15px; margin-bottom:20px; }
+  .big-h { font-size:clamp(44px,6vw,84px); }
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:44px; }
+  .card { border:2px solid var(--ink); border-radius:28px; padding:30px; background:#fff; box-shadow:8px 8px 0 var(--ink); }
+  .card h3 { font-size:40px; margin-bottom:16px; }
+  .card:nth-child(1) { background:var(--pink); } .card:nth-child(2) { background:var(--mint); } .card:nth-child(3) { background:var(--yellow); }
+  .card ul { margin:0; padding-left:20px; } .card li { margin:6px 0; }
+  .quote { font-size:clamp(30px,4vw,52px); font-weight:600; letter-spacing:-.02em; line-height:1.1; text-align:center; max-width:22ch; margin:0 auto; }
+  .quote small { display:block; font-size:18px; margin-top:20px; color:var(--blue); }
+  footer { background:var(--pink); padding:60px 0; border-top:2px solid var(--ink); }
+  footer h2 { font-size:clamp(44px,7vw,100px); }
+  .contacts { display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+  .label { position:fixed; left:16px; bottom:16px; background:var(--ink); color:#fff; padding:8px 14px; border-radius:999px; font-size:14px; z-index:30; }
+
+  @media (max-width:860px){
+    .navlinks a:not(.cta) { display:none; }
+    .two,.cards { grid-template-columns:1fr; }
+    .intro { bottom:9vh; right:16px; }
+    .intro p { font-size:18px; }
+    .cap, .cap.left { top:auto; bottom:80px; left:16px; right:16px; width:auto; transform:translateY(20px) scale(.95); }
+    .cap.on { transform:none; }
+    .cap h3 { font-size:32px; }
+    .rail { display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="label">Prototype · Travelling 3D</div>
+
+<div class="topbar"><div class="wrap"><nav>
+  <a class="logo" href="#"><i></i>Coralie Simonis</a>
+  <div class="navlinks"><a href="#approche">L'approche</a><a href="#bienfaits">Bienfaits</a><a class="cta" href="#contact">Contact</a></div>
+</nav></div></div>
+
+<section class="travel" id="travel">
+  <div class="stage">
+    <canvas id="scene" aria-label="Travelling en 3D : le chien, trois lapins puis deux hamsters dans une prairie"></canvas>
+    <div class="fallback" id="fallback">La 3D n'est pas disponible sur cet appareil.</div>
+
+    <div class="intro" id="intro">
+      <span class="tag">Psy enfants &amp; ados · Charneux</span>
+      <h1>La thérapie<br><span class="hl">avec</span> des <span class="bl">animaux</span>.</h1>
+      <p>Coralie Simonis, psychologue. Ici, l'animal est le partenaire du thérapeute. Venez rencontrer l'équipe&nbsp;!</p>
+      <div class="actions"><a class="btn" href="tel:+32496267127">0496 / 26 71 27</a><a class="btn alt" href="#approche">Comment ça marche ?</a></div>
+    </div>
+
+    <div class="cap" data-k="1" style="--c:var(--yellow)"><span class="n">1 / 6</span><h3>Le chien</h3><p>Le premier à vous accueillir. Prénom à venir.</p><span class="benefit">Facilite la relation de confiance</span></div>
+    <div class="cap left" data-k="2" style="--c:var(--pink)"><span class="n">2 / 6</span><h3>Lapin n°1</h3><p>Prénom à venir.</p><span class="benefit">Apporte une sécurité au patient</span></div>
+    <div class="cap" data-k="3" style="--c:var(--mint)"><span class="n">3 / 6</span><h3>Lapin n°2</h3><p>Prénom à venir.</p><span class="benefit">Permet d'être dans le moment présent</span></div>
+    <div class="cap left" data-k="4" style="--c:var(--yellow)"><span class="n">4 / 6</span><h3>Lapin n°3</h3><p>Prénom à venir.</p><span class="benefit">Facilite la communication non verbale</span></div>
+    <div class="cap" data-k="5" style="--c:var(--pink)"><span class="n">5 &amp; 6 / 6</span><h3>Les hamsters</h3><p>Le duo de l'équipe. Prénoms à venir.</p><span class="benefit">Apporte un plaisir dans le travail personnel</span></div>
+
+    <div class="rail" id="rail"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="hint" id="hint">Faites défiler</div>
+  </div>
+</section>
+
+<div class="marquee"><span>Confiance ✦ Plaisir ✦ Sécurité ✦ Nature ✦ Lâcher-prise ✦ Autonomie ✦ Socialisation ✦ Confiance ✦ Plaisir ✦ Sécurité ✦ Nature ✦ Lâcher-prise ✦ Autonomie ✦ Socialisation ✦&nbsp;</span></div>
+<section class="block" id="approche">
+  <div class="blue-sec"><div class="wrap two" style="padding:80px 0">
+    <div><span class="tagline">C'est quoi ?</span><h2>L'animal, partenaire du thérapeute.</h2></div>
+    <div><p>De par son pouvoir attractif et d'attachement, l'animal va stimuler le patient.</p><p>Le thérapeute va proposer, sur base des observations, des activités thérapeutiques qui vont répondre aux objectifs thérapeutiques.</p></div>
+  </div></div>
+</section>
+<section class="block wrap" id="bienfaits" style="padding-top:20px">
+  <h2 class="big-h">Pourquoi ça marche ?</h2>
+  <div class="cards">
+    <div class="card"><h3>Apporte</h3><ul><li>De l'humour et de la souplesse</li><li>Un plaisir dans le travail personnel</li><li>Une sécurité au patient</li><li>Un contact avec la nature</li></ul></div>
+    <div class="card"><h3>Facilite</h3><ul><li>La relation de confiance</li><li>La levée des défenses</li><li>Le transfert</li><li>La communication non verbale</li></ul></div>
+    <div class="card"><h3>Permet</h3><ul><li>D'être dans le moment présent</li><li>Plus d'investissement à l'école</li><li>Le développement de l'autonomie</li><li>La socialisation</li></ul></div>
+  </div>
+</section>
+<section class="block wrap"><p class="quote">«&nbsp;L'animal accepte les humains pour ce qu'ils sont et non pas pour ce qu'ils devraient être.&nbsp;»<small>Boris Levinson</small></p></section>
+<footer id="contact"><div class="wrap">
+  <h2>On se rencontre ?</h2>
+  <div class="contacts"><a class="btn" href="tel:+32496267127">0496 / 26 71 27</a><a class="btn alt" href="mailto:simoniscoralie@gmail.com">simoniscoralie@gmail.com</a><a class="btn alt" href="https://www.google.com/maps/search/?api=1&amp;query=Hesselles+536B+4654+Charneux+Belgique">Hesselles 536 B, Charneux</a></div>
+</div></footer>
+
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+const canvas = document.getElementById('scene');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+} catch (e) {
+  document.getElementById('fallback').style.display = 'grid';
+  throw e;
+}
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+const scene = new THREE.Scene();
+const SKY = new THREE.Color('#ffd9e6');
+scene.background = SKY;
+scene.fog = new THREE.Fog(SKY, 22, 70);
+
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
+
+// Lumières
+scene.add(new THREE.HemisphereLight('#ffffff', '#7ee0c3', 1.6));
+const sun = new THREE.DirectionalLight('#fff1d6', 2.2);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -12, right: 12, top: 12, bottom: -12, near: 1, far: 60 });
+sun.shadow.bias = -0.0005;
+scene.add(sun, sun.target);
+
+// Matériaux « cartoon » avec contour noir (comme les cartes de la DA)
+const grad = new THREE.DataTexture(new Uint8Array([90, 170, 255]), 3, 1, THREE.RedFormat);
+grad.minFilter = grad.magFilter = THREE.NearestFilter; grad.needsUpdate = true;
+const mats = {};
+const toon = c => mats[c] ||= new THREE.MeshToonMaterial({ color: c, gradientMap: grad });
+const outlineMat = new THREE.MeshBasicMaterial({ color: '#111', side: THREE.BackSide });
+
+function part(parent, geo, color, { p = [0, 0, 0], s = [1, 1, 1], r = [0, 0, 0], outline = 1.07, shadow = true } = {}) {
+  const m = new THREE.Mesh(geo, toon(color));
+  m.position.set(...p); m.scale.set(...s); m.rotation.set(...r);
+  m.castShadow = shadow;
+  if (outline) { const o = new THREE.Mesh(geo, outlineMat); o.scale.setScalar(outline); m.add(o); }
+  parent.add(m);
+  return m;
+}
+const sph = (r, w = 24) => new THREE.SphereGeometry(r, w, Math.round(w * .75));
+const cyl = (r1, r2, h) => new THREE.CylinderGeometry(r1, r2, h, 16);
+const cap = (r, l) => new THREE.CapsuleGeometry(r, l, 8, 16);
+
+// Chemin : légère courbe
+const pathX = z => Math.sin(z * 0.07) * 1.2;
+
+// Sol vallonné
+const groundGeo = new THREE.PlaneGeometry(120, 160, 120, 160);
+groundGeo.rotateX(-Math.PI / 2);
+const pos = groundGeo.attributes.position;
+for (let i = 0; i < pos.count; i++) {
+  const x = pos.getX(i), z = pos.getZ(i) - 40;
+  const d = Math.abs(x - pathX(z));
+  const hills = Math.sin(x * .18) * Math.cos(z * .12) * 1.4 + Math.sin(z * .05 + x * .07) * 1.2;
+  pos.setY(i, hills * THREE.MathUtils.smoothstep(d, 4, 14));
+}
+groundGeo.translate(0, 0, -40);
+groundGeo.computeVertexNormals();
+const ground = new THREE.Mesh(groundGeo, toon('#7ee0c3'));
+ground.receiveShadow = true;
+scene.add(ground);
+
+// Sentier
+const pathPts = [];
+for (let z = 12; z >= -100; z -= 2) pathPts.push(new THREE.Vector3(pathX(z), 0.02, z));
+const pathCurve = new THREE.CatmullRomCurve3(pathPts);
+const pathGeo = new THREE.TubeGeometry(pathCurve, 200, 1.1, 8, false);
+pathGeo.scale(1, 0.02, 1);
+const path = new THREE.Mesh(pathGeo, toon('#ffe7a8'));
+path.receiveShadow = true;
+scene.add(path);
+
+// Décor : arbres pop, fleurs, nuages
+const rand = (() => { let s = 7; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+const canopy = ['#2340ff', '#ff8fb8', '#ffd23f', '#5ccfae'];
+for (let i = 0; i < 46; i++) {
+  const z = 10 - i * 2.4 - rand() * 2;
+  const side = i % 2 ? 1 : -1;
+  const x = pathX(z) + side * (6 + rand() * 12);
+  const t = new THREE.Group();
+  t.position.set(x, 0, z);
+  const h = 1.2 + rand() * 1.2;
+  part(t, cyl(.12, .16, h), '#7a4b2a', { p: [0, h / 2, 0] });
+  const col = canopy[i % canopy.length];
+  if (rand() > .5) part(t, sph(.9 + rand() * .5), col, { p: [0, h + .6, 0], outline: 1.04 });
+  else part(t, new THREE.ConeGeometry(.9, 2.2, 16), col, { p: [0, h + 1, 0], outline: 1.04 });
+  scene.add(t);
+}
+const flowerCols = ['#ffffff', '#ff8fb8', '#ffd23f', '#2340ff'];
+for (let i = 0; i < 220; i++) {
+  const z = 10 - rand() * 90;
+  const side = rand() > .5 ? 1 : -1;
+  const x = pathX(z) + side * (1.6 + rand() * 7);
+  part(scene, sph(.07, 8), flowerCols[i % 4], { p: [x, .08, z], outline: 0, shadow: false });
+}
+for (let i = 0; i < 9; i++) {
+  const c = new THREE.Group();
+  c.position.set(-30 + rand() * 60, 12 + rand() * 6, -20 - rand() * 60);
+  for (let j = 0; j < 4; j++) part(c, sph(1 + rand()), '#ffffff', { p: [j * 1.3 - 2, rand() * .6, rand()], outline: 1.03, shadow: false });
+  scene.add(c);
+}
+part(scene, sph(5), '#ffd23f', { p: [14, 20, -95], outline: 1.03, shadow: false });
+
+// Barrières le long du chemin
+function fence(z0, side, n) {
+  for (let i = 0; i < n; i++) {
+    const z = z0 - i * 1.4, x = pathX(z) + side * 2.6;
+    part(scene, new THREE.BoxGeometry(.12, .8, .12), '#ffffff', { p: [x, .4, z] });
+    if (i < n - 1) part(scene, new THREE.BoxGeometry(.06, .1, 1.4), '#ffffff', { p: [x, .55, z - .7], outline: 1.15 });
+  }
+}
+fence(-14, -1, 5); fence(-36, 1, 5);
+
+// ===== Animaux =====
+const anims = [];
+
+function makeDog() {
+  const g = new THREE.Group();
+  const fur = '#d9a066', dark = '#8a5a3c';
+  part(g, cap(.28, .6), fur, { p: [0, .62, 0], r: [Math.PI / 2, 0, 0] });
+  for (const [x, z] of [[.15, .3], [-.15, .3], [.15, -.3], [-.15, -.3]]) part(g, cyl(.08, .07, .5), fur, { p: [x, .27, z] });
+  const head = new THREE.Group(); head.position.set(0, 1.0, .48); g.add(head);
+  part(head, sph(.27), fur);
+  part(head, sph(.14), '#f1d1a8', { p: [0, -.08, .22], s: [1, .8, 1.3] });
+  part(head, sph(.055), '#111', { p: [0, -.02, .4], outline: 0 });
+  for (const s of [1, -1]) {
+    part(head, sph(.04), '#111', { p: [s * .1, .07, .22], outline: 0 });
+    part(head, sph(.015), '#fff', { p: [s * .1 + .01, .09, .26], outline: 0 });
+    part(head, sph(.16), dark, { p: [s * .25, -.02, -.02], s: [.35, 1, .65], r: [0, 0, s * .25] });
+  }
+  part(head, new THREE.TorusGeometry(.2, .045, 8, 24), '#ff8fb8', { p: [0, -.24, -.06], r: [Math.PI / 2 - .3, 0, 0] });
+  const tail = new THREE.Group(); tail.position.set(0, .78, -.55); g.add(tail);
+  part(tail, cap(.045, .3), fur, { p: [0, .18, 0] });
+  tail.rotation.x = -.6;
+  anims.push(t => {
+    tail.rotation.z = Math.sin(t * 10) * .6;
+    head.rotation.z = Math.sin(t * 1.3) * .12;
+    head.rotation.x = Math.sin(t * .9) * .05;
+  });
+  return g;
+}
+
+function makeRabbit(fur, inner, seed) {
+  const g = new THREE.Group();
+  const body = new THREE.Group(); g.add(body);
+  part(body, sph(.24), fur, { p: [0, .24, -.04], s: [1, .9, 1.15] });
+  part(body, sph(.08), '#ffffff', { p: [0, .26, -.3] });
+  for (const s of [1, -1]) part(body, sph(.07), fur, { p: [s * .1, .05, .16], s: [1, .6, 1.5] });
+  const head = new THREE.Group(); head.position.set(0, .46, .16); body.add(head);
+  part(head, sph(.16), fur);
+  part(head, sph(.03), '#ff8fb8', { p: [0, -.02, .155], outline: 0 });
+  const ears = [];
+  for (const s of [1, -1]) {
+    part(head, sph(.03), '#111', { p: [s * .08, .04, .12], outline: 0 });
+    part(head, sph(.01), '#fff', { p: [s * .08 + .008, .05, .145], outline: 0 });
+    const e = new THREE.Group(); e.position.set(s * .06, .12, -.02); head.add(e);
+    part(e, cap(.045, .2), fur, { p: [0, .14, 0], s: [1, 1, .55] });
+    part(e, cap(.025, .16), inner, { p: [0, .14, .018], s: [1, 1, .4], outline: 0 });
+    e.rotation.z = -s * .15;
+    ears.push(e);
+  }
+  anims.push(t => {
+    const tt = t + seed;
+    const hop = Math.max(0, Math.sin(tt * 2.2)) ** 6;
+    body.position.y = hop * .12;
+    ears[0].rotation.x = Math.sin(tt * 3) * .12;
+    ears[1].rotation.x = Math.sin(tt * 3 + 1) * .12 + (Math.sin(tt * .7) > .9 ? .5 : 0);
+    head.rotation.y = Math.sin(tt * .8) * .2;
+  });
+  g.scale.setScalar(1.35);
+  return g;
+}
+
+function makeHamster(fur, belly, seed) {
+  const g = new THREE.Group();
+  const body = new THREE.Group(); g.add(body);
+  part(body, sph(.17), fur, { p: [0, .15, 0], s: [1.05, .9, 1.2] });
+  part(body, sph(.12), belly, { p: [0, .12, .08], s: [1, .9, 1] , outline: 0 });
+  for (const s of [1, -1]) {
+    part(body, sph(.045), fur, { p: [s * .09, .28, .06] });
+    part(body, sph(.022), '#111', { p: [s * .06, .2, .18], outline: 0 });
+    part(body, sph(.045), belly, { p: [s * .1, .14, .15], outline: 0 });
+  }
+  part(body, sph(.018), '#ff8fb8', { p: [0, .16, .21], outline: 0 });
+  anims.push(t => {
+    const tt = t + seed;
+    body.scale.set(1 + Math.sin(tt * 6) * .02, 1 - Math.sin(tt * 6) * .02, 1);
+    body.rotation.y = Math.sin(tt * .9) * .3;
+  });
+  g.scale.setScalar(1.7);
+  return g;
+}
+
+function place(obj, z, side, face = 0) {
+  const x = pathX(z) + side;
+  obj.position.set(x, 0, z);
+  obj.rotation.y = face;
+  scene.add(obj);
+  return obj;
+}
+
+const dog = place(makeDog(), -10, 1.7, -0.7);
+place(makeRabbit('#f5f1ea', '#ffb7cf', 0), -22, -1.6, 0.6);
+place(makeRabbit('#9b9aa8', '#ffb7cf', 2), -28, 1.6, -0.6);
+place(makeRabbit('#a8724c', '#f3c9a6', 4), -34, -1.6, 0.6);
+// Les hamsters sur un coussin
+const cushion = part(scene, cyl(.9, .95, .14), '#ff8fb8', { p: [pathX(-46) + 1.2, .07, -46], outline: 1.02 });
+cushion.receiveShadow = true;
+place(makeHamster('#e6a85c', '#fff3e0', 0), -46, 0.85, 0.3).position.y = .14;
+place(makeHamster('#e8e2d8', '#ffffff', 3), -46.2, 1.55, -0.3).position.y = .14;
+
+// ===== Trajectoire caméra : une étape par animal =====
+const V = (x, y, z) => new THREE.Vector3(pathX(z) + x, y, z);
+const keys = [
+  { p: V(0, 3.4, 8),       t: V(0, 1.2, -12) },     // 0 intro
+  { p: V(-.3, 1.5, -5.6),  t: V(1.7, .85, -10) },   // 1 chien
+  { p: V(.3, 1.1, -18.6),  t: V(-1.6, .45, -22) },  // 2 lapin 1
+  { p: V(-.3, 1.1, -24.6), t: V(1.6, .45, -28) },   // 3 lapin 2
+  { p: V(.3, 1.1, -30.6),  t: V(-1.6, .45, -34) },  // 4 lapin 3
+  { p: V(.6, 1.25, -42.6), t: V(1.2, .3, -46.1) },  // 5 hamsters
+];
+const camCurve = new THREE.CatmullRomCurve3(keys.map(k => k.p), false, 'centripetal');
+const tgtCurve = new THREE.CatmullRomCurve3(keys.map(k => k.t), false, 'centripetal');
+const N = keys.length - 1;
+const smoother = x => x * x * x * (x * (x * 6 - 15) + 10);
+
+// Défilement → progression
+const travel = document.getElementById('travel');
+const intro = document.getElementById('intro');
+const hint = document.getElementById('hint');
+const caps = [...document.querySelectorAll('.cap')];
+const dots = [...document.querySelectorAll('#rail span')];
+let target = 0, current = 0;
+function readScroll() {
+  const r = travel.getBoundingClientRect();
+  const span = r.height - innerHeight;
+  target = THREE.MathUtils.clamp(-r.top / span, 0, 1);
+}
+addEventListener('scroll', readScroll, { passive: true });
+
+function resize() {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.fov = camera.aspect < 1 ? 62 : 45;
+  camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize);
+resize(); readScroll();
+
+const clock = new THREE.Clock();
+const tmp = new THREE.Vector3();
+function frame() {
+  const t = clock.getElapsedTime();
+  current += (target - current) * 0.08;
+  const k = current * N;
+  const i = Math.min(Math.floor(k), N - 1);
+  const u = (i + smoother(k - i)) / N;
+  camera.position.copy(camCurve.getPoint(u));
+  // léger mouvement « caméra à l'épaule »
+  camera.position.y += Math.sin(t * .8) * .03;
+  camera.lookAt(tgtCurve.getPoint(u));
+
+  sun.position.copy(camera.position).add(tmp.set(6, 12, 4));
+  sun.target.position.copy(camera.position).add(tmp.set(0, 0, -6));
+
+  for (const a of anims) a(t);
+
+  // Textes synchronisés
+  intro.style.opacity = Math.max(0, 1 - k * 2.2);
+  intro.style.transform = `translateY(${-k * 60}px)`;
+  intro.style.pointerEvents = k < .3 ? 'auto' : 'none';
+  hint.style.opacity = k < .15 ? 1 : 0;
+  const near = Math.round(k);
+  caps.forEach(c => c.classList.toggle('on', +c.dataset.k === near && Math.abs(k - near) < .3));
+  dots.forEach((d, j) => d.classList.toggle('on', j === Math.min(near, 5)));
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+frame();
+
+// Permet aux tests de sauter directement à une étape
+window.__jump = p => { target = current = p; };
+</script>
+</body>
+</html>
