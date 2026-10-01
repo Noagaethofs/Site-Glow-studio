@@ -1,11 +1,11 @@
-# Musique originale synthétisée de zéro : fanfare festive sur l'air de « Joyeux anniversaire »
-# (mélodie du domaine public), 3/4 rapide façon fanfare de fête.
+# Musique originale synthétisée de zéro : techno de soirée, 130 bpm
+# montée → drop au cachet, kick 4/4, basse en contretemps, ligne acide, stabs rave.
 import numpy as np, wave, sys
 SR = 44100
 DUR = 8.8
 N = int(SR * DUR)
 L = np.zeros(N); R = np.zeros(N)
-rng = np.random.default_rng(50)
+rng = np.random.default_rng(130)
 
 def hz(n): return 440.0 * 2 ** ((n - 69) / 12)
 
@@ -21,147 +21,136 @@ def env(n, a, d):
     if ra: e[:ra] *= np.linspace(0, 1, ra)
     return e
 
-def scie(f, t, harm=16, roll=0.06):
-    s = np.zeros_like(t)
-    for k in range(1, harm + 1):
-        if f * k > 15000: break
-        s += np.sin(2*np.pi*f*k*t) / k * np.exp(-(k - 1) * roll)
-    return s
+def scie_naive(freq_arr):
+    ph = np.cumsum(freq_arr) / SR
+    return 2 * (ph % 1.0) - 1
 
-def cuivre(m, dur, roll=0.07):
-    """Trompette/trombone : attaque cuivrée, vibrato, tenue puis relâche."""
-    n = int((dur + 0.08) * SR); t = np.arange(n) / SR
-    vib = 0.005 * np.sin(2*np.pi*5.5*t) * np.clip((t - 0.12) * 5, 0, 1)
-    brill = np.clip(t / 0.03, 0, 1)            # le son s'ouvre à l'attaque
-    s = scie(hz(m), t * (1 + vib), 18, roll + 0.25 * (1 - brill))
-    e = np.minimum(1, t / 0.018) * (0.75 + 0.25 * np.exp(-t / 0.08))
-    rel = int(0.08 * SR); e[-rel:] *= np.linspace(1, 0, rel)
-    return s * e
-
-def section(m, dur, harmo):
-    s = cuivre(m, dur) + 0.6 * cuivre(m + 0.06, dur)
-    if harmo is not None: s += 0.7 * cuivre(harmo, dur, 0.09)
-    return s * 0.5
-
-def piano(notes, dur):
-    n = int(dur * SR); t = np.arange(n) / SR; s = np.zeros(n)
-    for m in notes:
-        f = hz(m); s += (np.sin(2*np.pi*f*t) + 0.5*np.sin(2*np.pi*2*f*t)*np.exp(-t/0.1) + 0.2*np.sin(2*np.pi*3*f*t)*np.exp(-t/0.05))
-    s *= env(n, 0.002, 0.18); s[-100:] *= np.linspace(1, 0, 100)
-    return s / len(notes)
-
-def tuba(m, dur):
-    n = int(dur * SR); t = np.arange(n) / SR
-    s = np.tanh(1.8 * (np.sin(2*np.pi*hz(m)*t) + 0.5*np.sin(2*np.pi*2*hz(m)*t) + 0.25*np.sin(2*np.pi*3*hz(m)*t)))
-    s *= np.minimum(1, t / 0.01) * env(n, 0, 0.25); s[-200:] *= np.linspace(1, 0, 200)
-    return s
+def passe_bas(x, cut, q):
+    """Filtre à variable d'état (résonant) ; cut peut varier dans le temps."""
+    y = np.zeros_like(x); lp = bp = 0.0
+    cut = np.broadcast_to(cut, x.shape)
+    f = 2 * np.sin(np.pi * np.minimum(cut, SR / 6) / SR)
+    damp = 1.0 / q
+    for i in range(len(x)):
+        hp = x[i] - lp - damp * bp
+        bp += f[i] * hp
+        lp += f[i] * bp
+        y[i] = lp
+    return y
 
 def bruit(n):
     x = rng.standard_normal(n); return np.diff(np.concatenate([[0], x]))
 
 def kick():
-    n = int(0.25 * SR); t = np.arange(n) / SR
-    f = 50 + 110 * np.exp(-t / 0.03)
-    return np.tanh(1.4 * np.sin(2*np.pi*np.cumsum(f)/SR) * env(n, 0.0005, 0.1))
-
-def caisse_claire(g=1.0):
-    n = int(0.2 * SR); t = np.arange(n) / SR
-    s = bruit(n) * env(n, 0.0005, 0.06) * 0.6 + np.sin(2*np.pi*190*t) * env(n, 0.0005, 0.04) * 0.5
-    return s * g
+    n = int(0.32 * SR); t = np.arange(n) / SR
+    f = 46 + 150 * np.exp(-t / 0.028)
+    s = np.sin(2*np.pi*np.cumsum(f)/SR) * env(n, 0.0005, 0.16)
+    s[:40] += np.linspace(0.8, 0, 40)
+    return np.tanh(2.0 * s)
 
 def clap(g=1.0):
-    n = int(0.2 * SR); s = bruit(n) * env(n, 0.001, 0.06)
-    for k in (0.007, 0.014, 0.021):
-        i = int(k * SR); s[i:] += bruit(n - i) * env(n - i, 0.001, 0.05) * 0.7
-    return s * 0.45 * g
+    n = int(0.25 * SR); s = bruit(n) * env(n, 0.001, 0.08)
+    for k in (0.006, 0.013, 0.02):
+        i = int(k * SR); s[i:] += bruit(n - i) * env(n - i, 0.001, 0.06) * 0.7
+    return s * 0.4 * g
 
-def tambourin():
-    n = int(0.12 * SR); t = np.arange(n) / SR
-    s = bruit(n) * env(n, 0.001, 0.03)
-    for f in (5200, 7100, 9300): s += 0.2 * np.sin(2*np.pi*f*t) * env(n, 0.001, 0.04)
-    return s * 0.25
+def charley(ouvert=False):
+    n = int((0.2 if ouvert else 0.04) * SR)
+    return bruit(n) * env(n, 0.0005, 0.06 if ouvert else 0.01) * 0.28
 
 def crash(dur=2.0):
-    n = int(dur * SR); return bruit(n) * env(n, 0.001, 0.7) * 0.25
+    n = int(dur * SR); return bruit(n) * env(n, 0.001, 0.8) * 0.22
+
+def basse(m, dur):
+    n = int(dur * SR); t = np.arange(n) / SR
+    s = scie_naive(np.full(n, hz(m))) + np.sin(2*np.pi*hz(m)*t)
+    s = passe_bas(s, 300 + 900 * np.exp(-t / 0.04), 1.2)
+    s = np.tanh(2.2 * s) * env(n, 0.002, 0.09)
+    s[-120:] *= np.linspace(1, 0, 120)
+    return s
+
+def stab(notes, dur=0.35):
+    n = int(dur * SR); t = np.arange(n) / SR; s = np.zeros(n)
+    for m in notes:
+        for d in (-0.1, 0.0, 0.1):
+            s += scie_naive(np.full(n, hz(m + d)))
+    s = passe_bas(s / (3 * len(notes)), 800 + 5000 * np.exp(-t / 0.06), 2.0)
+    return s * env(n, 0.002, 0.12)
 
 def cloche(m, dur=0.4):
     n = int(dur * SR); t = np.arange(n) / SR; f = hz(m)
     return (np.sin(2*np.pi*f*t) + 0.4*np.sin(2*np.pi*2.76*f*t)*np.exp(-t/0.05)) * env(n, 0.001, 0.15)
 
-def langue_de_belle_mere(t0):
-    """Sifflet de fête qui se déroule : glissando nasillard."""
-    n = int(0.55 * SR); t = np.arange(n) / SR
-    f = 520 + 380 * np.clip(t / 0.25, 0, 1) ** 0.7 + 12 * np.sin(2*np.pi*9*t)
-    ph = 2*np.pi*np.cumsum(f)/SR
-    s = sum(np.sin(k * ph) / k for k in range(1, 9)) * np.minimum(1, t / 0.02) * np.clip((0.55 - t) / 0.1, 0, 1)
-    ajoute(s * 0.12, t0, pan=0.5)
+B = 60 / 130
+T0 = 0.85
+def tp(x): return T0 + x * B
+nb_temps = int((DUR - T0) / B) + 1
 
-B = 0.307                 # un temps (~195 bpm, en 3/4)
-T0 = 0.85                 # le cachet se brise : levée « Joy-eux »
-def tp(x): return T0 + B + x * B   # x = temps à partir du premier temps fort
+# --- montée (0 → drop au cachet) : souffle filtré qui s'ouvre, roulement de claps qui accélère, sirène
+n = int(T0 * SR); t = np.arange(n) / SR
+souffle = passe_bas(rng.standard_normal(n), 300 + 9000 * (t / T0) ** 2, 3.0) * (t / T0) ** 1.5 * 0.5
+ajoute(souffle, 0.0)
+tt = 0.0
+while tt < T0 - 0.03:
+    ajoute(clap(0.25 + 0.7 * tt / T0), tt, 1.0)
+    tt += 0.11 - 0.07 * tt / T0
+sir = scie_naive(hz(57) * (1 + 1.0 * (t / T0) ** 2)) * (t / T0) * 0.15
+ajoute(passe_bas(sir, 2500, 1.5), 0.0, 1.0, pan=0.3)
 
-# --- intro : roulement de caisse claire qui monte jusqu'au cachet
-k = 0; t = 0.05
-while t < T0 - 0.02:
-    ajoute(caisse_claire(0.15 + 0.6 * t / T0), t, 1.0, pan=0.1)
-    t += 0.085 - 0.045 * t / T0; k += 1
-ajoute(crash(1.5), T0, 0.9, pan=-0.2)
+# --- le drop
+ajoute(crash(2.2), T0, 1.0, pan=-0.2)
+for i in range(nb_temps):
+    ajoute(kick(), tp(i), 1.0)
+    if i % 2 == 1: ajoute(clap(), tp(i), 1.0, pan=0.05)
+    ajoute(charley(True), tp(i + 0.5), 0.9, pan=0.3)
+    for q in (0.25, 0.75): ajoute(charley(), tp(i + q), 0.7, pan=-0.3)
+    ajoute(charley(), tp(i), 0.4, pan=-0.3)
+    # basse « roulante » sur les doubles croches hors temps
+    racine = 33 if (i // 4) % 2 == 0 else 31   # la, puis sol
+    for q in (0.25, 0.5, 0.75):
+        ajoute(basse(racine + (12 if q == 0.5 else 0), B * 0.22), tp(i + q), 0.45)
 
-# --- mélodie (temps, note, durée) en fa majeur, à partir de la levée
-mel = [(-1, 72, .7), (-0.3, 72, .25),
-       (0, 74, .9), (1, 72, .9), (2, 77, .9), (3, 76, 1.8), (5, 72, .7), (5.7, 72, .25),
-       (6, 74, .9), (7, 72, .9), (8, 79, .9), (9, 77, 1.8), (11, 72, .7), (11.7, 72, .25),
-       (12, 84, .9), (13, 81, .9), (14, 77, .9), (15, 76, .9), (16, 74, 1.4), (17, 82, .7), (17.7, 82, .25),
-       (18, 81, .9), (19, 77, .9), (20, 79, .9), (21, 77, 2.6)]
-gamme = [65, 67, 69, 70, 72, 74, 76, 77, 79, 81, 82, 84, 86]
-def tierce_dessous(m):
-    if m in gamme: i = gamme.index(m); return gamme[i - 2] if i >= 2 else m - 4
-    return m - 4
-for x, m, d in mel:
-    ajoute(section(m, d * B, tierce_dessous(m)), tp(x), 0.6, pan=-0.1)
-    ajoute(cuivre(m - 12, d * B, 0.12), tp(x), 0.12, pan=0.25)   # doublure à l'octave grave
+# --- ligne acide (doubles croches) qui s'ouvre au fil du morceau
+pas = [57, 57, 69, 57, 60, 57, 72, 57, 57, 64, 57, 67, 69, 57, 60, 62]
+accent = [1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0]
+d16 = B / 4
+debut = tp(0); fin_acid = DUR
+n_pas = int((fin_acid - debut) / d16)
+freqs = np.zeros(int((fin_acid - debut) * SR) + 1); acc_env = np.zeros_like(freqs)
+for k in range(n_pas):
+    i0 = int(k * d16 * SR); i1 = int((k + 1) * d16 * SR)
+    m = pas[k % 16] - 12 + (-2 if (k // 16) % 2 else 0)
+    freqs[i0:i1] = hz(m)
+    seg = np.arange(i1 - i0) / SR
+    acc_env[i0:i1] = (1.0 if accent[k % 16] else 0.5) * np.exp(-seg / 0.05)
+lent = np.linspace(0, 1, len(freqs))
+cut = 250 + 2600 * lent ** 1.4 + 2200 * acc_env * (0.4 + lent)
+acid = passe_bas(scie_naive(freqs), cut, 7.0)
+acid = np.tanh(2.5 * acid) * (0.35 + 0.65 * (acc_env > 0.01))
+ajoute(acid * 0.16, debut, 1.0, pan=-0.15)
 
-# --- accompagnement « oum-pa-pa » : basse au 1er temps, accords aux 2e et 3e
-acc = {0: (41, [65, 69, 72]), 1: (36, [64, 67, 70]), 2: (36, [64, 67, 70]), 3: (41, [65, 69, 72]),
-       4: (41, [63, 69, 72]), 5: (46, [65, 70, 74]), 6: (41, [65, 69, 72]), 7: (41, [65, 69, 72])}
-for bar in range(7):
-    basse, ch = acc[bar]
-    if bar == 6: ch2 = [64, 67, 70]
-    else: ch2 = ch
-    ajoute(tuba(basse, B * 0.9), tp(bar * 3), 0.55)
-    ajoute(tuba(basse + 7, B * 0.6), tp(bar * 3 + 2.5), 0.25) if bar % 2 else None
-    ajoute(piano(ch, B * 0.6), tp(bar * 3 + 1), 0.5, pan=0.3)
-    ajoute(piano(ch2, B * 0.6), tp(bar * 3 + 2), 0.5, pan=0.3)
-    ajoute(kick(), tp(bar * 3), 0.9)
-    ajoute(caisse_claire(0.3), tp(bar * 3 + 1), 1.0)
-    ajoute(caisse_claire(0.25), tp(bar * 3 + 2), 1.0)
-    ajoute(clap(0.5), tp(bar * 3 + 1), 1.0, pan=-0.15)
-    ajoute(clap(0.5), tp(bar * 3 + 2), 1.0, pan=0.15)
-    for h in range(6): ajoute(tambourin(), tp(bar * 3 + h * 0.5), 0.55 if h % 2 else 0.35, pan=0.45)
-# roulement vers la dernière phrase (« Joyeux anniversaire » final)
-for k in range(6): ajoute(caisse_claire(0.25 + 0.06 * k), tp(16.5 + k * 0.25), 1.0)
+# --- stabs rave (avec écho) chaque mesure
+for bar in range(nb_temps // 4 + 1):
+    notes = [57, 60, 64, 67, 71] if bar % 2 == 0 else [55, 59, 62, 66, 69]
+    for x in (0.5, 2.75):
+        s = stab(notes)
+        for e, g in enumerate((0.42, 0.2, 0.09)):
+            ajoute(s, tp(bar * 4 + x + e * 0.75), g, pan=0.35 * (-1) ** e)
 
-# --- éclats argentés quand la carte sort, puis apparition de l'invitation
-for k, m in enumerate([89, 93, 96, 98, 101]):
-    ajoute(cloche(m), 2.2 + k * 0.05, 0.14, pan=-0.5 + 0.25 * k)
-ajoute(crash(1.2), tp(9), 0.55, pan=0.3)
-
-# --- final : accord tenu, trille de cuivres, cymbale, sifflet de fête
-fin = tp(21)
-ajoute(tuba(41, 1.3), fin, 0.6); ajoute(kick(), fin, 1.0)
-ajoute(piano([65, 69, 72, 77], 1.2), fin, 0.6, pan=0.3)
-ajoute(crash(1.8), fin, 1.0)
-for i, m in enumerate([65, 69, 72]):
-    ajoute(cuivre(m, 1.1), fin, 0.18, pan=-0.4 + 0.4 * i)
-for k in range(8): ajoute(cloche(96 + (k % 2) * 2, 0.2), fin + 0.1 + k * 0.07, 0.08, pan=0.4)
-langue_de_belle_mere(fin + 0.15)
-langue_de_belle_mere(tp(3) + 0.05)
+# --- éclats quand la carte sort, impact quand l'invitation apparaît, final
+for k, m in enumerate([88, 91, 93, 96, 100]):
+    ajoute(cloche(m), 2.2 + k * 0.05, 0.13, pan=-0.5 + 0.25 * k)
+ajoute(crash(1.5), tp(6), 0.7, pan=0.25)
+n = int(1.2 * SR); t = np.arange(n) / SR
+impact = np.sin(2*np.pi*np.cumsum(60 * np.exp(-t / 0.3) + 30) / SR) * env(n, 0.001, 0.35)
+ajoute(impact, tp(6), 0.5)
+ajoute(crash(1.5), tp(16), 0.8)
 
 st = np.stack([L, R], 1)
-fo = int(0.45 * SR); st[-fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.2
+fo = int(0.5 * SR); st[-fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.2
 st /= np.percentile(np.abs(st), 99.7)
-st = np.tanh(st * 0.9) * 0.9
+st = np.tanh(st * 0.95) * 0.9
 pcm = (st * 32767).astype(np.int16)
 with wave.open(sys.argv[1], 'wb') as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
-print('ok, fin de la mélodie à', round(fin, 2), 's')
+print('ok')
