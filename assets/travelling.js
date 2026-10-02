@@ -1,14 +1,26 @@
 // Travelling 3D de la page d'accueil (provisoire : sera remplacé par la vidéo filmée)
 // Script classique (et non module) pour fonctionner aussi en ouvrant le fichier en local.
 (async () => {
-const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
+const fallback = msg => {
+  const f = document.getElementById('fallback');
+  f.textContent = msg;
+  f.style.display = 'grid';
+};
+let THREE;
+try {
+  // window.THREE_SRC permet de fournir Three.js intégré (version « fichier unique »)
+  THREE = await import(window.THREE_SRC || 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
+} catch (e) {
+  fallback("Le travelling 3D n'a pas pu se charger. Ouvrez la page dans Safari ou Chrome, avec une connexion internet.");
+  return;
+}
 
 const canvas = document.getElementById('scene');
 let renderer;
 try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 } catch (e) {
-  document.getElementById('fallback').style.display = 'grid';
+  fallback("La 3D n'est pas disponible sur cet appareil.");
   return;
 }
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
