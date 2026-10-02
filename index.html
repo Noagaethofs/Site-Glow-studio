@@ -3,259 +3,272 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coralie Simonis · Psychologue enfants &amp; ados · Thérapie assistée par l'animal</title>
+  <title>Coralie Simonis · Psychologue enfants &amp; ados · Thérapie assistée par l'animal · Charneux</title>
   <meta name="description" content="Coralie Simonis, psychologue pour enfants et adolescents à Charneux. Thérapie assistée par l'animal : l'animal comme partenaire du thérapeute.">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-  <a class="skip" href="#contenu">Aller au contenu</a>
+<a class="skip" href="#approche">Aller au contenu</a>
 
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="brand" href="#accueil" aria-label="Coralie Simonis, accueil">
-        <img src="assets/logo.svg" alt="" width="38" height="38">
-        <span>
-          <span class="brand-name">Coralie Simonis</span>
-          <span class="brand-sub">Psychologue enfants &amp; ados</span>
-        </span>
-      </a>
-      <button class="menu-toggle" aria-expanded="false" aria-controls="menu">
-        <span class="sr-only">Menu</span>
-        <span class="bar"></span><span class="bar"></span>
-      </button>
-      <nav id="menu" class="nav" aria-label="Navigation principale">
+<header class="topbar">
+  <div class="wrap">
+    <nav aria-label="Navigation principale">
+      <a class="logo" href="#accueil"><img src="assets/logo.svg" alt="">Coralie Simonis</a>
+      <button class="burger" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><span></span><span></span></button>
+      <div class="navlinks" id="menu">
         <a href="#approche">L'approche</a>
-        <a href="#pourquoi">Bienfaits</a>
+        <a href="#pourquoi">Pourquoi</a>
         <a href="#pour-qui">Pour qui</a>
-        <a href="#contact" class="btn btn-sun">Prendre contact</a>
-      </nav>
+        <a href="#qui-suis-je">Qui suis-je</a>
+        <a href="#faq">FAQ</a>
+        <a class="cta" href="#contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- 1 · ACCUEIL : travelling (3D provisoire, remplacé ensuite par la vidéo filmée) -->
+  <section class="travel" id="accueil">
+    <div class="stage">
+      <canvas id="scene" aria-label="Travelling dans une prairie : le chien, trois lapins puis deux hamsters"></canvas>
+      <div class="fallback" id="fallback">La 3D n'est pas disponible sur cet appareil.</div>
+
+      <div class="intro" id="intro">
+        <span class="tag">Psy enfants &amp; ados · Charneux</span>
+        <h1>La thérapie<br><span class="hl">avec</span> des <span class="bl">animaux</span>.</h1>
+        <p>Coralie Simonis, psychologue. Ici, l'animal est le partenaire du thérapeute. Faites défiler pour rencontrer l'équipe&nbsp;!</p>
+        <div class="actions"><a class="btn" href="tel:+32496267127">0496 / 26 71 27</a><a class="btn alt" href="#approche">Comment ça marche ?</a></div>
+      </div>
+
+      <div class="cap" data-k="1" style="--c:var(--yellow)">
+        <span class="n">Le chien</span><h3><span class="todo">Prénom</span></h3>
+        <p>Sa joie et sa fidélité créent le lien&nbsp;: avec lui, la confiance s'installe dès la première rencontre.</p>
+      </div>
+      <div class="cap left" data-k="2" style="--c:var(--pink)">
+        <span class="n">Lapin</span><h3><span class="todo">Prénom</span></h3>
+        <p>Doux et un peu craintif, il apprend à l'enfant à ralentir et à respecter le rythme de l'autre.</p>
+      </div>
+      <div class="cap" data-k="3" style="--c:var(--mint)">
+        <span class="n">Lapin</span><h3><span class="todo">Prénom</span></h3>
+        <p>Il ne parle pas, mais il réagit à tout&nbsp;: une porte d'entrée vers la communication non verbale et les émotions.</p>
+      </div>
+      <div class="cap left" data-k="4" style="--c:var(--yellow)">
+        <span class="n">Lapin</span><h3><span class="todo">Prénom</span></h3>
+        <p>Prendre soin de lui donne à l'enfant un vrai rôle&nbsp;: il se sent utile, responsable et plus autonome.</p>
+      </div>
+      <div class="cap" data-k="5" style="--c:var(--pink)">
+        <span class="n">Les hamsters</span><h3><span class="todo">Prénom</span> &amp; <span class="todo">Prénom</span></h3>
+        <p>Tout petits et fragiles, ils demandent calme et délicatesse&nbsp;: idéal pour être dans le moment présent.</p>
+      </div>
+
+      <div class="rail" id="rail" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="hint" id="hint">Faites défiler</div>
     </div>
-  </header>
+  </section>
 
-  <main id="contenu">
+  <div class="marquee" aria-hidden="true"><span>Confiance ✦ Plaisir ✦ Sécurité ✦ Nature ✦ Lâcher-prise ✦ Autonomie ✦ Socialisation ✦ Confiance ✦ Plaisir ✦ Sécurité ✦ Nature ✦ Lâcher-prise ✦ Autonomie ✦ Socialisation ✦&nbsp;</span></div>
 
-    <!-- ACCUEIL -->
-    <section id="accueil" class="hero">
-      <div class="wrap hero-inner">
-        <div class="hero-text">
-          <p class="pill">Thérapie assistée par l'animal · Charneux</p>
-          <h1>Grandir en confiance, <em>avec l'animal</em> à ses côtés.</h1>
-          <p class="lead">
-            Coralie Simonis est psychologue pour enfants et adolescents.
-            Dans ses séances, l'animal devient un véritable partenaire
-            thérapeutique, au cabinet comme dans les prairies alentour.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-sun" href="tel:+32496267127">0496 / 26 71 27</a>
-            <a class="btn btn-line" href="#approche">Découvrir l'approche</a>
-          </div>
-        </div>
-
-        <div class="hero-art" aria-hidden="true">
-          <div class="arch">
-            <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice">
-              <rect width="400" height="520" fill="#f6ead2"/>
-              <circle class="sun" cx="270" cy="170" r="62" fill="#f2c14e"/>
-              <path d="M0 330 Q90 270 200 300 T400 280 V520 H0 Z" fill="#a9c79a"/>
-              <path d="M0 380 Q120 330 230 365 T400 350 V520 H0 Z" fill="#6f9a6a"/>
-              <path d="M0 440 Q140 400 260 430 T400 425 V520 H0 Z" fill="#3f6b4b"/>
-              <g stroke="#f6ead2" stroke-width="5" stroke-linecap="round" opacity=".85">
-                <line x1="40" y1="410" x2="40" y2="452"/>
-                <line x1="90" y1="402" x2="90" y2="444"/>
-                <line x1="140" y1="398" x2="140" y2="440"/>
-                <line x1="30" y1="420" x2="150" y2="408"/>
-                <line x1="30" y1="436" x2="150" y2="424"/>
-              </g>
-              <g fill="#1e3a2c">
-                <ellipse cx="300" cy="402" rx="34" ry="18"/>
-                <circle cx="334" cy="382" r="14"/>
-                <ellipse cx="342" cy="372" rx="5" ry="10" transform="rotate(25 342 372)"/>
-                <rect x="276" y="410" width="7" height="22" rx="3"/>
-                <rect x="314" y="410" width="7" height="22" rx="3"/>
-                <path d="M268 396 q-16 -6 -12 -22" stroke="#1e3a2c" stroke-width="6" fill="none" stroke-linecap="round"/>
-              </g>
-            </svg>
-          </div>
-          <div class="badge">
-            <span class="badge-num">2</span>
-            <span>psychologue<br>&amp; animal, en duo</span>
-          </div>
-        </div>
+  <!-- 2 · L'APPROCHE -->
+  <section class="block" id="approche">
+    <div class="blue-sec"><div class="wrap two">
+      <div><span class="tagline">L'approche</span><h2>L'animal, partenaire du thérapeute.</h2></div>
+      <div>
+        <p>La thérapie assistée par l'animal est une méthode où l'animal est partenaire du thérapeute.</p>
+        <p>De par son pouvoir attractif et d'attachement, il va stimuler le patient. Le thérapeute va proposer, sur base des observations, des activités thérapeutiques qui vont répondre aux objectifs thérapeutiques.</p>
+        <p class="note">📍 Les séances ont lieu à Charneux, ainsi que dans les prairies et chemins environnants.</p>
       </div>
-    </section>
+    </div></div>
+  </section>
 
-    <!-- C'EST QUOI ? -->
-    <section id="approche" class="section">
-      <div class="wrap split">
-        <header class="section-head">
-          <span class="num">01</span>
-          <h2>C'est quoi&nbsp;?</h2>
-        </header>
-        <div class="prose">
-          <p class="big">
-            La thérapie assistée par l'animal est une méthode où
-            <em>l'animal est partenaire du thérapeute</em>.
-          </p>
-          <p>
-            De par son pouvoir attractif et d'attachement, il va stimuler le patient.
-            Le thérapeute va proposer, sur base des observations, des activités
-            thérapeutiques qui vont répondre aux objectifs thérapeutiques.
-          </p>
-          <p>
-            Les séances se déroulent à Charneux ainsi que dans les prairies et
-            chemins environnants&nbsp;: le travail en extérieur offre aussi un
-            contact précieux avec la nature.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CITATION -->
-    <section class="quote-band" aria-label="Citation">
-      <figure class="wrap quote">
-        <blockquote>
-          «&nbsp;L'animal ne se nourrit pas d'attentes idéalisées envers les humains.
-          Il les accepte pour ce qu'ils sont et non pas pour ce qu'ils devraient être.&nbsp;»
-        </blockquote>
-        <figcaption>Boris Levinson</figcaption>
-      </figure>
-    </section>
-
-    <!-- POURQUOI ? -->
-    <section id="pourquoi" class="section">
-      <div class="wrap">
-        <header class="section-head">
-          <span class="num">02</span>
-          <h2>Pourquoi&nbsp;?</h2>
-        </header>
-        <div class="benefits">
-          <article class="benefit">
-            <h3>L'animal apporte…</h3>
-            <ul>
-              <li>De l'humour et de la souplesse dans des interactions parfois sérieuses</li>
-              <li>Un plaisir dans le travail personnel</li>
-              <li>Une sécurité au patient</li>
-              <li>Un support à des carences affectives, des traumatismes…</li>
-              <li>Un contact avec la nature par le travail en extérieur</li>
-            </ul>
-          </article>
-          <article class="benefit">
-            <h3>Il facilite…</h3>
-            <ul>
-              <li>La relation de confiance avec le thérapeute</li>
-              <li>La levée des défenses</li>
-              <li>Le transfert</li>
-              <li>La communication non verbale</li>
-            </ul>
-          </article>
-          <article class="benefit">
-            <h3>Il permet…</h3>
-            <ul>
-              <li>D'être dans le moment présent, le lâcher-prise</li>
-              <li>Une ouverture et un ajustement relationnel</li>
-              <li>Une amélioration du bien-être du patient</li>
-              <li>Plus d'investissement à l'école</li>
-              <li>Le développement de l'autonomie</li>
-              <li>La socialisation</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- POUR QUI ? -->
-    <section id="pour-qui" class="section section-dark">
-      <div class="wrap">
-        <header class="section-head">
-          <span class="num">03</span>
-          <h2>Pour qui&nbsp;?</h2>
-        </header>
-        <div class="split">
-          <div>
-            <p class="big">Tous types de publics, à <em>deux conditions</em>&nbsp;:</p>
-            <div class="conditions">
-              <div class="condition"><span>1</span>Ne pas avoir peur des animaux</div>
-              <div class="condition"><span>2</span>Ne pas être allergique</div>
-            </div>
-          </div>
-          <div>
-            <p class="label">Par exemple</p>
-            <ul class="tags">
-              <li>Enfants avec des difficultés relationnelles</li>
-              <li>Trouble du déficit de l'attention / hyperactivité (TDAH)</li>
-              <li>Troubles anxieux</li>
-              <li>Troubles du spectre autistique</li>
-              <li>Enfants et adultes avec un handicap mental</li>
-              <li>…</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-      <div class="wrap">
-        <div class="contact-card">
-          <div class="contact-intro">
-            <header class="section-head">
-              <span class="num">04</span>
-              <h2>Faisons connaissance</h2>
-            </header>
-            <p>
-              Pour toute question ou pour fixer un premier rendez-vous,
-              n'hésitez pas à appeler ou à écrire.
-            </p>
-          </div>
-          <ul class="contact-list">
-            <li>
-              <span class="label">Téléphone</span>
-              <a href="tel:+32496267127">0496 / 26 71 27</a>
-            </li>
-            <li>
-              <span class="label">E-mail</span>
-              <a href="mailto:simoniscoralie@gmail.com">simoniscoralie@gmail.com</a>
-            </li>
-            <li>
-              <span class="label">Adresse</span>
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=Hesselles+536B+4654+Charneux+Belgique" target="_blank" rel="noopener">
-                Hesselles 536 B, 4654 Charneux
-              </a>
-              <span class="note">et prairies et chemins environnants…</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap footer-inner">
-      <p><span class="brand-name">Coralie Simonis</span> · Psychologue enfants &amp; ados · Thérapie assistée par l'animal</p>
-      <p>© <span id="year">2026</span></p>
+  <!-- 3 · POURQUOI ÇA MARCHE -->
+  <section class="block wrap" id="pourquoi" style="padding-top:20px">
+    <span class="tagline">Les bienfaits</span>
+    <h2 class="big-h">Pourquoi ça marche ?</h2>
+    <div class="cards">
+      <div class="card"><h3>Apporte…</h3><ul>
+        <li>De l'humour et de la souplesse dans des interactions parfois sérieuses</li>
+        <li>Un plaisir dans le travail personnel</li>
+        <li>Une sécurité au patient</li>
+        <li>Un support à des carences affectives, des traumatismes…</li>
+        <li>Un contact avec la nature par le travail en extérieur</li>
+      </ul></div>
+      <div class="card"><h3>Facilite…</h3><ul>
+        <li>La relation de confiance avec le thérapeute</li>
+        <li>La levée des défenses</li>
+        <li>Le transfert</li>
+        <li>La communication non verbale</li>
+      </ul></div>
+      <div class="card"><h3>Permet…</h3><ul>
+        <li>D'être dans le moment présent, le lâcher-prise</li>
+        <li>Une ouverture et un ajustement relationnel</li>
+        <li>Une amélioration du bien-être du patient</li>
+        <li>Plus d'investissement à l'école</li>
+        <li>Le développement de l'autonomie</li>
+        <li>La socialisation</li>
+      </ul></div>
     </div>
-  </footer>
+    <p class="quote" style="margin-top:110px">«&nbsp;L'animal ne se nourrit pas d'attentes idéalisées envers les humains. Il les accepte pour ce qu'ils sont et non pas pour ce qu'ils devraient être.&nbsp;»<small>Boris Levinson</small></p>
+  </section>
 
-  <script>
-    const toggle = document.querySelector('.menu-toggle');
-    const menu = document.getElementById('menu');
-    toggle.addEventListener('click', () => {
-      const open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      menu.classList.toggle('open', !open);
-    });
-    menu.addEventListener('click', e => {
-      if (e.target.closest('a')) {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('open');
-      }
-    });
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <!-- 4 · POUR QUI -->
+  <section class="block mint-sec" id="pour-qui">
+    <div class="wrap two">
+      <div>
+        <span class="tagline">Les publics</span>
+        <h2 class="big-h">Pour qui ?</h2>
+        <p style="font-size:22px;margin-top:24px">Tous types de publics, mais il y a deux conditions&nbsp;:</p>
+        <div class="conditions">
+          <div class="condition"><span>1</span>Ne pas avoir peur des animaux</div>
+          <div class="condition"><span>2</span>Ne pas être allergique</div>
+        </div>
+      </div>
+      <div>
+        <p style="font-weight:800;font-size:22px;margin-top:8px">Par exemple&nbsp;:</p>
+        <ul class="chips">
+          <li>Enfants avec des difficultés relationnelles</li>
+          <li>Trouble du déficit de l'attention / hyperactivité (TDAH)</li>
+          <li>Troubles anxieux</li>
+          <li>Troubles du spectre autistique</li>
+          <li>Enfants et adultes avec un handicap mental</li>
+          <li>…</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · QUI SUIS-JE -->
+  <section class="block wrap" id="qui-suis-je">
+    <div class="about">
+      <div class="id-card" aria-hidden="true">
+        <span class="sticker">Psy<br>enfants<br>&amp; ados</span>
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="who">Coralie<br>Simonis</div>
+        <span class="what">Psychologue</span>
+        <ul>
+          <li>Thérapie assistée par l'animal</li>
+          <li>Enfants &amp; adolescents</li>
+          <li>Charneux, Belgique</li>
+        </ul>
+      </div>
+      <div>
+        <span class="tagline">Qui suis-je&nbsp;?</span>
+        <h2 class="big-h">Coralie Simonis</h2>
+        <p class="lead">Psychologue pour enfants et adolescents, j'accompagne chaque jeune avec mes animaux, partenaires à part entière de la thérapie.</p>
+        <p class="todo">Quelques phrases de Coralie sur son parcours, ce qui l'a amenée à travailler avec les animaux et sa façon d'accompagner les enfants.</p>
+        <ul class="facts">
+          <li><b>Formation</b><span class="todo">Diplôme de psychologue · formation en thérapie assistée par l'animal</span></li>
+          <li><b>Agrément</b><span class="todo">N° d'agrément de la Commission des Psychologues</span></li>
+          <li><b>Consultations</b><span>Hesselles 536 B, 4654 Charneux, et prairies et chemins environnants</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · FAQ -->
+  <section class="block faq-sec" id="faq">
+    <div class="wrap">
+      <span class="tagline">Questions fréquentes</span>
+      <h2 class="big-h">FAQ</h2>
+      <div class="faq">
+        <details>
+          <summary>Mon enfant a un peu peur des animaux, est-ce possible&nbsp;?</summary>
+          <div><p>Ne pas avoir peur des animaux est l'une des deux conditions pour suivre une thérapie assistée par l'animal. En cas de doute, appelez Coralie&nbsp;: elle vous dira si cette approche convient à votre enfant.</p></div>
+        </details>
+        <details>
+          <summary>Et en cas d'allergie&nbsp;?</summary>
+          <div><p>Ne pas être allergique est la deuxième condition. Si votre enfant est allergique à certains animaux, parlez-en lors du premier contact.</p></div>
+        </details>
+        <details>
+          <summary>Où se déroulent les séances&nbsp;?</summary>
+          <div><p>À Charneux (Hesselles 536 B), ainsi que dans les prairies et chemins environnants. Le travail en extérieur offre un contact avec la nature.</p><p class="todo">Tenue conseillée (bottes, vêtements de pluie…) et infos de parking.</p></div>
+        </details>
+        <details>
+          <summary>Comment se passe la première séance&nbsp;?</summary>
+          <div><p class="todo">Déroulement de la première rencontre : présence des parents, découverte des animaux, objectifs…</p></div>
+        </details>
+        <details>
+          <summary>Combien de temps dure une séance et combien coûte-t-elle&nbsp;?</summary>
+          <div><p class="todo">Durée, tarif et éventuel remboursement par la mutuelle.</p></div>
+        </details>
+        <details>
+          <summary>Que se passe-t-il s'il pleut&nbsp;?</summary>
+          <div><p class="todo">Organisation des séances par mauvais temps.</p></div>
+        </details>
+        <details>
+          <summary>Comment prendre rendez-vous&nbsp;?</summary>
+          <div><p>Par téléphone au <a href="tel:+32496267127">0496 / 26 71 27</a> ou par e-mail à <a href="mailto:simoniscoralie@gmail.com">simoniscoralie@gmail.com</a>.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <span class="tagline">Contact</span>
+      <h2>On se rencontre ?</h2>
+      <div class="contact-grid">
+        <a class="contact-card" href="tel:+32496267127"><span class="k">Téléphone</span><strong>0496 / 26 71 27</strong><small>Appel ou SMS</small></a>
+        <a class="contact-card" href="mailto:simoniscoralie@gmail.com"><span class="k">E-mail</span><strong>simoniscoralie@gmail.com</strong><small>Réponse dans les meilleurs délais</small></a>
+        <a class="contact-card" href="https://www.google.com/maps/search/?api=1&amp;query=Hesselles+536B+4654+Charneux+Belgique" target="_blank" rel="noopener"><span class="k">Adresse</span><strong>Hesselles 536 B<br>4654 Charneux</strong><small>et prairies et chemins environnants… · Voir sur la carte ↗</small></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- 8 · PIED DE PAGE -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#accueil"><img src="assets/logo.svg" alt="">Coralie Simonis</a>
+        <p>Psychologue enfants &amp; ados<br>Thérapie assistée par l'animal</p>
+        <p><span class="todo">N° d'agrément</span></p>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="#approche">L'approche</a></li>
+          <li><a href="#pourquoi">Pourquoi ça marche</a></li>
+          <li><a href="#pour-qui">Pour qui</a></li>
+          <li><a href="#qui-suis-je">Qui suis-je</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+32496267127">0496 / 26 71 27</a></li>
+          <li><a href="mailto:simoniscoralie@gmail.com">simoniscoralie@gmail.com</a></li>
+          <li>Hesselles 536 B, 4654 Charneux</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© <span id="year">2026</span> Coralie Simonis</span>
+      <span><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.querySelector('.burger');
+  const menu = document.getElementById('menu');
+  burger.addEventListener('click', () => {
+    const open = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!open));
+    menu.classList.toggle('open', !open);
+  });
+  menu.addEventListener('click', e => {
+    if (e.target.closest('a')) { burger.setAttribute('aria-expanded', 'false'); menu.classList.remove('open'); }
+  });
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script src="assets/travelling.js"></script>
 </body>
 </html>
