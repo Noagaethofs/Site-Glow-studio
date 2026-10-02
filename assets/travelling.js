@@ -8,8 +8,8 @@ const fallback = msg => {
 };
 let THREE;
 try {
-  // window.THREE_SRC permet de fournir Three.js intégré (version « fichier unique »)
-  THREE = await import(window.THREE_SRC || 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
+  // window.THREE est fourni directement dans la version « fichier unique »
+  THREE = window.THREE || await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
 } catch (e) {
   fallback("Le travelling 3D n'a pas pu se charger. Ouvrez la page dans Safari ou Chrome, avec une connexion internet.");
   return;
