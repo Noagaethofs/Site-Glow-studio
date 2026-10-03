@@ -16,25 +16,32 @@
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-  const grad = new THREE.DataTexture(new Uint8Array([105, 185, 255]), 3, 1, THREE.RedFormat);
-  grad.minFilter = grad.magFilter = THREE.NearestFilter; grad.needsUpdate = true;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.15;
+  // rendu doux et lisse, façon personnages 3D actuels (pas de contour ni d'aplats)
   const mats = {};
-  const toon = c => mats[c] ||= new THREE.MeshToonMaterial({ color: c, gradientMap: grad });
-  const lineMat = new THREE.MeshBasicMaterial({ color: '#111', side: THREE.BackSide });
-  function part(parent, geo, color, { p = [0, 0, 0], s = [1, 1, 1], r = [0, 0, 0], line = 1.06 } = {}) {
-    const m = new THREE.Mesh(geo, toon(color));
+  const soft = c => mats[c] ||= new THREE.MeshStandardMaterial({ color: c, roughness: .62, metalness: 0 });
+  function part(parent, geo, color, { p = [0, 0, 0], s = [1, 1, 1], r = [0, 0, 0] } = {}) {
+    const m = new THREE.Mesh(geo, soft(color));
     m.position.set(...p); m.scale.set(...s); m.rotation.set(...r);
-    if (line) { const o = new THREE.Mesh(geo, lineMat); o.scale.setScalar(line); m.add(o); }
     parent.add(m);
     return m;
   }
-  const sph = (r, w = 24) => new THREE.SphereGeometry(r, w, Math.round(w * .75));
-  const cyl = (a, b, h) => new THREE.CylinderGeometry(a, b, h, 14);
-  const cap = (r, l) => new THREE.CapsuleGeometry(r, l, 8, 16);
+  const sph = (r, w = 40) => new THREE.SphereGeometry(r, w, Math.round(w * .75));
+  // ombre douce sous l'animal
+  const shadowTex = (() => {
+    const c = document.createElement('canvas'); c.width = c.height = 128;
+    const x = c.getContext('2d'), gr = x.createRadialGradient(64, 64, 0, 64, 64, 64);
+    gr.addColorStop(0, 'rgba(0,0,0,.35)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+    x.fillStyle = gr; x.fillRect(0, 0, 128, 128);
+    return new THREE.CanvasTexture(c);
+  })();
+  const cyl = (a, b, h) => new THREE.CylinderGeometry(a, b, h, 28);
+  const cap = (r, l) => new THREE.CapsuleGeometry(r, l, 12, 28);
   const eyes = (head, x, y, z, r = .045) => {
     for (const s of [1, -1]) {
-      part(head, sph(r), '#111', { p: [s * x, y, z], line: 0 });
-      part(head, sph(r * .35), '#fff', { p: [s * x + r * .3, y + r * .35, z + r * .7], line: 0 });
+      part(head, sph(r), '#1d1a1a', { p: [s * x, y, z] });
+      part(head, sph(r * .35), '#ffffff', { p: [s * x + r * .3, y + r * .35, z + r * .7] });
     }
   };
 
@@ -50,7 +57,7 @@
     const head = new THREE.Group(); head.position.set(0, 1.12, .2); g.add(head);
     part(head, sph(.3), fur);
     part(head, sph(.15), light, { p: [0, -.08, .25], s: [1, .8, 1.25] });
-    part(head, sph(.06), '#111', { p: [0, -.02, .43], line: 0 });
+    part(head, sph(.06), '#111', { p: [0, -.02, .43] });
     eyes(head, .12, .07, .25);
     for (const s of [1, -1]) part(head, sph(.17), ear, { p: [s * .28, -.04, -.02], s: [.38, 1.05, .7], r: [0, 0, s * .22] });
     part(head, new THREE.TorusGeometry(.21, .04, 8, 24), '#ff8fb8', { p: [0, -.26, -.05], r: [Math.PI / 2 - .25, 0, 0] });
@@ -67,15 +74,15 @@
     part(body, sph(.32), fur, { p: [0, .3, -.06], s: [1, .88, 1.15] });
     part(body, sph(.1), mane, { p: [0, .32, -.42] }); // queue
     for (const s of [1, -1]) part(body, sph(.09), fur, { p: [s * .13, .06, .22], s: [1, .6, 1.5] });
-    for (const pt of patches) part(body, sph(pt.r), pt.c, { p: pt.p, s: pt.s || [1, 1, 1], line: 0 });
+    for (const pt of patches) part(body, sph(pt.r), pt.c, { p: pt.p, s: pt.s || [1, 1, 1] });
     const head = new THREE.Group(); head.position.set(0, .66, .18); body.add(head);
     part(head, sph(.22), fur);
     // la crinière : une couronne de touffes autour de la tête
     for (let k = 0; k < 12; k++) {
       const a = k / 12 * Math.PI * 2;
-      part(head, sph(.09), mane, { p: [Math.cos(a) * .22, Math.sin(a) * .2 + .02, -.06], line: 1.04 });
+      part(head, sph(.09), mane, { p: [Math.cos(a) * .22, Math.sin(a) * .2 + .02, -.06] });
     }
-    const nose = part(head, sph(.035), '#ff8fb8', { p: [0, -.04, .215], line: 0 });
+    const nose = part(head, sph(.035), '#ff8fb8', { p: [0, -.04, .215] });
     eyes(head, .1, .04, .17, .04);
     const ears = [];
     for (const s of [1, -1]) {
@@ -108,8 +115,11 @@
   // Une scène par badge
   const views = badges.map(cv => {
     const scene = new THREE.Scene();
-    scene.add(new THREE.HemisphereLight('#ffffff', '#ffd6e6', 2.1));
-    const sun = new THREE.DirectionalLight('#fff4e0', 1.8); sun.position.set(2, 4, 3); scene.add(sun);
+    scene.add(new THREE.HemisphereLight('#ffffff', '#f2dfe6', 1.5));
+    const key = new THREE.DirectionalLight('#ffffff', 2.2); key.position.set(2, 3.5, 4); scene.add(key);
+    const rim = new THREE.DirectionalLight('#dfe8ff', 1.4); rim.position.set(-3, 2, -3); scene.add(rim);
+    const shadow = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.3), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false }));
+    shadow.rotation.x = -Math.PI / 2; shadow.position.y = .002; scene.add(shadow);
     const m = (builders[cv.dataset.avatar] || yellow)();
     scene.add(m.g);
     const camera = new THREE.PerspectiveCamera(32, 1, .1, 50);
