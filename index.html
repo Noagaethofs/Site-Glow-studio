@@ -32,12 +32,14 @@
 </header>
 
 <main>
-  <!-- 1 · ACCUEIL : travelling (3D provisoire, remplacé ensuite par la vidéo filmée) -->
+  <!-- 1 · ACCUEIL : travelling vidéo piloté par le défilement -->
   <section class="travel" id="accueil">
     <div class="stage">
-      <canvas id="scene" aria-label="Travelling dans une prairie : le chien, trois lapins puis deux hamsters"></canvas>
-      <div class="fallback" id="fallback">La 3D n'est pas disponible sur cet appareil.</div>
-      <noscript><div class="fallback" style="display:grid">Le travelling 3D ne s'affiche pas dans cet aperçu. Ouvrez la page dans Safari ou Chrome.</div></noscript>
+      <video class="hero-video" id="hero-video" poster="assets/travelling-poster.jpg" muted playsinline preload="auto" aria-label="Travelling : on avance vers Yellow le chien, puis dans l'enclos des lapins">
+        <source src="assets/travelling.mp4" type="video/mp4">
+        <source src="assets/travelling.webm" type="video/webm">
+      </video>
+      <div class="scrim" aria-hidden="true"></div>
 
       <div class="intro" id="intro">
         <span class="tag">Psy enfants &amp; ados · Charneux</span>
@@ -46,28 +48,30 @@
         <div class="actions"><a class="btn" href="tel:+32496267127">0496 / 26 71 27</a><a class="btn alt" href="#approche">Comment ça marche ?</a></div>
       </div>
 
-      <div class="cap" data-k="1" style="--c:var(--yellow)">
+      <div class="cap" data-start="2.0" data-end="4.3" style="--c:var(--yellow)">
         <span class="n">Le chien · 7 ans</span><h3>Yellow</h3>
         <p>Sa joie et sa fidélité créent le lien&nbsp;: avec lui, la confiance s'installe dès la première rencontre.</p>
       </div>
-      <div class="cap left" data-k="2" style="--c:var(--pink)">
+      <div class="cap left" data-start="5.0" data-end="7.9" style="--c:var(--pink)">
         <span class="n">Lapin · 6 mois</span><h3>Plume</h3>
         <p>Doux et un peu craintif, il apprend à l'enfant à ralentir et à respecter le rythme de l'autre.</p>
       </div>
-      <div class="cap" data-k="3" style="--c:var(--mint)">
+      <div class="cap" data-start="8.6" data-end="99" style="--c:var(--mint)">
         <span class="n">Lapin · 4 ans</span><h3>Espoir</h3>
         <p>Il ne parle pas, mais il réagit à tout&nbsp;: une porte d'entrée vers la communication non verbale et les émotions.</p>
       </div>
-      <div class="cap left" data-k="4" style="--c:var(--yellow)">
+      <!-- À ajouter quand ils seront filmés (3e lapin et hamsters) :
+      <div class="cap left" data-start="?" data-end="?" (couleur : jaune)>
         <span class="n">Lapin</span><h3><span class="todo">Prénom</span></h3>
         <p>Prendre soin de lui donne à l'enfant un vrai rôle&nbsp;: il se sent utile, responsable et plus autonome.</p>
       </div>
-      <div class="cap" data-k="5" style="--c:var(--pink)">
+      <div class="cap" data-start="?" data-end="?" (couleur : rose)>
         <span class="n">Les hamsters</span><h3><span class="todo">Prénom</span> &amp; <span class="todo">Prénom</span></h3>
         <p>Tout petits et fragiles, ils demandent calme et délicatesse&nbsp;: idéal pour être dans le moment présent.</p>
       </div>
+      -->
 
-      <div class="rail" id="rail" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="rail" id="rail" aria-hidden="true"></div>
       <div class="hint" id="hint">Faites défiler</div>
     </div>
   </section>
@@ -262,6 +266,6 @@
   });
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-<script src="assets/travelling.js"></script>
+<script src="assets/travelling-video.js"></script>
 </body>
 </html>
