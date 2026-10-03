@@ -63,24 +63,22 @@
 
   // --- Chargement progressif : on lit le fichier au fil de l'eau ---
   const load = async () => {
-    meta = await (await fetch(base + '.json')).json();
+    const indexUrl = new URL(base + '.json', location.href);
+    meta = await (await fetch(indexUrl)).json();
     blobs = new Array(meta.count);
-    const last = meta.entries[meta.entries.length - 1];
-    const all = new Uint8Array(last[1] + last[2]);
-    const reader = (await fetch(base + '.bin')).body.getReader();
-    let received = 0, next = 0;
-    for (;;) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      all.set(value, received);
-      received += value.length;
-      // crée chaque image dès qu'elle est entièrement reçue
-      while (next < meta.entries.length && meta.entries[next][1] + meta.entries[next][2] <= received) {
-        const [idx, off, len] = meta.entries[next++];
-        blobs[idx] = new Blob([all.subarray(off, off + len)], { type: 'image/webp' });
-        dirty = true;
+    // une image sur huit d'abord, puis les autres : le défilement marche vite, puis s'affine
+    const queue = meta.order.slice();
+    const worker = async () => {
+      while (queue.length) {
+        const i = queue.shift();
+        try {
+          const res = await fetch(new URL(meta.dir + meta.files[i], indexUrl));
+          blobs[i] = await res.blob();
+          dirty = true;
+        } catch (e) { /* image manquante : on garde la plus proche */ }
       }
-    }
+    };
+    await Promise.all(Array.from({ length: 6 }, worker));
   };
 
   const readScroll = () => {
