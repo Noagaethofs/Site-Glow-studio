@@ -35,10 +35,7 @@
   <!-- 1 · ACCUEIL : travelling vidéo piloté par le défilement -->
   <section class="travel" id="accueil">
     <div class="stage">
-      <video class="hero-video" id="hero-video" poster="assets/travelling-poster.jpg" muted playsinline preload="auto" aria-label="Travelling : on avance vers Yellow le chien, puis dans l'enclos des lapins">
-        <source src="assets/travelling.mp4" type="video/mp4">
-        <source src="assets/travelling.webm" type="video/webm">
-      </video>
+      <canvas class="hero-canvas" id="hero-canvas" data-frames="assets/travelling-frames" role="img" aria-label="Travelling : on avance vers Yellow le chien, puis dans l'enclos des lapins"></canvas>
       <div class="scrim" aria-hidden="true"></div>
 
       <div class="intro" id="intro">
@@ -266,6 +263,6 @@
   });
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-<script src="assets/travelling-video.js"></script>
+<script src="assets/travelling.js"></script>
 </body>
 </html>
