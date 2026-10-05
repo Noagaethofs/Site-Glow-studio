@@ -60,6 +60,16 @@ export function initReveals(scope = document) {
     });
   });
 
+  // Hero de page : léger zoom arrière à l'arrivée puis parallaxe
+  scope.querySelectorAll('[data-hero-zoom]').forEach((el) => {
+    gsap.fromTo(el, { scale: 1.15 }, { scale: 1, duration: 2.2, ease: 'expo.out' });
+    gsap.to(el, {
+      yPercent: 18,
+      ease: 'none',
+      scrollTrigger: { trigger: el.parentElement, start: 'top top', end: 'bottom top', scrub: true },
+    });
+  });
+
   // Texte mot à mot (le constat)
   scope.querySelectorAll('[data-scrub-words]').forEach((el) => {
     SplitText.create(el, {

@@ -243,7 +243,7 @@ figure > img, figure > picture, figure > picture > img, figure > video {
 }
 
 /* --- Révélations (état initial posé en JS uniquement) -------------------- */
-.split-line { display: block; overflow: clip; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.split-line { display: block; overflow: clip; padding-bottom: 0.2em; margin-bottom: -0.2em; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

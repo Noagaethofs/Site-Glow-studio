@@ -35,6 +35,12 @@ async function boot() {
   initForms();
   initLightbox();
 
+  // Lien de navigation de la page courante
+  document.querySelectorAll('.header__nav a, .menu__list a').forEach((a) => {
+    const url = new URL(a.href);
+    if (!url.hash && url.pathname === location.pathname) a.setAttribute('aria-current', 'page');
+  });
+
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
   // Les découpes de lignes dépendent des polices : on attend qu'elles soient prêtes
