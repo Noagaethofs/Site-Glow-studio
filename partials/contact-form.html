@@ -1,0 +1,50 @@
+<!--
+  Formulaire de contact — partagé entre l'accueil et la page Photographie.
+  Paramètre `preset` : type de demande pré-sélectionné (site | photo | video | autre).
+  Envoi : POST /api/contact (Cloudflare Pages Function, voir functions/api/contact.js).
+  Fonctionne aussi sans JavaScript (redirection vers /merci/).
+-->
+<form class="form" action="/api/contact" method="post" data-form data-preset="{{preset}}" novalidate>
+  <fieldset class="form__types">
+    <legend class="form__legend">Votre demande concerne</legend>
+    <label class="chip"><input type="radio" name="type" value="site" checked><span>Un site web</span></label>
+    <label class="chip"><input type="radio" name="type" value="photo"><span>Photo</span></label>
+    <label class="chip"><input type="radio" name="type" value="video"><span>Vidéo</span></label>
+    <label class="chip"><input type="radio" name="type" value="autre"><span>Autre</span></label>
+  </fieldset>
+
+  <div class="form__grid">
+    <div class="field">
+      <label for="f-name-{{id}}">Nom <span aria-hidden="true">*</span></label>
+      <input id="f-name-{{id}}" name="name" type="text" autocomplete="name" required>
+    </div>
+    <div class="field">
+      <label for="f-company-{{id}}">Entreprise</label>
+      <input id="f-company-{{id}}" name="company" type="text" autocomplete="organization">
+    </div>
+    <div class="field">
+      <label for="f-email-{{id}}">Email <span aria-hidden="true">*</span></label>
+      <input id="f-email-{{id}}" name="email" type="email" autocomplete="email" inputmode="email" required>
+    </div>
+    <div class="field">
+      <label for="f-phone-{{id}}">Téléphone</label>
+      <input id="f-phone-{{id}}" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+    </div>
+    <div class="field field--full">
+      <label for="f-message-{{id}}">Votre projet en quelques mots <span aria-hidden="true">*</span></label>
+      <textarea id="f-message-{{id}}" name="message" rows="4" required placeholder="{{placeholder}}"></textarea>
+    </div>
+  </div>
+
+  <!-- Piège anti-spam : invisible pour les humains -->
+  <div class="form__hp" aria-hidden="true">
+    <label for="f-website-{{id}}">Ne pas remplir</label>
+    <input id="f-website-{{id}}" name="website" type="text" tabindex="-1" autocomplete="off">
+  </div>
+
+  <div class="form__foot">
+    <p class="form__legal">En envoyant ce formulaire, vous acceptez que GLOW utilise ces informations pour vous répondre. <a href="/mentions-legales/#confidentialite">Confidentialité</a></p>
+    <button class="btn btn--light" type="submit"><span data-form-label>{{submit}}</span></button>
+  </div>
+  <p class="form__status" role="status" aria-live="polite" data-form-status></p>
+</form>

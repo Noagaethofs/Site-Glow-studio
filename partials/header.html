@@ -1,0 +1,64 @@
+<script>
+  /* Intro : décidée avant le premier affichage pour éviter tout flash.
+     Une fois par session, jamais en reduced-motion, retirée de force après 2,5 s. */
+  (function () {
+    try {
+      if (sessionStorage.getItem('glow-intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      sessionStorage.setItem('glow-intro', '1');
+      var d = document.documentElement;
+      d.classList.add('is-loading');
+      setTimeout(function () { d.classList.remove('is-loading'); }, 2500);
+    } catch (e) {}
+  })();
+</script>
+<a class="skip-link" href="#main">Aller au contenu</a>
+
+<!-- Intro de chargement : affichée une fois par session, < 1 s, jamais bloquante -->
+<div class="loader" data-loader aria-hidden="true">
+  <div class="loader__mark"><span>GL</span><span>OW</span></div>
+</div>
+
+<!-- Curseur personnalisé (desktop uniquement, activé en JS) -->
+<div class="cursor is-hidden" data-cursor aria-hidden="true"><span class="cursor__label" data-cursor-label></span></div>
+
+<header class="header" data-header>
+  <a class="header__logo" href="/" aria-label="GLOW, retour à l'accueil">GLOW</a>
+  <nav class="header__nav" aria-label="Navigation principale">
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#realisations">Réalisations</a></li>
+      <li><a href="/#offres">Offres</a></li>
+      <li><a href="/photographie/"{{photo_current}}>Photographie</a></li>
+      <li><a href="/#equipe">Équipe</a></li>
+      <li><a href="{{contact_href}}">Contact</a></li>
+    </ul>
+  </nav>
+  <a class="btn btn--sm header__cta" href="{{contact_href}}">{{cta_label}}</a>
+  <button class="header__burger" type="button" aria-expanded="false" aria-controls="menu" data-burger>
+    <span class="header__burger-label">Menu</span>
+  </button>
+</header>
+
+<!-- Menu plein écran (mobile / tablette) -->
+<div class="menu" id="menu" data-menu hidden>
+  <nav aria-label="Menu mobile">
+    <ol class="menu__list">
+      <li><a href="/#services"><span>01</span>Services</a></li>
+      <li><a href="/#realisations"><span>02</span>Réalisations</a></li>
+      <li><a href="/#offres"><span>03</span>Offres</a></li>
+      <li><a href="/photographie/"><span>04</span>Photographie</a></li>
+      <li><a href="/#equipe"><span>05</span>Équipe</a></li>
+      <li><a href="{{contact_href}}"><span>06</span>Contact</a></li>
+    </ol>
+  </nav>
+  <div class="menu__foot">
+    <p class="menu__slogan">Designed to <em>Shine</em></p>
+    <p>
+      <a href="mailto:[EMAIL]" class="todo">[EMAIL]</a><br>
+      <a href="tel:[TELEPHONE]" class="todo">[TÉLÉPHONE]</a>
+    </p>
+  </div>
+</div>
+
+<!-- CTA devis toujours accessible sur mobile -->
+<a class="sticky-cta" href="{{contact_href}}" data-sticky-cta>{{sticky_label}}</a>
