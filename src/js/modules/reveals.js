@@ -11,10 +11,17 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { isDesktop } from './env.js';
 
 export function initReveals(scope = document) {
-  // Titres : lignes masquées qui montent
+  // Titres : lignes masquées qui montent (desktop).
+  // Sur mobile, simple apparition du bloc : moins de calculs de mise en page.
+  const desktop = isDesktop();
   scope.querySelectorAll('[data-split]').forEach((el) => {
+    if (!desktop) {
+      gsap.from(el, { y: 30, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
+      return;
+    }
     SplitText.create(el, {
       type: 'lines',
       mask: 'lines',

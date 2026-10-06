@@ -28,7 +28,7 @@
 .cursor {
   position: fixed;
   top: 0; left: 0;
-  z-index: 140;
+  z-index: 170;
   display: none;
   width: 10px; height: 10px;
   margin: -5px 0 0 -5px;
