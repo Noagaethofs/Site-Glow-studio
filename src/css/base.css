@@ -17,8 +17,8 @@ html.lenis, html.lenis body { height: auto; }
 
 body {
   margin: 0;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-sans);
   font-size: var(--fs-base);
   font-weight: 400;
@@ -53,8 +53,36 @@ em {
   letter-spacing: -0.02em;
 }
 
-::selection { background: var(--paper); color: var(--ink); }
-.theme-paper ::selection { background: var(--ink); color: var(--paper); }
+::selection { background: var(--peach); color: var(--ink); }
+
+/* Texte éclairé par le dégradé du logo (variante foncée pour rester lisible) */
+.glow-text {
+  background: linear-gradient(100deg, #e9726c 0%, #e0927a 45%, #9b77e3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.06em; /* l'italique déborde de sa boîte */
+}
+.theme-ink .glow-text { background-image: var(--glow); }
+
+/* Petite étiquette de section */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tag::before {
+  content: '';
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: var(--glow);
+}
 
 :focus-visible {
   outline: 2px solid currentColor;
@@ -111,6 +139,7 @@ section {
   height: 100%;
   min-height: 100%;
   background-color: var(--ph);
+  border-radius: inherit;
   background-image: var(--grain);
   overflow: hidden;
 }
@@ -158,8 +187,8 @@ figure > img, figure > picture, figure > picture > img, figure > video {
 
 /* --- Boutons et liens ---------------------------------------------------- */
 .btn {
-  --btn-bg: var(--paper);
-  --btn-fg: var(--ink);
+  --btn-bg: var(--ink);
+  --btn-fg: var(--paper);
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -190,8 +219,19 @@ figure > img, figure > picture, figure > picture > img, figure > video {
   .btn:hover::after { transform: translateY(0); }
   .btn:hover { outline: 1px solid var(--btn-bg); outline-offset: -1px; }
 }
-.theme-paper .btn { --btn-bg: var(--ink); --btn-fg: var(--paper); }
-.btn--light, .theme-paper .btn--light { --btn-bg: var(--paper); --btn-fg: var(--ink); }
+.theme-ink .btn { --btn-bg: var(--paper); --btn-fg: var(--ink); }
+.btn--light, .theme-ink .btn--light { --btn-bg: var(--paper); --btn-fg: var(--ink); }
+/* Bouton principal : la lumière du logo, très douce */
+.btn--glow {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--ink);
+  background: var(--glow);
+  color: var(--ink);
+}
+.btn--glow::after { background: var(--ink); }
+@media (hover: hover) {
+  .btn--glow:hover { color: var(--paper); outline: 0; }
+}
 .btn--sm { padding: 0.8em 1.2em; font-size: var(--fs-xs); }
 
 .link-arrow {

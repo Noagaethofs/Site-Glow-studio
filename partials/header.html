@@ -1,28 +1,36 @@
 <script>
-  /* Intro : décidée avant le premier affichage pour éviter tout flash.
-     Une fois par session, jamais en reduced-motion, retirée de force après 2,5 s. */
+  /* Intro de chargement : décidée avant le premier affichage pour éviter tout flash.
+     Version complète à la première visite de la session, version courte ensuite.
+     Jamais en reduced-motion ; retirée de force après 5 s quoi qu'il arrive. */
   (function () {
     try {
-      if (sessionStorage.getItem('glow-intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      sessionStorage.setItem('glow-intro', '1');
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       var d = document.documentElement;
+      var seen = false;
+      try { seen = !!sessionStorage.getItem('glow-intro'); sessionStorage.setItem('glow-intro', '1'); } catch (e) {}
       d.classList.add('is-loading');
-      setTimeout(function () { d.classList.remove('is-loading'); }, 2500);
+      d.setAttribute('data-intro', seen ? 'short' : 'full');
+      setTimeout(function () { d.classList.remove('is-loading'); }, 5000);
     } catch (e) {}
   })();
 </script>
 <a class="skip-link" href="#main">Aller au contenu</a>
 
-<!-- Intro de chargement : affichée une fois par session, < 1 s, jamais bloquante -->
+<!-- Intro de chargement : le logo se dessine, puis s'ouvre sur le site par son O -->
 <div class="loader" data-loader aria-hidden="true">
-  <div class="loader__mark"><span>GL</span><span>OW</span></div>
+  <div class="loader__light"></div>
+  <!-- @include partials/logo.html class="loader__logo" viewbox="120 170 1040 320" -->
+  <p class="loader__count"><span data-loader-count>0</span></p>
+  <p class="loader__tag">Designed to <em>Shine</em></p>
 </div>
 
 <!-- Curseur personnalisé (desktop uniquement, activé en JS) -->
 <div class="cursor is-hidden" data-cursor aria-hidden="true"><span class="cursor__label" data-cursor-label></span></div>
 
 <header class="header" data-header>
-  <a class="header__logo" href="/" aria-label="GLOW, retour à l'accueil">GLOW</a>
+  <a class="header__logo" href="/" aria-label="GLOW Studio, retour à l'accueil">
+    <!-- @include partials/logo.html class="header__svg" viewbox="120 170 1040 320" -->
+  </a>
   <nav class="header__nav" aria-label="Navigation principale">
     <ul>
       <li><a href="/#services">Services</a></li>
@@ -52,7 +60,7 @@
     </ol>
   </nav>
   <div class="menu__foot">
-    <p class="menu__slogan">Designed to <em>Shine</em></p>
+    <p class="menu__slogan">Designed to <em class="glow-text">Shine</em></p>
     <p>
       <a href="mailto:[EMAIL]" class="todo">[EMAIL]</a><br>
       <a href="tel:[TELEPHONE]" class="todo">[TÉLÉPHONE]</a>

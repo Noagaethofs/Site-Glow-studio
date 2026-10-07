@@ -1,6 +1,6 @@
-<footer class="footer">
+<footer class="footer theme-ink">
   <div class="footer__top">
-    <p class="footer__slogan">Designed to <em>Shine</em></p>
+    <p class="footer__slogan">Designed to <em class="glow-text">Shine</em></p>
     <a class="footer__back link-arrow link-arrow--up" href="#top" data-scroll-top>Haut de page</a>
   </div>
 
@@ -37,11 +37,13 @@
       <ul>
         <li><a href="/mentions-legales/">Mentions légales</a></li>
         <li><a href="/mentions-legales/#confidentialite">Confidentialité</a></li>
-        <li>© <span data-year>2026</span> GLOW</li>
+        <li>© <span data-year>2026</span> GLOW Studio</li>
       </ul>
     </div>
   </div>
 
-  <!-- Grand logo typographique, variante stacked GL / OW -->
-  <p class="footer__logo" aria-hidden="true"><span>GL</span><span>OW</span></p>
+  <!-- Grand logo, qui se dessine quand on arrive en bas de page -->
+  <div class="footer__logo" data-footer-logo>
+    <!-- @include partials/logo.html class="footer__svg" viewbox="120 170 1040 320" -->
+  </div>
 </footer>

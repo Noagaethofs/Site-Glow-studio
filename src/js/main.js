@@ -18,6 +18,9 @@ import { initReveals } from './modules/reveals.js';
 import { initHero } from './modules/hero.js';
 import { initMethod } from './modules/method.js';
 import { initWork } from './modules/work.js';
+import { initFilm } from './modules/film.js';
+import { initTeam } from './modules/team.js';
+import { initFooterLogo } from './modules/footer.js';
 import { initForms } from './modules/form.js';
 import { initLightbox } from './modules/lightbox.js';
 
@@ -43,15 +46,21 @@ async function boot() {
 
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
+  // L'intro de chargement démarre tout de suite, sans attendre la suite
+  const loaded = runLoader();
+
   // Les découpes de lignes dépendent des polices : on attend qu'elles soient prêtes
   await document.fonts?.ready;
 
   const hero = initHero();
   initMethod();
   initWork();
+  initFilm();
+  initTeam();
+  initFooterLogo();
   if (!reduced) initReveals();
 
-  await runLoader();
+  await loaded;
   hero.intro();
 
   ScrollTrigger.refresh();

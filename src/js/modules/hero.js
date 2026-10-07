@@ -1,13 +1,17 @@
 /**
  * Hero « L'ouverture ».
- * Le O de GLOW est un anneau ; la couche vidéo est découpée en ellipse
- * exactement dans son ouverture (clip-path). Sur desktop, la section est
- * pinnée et le cercle s'ouvre au scroll jusqu'à remplir l'écran.
+ * Le O du grand logo SVG est un anneau ; la couche vidéo est découpée en
+ * cercle exactement dans son ouverture (clip-path). Sur desktop, la section
+ * est pinnée et le cercle s'ouvre au scroll jusqu'à remplir l'écran.
+ * Une lumière douce (couleurs du logo) suit lentement le curseur.
  */
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { MQ, prefersReducedMotion } from './env.js';
+
+// Géométrie du O dans le repère du logo (voir partials/logo.html)
+const O = { cx: 651, cy: 294, r: 92.5, stroke: 49 };
 
 export function initHero() {
   const hero = document.querySelector('[data-hero]');
@@ -15,40 +19,39 @@ export function initHero() {
 
   const stage = hero.querySelector('[data-hero-stage]');
   const media = hero.querySelector('[data-hero-media]');
+  const mark = hero.querySelector('[data-hero-mark]');
   const ring = hero.querySelector('[data-hero-o]');
   const gl = hero.querySelector('[data-hero-gl]');
   const w = hero.querySelector('[data-hero-w]');
   const title = hero.querySelector('[data-hero-title]');
+  const light = hero.querySelector('[data-hero-light]');
   const fades = hero.querySelectorAll('[data-hero-fade]');
 
   // --- Géométrie de l'ouverture ---------------------------------------
-  // L'ouverture est une ellipse (le O de General Sans est plus fin en haut/bas)
-  const geo = { x: 0, y: 0, rx: 0, ry: 0, kMax: 1 };
+  const geo = { x: 0, y: 0, r: 0, max: 0 };
   const state = { k: 1 }; // facteur d'agrandissement de l'ouverture
+  let scrollTl = null;
 
-  // Mesure par offsets (insensible aux transformations GSAP en cours).
-  // L'offsetParent de l'anneau est .hero__inner, calé en haut à gauche du stage.
+  // Mesure à partir de la boîte du SVG (jamais transformé) : insensible
+  // aux animations en cours sur les lettres.
   const measure = () => {
-    const w0 = stage.clientWidth;
-    const h0 = stage.clientHeight;
-    geo.x = ring.offsetLeft + ring.offsetWidth / 2;
-    geo.y = ring.offsetTop + ring.offsetHeight / 2;
-    geo.rx = Math.max(1, ring.offsetWidth / 2 - ring.clientLeft + 1);
-    geo.ry = Math.max(1, ring.offsetHeight / 2 - ring.clientTop + 1);
-    const far = Math.hypot(Math.max(geo.x, w0 - geo.x), Math.max(geo.y, h0 - geo.y));
-    geo.kMax = (far / Math.min(geo.rx, geo.ry)) * 1.05;
+    const s = stage.getBoundingClientRect();
+    const m = mark.getBoundingClientRect();
+    const vb = mark.viewBox.baseVal;
+    const scale = m.width / vb.width;
+    geo.x = m.left - s.left + (O.cx - vb.x) * scale;
+    geo.y = m.top - s.top + (O.cy - vb.y) * scale;
+    geo.r = (O.r - O.stroke / 2) * scale + 1;
+    geo.max = Math.hypot(Math.max(geo.x, s.width - geo.x), Math.max(geo.y, s.height - geo.y)) + 4;
   };
   const applyClip = () => {
-    const rx = (geo.rx * state.k).toFixed(1);
-    const ry = (geo.ry * state.k).toFixed(1);
-    media.style.clipPath = `ellipse(${rx}px ${ry}px at ${geo.x.toFixed(1)}px ${geo.y.toFixed(1)}px)`;
+    media.style.clipPath = `circle(${(geo.r * state.k).toFixed(1)}px at ${geo.x.toFixed(1)}px ${geo.y.toFixed(1)}px)`;
   };
-  let scrollTl = null;
   const sync = () => {
     measure();
-    // hors animation de scroll (ou tout en haut), le cercle épouse l'anneau
-    if (!scrollTl || scrollTl.scrollTrigger.progress === 0) state.k = 1;
+    if (!scrollTl || scrollTl.scrollTrigger.progress === 0) state.k = Math.min(state.k, 1);
     applyClip();
+    gsap.set(light, { x: geo.x, y: geo.y });
   };
   sync();
   ScrollTrigger.addEventListener('refresh', sync);
@@ -70,45 +73,55 @@ export function initHero() {
       },
     });
     scrollTl
-      .fromTo(state, { k: 1 }, { k: () => geo.kMax, duration: 1, ease: 'power2.in', onUpdate: applyClip }, 0)
-      .to(ring, { scale: 2.4, opacity: 0, duration: 0.45, ease: 'power1.in' }, 0)
-      .to(gl, { xPercent: -70, opacity: 0, duration: 0.6 }, 0)
-      .to(w, { xPercent: 90, opacity: 0, duration: 0.6 }, 0)
+      .fromTo(state, { k: 1 }, { k: () => geo.max / geo.r, duration: 1, ease: 'power2.in', onUpdate: applyClip }, 0)
+      .to(ring, { scale: 2.6, opacity: 0, svgOrigin: `${O.cx} ${O.cy}`, duration: 0.45, ease: 'power1.in' }, 0)
+      .to(gl, { x: -520, opacity: 0, duration: 0.6 }, 0)
+      .to(w, { x: 560, opacity: 0, duration: 0.6 }, 0)
       .to(fades, { yPercent: -40, opacity: 0, duration: 0.45, stagger: 0.04 }, 0)
+      .to(light, { opacity: 0, duration: 0.5 }, 0)
       .to({}, { duration: 0.2 }); // courte tenue en plein cadre
 
     return () => { scrollTl = null; sync(); };
   });
 
-  // --- Curseur : légère réaction de la composition --------------------
+  // --- Curseur : la lumière suit, la composition réagit à peine --------
   mm.add(`${MQ.desktop} and ${MQ.finePointer} and (prefers-reduced-motion: no-preference)`, () => {
+    const lx = gsap.quickTo(light, 'x', { duration: 2.2, ease: 'power3.out' });
+    const ly = gsap.quickTo(light, 'y', { duration: 2.2, ease: 'power3.out' });
     const tx = gsap.quickTo(title, 'x', { duration: 1.2, ease: 'power3.out' });
-    const glx = gsap.quickTo(gl, 'x', { duration: 1.4, ease: 'power3.out' });
-    const wx = gsap.quickTo(w, 'x', { duration: 1.4, ease: 'power3.out' });
     const onMove = (e) => {
       if (window.scrollY > window.innerHeight * 0.2) return;
-      const nx = e.clientX / window.innerWidth - 0.5;
-      tx(nx * -24);
-      glx(nx * 14);
-      wx(nx * -14);
+      const s = stage.getBoundingClientRect();
+      // la lumière reste attirée par le O : mélange position du O / curseur
+      lx(geo.x + (e.clientX - s.left - geo.x) * 0.45);
+      ly(geo.y + (e.clientY - s.top - geo.y) * 0.45);
+      tx((e.clientX / window.innerWidth - 0.5) * -18);
     };
     window.addEventListener('pointermove', onMove, { passive: true });
     return () => window.removeEventListener('pointermove', onMove);
   });
 
-  // --- Intro d'entrée (après le loader) --------------------------------
-  const intro = () => {
-    if (prefersReducedMotion()) return;
+  // Respiration lente de la lumière (desktop uniquement, très subtile)
+  mm.add(`${MQ.desktop} and (prefers-reduced-motion: no-preference)`, () => {
+    gsap.to(light, { scale: 1.12, rotate: 25, duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+  });
+
+  // --- Intro d'entrée -------------------------------------------------
+  // Construite tout de suite (en pause) pour que l'état de départ soit posé
+  // sous le loader, puis jouée quand l'ouverture du loader commence.
+  let introTl = null;
+  if (!prefersReducedMotion()) {
     const split = SplitText.create(title, { type: 'words', mask: 'words' });
-    const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-    tl.from(split.words, { yPercent: 110, duration: 1.2, stagger: 0.08 }, 0)
-      .from([gl, w], { yPercent: 100, duration: 1.3, stagger: 0.06 }, 0.1)
-      .from(ring, { scale: 0, duration: 1.3, ease: 'expo.inOut', onUpdate: applyClip }, 0.15)
-      .fromTo(state, { k: 0 }, { k: 1, duration: 1.3, ease: 'expo.inOut', onUpdate: applyClip }, 0.15)
+    introTl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
+    introTl.from([gl, w], { y: 140, opacity: 0, duration: 1.3, stagger: 0.08 }, 0)
+      .from(ring, { scale: 0.4, opacity: 0, svgOrigin: `${O.cx} ${O.cy}`, duration: 1.3 }, 0.05)
+      .fromTo(state, { k: 0 }, { k: 1, duration: 1.3, ease: 'expo.inOut', onUpdate: applyClip, immediateRender: false }, 0.1)
+      .from(split.words, { yPercent: 110, duration: 1.1, stagger: 0.07 }, 0.3)
       .from(fades[0], { opacity: 0, y: 12, duration: 0.8 }, 0.5)
-      .from(fades[2], { opacity: 0, y: 20, duration: 1 }, 0.6)
+      .from(hero.querySelectorAll('.hero__side > *'), { opacity: 0, y: 20, duration: 1, stagger: 0.08 }, 0.55)
       .add(() => split.revert());
-  };
+  }
+  const intro = () => introTl?.play();
 
   return { intro };
 }

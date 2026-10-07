@@ -1,50 +1,28 @@
 /**
- * Réalisations : sur desktop, un grand visuel suit le curseur au survol
- * de chaque projet. Les visuels sont repris des <figure> de la liste
- * (affichées en grand sous chaque projet sur mobile).
+ * Réalisations : sur desktop, les projets sont des panneaux « sticky » qui
+ * s'empilent ; celui du dessous recule légèrement quand le suivant arrive.
+ * Sur mobile ou en reduced-motion : simple pile verticale.
  */
 import { gsap } from 'gsap';
-import { hasFinePointer, isDesktop, prefersReducedMotion } from './env.js';
+import { MQ } from './env.js';
 
 export function initWork() {
-  const list = document.querySelector('[data-work-list]');
-  const follower = document.querySelector('[data-work-follower]');
-  if (!list || !follower || !hasFinePointer() || prefersReducedMotion()) return;
+  const cases = [...document.querySelectorAll('[data-case]')];
+  if (cases.length < 2) return;
 
-  const items = [...list.querySelectorAll('[data-work]')];
-  const clones = items.map((item) => {
-    const fig = item.querySelector('.work-item__media').cloneNode(true);
-    fig.className = '';
-    follower.appendChild(fig);
-    return fig;
-  });
-
-  gsap.set(follower, { xPercent: -50, yPercent: -50 });
-  const xTo = gsap.quickTo(follower, 'x', { duration: 0.7, ease: 'power3.out' });
-  const yTo = gsap.quickTo(follower, 'y', { duration: 0.7, ease: 'power3.out' });
-  const rTo = gsap.quickTo(follower, 'rotation', { duration: 0.9, ease: 'power3.out' });
-  let lastX = 0;
-
-  list.addEventListener('pointermove', (e) => {
-    if (!isDesktop()) return;
-    xTo(e.clientX);
-    yTo(e.clientY);
-    rTo(gsap.utils.clamp(-6, 6, (e.clientX - lastX) * 0.4)); // légère inclinaison selon la vitesse
-    lastX = e.clientX;
-  });
-
-  items.forEach((item, i) => {
-    item.addEventListener('pointerenter', (e) => {
-      if (!isDesktop()) return;
-      if (!follower.classList.contains('is-active')) {
-        gsap.set(follower, { x: e.clientX, y: e.clientY });
-      }
-      clones.forEach((c, j) => c.classList.toggle('is-current', i === j));
-      follower.classList.add('is-active');
+  gsap.matchMedia().add(`${MQ.desktop} and (prefers-reduced-motion: no-preference)`, () => {
+    cases.slice(0, -1).forEach((c, i) => {
+      gsap.to(c, {
+        scale: 0.92,
+        opacity: 0.35,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: cases[i + 1],
+          start: 'top bottom',
+          end: 'top top+=120',
+          scrub: true,
+        },
+      });
     });
-  });
-  list.addEventListener('pointerleave', () => {
-    follower.classList.remove('is-active');
-    rTo(0);
   });
 }

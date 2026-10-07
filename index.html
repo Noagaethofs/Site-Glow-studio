@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>GLOW — Sites web, photo et vidéo pour entreprises en Belgique</title>
+  <title>GLOW Studio — Sites web, photo et vidéo pour entreprises en Belgique</title>
   <meta name="description" content="GLOW crée des sites web professionnels et rapides, avec les photos et vidéos qui vont avec. Agence créative belge pour indépendants, commerces et PME. Designed to Shine.">
   <link rel="canonical" href="https://[DOMAINE]/">
-  <meta name="theme-color" content="#0b0b0b">
+  <meta name="theme-color" content="#fbf8f5">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_BE">
   <meta property="og:site_name" content="GLOW">
-  <meta property="og:title" content="GLOW — Designed to Shine">
+  <meta property="og:title" content="GLOW Studio — Designed to Shine">
   <meta property="og:description" content="Votre site web et les photos qui vont avec. Une présence en ligne à la hauteur de votre travail.">
   <meta property="og:url" content="https://[DOMAINE]/">
   <meta property="og:image" content="https://[DOMAINE]/og-image.jpg">
@@ -28,7 +28,7 @@
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "GLOW",
+    "name": "GLOW Studio",
     "slogan": "Designed to Shine",
     "description": "Agence créative et digitale belge : création de sites web, photographie et vidéo pour indépendants, commerces et PME.",
     "url": "https://[DOMAINE]/",
@@ -53,11 +53,13 @@
 
   <!-- ============================================================
        01 · HERO — « L'ouverture »
-       Le O de GLOW est une fenêtre sur la vidéo. Au scroll (desktop),
-       elle s'ouvre jusqu'à remplir l'écran.
+       Le grand logo GLOW. Son O est une fenêtre sur la vidéo ; au scroll
+       (desktop), elle s'ouvre jusqu'à remplir l'écran. Une lumière douce
+       aux couleurs du logo suit le curseur.
        ============================================================ -->
   <section class="hero" id="top" data-hero>
     <div class="hero__stage" data-hero-stage>
+      <div class="hero__light" data-hero-light aria-hidden="true"></div>
 
       <div class="hero__media" data-hero-media>
         <!-- EMPLACEMENT VIDÉO HERO
@@ -67,42 +69,51 @@
                <source src="/media/hero.mp4" type="video/mp4">
              </video>
              Format conseillé : 8–12 s en boucle, muette, 1920×1080, < 3 Mo. -->
-        <div class="ph ph--hero" data-label="Vidéo hero · Tim · boucle 8–12 s, muette, 1920×1080"></div>
+        <div class="ph ph--hero" data-label="Vidéo hero · Tim · boucle 8–12 s, muette"></div>
       </div>
 
       <div class="hero__inner">
         <div class="hero__meta" data-hero-fade>
           <p>Agence créative — Belgique</p>
-          <p class="hero__meta-services">Sites web · Photographie · Vidéo</p>
+          <p class="hero__meta-services">Sites web <span>·</span> Photographie <span>·</span> Vidéo</p>
         </div>
 
-        <h1 class="hero__title" data-hero-fade>
-          <span class="sr-only">GLOW, sites web, photo et vidéo en Belgique.</span>
-          <span class="hero__line" data-hero-title>Designed to <em>Shine</em></span>
-        </h1>
+        <!-- Le grand logo : GL / O (fenêtre) / W, animés séparément -->
+        <svg class="hero__mark" data-hero-mark viewBox="128 174 1024 244" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="52">
+          <g data-hero-gl>
+            <path d="M378,206 H272 A110,90.5 0 0 0 272,387 H350 A28,28 0 0 0 378,359"/>
+            <path d="M378,359 V289" stroke-linecap="butt"/>
+            <path d="M378,307 H261" stroke-width="38"/>
+            <path d="M452,205 V357 A30,30 0 0 0 482,387 H540"/>
+          </g>
+          <g data-hero-o><path d="M651,201.5 A92.5,92.5 0 1 1 650.9,201.5" stroke-width="49"/></g>
+          <g data-hero-w><path d="M812,254 C822,330 840,380 878,380 C918,380 932,312 963,312 C996,312 1008,380 1046,380 C1080,380 1096,320 1116,225"/></g>
+        </svg>
 
         <div class="hero__bottom" data-hero-fade>
-          <p class="hero__lead">Nous créons votre site web et les photos qui vont avec. Une présence en ligne à la hauteur de votre travail.</p>
-          <div class="hero__actions">
-            <a class="btn" href="#contact">Demander un devis</a>
-            <a class="link-arrow" href="#realisations">Voir nos réalisations</a>
+          <h1 class="hero__title">
+            <span class="sr-only">GLOW Studio, sites web, photo et vidéo en Belgique.</span>
+            <span data-hero-title>Designed to <em class="glow-text">Shine</em></span>
+          </h1>
+          <div class="hero__side">
+            <p class="hero__lead">Nous créons votre site web et les photos qui vont avec. Une présence en ligne à la hauteur de votre travail.</p>
+            <div class="hero__actions">
+              <a class="btn btn--glow" href="#contact">Demander un devis</a>
+              <a class="link-arrow" href="#realisations">Nos réalisations</a>
+            </div>
           </div>
         </div>
-
-        <p class="hero__mark" aria-hidden="true">
-          <span class="hero__gl" data-hero-gl>GL</span><span class="hero__o" data-hero-o></span><span class="hero__w" data-hero-w>W</span>
-        </p>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       02 · LE CONSTAT — révélation mot à mot au scroll
+       02 · LE CONSTAT — fond sombre, les mots s'allument au scroll
        ============================================================ -->
-  <section class="statement theme-paper" aria-labelledby="statement-title">
-    <p class="eyebrow">Le constat</p>
+  <section class="statement theme-ink" aria-labelledby="statement-title">
+    <p class="statement__label">Le constat</p>
     <h2 class="statement__text" id="statement-title" data-scrub-words>
-      Votre travail est excellent. Votre site ne le montre pas. Daté, lent sur mobile, rempli de photos que tout le monde a déjà&nbsp;vues.
+      Votre travail est excellent. Votre site ne le montre&nbsp;pas. Daté, lent sur mobile, rempli de photos que tout le monde a déjà&nbsp;vues.
     </h2>
     <p class="statement__answer" data-reveal>
       <span>Nous créons une présence en ligne qui donne envie de travailler avec vous.</span>
@@ -111,19 +122,19 @@
   </section>
 
   <!-- ============================================================
-       03 · SERVICES — liste éditoriale, image révélée au survol
+       03 · SERVICES — titre centré, liste éditoriale XXL.
+       Au survol : une lumière balaie la ligne, l'image apparaît.
        ============================================================ -->
   <section class="services" id="services" aria-labelledby="services-title">
-    <div class="section-head">
-      <p class="eyebrow"><span class="eyebrow__num">(01)</span> Services</p>
-      <h2 class="section-title" id="services-title" data-split>Un site, des images. <em>Une seule équipe.</em></h2>
-      <p class="section-intro" data-reveal>Pas besoin de coordonner un webdesigner, un photographe et un vidéaste. Nous faisons tout, avec la même exigence.</p>
-    </div>
+    <header class="services__head">
+      <p class="tag">Services</p>
+      <h2 class="services__title" id="services-title" data-split>Un site, des images. <em>Une seule équipe.</em></h2>
+      <p class="services__intro" data-reveal>Pas besoin de coordonner un webdesigner, un photographe et un vidéaste. Nous faisons tout, avec la même exigence.</p>
+    </header>
 
     <ol class="svc-list">
       <li class="svc" data-svc>
         <a class="svc__link" href="#offres">
-          <span class="svc__num">01</span>
           <span class="svc__title">Sites web</span>
           <span class="svc__body">
             <span class="svc__desc">Création et refonte. Des sites rapides, clairs sur mobile, pensés pour que vos visiteurs vous contactent.</span>
@@ -132,13 +143,12 @@
           <span class="svc__arrow" aria-hidden="true">→</span>
         </a>
         <figure class="svc__media" aria-hidden="true">
-          <!-- EMPLACEMENT : capture d'écran d'un site réalisé (16:10) -->
-          <div class="ph" data-label="Capture site réalisé · 16:10"></div>
+          <!-- EMPLACEMENT : capture d'écran d'un site réalisé (4:3) -->
+          <div class="ph" data-label="Capture site réalisé · 4:3"></div>
         </figure>
       </li>
       <li class="svc" data-svc>
         <a class="svc__link" href="/photographie/">
-          <span class="svc__num">02</span>
           <span class="svc__title">Photographie</span>
           <span class="svc__body">
             <span class="svc__desc">Portraits, équipe, locaux, produits, réalisations, événements. Par Tim, notre photographe. Jamais de banque d'images.</span>
@@ -148,12 +158,11 @@
         </a>
         <figure class="svc__media" aria-hidden="true">
           <!-- EMPLACEMENT : photo de Tim (portrait pro) -->
-          <div class="ph" data-label="Photo Tim · portrait professionnel · 4:5"></div>
+          <div class="ph" data-label="Photo Tim · portrait professionnel"></div>
         </figure>
       </li>
       <li class="svc" data-svc>
         <a class="svc__link" href="#contact" data-preset-link="video">
-          <span class="svc__num">03</span>
           <span class="svc__title">Vidéo</span>
           <span class="svc__body">
             <span class="svc__desc">Des vidéos courtes qui montrent votre activité, pour votre site et vos réseaux sociaux.</span>
@@ -168,7 +177,6 @@
       </li>
       <li class="svc" data-svc>
         <a class="svc__link" href="#contact" data-preset-link="autre">
-          <span class="svc__num">04</span>
           <span class="svc__title">Accompagnement</span>
           <span class="svc__body">
             <span class="svc__desc">Google Business Profile, référencement local, maintenance, petites automatisations. Nous restons là après la mise en ligne.</span>
@@ -178,20 +186,19 @@
         </a>
         <figure class="svc__media" aria-hidden="true">
           <!-- EMPLACEMENT : photo de l'équipe au travail -->
-          <div class="ph" data-label="Photo équipe GLOW au travail · 4:3"></div>
+          <div class="ph" data-label="Photo équipe GLOW au travail"></div>
         </figure>
       </li>
     </ol>
   </section>
 
   <!-- ============================================================
-       04 · GLOW METHOD — scroll horizontal pinné (desktop),
-       pile verticale (mobile)
+       04 · GLOW METHOD — fond sombre, scroll horizontal pinné (desktop),
+       pile verticale (mobile). Les étapes s'allument une à une.
        ============================================================ -->
-  <section class="method theme-paper" id="methode" aria-labelledby="method-title" data-method>
+  <section class="method theme-ink" id="methode" aria-labelledby="method-title" data-method>
     <div class="method__pin" data-method-pin>
       <div class="method__head">
-        <p class="eyebrow"><span class="eyebrow__num">(02)</span> La méthode</p>
         <h2 class="method__title" id="method-title">GLOW <em>Method</em></h2>
         <p class="method__intro">Cinq étapes, du premier café à la mise en ligne. Vous savez toujours où on en est.</p>
       </div>
@@ -219,7 +226,7 @@
         </li>
         <li class="step step--shine">
           <span class="step__num">05</span>
-          <h3 class="step__name"><em>Shine</em></h3>
+          <h3 class="step__name"><em class="glow-text">Shine</em></h3>
           <p class="step__text"><strong>Mise en ligne.</strong> Votre entreprise a enfin la présence qu'elle mérite. Et on reste disponibles pour la suite.</p>
         </li>
       </ol>
@@ -229,83 +236,89 @@
   </section>
 
   <!-- ============================================================
-       05 · RÉALISATIONS — liste, grand visuel qui suit le curseur
-       Pour ajouter un projet : dupliquer un <li class="work-item">
+       05 · RÉALISATIONS — grands panneaux qui s'empilent au scroll
+       Pour ajouter un projet : dupliquer un <article class="case">
        et créer sa page avec `npm run new-project` (voir README).
        ============================================================ -->
   <section class="work" id="realisations" aria-labelledby="work-title">
-    <div class="section-head section-head--split">
-      <p class="eyebrow"><span class="eyebrow__num">(03)</span> Réalisations</p>
-      <h2 class="section-title" id="work-title" data-split>Des projets réels. <em>Des clients réels.</em></h2>
-      <p class="section-intro" data-reveal>Quelques projets récents. Le portfolio complet arrive très bientôt.</p>
+    <header class="work__head">
+      <h2 class="work__title" id="work-title">Réalisations<sup class="work__count">(03)</sup></h2>
+      <p class="work__intro" data-reveal>Des projets réels, pour des clients réels. <br>Le portfolio complet arrive très bientôt.</p>
+    </header>
+
+    <div class="cases" data-cases>
+      <article class="case" data-case>
+        <a class="case__link" href="/projets/j-clean-auto/" data-cursor-text="Voir">
+          <figure class="case__media">
+            <!-- EMPLACEMENT : visuel principal J-Clean Auto (16:10) -->
+            <div class="ph" data-label="J-Clean Auto · visuel du site · 16:10"></div>
+          </figure>
+          <div class="case__info">
+            <p class="case__num">01</p>
+            <h3 class="case__name">J-Clean Auto</h3>
+            <dl class="case__meta">
+              <div><dt>Secteur</dt><dd>Nettoyage automobile</dd></div>
+              <div><dt>Prestation</dt><dd>Site web</dd></div>
+            </dl>
+            <p class="case__desc">Un site premium mais accessible : hero vidéo, comparateur avant / après, tarifs, témoignages, pensé d'abord pour le mobile.</p>
+            <span class="link-arrow">Voir le projet</span>
+          </div>
+        </a>
+      </article>
+      <article class="case" data-case>
+        <a class="case__link" href="/projets/planning-familial-huy/" data-cursor-text="Voir">
+          <figure class="case__media">
+            <!-- EMPLACEMENT : image extraite de la vidéo Planning Familial de Huy -->
+            <div class="ph" data-label="Planning Familial de Huy · extrait vidéo · 16:10"></div>
+          </figure>
+          <div class="case__info">
+            <p class="case__num">02</p>
+            <h3 class="case__name">Planning Familial de Huy</h3>
+            <dl class="case__meta">
+              <div><dt>Secteur</dt><dd>Santé · Association</dd></div>
+              <div><dt>Prestation</dt><dd>Vidéo marketing</dd></div>
+            </dl>
+            <p class="case__desc">Une vidéo pour présenter le centre, son équipe et ses services, de manière simple et rassurante.</p>
+            <span class="link-arrow">Voir le projet</span>
+          </div>
+        </a>
+      </article>
+      <article class="case" data-case>
+        <a class="case__link" href="/projets/psychologue/" data-cursor-text="Voir">
+          <figure class="case__media">
+            <!-- EMPLACEMENT : visuel du site de la psychologue -->
+            <div class="ph" data-label="Site psychologue · visuel · 16:10"></div>
+          </figure>
+          <div class="case__info">
+            <p class="case__num">03</p>
+            <h3 class="case__name"><span class="todo">[Nom]</span> — Psychologue</h3>
+            <dl class="case__meta">
+              <div><dt>Secteur</dt><dd>Santé · Profession libérale</dd></div>
+              <div><dt>Prestation</dt><dd>Site web</dd></div>
+            </dl>
+            <p class="case__desc">Un site calme et clair, qui met en confiance avant même le premier rendez-vous.</p>
+            <span class="link-arrow">Voir le projet</span>
+          </div>
+        </a>
+      </article>
     </div>
-
-    <ul class="work-list" data-work-list>
-      <li class="work-item" data-work>
-        <a class="work-item__link" href="/projets/j-clean-auto/" data-cursor-text="Voir">
-          <span class="work-item__num">01</span>
-          <h3 class="work-item__name">J-Clean Auto</h3>
-          <span class="work-item__sector">Nettoyage automobile</span>
-          <span class="work-item__scope">Site web</span>
-          <span class="work-item__desc">Un site premium mais accessible : hero vidéo, comparateur avant / après, tarifs, témoignages, pensé d'abord pour le mobile.</span>
-          <span class="work-item__arrow" aria-hidden="true">→</span>
-        </a>
-        <figure class="work-item__media">
-          <!-- EMPLACEMENT : visuel principal J-Clean Auto (16:10 ou 4:5) -->
-          <div class="ph" data-label="J-Clean Auto · visuel du site"></div>
-        </figure>
-      </li>
-      <li class="work-item" data-work>
-        <a class="work-item__link" href="/projets/planning-familial-huy/" data-cursor-text="Voir">
-          <span class="work-item__num">02</span>
-          <h3 class="work-item__name">Planning Familial de Huy</h3>
-          <span class="work-item__sector">Santé · Association</span>
-          <span class="work-item__scope">Vidéo marketing</span>
-          <span class="work-item__desc">Une vidéo pour présenter le centre, son équipe et ses services, de manière simple et rassurante.</span>
-          <span class="work-item__arrow" aria-hidden="true">→</span>
-        </a>
-        <figure class="work-item__media">
-          <!-- EMPLACEMENT : image extraite de la vidéo Planning Familial de Huy -->
-          <div class="ph" data-label="Planning Familial de Huy · extrait vidéo"></div>
-        </figure>
-      </li>
-      <li class="work-item" data-work>
-        <a class="work-item__link" href="/projets/psychologue/" data-cursor-text="Voir">
-          <span class="work-item__num">03</span>
-          <h3 class="work-item__name"><span class="todo">[Nom]</span> — Psychologue</h3>
-          <span class="work-item__sector">Santé · Profession libérale</span>
-          <span class="work-item__scope">Site web</span>
-          <span class="work-item__desc">Un site calme et clair, qui met en confiance avant même le premier rendez-vous.</span>
-          <span class="work-item__arrow" aria-hidden="true">→</span>
-        </a>
-        <figure class="work-item__media">
-          <!-- EMPLACEMENT : visuel du site de la psychologue -->
-          <div class="ph" data-label="Site psychologue · visuel"></div>
-        </figure>
-      </li>
-    </ul>
-
-    <!-- Conteneur du visuel qui suit le curseur (rempli en JS) -->
-    <div class="work-follower" data-work-follower aria-hidden="true"></div>
   </section>
 
   <!-- ============================================================
-       06 · OFFRES — mise en page éditoriale, Signature mise en avant
+       06 · OFFRES — trois colonnes de largeurs différentes,
+       Signature au centre, sur une lumière douce
        ============================================================ -->
-  <section class="offers theme-paper" id="offres" aria-labelledby="offers-title">
-    <div class="section-head">
-      <p class="eyebrow"><span class="eyebrow__num">(04)</span> Offres</p>
-      <h2 class="section-title" id="offers-title" data-split>Des prix clairs. <em>Annoncés dès le départ.</em></h2>
-      <p class="section-intro" data-reveal>Trois points de départ. Chaque projet reçoit un devis précis et gratuit avant de commencer.</p>
-    </div>
+  <section class="offers" id="offres" aria-labelledby="offers-title">
+    <header class="offers__head">
+      <h2 class="offers__title" id="offers-title" data-split>Des prix clairs, <em>annoncés dès le départ.</em></h2>
+      <p class="offers__intro" data-reveal>Trois points de départ. Chaque projet reçoit un devis précis et gratuit avant de commencer.</p>
+    </header>
 
-    <div class="offer-list">
-      <article class="offer" data-reveal>
-        <div class="offer__id">
-          <span class="offer__num">A</span>
-          <h3 class="offer__name">Essentiel</h3>
-          <p class="offer__for">Vous avez déjà vos photos. Il vous faut un site net, rapide et efficace.</p>
-        </div>
+    <div class="offer-grid">
+      <article class="offer offer--essentiel" data-reveal>
+        <h3 class="offer__name">Essentiel</h3>
+        <p class="offer__for">Vous avez déjà vos photos. Il vous faut un site net, rapide et efficace.</p>
+        <p class="offer__price"><span class="offer__from">à partir de</span> <span class="offer__amount">600 €</span> <span class="offer__tax todo">[HTVA / TVAC]</span></p>
         <ul class="offer__list">
           <li>Site one-page, adapté au mobile</li>
           <li>Jusqu'à <span class="todo">[5-6]</span> sections</li>
@@ -313,23 +326,16 @@
           <li>Référencement de base</li>
           <li>Mise en ligne</li>
           <li><span class="todo">[2]</span> allers-retours de corrections</li>
-          <li class="offer__note">Photos fournies par vos soins</li>
         </ul>
-        <div class="offer__price">
-          <span class="offer__from">À partir de</span>
-          <span class="offer__amount">600 €</span>
-          <span class="offer__tax todo">[HTVA / TVAC]</span>
-          <a class="link-arrow" href="#contact" data-preset-link="site">Demander un devis</a>
-        </div>
+        <p class="offer__note">Photos fournies par vos soins.</p>
+        <a class="link-arrow" href="#contact" data-preset-link="site">Demander un devis</a>
       </article>
 
-      <article class="offer offer--featured" data-reveal>
-        <div class="offer__id">
-          <span class="offer__num">B</span>
-          <h3 class="offer__name">Signature</h3>
-          <p class="offer__badge">Site + photos par Tim</p>
-          <p class="offer__for">Le site et les images qui vont avec. Votre entreprise, montrée telle qu'elle est.</p>
-        </div>
+      <article class="offer offer--signature" data-reveal>
+        <p class="offer__badge">Site + photos par Tim</p>
+        <h3 class="offer__name">Signature</h3>
+        <p class="offer__for">Le site et les images qui vont avec. Votre entreprise, montrée telle qu'elle est.</p>
+        <p class="offer__price"><span class="offer__from">à partir de</span> <span class="offer__amount">999 €</span> <span class="offer__tax todo">[HTVA / TVAC]</span></p>
         <ul class="offer__list">
           <li>Site jusqu'à <span class="todo">[4-5]</span> pages</li>
           <li>Shooting photo par Tim : <span class="todo">[durée]</span>, <span class="todo">[nombre]</span> photos retouchées</li>
@@ -337,33 +343,15 @@
           <li>Fiche Google Business Profile</li>
           <li>Référencement local de base</li>
         </ul>
-        <div class="offer__price">
-          <span class="offer__from">À partir de</span>
-          <span class="offer__amount">999 €</span>
-          <span class="offer__tax todo">[HTVA / TVAC]</span>
-          <a class="btn btn--light" href="#contact" data-preset-link="site">Demander un devis</a>
-        </div>
+        <a class="btn" href="#contact" data-preset-link="site">Demander un devis</a>
       </article>
 
-      <article class="offer" data-reveal>
-        <div class="offer__id">
-          <span class="offer__num">C</span>
-          <h3 class="offer__name">Sur mesure</h3>
-          <p class="offer__for">Un projet plus ambitieux ou un besoin précis. On construit l'offre avec vous.</p>
-        </div>
-        <ul class="offer__list">
-          <li>Sites plus complets</li>
-          <li>Multilingue</li>
-          <li>Identité visuelle</li>
-          <li>Vidéo</li>
-          <li>Automatisations</li>
-          <li>Besoins spécifiques</li>
-        </ul>
-        <div class="offer__price">
-          <span class="offer__from">Prix</span>
-          <span class="offer__amount offer__amount--text">Sur devis</span>
-          <a class="link-arrow" href="#contact" data-preset-link="autre">En parler</a>
-        </div>
+      <article class="offer offer--mesure" data-reveal>
+        <h3 class="offer__name">Sur <em>mesure</em></h3>
+        <p class="offer__for">Un projet plus ambitieux ou un besoin précis ? On construit l'offre avec vous.</p>
+        <p class="offer__words">Sites plus complets, multilingue, identité visuelle, vidéo, automatisations, besoins spécifiques.</p>
+        <p class="offer__price"><span class="offer__amount offer__amount--text">Sur devis</span></p>
+        <a class="link-arrow" href="#contact" data-preset-link="autre">En parler</a>
       </article>
     </div>
 
@@ -371,73 +359,92 @@
   </section>
 
   <!-- ============================================================
-       07 · PHOTOGRAPHIE (teaser) — sélection de Tim, parallaxe léger
+       07 · PHOTOGRAPHIE (teaser) — fond sombre, deux bandes de photos
+       qui défilent en sens opposés au rythme du scroll
        ============================================================ -->
-  <section class="photo-teaser" aria-labelledby="photo-teaser-title">
-    <div class="photo-teaser__grid">
-      <!-- EMPLACEMENTS : sélection de 5 photos de Tim, formats variés -->
-      <figure class="pt pt--1" data-parallax="-0.08"><div class="ph" data-label="Photo Tim · portrait · 4:5"></div></figure>
-      <figure class="pt pt--2" data-parallax="0.06"><div class="ph" data-label="Photo Tim · locaux · 3:2"></div></figure>
-      <div class="photo-teaser__text">
-        <p class="eyebrow"><span class="eyebrow__num">(05)</span> Photographie</p>
-        <h2 class="section-title" id="photo-teaser-title" data-split>Vos photos. <em>Pas celles de tout le monde.</em></h2>
-        <p class="section-intro" data-reveal>Tim, notre photographe, réalise les images de votre site : votre équipe, vos locaux, votre travail. Avec ou sans site web.</p>
-        <a class="link-arrow" href="/photographie/" data-reveal>Découvrir la photographie</a>
+  <section class="photo-teaser theme-ink" aria-labelledby="photo-teaser-title" data-film>
+    <div class="film film--a" data-film-row="-1" aria-hidden="true">
+      <!-- EMPLACEMENTS : sélection de photos de Tim, formats variés -->
+      <figure class="film__item film__item--p"><div class="ph" data-label="Photo Tim · portrait"></div></figure>
+      <figure class="film__item film__item--l"><div class="ph" data-label="Photo Tim · locaux"></div></figure>
+      <figure class="film__item film__item--s"><div class="ph" data-label="Photo Tim · produit"></div></figure>
+      <figure class="film__item film__item--l"><div class="ph" data-label="Photo Tim · équipe"></div></figure>
+      <figure class="film__item film__item--p"><div class="ph" data-label="Photo Tim · chantier"></div></figure>
+      <figure class="film__item film__item--l"><div class="ph" data-label="Photo Tim · événement"></div></figure>
+    </div>
+
+    <div class="photo-teaser__text">
+      <h2 class="photo-teaser__title" id="photo-teaser-title" data-split>Vos photos. <em>Pas celles de tout le monde.</em></h2>
+      <div class="photo-teaser__side">
+        <p data-reveal>Tim, notre photographe, réalise les images de votre site : votre équipe, vos locaux, votre travail. Avec ou sans site web.</p>
+        <a class="btn btn--light" href="/photographie/" data-reveal>Découvrir la photographie</a>
       </div>
-      <figure class="pt pt--3" data-parallax="-0.04"><div class="ph" data-label="Photo Tim · produit · 1:1"></div></figure>
-      <figure class="pt pt--4" data-parallax="0.1"><div class="ph" data-label="Photo Tim · équipe · 16:9"></div></figure>
-      <figure class="pt pt--5" data-parallax="-0.06"><div class="ph" data-label="Photo Tim · chantier · 4:5"></div></figure>
+    </div>
+
+    <div class="film film--b" data-film-row="1" aria-hidden="true">
+      <figure class="film__item film__item--l"><div class="ph" data-label="Photo Tim · détail"></div></figure>
+      <figure class="film__item film__item--p"><div class="ph" data-label="Photo Tim · portrait"></div></figure>
+      <figure class="film__item film__item--l"><div class="ph" data-label="Photo Tim · atelier"></div></figure>
+      <figure class="film__item film__item--s"><div class="ph" data-label="Photo Tim · produit"></div></figure>
+      <figure class="film__item film__item--l"><div class="ph" data-label="Photo Tim · réalisation"></div></figure>
+      <figure class="film__item film__item--p"><div class="ph" data-label="Photo Tim · équipe"></div></figure>
     </div>
   </section>
 
   <!-- ============================================================
-       08 · ÉQUIPE
+       08 · ÉQUIPE — trois portraits en accordéon : celui qu'on survole
+       s'élargit (desktop). Pile simple sur mobile.
        ============================================================ -->
-  <section class="team theme-paper" id="equipe" aria-labelledby="team-title">
-    <div class="section-head">
-      <p class="eyebrow"><span class="eyebrow__num">(06)</span> Équipe</p>
-      <h2 class="section-title" id="team-title" data-split>Trois personnes. <em>En direct.</em></h2>
-      <p class="section-intro" data-reveal>Vous travaillez avec ceux qui conçoivent votre site et réalisent vos images. Pas d'intermédiaire.</p>
-    </div>
+  <section class="team" id="equipe" aria-labelledby="team-title">
+    <header class="team__head">
+      <h2 class="team__title" id="team-title" data-split>Trois personnes. <em>En direct.</em></h2>
+      <p class="team__intro" data-reveal>Vous travaillez avec ceux qui conçoivent votre site et réalisent vos images. Pas d'intermédiaire.</p>
+    </header>
 
-    <ul class="team__list">
-      <li class="member" data-reveal>
-        <figure class="member__photo" data-mask>
-          <!-- EMPLACEMENT : vraie photo de Noa (4:5) -->
-          <div class="ph" data-label="Portrait Noa · 4:5"></div>
+    <ul class="team__list" data-team>
+      <li class="member is-open" tabindex="0">
+        <figure class="member__photo">
+          <!-- EMPLACEMENT : vraie photo de Noa (portrait) -->
+          <div class="ph" data-label="Portrait Noa"></div>
         </figure>
-        <h3 class="member__name">Noa Gaethofs</h3>
-        <p class="member__role todo">[Rôle]</p>
-        <p class="member__bio todo">[Une phrase sur Noa : ce qu'elle/il fait chez GLOW, avec un ton humain.]</p>
+        <div class="member__info">
+          <h3 class="member__name">Noa Gaethofs</h3>
+          <p class="member__role todo">[Rôle]</p>
+          <p class="member__bio todo">[Une phrase sur Noa, avec un ton humain.]</p>
+        </div>
       </li>
-      <li class="member" data-reveal>
-        <figure class="member__photo" data-mask>
-          <!-- EMPLACEMENT : vraie photo de Tim (4:5) -->
-          <div class="ph" data-label="Portrait Tim · 4:5"></div>
+      <li class="member" tabindex="0">
+        <figure class="member__photo">
+          <!-- EMPLACEMENT : vraie photo de Tim (portrait) -->
+          <div class="ph" data-label="Portrait Tim"></div>
         </figure>
-        <h3 class="member__name">Tim <span class="todo">[Nom]</span></h3>
-        <p class="member__role">Photographe · <span class="todo">[Rôle]</span></p>
-        <p class="member__bio todo">[Une phrase sur Tim et sa façon de photographier.]</p>
+        <div class="member__info">
+          <h3 class="member__name">Tim <span class="todo">[Nom]</span></h3>
+          <p class="member__role">Photographe · <span class="todo">[Rôle]</span></p>
+          <p class="member__bio todo">[Une phrase sur Tim et sa façon de photographier.]</p>
+        </div>
       </li>
-      <li class="member" data-reveal>
-        <figure class="member__photo" data-mask>
-          <!-- EMPLACEMENT : vraie photo de Nicolas (4:5) -->
-          <div class="ph" data-label="Portrait Nicolas · 4:5"></div>
+      <li class="member" tabindex="0">
+        <figure class="member__photo">
+          <!-- EMPLACEMENT : vraie photo de Nicolas (portrait) -->
+          <div class="ph" data-label="Portrait Nicolas"></div>
         </figure>
-        <h3 class="member__name">Nicolas Ovidio</h3>
-        <p class="member__role todo">[Rôle]</p>
-        <p class="member__bio todo">[Une phrase sur Nicolas.]</p>
+        <div class="member__info">
+          <h3 class="member__name">Nicolas Ovidio</h3>
+          <p class="member__role todo">[Rôle]</p>
+          <p class="member__bio todo">[Une phrase sur Nicolas.]</p>
+        </div>
       </li>
     </ul>
   </section>
 
   <!-- ============================================================
-       09 · FAQ — <details> natif, accessible au clavier
+       09 · FAQ — titre collant à gauche, <details> natif à droite
        ============================================================ -->
-  <section class="faq theme-paper" id="faq" aria-labelledby="faq-title">
+  <section class="faq" id="faq" aria-labelledby="faq-title">
     <div class="faq__head">
-      <p class="eyebrow"><span class="eyebrow__num">(07)</span> Questions</p>
-      <h2 class="section-title" id="faq-title" data-split>Les questions <em>qu'on nous pose.</em></h2>
+      <h2 class="faq__title" id="faq-title" data-split>Questions <em>fréquentes</em></h2>
+      <p class="faq__help">Une autre question ? <a href="#contact">Écrivez-nous.</a></p>
     </div>
     <div class="faq__list">
       <details class="faq__item">
@@ -468,10 +475,10 @@
   </section>
 
   <!-- ============================================================
-       10 · CONTACT
+       10 · CONTACT — la lumière GLOW en fond, titre XXL centré
        ============================================================ -->
-  <section class="contact" id="contact" aria-labelledby="contact-title">
-    <h2 class="contact__title" id="contact-title" data-split>Parlons de <em>votre projet.</em></h2>
+  <section class="contact contact--glow" id="contact" aria-labelledby="contact-title">
+    <h2 class="contact__title" id="contact-title" data-split>On en <em>parle&nbsp;?</em></h2>
     <div class="contact__grid">
       <div class="contact__info">
         <p class="contact__lead">Un site, des photos, une vidéo, ou simplement une question : écrivez-nous. Réponse sous <span class="todo">[48 h]</span>.</p>

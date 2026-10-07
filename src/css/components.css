@@ -3,26 +3,51 @@
    footer, formulaire
    ========================================================================== */
 
-/* --- Loader -------------------------------------------------------------- */
+/* --- Loader -------------------------------------------------------------
+   Fond : lumière douce aux couleurs du logo. Le logo se dessine trait par
+   trait, puis le site apparaît à travers une ouverture qui part du O. */
 .loader {
   position: fixed;
   inset: 0;
   z-index: 150;
   display: none;
   place-items: center;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
   pointer-events: none;
+  --hole: 0px;
+  --hx: 50%;
+  --hy: 50%;
+}
+/* L'ouverture (masque animé) n'est utilisée que sur grand écran */
+.loader.is-opening {
+  -webkit-mask: radial-gradient(circle at var(--hx) var(--hy), transparent var(--hole), #000 calc(var(--hole) + 1px));
+  mask: radial-gradient(circle at var(--hx) var(--hy), transparent var(--hole), #000 calc(var(--hole) + 1px));
 }
 .is-loading .loader { display: grid; }
-.loader__mark {
-  display: grid;
-  font-size: clamp(4rem, 14vw, 11rem);
-  font-weight: 600;
-  line-height: 0.78;
-  letter-spacing: var(--track-display);
+.loader__light {
+  position: absolute;
+  inset: -20%;
+  background: url('/media/glow.webp') center / 100% 100% no-repeat;
+  opacity: 0;
 }
-.loader__mark span { display: block; overflow: clip; }
+.loader__logo { position: relative; width: min(64vw, 46rem); height: auto; overflow: visible; opacity: 0; }
+.loader.is-drawing .loader__logo { opacity: 1; }
+.loader__count {
+  position: absolute;
+  left: var(--gutter);
+  bottom: calc(var(--space-3) + env(safe-area-inset-bottom));
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.loader__count::after { content: ' %'; color: var(--muted); }
+.loader__tag {
+  position: absolute;
+  right: var(--gutter);
+  bottom: calc(var(--space-3) + env(safe-area-inset-bottom));
+  font-size: var(--fs-md);
+}
 
 /* --- Curseur personnalisé ------------------------------------------------ */
 .cursor {
@@ -59,7 +84,9 @@
 .cursor.is-text .cursor__label { opacity: 1; }
 .cursor.is-hidden { width: 0; height: 0; margin: 0; }
 
-/* --- Header -------------------------------------------------------------- */
+/* --- Header -------------------------------------------------------------
+   Transparent sur le hero, puis fond clair quand on descend. Se rétracte
+   au scroll vers le bas. */
 .header {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -69,20 +96,20 @@
   gap: var(--space-4);
   height: var(--header-h);
   padding: 0 var(--gutter);
-  color: #fff;
-  mix-blend-mode: difference;  /* lisible sur fond noir comme sur blanc cassé */
-  transition: transform var(--dur) var(--ease-out), height var(--dur) var(--ease-out);
+  color: var(--ink);
+  transition: transform var(--dur) var(--ease-out), height var(--dur) var(--ease-out), background-color var(--dur), box-shadow var(--dur);
 }
 .header.is-hidden { transform: translateY(-100%); }
-.header.is-compact { height: 3.5rem; }
-.menu-open .header { mix-blend-mode: normal; color: var(--paper); transform: none; }
-
-.header__logo {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.06em;
-  line-height: 1;
+.header.is-compact {
+  height: 3.75rem;
+  background-color: rgba(251, 248, 245, 0.94);
+  box-shadow: 0 1px 0 var(--line-light);
 }
+.menu-open .header { color: var(--ink); background-color: transparent; box-shadow: none; transform: none; }
+
+.header__logo { display: block; line-height: 0; }
+.header__svg { width: 6.25rem; height: auto; }
+.header__svg .logo__studio { stroke-width: 7; }
 .header__nav { margin-left: auto; }
 .header__nav ul { display: flex; gap: clamp(1rem, 2vw, 2rem); }
 .header__nav a {
@@ -93,9 +120,10 @@
 .header__nav a::after {
   content: '';
   position: absolute;
-  left: 0; right: 0; bottom: -0.25em;
-  height: 1px;
-  background: currentColor;
+  left: 0; right: 0; bottom: -0.3em;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--glow);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform var(--dur-fast) var(--ease-out);
@@ -104,8 +132,7 @@
 @media (hover: hover) {
   .header__nav a:hover::after { transform: scaleX(1); transform-origin: left; }
 }
-.header__cta { --btn-bg: #fff; --btn-fg: #000; }
-.theme-paper .header__cta { --btn-bg: #fff; --btn-fg: #000; }
+.header__cta { border-radius: 999px; }
 
 .header__burger {
   display: none;
@@ -129,8 +156,8 @@
   flex-direction: column;
   justify-content: space-between;
   padding: calc(var(--header-h) + var(--space-4)) var(--gutter) calc(var(--space-4) + env(safe-area-inset-bottom));
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper) var(--glow-soft);
+  color: var(--ink);
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -148,7 +175,7 @@
 .menu__list span {
   font-size: var(--fs-xs);
   letter-spacing: 0;
-  color: var(--grey);
+  color: var(--muted);
   transform: translateY(-1.6em);
 }
 .menu__foot {
@@ -158,9 +185,9 @@
   gap: var(--space-3);
   padding-top: var(--space-4);
   font-size: var(--fs-sm);
-  color: var(--grey);
+  color: var(--muted);
 }
-.menu__slogan { font-size: var(--fs-md); color: var(--paper); }
+.menu__slogan { font-size: var(--fs-md); color: var(--ink); }
 
 /* --- CTA devis fixe (mobile) -------------------------------------------- */
 .sticky-cta {
@@ -170,12 +197,13 @@
   z-index: 80;
   display: none;
   padding: 1rem 1.4rem;
-  background: var(--paper);
+  background: var(--glow);
   color: var(--ink);
+  border-radius: 999px;
   font-size: var(--fs-sm);
   font-weight: 600;
   line-height: 1;
-  box-shadow: 0 0 0 1px var(--ink);
+  box-shadow: 0 6px 20px rgba(31, 27, 28, 0.12);
   transition: transform var(--dur) var(--ease-out), opacity var(--dur);
 }
 .sticky-cta.is-hidden { transform: translateY(150%); opacity: 0; }
@@ -189,7 +217,6 @@
   padding: var(--space-5) var(--gutter) 0;
   background: var(--ink);
   color: var(--paper);
-  border-top: 1px solid var(--line-dark);
   overflow: hidden;
 }
 .footer__top {
@@ -214,26 +241,14 @@
 .footer__cols li { padding: 0.2em 0; }
 .footer__cols a { transition: color var(--dur-fast); }
 @media (hover: hover) { .footer__cols a:hover { color: var(--grey); } }
-.footer__label { margin-bottom: 0.75em; color: var(--grey); }
+.footer__label { margin-bottom: 0.75em; color: var(--muted); }
 @media (min-width: 48em) {
   .footer__cols { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* Grand logo stacked GL / OW, qui déborde légèrement en bas */
-.footer__logo {
-  display: grid;
-  margin-top: var(--space-5);
-  font-size: clamp(6rem, 31vw, 38rem);
-  font-weight: 600;
-  line-height: 0.74;
-  letter-spacing: -0.07em;
-  margin-bottom: -0.05em;
-  user-select: none;
-}
-.footer__logo span:last-child { justify-self: end; margin-right: -0.04em; }
-@media (max-width: 47.99em) {
-  .footer__logo { font-size: 52vw; }
-}
+/* Grand logo, pleine largeur, qui se dessine en arrivant en bas de page */
+.footer__logo { margin-top: var(--space-5); padding-bottom: var(--space-4); line-height: 0; }
+.footer__svg { width: 100%; height: auto; overflow: visible; }
 
 /* --- Formulaire ---------------------------------------------------------- */
 .form { display: grid; gap: var(--space-4); }
@@ -245,6 +260,7 @@
   display: block;
   padding: 0.75em 1.15em;
   border: 1px solid var(--line);
+  border-radius: 999px;
   font-size: var(--fs-sm);
   font-weight: 500;
   transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
@@ -292,3 +308,8 @@
    sauf dans les champs de saisie */
 .has-cursor, .has-cursor * { cursor: none; }
 .has-cursor input, .has-cursor textarea, .has-cursor select { cursor: text; }
+.form__submit { border-radius: 999px; }
+
+/* Pages qui s'ouvrent sur une photo sombre : header clair tant qu'on est en haut */
+:is(.page-photo, .page-thanks) .header:not(.is-compact) { color: var(--paper); }
+:is(.page-photo, .page-thanks) .header:not(.is-compact) .header__cta { --btn-bg: var(--paper); --btn-fg: var(--ink); }

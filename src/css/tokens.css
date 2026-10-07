@@ -32,21 +32,30 @@
 }
 
 :root {
-  /* --- Couleurs : noir & blanc, pas d'accent ---------------------------- */
-  --ink: #0b0b0b;          /* noir chambre noire */
-  --ink-2: #161616;        /* noir relevé (placeholders, survols) */
-  --paper: #f1efea;        /* blanc cassé */
-  --paper-2: #e4e1da;      /* blanc cassé appuyé */
-  --grey: #8a8883;         /* textes secondaires (AA sur les deux fonds en ≥ 16px) */
-  --line-dark: rgba(241, 239, 234, 0.14);
-  --line-light: rgba(11, 11, 11, 0.14);
+  /* --- Couleurs -----------------------------------------------------------
+     Base claire et chaude. Le dégradé du logo (corail → pêche → lilas) est
+     la « lumière » de GLOW : utilisé très légèrement, jamais en aplat criard. */
+  --ink: #1f1b1c;          /* noir du logo */
+  --ink-2: #2a2526;
+  --paper: #fbf8f5;        /* blanc chaud */
+  --paper-2: #f3eee9;      /* blanc chaud appuyé */
+  --grey: #8f8786;
+  --line-dark: rgba(251, 248, 245, 0.14);
+  --line-light: rgba(31, 27, 28, 0.12);
 
-  /* Couleurs contextuelles (surchargées par .theme-paper) */
-  --bg: var(--ink);
-  --fg: var(--paper);
-  --muted: #9b9994;
-  --line: var(--line-dark);
-  --ph: #1a1a1a;           /* fond des emplacements photo */
+  --coral: #ff9f9b;
+  --peach: #f9d3c4;
+  --lilac: #c9a9f8;
+  --glow: linear-gradient(100deg, var(--coral) 0%, var(--peach) 48%, var(--lilac) 100%);
+  /* version adoucie pour les fonds (≈ 35 % d'intensité) */
+  --glow-soft: linear-gradient(100deg, #ffe3e1 0%, #fdf0ea 48%, #ece2fd 100%);
+
+  /* Couleurs contextuelles (surchargées par .theme-ink) */
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --muted: #6f6767;
+  --line: var(--line-light);
+  --ph: #ece6e1;           /* fond des emplacements photo */
 
   /* --- Typographies ------------------------------------------------------ */
   --font-sans: 'General Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -90,11 +99,13 @@
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Thème clair appliqué à une section */
-.theme-paper {
-  --bg: var(--paper);
-  --fg: var(--ink);
-  --muted: #5f5d58;
-  --line: var(--line-light);
-  --ph: #d8d5ce;
+/* Thème sombre appliqué à une section (contraste ponctuel) */
+.theme-ink {
+  --bg: var(--ink);
+  --fg: var(--paper);
+  --muted: #a69e9c;
+  --line: var(--line-dark);
+  --ph: #2c2728;
 }
+/* Ancien nom conservé : le clair est désormais le thème par défaut */
+.theme-paper { --bg: var(--paper); }
