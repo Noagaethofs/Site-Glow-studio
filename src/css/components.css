@@ -108,8 +108,7 @@
 .menu-open .header { color: var(--ink); background-color: transparent; box-shadow: none; transform: none; }
 
 .header__logo { display: block; line-height: 0; }
-.header__svg { width: 6.25rem; height: auto; }
-.header__svg .logo__studio { stroke-width: 7; }
+.header__svg { width: 7rem; height: auto; }
 .header__nav { margin-left: auto; }
 .header__nav ul { display: flex; gap: clamp(1rem, 2vw, 2rem); }
 .header__nav a {

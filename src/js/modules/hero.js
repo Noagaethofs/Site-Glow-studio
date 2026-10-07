@@ -7,11 +7,10 @@
  */
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 import { MQ, prefersReducedMotion } from './env.js';
 
 // Géométrie du O dans le repère du logo (voir partials/logo.html)
-const O = { cx: 651, cy: 294, r: 92.5, stroke: 49 };
+const O = { cx: 649, cy: 292, hole: 69 }; // centre et rayon de l'ouverture du O
 
 export function initHero() {
   const hero = document.querySelector('[data-hero]');
@@ -23,6 +22,7 @@ export function initHero() {
   const ring = hero.querySelector('[data-hero-o]');
   const gl = hero.querySelector('[data-hero-gl]');
   const w = hero.querySelector('[data-hero-w]');
+  const studio = hero.querySelector('[data-hero-studio]');
   const title = hero.querySelector('[data-hero-title]');
   const light = hero.querySelector('[data-hero-light]');
   const fades = hero.querySelectorAll('[data-hero-fade]');
@@ -41,7 +41,7 @@ export function initHero() {
     const scale = m.width / vb.width;
     geo.x = m.left - s.left + (O.cx - vb.x) * scale;
     geo.y = m.top - s.top + (O.cy - vb.y) * scale;
-    geo.r = (O.r - O.stroke / 2) * scale + 1;
+    geo.r = O.hole * scale + 1;
     geo.max = Math.hypot(Math.max(geo.x, s.width - geo.x), Math.max(geo.y, s.height - geo.y)) + 4;
   };
   const applyClip = () => {
@@ -77,6 +77,7 @@ export function initHero() {
       .to(ring, { scale: 2.6, opacity: 0, svgOrigin: `${O.cx} ${O.cy}`, duration: 0.45, ease: 'power1.in' }, 0)
       .to(gl, { x: -520, opacity: 0, duration: 0.6 }, 0)
       .to(w, { x: 560, opacity: 0, duration: 0.6 }, 0)
+      .to(studio, { y: 60, opacity: 0, duration: 0.35 }, 0)
       .to(fades, { yPercent: -40, opacity: 0, duration: 0.45, stagger: 0.04 }, 0)
       .to(light, { opacity: 0, duration: 0.5 }, 0)
       .to({}, { duration: 0.2 }); // courte tenue en plein cadre
@@ -111,15 +112,15 @@ export function initHero() {
   // sous le loader, puis jouée quand l'ouverture du loader commence.
   let introTl = null;
   if (!prefersReducedMotion()) {
-    const split = SplitText.create(title, { type: 'words', mask: 'words' });
+    // Pas de découpe en mots : elle casse le texte en dégradé (« Shine »)
     introTl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
     introTl.from([gl, w], { y: 140, opacity: 0, duration: 1.3, stagger: 0.08 }, 0)
+      .from(studio, { opacity: 0, y: 20, duration: 1 }, 0.4)
       .from(ring, { scale: 0.4, opacity: 0, svgOrigin: `${O.cx} ${O.cy}`, duration: 1.3 }, 0.05)
       .fromTo(state, { k: 0 }, { k: 1, duration: 1.3, ease: 'expo.inOut', onUpdate: applyClip, immediateRender: false }, 0.1)
-      .from(split.words, { yPercent: 110, duration: 1.1, stagger: 0.07 }, 0.3)
+      .from(title, { y: 60, opacity: 0, duration: 1.1 }, 0.3)
       .from(fades[0], { opacity: 0, y: 12, duration: 0.8 }, 0.5)
       .from(hero.querySelectorAll('.hero__side > *'), { opacity: 0, y: 20, duration: 1, stagger: 0.08 }, 0.55)
-      .add(() => split.revert());
   }
   const intro = () => introTl?.play();
 

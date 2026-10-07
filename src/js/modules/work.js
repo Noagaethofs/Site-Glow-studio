@@ -1,28 +1,54 @@
 /**
- * Réalisations : sur desktop, les projets sont des panneaux « sticky » qui
- * s'empilent ; celui du dessous recule légèrement quand le suivant arrive.
- * Sur mobile ou en reduced-motion : simple pile verticale.
+ * Réalisations : rail horizontal.
+ * - Tactile : défilement natif avec aimantation (scroll-snap).
+ * - Souris : on peut attraper et faire glisser le rail ; flèches précédent / suivant.
+ * - Clavier : les flèches sont des boutons, les cartes des liens.
  */
-import { gsap } from 'gsap';
-import { MQ } from './env.js';
-
 export function initWork() {
-  const cases = [...document.querySelectorAll('[data-case]')];
-  if (cases.length < 2) return;
+  const rail = document.querySelector('[data-rail]');
+  if (!rail) return;
+  const prev = document.querySelector('[data-rail-prev]');
+  const next = document.querySelector('[data-rail-next]');
+  const step = () => (rail.querySelector('.project')?.getBoundingClientRect().width ?? 300) + 24;
 
-  gsap.matchMedia().add(`${MQ.desktop} and (prefers-reduced-motion: no-preference)`, () => {
-    cases.slice(0, -1).forEach((c, i) => {
-      gsap.to(c, {
-        scale: 0.92,
-        opacity: 0.35,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: cases[i + 1],
-          start: 'top bottom',
-          end: 'top top+=120',
-          scrub: true,
-        },
-      });
-    });
+  const update = () => {
+    const max = rail.scrollWidth - rail.clientWidth - 2;
+    if (prev) prev.disabled = rail.scrollLeft <= 2;
+    if (next) next.disabled = rail.scrollLeft >= max;
+  };
+  prev?.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next?.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
+  rail.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+
+  // Glisser à la souris (le tactile garde le comportement natif)
+  let startX = 0;
+  let startLeft = 0;
+  let moved = false;
+  let down = false;
+  rail.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    down = true;
+    moved = false;
+    startX = e.clientX;
+    startLeft = rail.scrollLeft;
   });
+  window.addEventListener('pointermove', (e) => {
+    if (!down) return;
+    const dx = e.clientX - startX;
+    if (!moved && Math.abs(dx) > 6) { moved = true; rail.classList.add('is-dragging'); }
+    if (moved) rail.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('pointerup', () => {
+    if (!down) return;
+    down = false;
+    if (moved) {
+      // on laisse l'aimantation reprendre la main après le relâchement
+      requestAnimationFrame(() => rail.classList.remove('is-dragging'));
+    }
+  });
+  // un glisser ne doit pas ouvrir le projet
+  rail.addEventListener('click', (e) => { if (moved) { e.preventDefault(); moved = false; } }, true);
+  rail.addEventListener('dragstart', (e) => e.preventDefault());
 }

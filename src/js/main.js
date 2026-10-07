@@ -19,6 +19,7 @@ import { initHero } from './modules/hero.js';
 import { initMethod } from './modules/method.js';
 import { initWork } from './modules/work.js';
 import { initFilm } from './modules/film.js';
+import { initPlans } from './modules/plans.js';
 import { initTeam } from './modules/team.js';
 import { initFooterLogo } from './modules/footer.js';
 import { initForms } from './modules/form.js';
@@ -56,6 +57,7 @@ async function boot() {
   initMethod();
   initWork();
   initFilm();
+  initPlans();
   initTeam();
   initFooterLogo();
   if (!reduced) initReveals();

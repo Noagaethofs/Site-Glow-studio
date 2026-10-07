@@ -9,19 +9,12 @@
  */
 import { gsap } from 'gsap';
 import { isDesktop } from './env.js';
+import { prepareLogo } from './logo-draw.js';
 
 const pageLoaded = () => new Promise((resolve) => {
   if (document.readyState === 'complete') resolve();
   else window.addEventListener('load', resolve, { once: true });
 });
-
-/** Prépare un tracé SVG pour l'effet « dessin » (stroke-dashoffset). */
-const prepareStroke = (path) => {
-  const len = path.getTotalLength();
-  path.style.strokeDasharray = `${len} ${len}`;
-  path.style.strokeDashoffset = len;
-  return path;
-};
 
 export function runLoader() {
   const root = document.documentElement;
@@ -31,8 +24,8 @@ export function runLoader() {
   const short = root.dataset.intro === 'short';
   const light = loader.querySelector('.loader__light');
   const logo = loader.querySelector('.loader__logo');
-  const glyphs = [...loader.querySelectorAll('.logo__glow path')].map(prepareStroke);
-  const studio = [...loader.querySelectorAll('.logo__studio path')].map(prepareStroke);
+  const glyphs = prepareLogo([...loader.querySelectorAll('.logo__glow path')], 1.8);
+  const studio = prepareLogo([...loader.querySelectorAll('.logo__studio path')], 0.8);
   const ring = loader.querySelector('.logo__o');
   const count = loader.querySelector('[data-loader-count]');
   const tag = loader.querySelector('.loader__tag');
@@ -45,8 +38,12 @@ export function runLoader() {
     intro
       .to(light, { opacity: 1, duration: 1.2 * speed, ease: 'power2.out' }, 0)
       .fromTo(light, { rotate: -8, scale: 0.9 }, { rotate: 8, scale: 1.05, duration: 3, ease: 'sine.inOut' }, 0)
+      // contour qui se trace, puis remplissage : le logo reste celui du fichier d'origine
       .to(glyphs, { strokeDashoffset: 0, duration: 0.9 * speed, ease: 'power2.inOut', stagger: 0.12 * speed }, 0.1)
-      .to(studio, { strokeDashoffset: 0, duration: 0.5 * speed, ease: 'power1.inOut', stagger: 0.05 * speed }, 0.7 * speed)
+      .to(glyphs, { fillOpacity: 1, duration: 0.5 * speed, ease: 'power1.out', stagger: 0.12 * speed }, 0.75 * speed)
+      .to(studio, { strokeDashoffset: 0, duration: 0.5 * speed, ease: 'power1.inOut', stagger: 0.05 * speed }, 0.8 * speed)
+      .to(studio, { fillOpacity: 1, duration: 0.4 * speed, stagger: 0.05 * speed }, 1.1 * speed)
+      .set([...glyphs, ...studio], { strokeWidth: 0 })
       .from(tag, { opacity: 0, y: 12, duration: 0.6, ease: 'expo.out' }, 0.6 * speed)
       .to(counter, {
         v: 90, duration: 1.4 * speed, ease: 'power1.inOut',
@@ -84,7 +81,7 @@ export function runLoader() {
         },
       })
         .to(counter, { v: 100, duration: 0.3, ease: 'none', onUpdate: () => { count.textContent = Math.round(counter.v); } })
-        .to(ring, { scale: 0.86, svgOrigin: '651 294', duration: 0.35, ease: 'power2.in' })
+        .to(ring, { scale: 0.86, svgOrigin: '649 292', duration: 0.35, ease: 'power2.in' })
         .to(hole, {
           r: far + 40,
           duration: 1.1 * (short ? 0.75 : 1),

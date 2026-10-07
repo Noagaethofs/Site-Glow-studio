@@ -18,7 +18,9 @@ export function initReveals(scope = document) {
   // Sur mobile, simple apparition du bloc : moins de calculs de mise en page.
   const desktop = isDesktop();
   scope.querySelectorAll('[data-split]').forEach((el) => {
-    if (!desktop) {
+    // Mobile, ou titre contenant du texte en dégradé (incompatible avec la découpe) :
+    // simple apparition du bloc
+    if (!desktop || el.querySelector('.glow-text')) {
       gsap.from(el, { y: 30, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
       return;
     }
