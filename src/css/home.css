@@ -5,100 +5,100 @@
    ========================================================================== */
 
 /* ==========================================================================
-   01 · HERO — le logo, et son O qui s'ouvre sur la vidéo
+   01 · HERO — introduction épurée : le message, puis la vidéo
    ========================================================================== */
-.hero { background: var(--paper); color: var(--ink); }
-
-.hero__stage {
+.hero {
   position: relative;
-  height: 100vh;
-  height: 100svh;              /* iOS : hauteur stable malgré la barre d'adresse */
-  min-height: 36rem;
   overflow: hidden;
+  padding: calc(var(--header-h) + var(--space-5)) var(--gutter) var(--space-5);
+  background: var(--paper);
+  color: var(--ink);
 }
 
-/* Lumière douce aux couleurs du logo, derrière le O (suit le curseur) */
+/* Lumière douce aux couleurs du logo, fixe et discrète */
 .hero__light {
   position: absolute;
-  top: 0; left: 0;
-  z-index: 0;
-  width: 75vmax;
-  aspect-ratio: 1;
-  margin: -37.5vmax 0 0 -37.5vmax;
-  /* petite image pré-calculée, agrandie : bien moins coûteux qu'un dégradé flou */
+  top: -10vmax;
+  left: 50%;
+  width: 90vmax;
+  aspect-ratio: 1.4;
+  transform: translateX(-50%);
   background: url('/media/glow.webp') center / 100% 100% no-repeat;
+  opacity: 0.75;
   pointer-events: none;
-  will-change: transform;
 }
 
-/* Couche média plein écran, découpée exactement dans l'ouverture du O (JS) */
-.hero__media {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  clip-path: circle(0px at 50% 50%);
-  will-change: clip-path;
-}
-.hero__media .ph--hero { --ph: #e9e1dc; }
-.hero__media video { width: 100%; height: 100%; }
-
-.hero__inner {
+.hero__intro {
   position: relative;
-  z-index: 2;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  height: 100%;
-  padding: calc(var(--header-h) + var(--space-3)) var(--gutter) var(--space-4);
-  pointer-events: none;
+  justify-items: center;
+  gap: var(--space-3);
+  max-width: 68rem;
+  margin: 0 auto;
+  text-align: center;
 }
-.hero__inner a { pointer-events: auto; }
-
-.hero__meta {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-2);
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  background: rgba(251, 248, 245, 0.7);
   font-size: var(--fs-sm);
+  font-weight: 500;
+}
+.hero__dot { width: 0.55em; height: 0.55em; border-radius: 50%; background: var(--glow); }
+
+.hero__title {
+  font-size: clamp(2.6rem, 1rem + 5.6vw, 7.25rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: var(--track-display);
+}
+/* chaque ligne est un masque : le texte monte dedans à l'arrivée */
+.hero__line { display: block; overflow: clip; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.hero__line > span { display: inline-block; }
+
+.hero__lead { max-width: 44ch; font-size: var(--fs-md); line-height: 1.45; color: var(--muted); }
+.hero__actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-3); margin-top: var(--space-1); }
+.hero__actions .btn { border-radius: 999px; }
+
+.hero__services { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: var(--space-2); }
+.hero__services li {
+  padding: 0.45em 0.95em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
   font-weight: 500;
   color: var(--muted);
 }
-.hero__meta span { color: var(--coral); }
 
-.hero__mark {
-  align-self: center;
-  width: 100%;
-  max-height: 100%;
-  height: auto;
-  overflow: visible;
-  color: var(--ink);
+/* Grand cadre vidéo */
+.hero__media {
+  position: relative;
+  max-width: 88rem;
+  margin: var(--space-5) auto 0;
+  aspect-ratio: 16 / 9;
+  border-radius: 1.5rem;
+  overflow: hidden;
 }
-.hero__mark g { will-change: transform; }
+.hero__media .ph--hero { --ph: #ebe3de; }
+.hero__media video { width: 100%; height: 100%; }
+.hero__caption {
+  position: absolute;
+  right: 1.25rem;
+  top: 1.1rem;
+  padding: 0.4em 0.9em;
+  border-radius: 999px;
+  background: rgba(251, 248, 245, 0.85);
+  font-size: var(--fs-sm);
+}
 
-.hero__bottom {
-  display: grid;
-  gap: var(--space-3);
-  align-items: end;
-}
-.hero__title {
-  font-size: clamp(2.8rem, 1rem + 5.2vw, 7.5rem);
-  font-weight: 500;
-  line-height: 0.9;
-  letter-spacing: var(--track-display);
-}
-.hero__title em { font-size: 1.08em; }
-.hero__side { display: grid; gap: var(--space-3); justify-items: start; }
-.hero__lead { max-width: 30ch; font-size: var(--fs-md); line-height: 1.35; }
-.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
-.hero__actions .btn { border-radius: 999px; }
-
-@media (min-width: 64em) {
-  .hero__bottom { grid-template-columns: 1.25fr 1fr; column-gap: var(--space-5); }
-  .hero__side { justify-self: end; }
-}
 @media (max-width: 47.99em) {
-  .hero__stage { height: auto; min-height: 100svh; }
-  .hero__inner { grid-template-rows: auto 1fr auto; gap: var(--space-4); min-height: 100svh; }
-  .hero__meta-services { display: none; }
-  .hero__title { font-size: clamp(2.8rem, 14vw, 5rem); }
+  .hero { padding-top: calc(var(--header-h) + var(--space-4)); }
+  .hero__intro { justify-items: start; text-align: left; }
+  .hero__actions, .hero__services { justify-content: flex-start; }
+  .hero__media { aspect-ratio: 4 / 5; border-radius: 1.1rem; margin-top: var(--space-4); }
 }
 
 /* ==========================================================================

@@ -15,15 +15,8 @@
   background: var(--paper);
   color: var(--ink);
   pointer-events: none;
-  --hole: 0px;
-  --hx: 50%;
-  --hy: 50%;
 }
-/* L'ouverture (masque animé) n'est utilisée que sur grand écran */
-.loader.is-opening {
-  -webkit-mask: radial-gradient(circle at var(--hx) var(--hy), transparent var(--hole), #000 calc(var(--hole) + 1px));
-  mask: radial-gradient(circle at var(--hx) var(--hy), transparent var(--hole), #000 calc(var(--hole) + 1px));
-}
+
 .is-loading .loader { display: grid; }
 .loader__light {
   position: absolute;
