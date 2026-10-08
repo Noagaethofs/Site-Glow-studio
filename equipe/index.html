@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr-BE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>L'équipe — GLOW Studio</title>
+  <meta name="description" content="Noa, Tim et Nicolas : l'équipe de GLOW Studio. Vous travaillez directement avec ceux qui conçoivent votre site et réalisent vos images.">
+  <link rel="canonical" href="https://[DOMAINE]/equipe/">
+  <meta name="theme-color" content="#fbf8f5">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_BE">
+  <meta property="og:site_name" content="GLOW Studio">
+  <meta property="og:title" content="L'équipe — GLOW Studio">
+  <meta property="og:description" content="Trois personnes, en direct. Pas d'intermédiaire.">
+  <meta property="og:url" content="https://[DOMAINE]/equipe/">
+  <meta property="og:image" content="https://[DOMAINE]/og-image.jpg">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/GeneralSans-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/src/css/main.css">
+</head>
+<body class="page-team">
+<!-- @include partials/header.html contact_href="/#contact" cta_label="Demander un devis" sticky_label="Devis" -->
+
+<main id="main">
+  <!-- Trois portraits en accordéon : celui qu'on survole s'élargit (desktop).
+       Carrousel à faire glisser sur mobile. -->
+  <section class="team team--page" id="top" aria-labelledby="team-title">
+    <header class="team__head">
+      <p class="tag">L'équipe</p>
+      <h1 class="team__title" id="team-title" data-split>Trois personnes. <em>En direct.</em></h1>
+      <p class="team__intro" data-reveal>Vous travaillez avec ceux qui conçoivent votre site et réalisent vos images. Pas d'intermédiaire.</p>
+    </header>
+
+    <ul class="team__list" data-team>
+      <li class="member is-open" tabindex="0">
+        <figure class="member__photo">
+          <!-- EMPLACEMENT : vraie photo de Noa (portrait) -->
+          <div class="ph" data-label="Portrait Noa"></div>
+        </figure>
+        <div class="member__info">
+          <h3 class="member__name">Noa Gaethofs</h3>
+          <p class="member__role todo">[Rôle]</p>
+          <p class="member__bio todo">[Une phrase sur Noa, avec un ton humain.]</p>
+        </div>
+      </li>
+      <li class="member" tabindex="0">
+        <figure class="member__photo">
+          <!-- EMPLACEMENT : vraie photo de Tim (portrait) -->
+          <div class="ph" data-label="Portrait Tim"></div>
+        </figure>
+        <div class="member__info">
+          <h3 class="member__name">Tim <span class="todo">[Nom]</span></h3>
+          <p class="member__role">Photographe · <span class="todo">[Rôle]</span></p>
+          <p class="member__bio todo">[Une phrase sur Tim et sa façon de photographier.]</p>
+        </div>
+      </li>
+      <li class="member" tabindex="0">
+        <figure class="member__photo">
+          <!-- EMPLACEMENT : vraie photo de Nicolas (portrait) -->
+          <div class="ph" data-label="Portrait Nicolas"></div>
+        </figure>
+        <div class="member__info">
+          <h3 class="member__name">Nicolas Ovidio</h3>
+          <p class="member__role todo">[Rôle]</p>
+          <p class="member__bio todo">[Une phrase sur Nicolas.]</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+
+  <!-- Appel à l'action vers le formulaire de l'accueil -->
+  <a class="project-next" href="/#contact">
+    <span class="project-next__label">Un projet ?</span>
+    <span class="project-next__name">Parlons-en <em>→</em></span>
+  </a>
+</main>
+
+<!-- @include partials/footer.html -->
+<script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

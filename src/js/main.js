@@ -18,7 +18,6 @@ import { initReveals } from './modules/reveals.js';
 import { initHero } from './modules/hero.js';
 import { initMethod } from './modules/method.js';
 import { initWork } from './modules/work.js';
-import { initFilm } from './modules/film.js';
 import { initServices } from './modules/services.js';
 import { initTeam } from './modules/team.js';
 import { initFooterLogo } from './modules/footer.js';
@@ -56,7 +55,6 @@ async function boot() {
   const hero = initHero();
   initMethod();
   initWork();
-  initFilm();
   initServices();
   initTeam();
   initFooterLogo();
