@@ -116,74 +116,54 @@
   </section>
 
   <!-- ============================================================
-       03 · SERVICES — titre centré, liste éditoriale XXL.
-       Au survol : une lumière balaie la ligne, l'image apparaît.
+       03 · SERVICES — sobre : une image fixe à gauche qui change selon
+       le service lu, la liste des services à droite.
        ============================================================ -->
-  <section class="services" id="services" aria-labelledby="services-title">
-    <header class="services__head">
-      <p class="tag">Services</p>
-      <h2 class="services__title" id="services-title" data-split>Un site, des images. <em>Une seule équipe.</em></h2>
-      <p class="services__intro" data-reveal>Pas besoin de coordonner un webdesigner, un photographe et un vidéaste. Nous faisons tout, avec la même exigence.</p>
-    </header>
+  <section class="services" id="services" aria-labelledby="services-title" data-services>
+    <div class="services__grid">
+      <div class="services__aside">
+        <h2 class="tag" id="services-title">Nos services</h2>
+        <div class="services__frame" aria-hidden="true">
+          <!-- EMPLACEMENTS : une image par service, dans le même ordre que la liste -->
+          <figure class="services__img is-active" data-service-img><div class="ph" data-label="Capture d'un site réalisé"></div></figure>
+          <figure class="services__img" data-service-img><div class="ph" data-label="Photo de Tim · portrait pro"></div></figure>
+          <figure class="services__img" data-service-img><div class="ph" data-label="Extrait vidéo"></div></figure>
+          <figure class="services__img" data-service-img><div class="ph" data-label="Équipe GLOW au travail"></div></figure>
+          <p class="services__count"><span data-service-count>01</span> / 04</p>
+        </div>
+      </div>
 
-    <ol class="svc-list">
-      <li class="svc" data-svc>
-        <a class="svc__link" href="#offres">
-          <span class="svc__title">Sites web</span>
-          <span class="svc__body">
-            <span class="svc__desc">Création et refonte. Des sites rapides, clairs sur mobile, pensés pour que vos visiteurs vous contactent.</span>
-            <span class="svc__tags">Création · Refonte · Formulaire · SEO</span>
-          </span>
-          <span class="svc__arrow" aria-hidden="true">→</span>
-        </a>
-        <figure class="svc__media" aria-hidden="true">
-          <!-- EMPLACEMENT : capture d'écran d'un site réalisé (4:3) -->
-          <div class="ph" data-label="Capture site réalisé · 4:3"></div>
-        </figure>
-      </li>
-      <li class="svc" data-svc>
-        <a class="svc__link" href="/photographie/">
-          <span class="svc__title">Photographie</span>
-          <span class="svc__body">
-            <span class="svc__desc">Portraits, équipe, locaux, produits, réalisations, événements. Par Tim, notre photographe. Jamais de banque d'images.</span>
-            <span class="svc__tags">Avec ou sans site web</span>
-          </span>
-          <span class="svc__arrow" aria-hidden="true">→</span>
-        </a>
-        <figure class="svc__media" aria-hidden="true">
-          <!-- EMPLACEMENT : photo de Tim (portrait pro) -->
-          <div class="ph" data-label="Photo Tim · portrait professionnel"></div>
-        </figure>
-      </li>
-      <li class="svc" data-svc>
-        <a class="svc__link" href="#contact" data-preset-link="video">
-          <span class="svc__title">Vidéo</span>
-          <span class="svc__body">
-            <span class="svc__desc">Des vidéos courtes qui montrent votre activité, pour votre site et vos réseaux sociaux.</span>
-            <span class="svc__tags">Présentation · Réseaux sociaux · Hero de site</span>
-          </span>
-          <span class="svc__arrow" aria-hidden="true">→</span>
-        </a>
-        <figure class="svc__media" aria-hidden="true">
-          <!-- EMPLACEMENT : image extraite d'une vidéo (ex. Planning Familial de Huy) -->
-          <div class="ph" data-label="Extrait vidéo · 16:9"></div>
-        </figure>
-      </li>
-      <li class="svc" data-svc>
-        <a class="svc__link" href="#contact" data-preset-link="autre">
-          <span class="svc__title">Accompagnement</span>
-          <span class="svc__body">
-            <span class="svc__desc">Google Business Profile, référencement local, maintenance, petites automatisations. Nous restons là après la mise en ligne.</span>
-            <span class="svc__tags">Google · SEO local · Maintenance</span>
-          </span>
-          <span class="svc__arrow" aria-hidden="true">→</span>
-        </a>
-        <figure class="svc__media" aria-hidden="true">
-          <!-- EMPLACEMENT : photo de l'équipe au travail -->
-          <div class="ph" data-label="Photo équipe GLOW au travail"></div>
-        </figure>
-      </li>
-    </ol>
+      <ol class="services__list">
+        <li class="service" data-service>
+          <span class="service__num">01</span>
+          <h3 class="service__name">Sites web</h3>
+          <p class="service__desc">Création et refonte de sites rapides, clairs et agréables sur mobile, pensés pour que vos visiteurs vous contactent.</p>
+          <ul class="service__tags"><li>Création</li><li>Refonte</li><li>Formulaire</li><li>Référencement</li></ul>
+          <a class="link-arrow" href="#offres">Voir les offres</a>
+        </li>
+        <li class="service" data-service>
+          <span class="service__num">02</span>
+          <h3 class="service__name">Photographie</h3>
+          <p class="service__desc">Portraits, équipe, locaux, produits, réalisations, événements. Par Tim, notre photographe. Avec ou sans site web.</p>
+          <ul class="service__tags"><li>Portraits</li><li>Équipe</li><li>Locaux</li><li>Produits</li></ul>
+          <a class="link-arrow" href="/photographie/">Découvrir la photographie</a>
+        </li>
+        <li class="service" data-service>
+          <span class="service__num">03</span>
+          <h3 class="service__name">Vidéo</h3>
+          <p class="service__desc">Des vidéos courtes qui montrent votre activité, pour votre site et vos réseaux sociaux.</p>
+          <ul class="service__tags"><li>Présentation</li><li>Réseaux sociaux</li><li>Vidéo de site</li></ul>
+          <a class="link-arrow" href="#contact" data-preset-link="video">Parler d'une vidéo</a>
+        </li>
+        <li class="service" data-service>
+          <span class="service__num">04</span>
+          <h3 class="service__name">Accompagnement</h3>
+          <p class="service__desc">Fiche Google, référencement local, maintenance et petites automatisations. Nous restons là après la mise en ligne.</p>
+          <ul class="service__tags"><li>Google Business Profile</li><li>SEO local</li><li>Maintenance</li></ul>
+          <a class="link-arrow" href="#contact" data-preset-link="autre">En parler</a>
+        </li>
+      </ol>
+    </div>
   </section>
 
   <!-- ============================================================
