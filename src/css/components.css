@@ -26,6 +26,46 @@
 }
 .loader__logo { position: relative; width: min(64vw, 46rem); height: auto; overflow: visible; opacity: 0; }
 .loader.is-drawing .loader__logo { opacity: 1; }
+.loader.is-waiting { pointer-events: auto; cursor: pointer; }
+.loader__hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  transform: translateX(-50%);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+}
+/* petite molette de souris qui invite à défiler */
+.loader__wheel {
+  position: relative;
+  width: 1.4rem;
+  height: 2.2rem;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+}
+.loader__wheel::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0.4rem;
+  width: 3px;
+  height: 0.45rem;
+  margin-left: -1.5px;
+  border-radius: 3px;
+  background: currentColor;
+  animation: loader-wheel 1.6s var(--ease-in-out) infinite;
+}
+@keyframes loader-wheel {
+  0% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(0.7rem); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
 .loader__count {
   position: absolute;
   left: var(--gutter);
@@ -305,3 +345,4 @@
 /* Pages qui s'ouvrent sur une photo sombre : header clair tant qu'on est en haut */
 :is(.page-photo, .page-thanks) .header:not(.is-compact) { color: var(--paper); }
 :is(.page-photo, .page-thanks) .header:not(.is-compact) .header__cta { --btn-bg: var(--paper); --btn-fg: var(--ink); }
+@media (max-width: 47.99em) { .loader__tag { display: none; } }

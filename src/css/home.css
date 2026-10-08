@@ -76,7 +76,7 @@
 /* Grand cadre vidéo */
 .hero__media {
   position: relative;
-  max-width: 88rem;
+  max-width: min(100%, 52rem);
   margin: var(--space-5) auto 0;
   aspect-ratio: 16 / 9;
   border-radius: 1.5rem;
