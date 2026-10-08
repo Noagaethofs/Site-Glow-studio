@@ -343,6 +343,6 @@
 .form__submit { border-radius: 999px; }
 
 /* Pages qui s'ouvrent sur une photo sombre : header clair tant qu'on est en haut */
-:is(.page-photo, .page-thanks) .header:not(.is-compact) { color: var(--paper); }
-:is(.page-photo, .page-thanks) .header:not(.is-compact) .header__cta { --btn-bg: var(--paper); --btn-fg: var(--ink); }
+:is(.page-home, .page-photo, .page-thanks) .header:not(.is-compact) { color: var(--paper); }
+:is(.page-home, .page-photo, .page-thanks) .header:not(.is-compact) .header__cta { --btn-bg: var(--paper); --btn-fg: var(--ink); }
 @media (max-width: 47.99em) { .loader__tag { display: none; } }

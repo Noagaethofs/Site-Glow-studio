@@ -29,6 +29,24 @@ export function initHero() {
     .from(media, { y: 60, opacity: 0, clipPath: 'inset(8% 6% 0% 6% round 1.5rem)', duration: 1.4, ease: 'expo.out', clearProps: 'clipPath' }, 0.6)
     .from(inner, { scale: 1.15, duration: 1.8 }, 0.6);
 
+  // Lumière qui suit le curseur (desktop avec souris)
+  const spot = hero.querySelector('[data-hero-spot]');
+  gsap.matchMedia().add(`${MQ.desktop} and ${MQ.finePointer}`, () => {
+    const xTo = gsap.quickTo(spot, 'x', { duration: 1.4, ease: 'power3.out' });
+    const yTo = gsap.quickTo(spot, 'y', { duration: 1.4, ease: 'power3.out' });
+    const onMove = (e) => {
+      const r = hero.getBoundingClientRect();
+      if (e.clientY > r.bottom) return;
+      xTo(e.clientX - r.left);
+      yTo(e.clientY - r.top);
+      gsap.to(spot, { opacity: 0.55, duration: 0.8, overwrite: 'auto' });
+    };
+    const onLeave = () => gsap.to(spot, { opacity: 0, duration: 0.8 });
+    hero.addEventListener('pointermove', onMove);
+    hero.addEventListener('pointerleave', onLeave);
+    return () => { hero.removeEventListener('pointermove', onMove); hero.removeEventListener('pointerleave', onLeave); };
+  });
+
   // Parallaxe léger de la vidéo dans son cadre (desktop uniquement)
   gsap.matchMedia().add(MQ.desktop, () => {
     gsap.fromTo(inner, { yPercent: -4 }, {
