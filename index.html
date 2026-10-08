@@ -365,20 +365,22 @@
   </section>
 
   <!-- ============================================================
-       10 · CONTACT — la lumière GLOW en fond, titre XXL centré
+       10 · CONTACT — un cadre compact sur fond noir : titre, phrase,
+       boutons (email, Instagram) ; le formulaire de devis s'ouvre dans
+       la carte (<details>, fonctionne sans JavaScript).
        ============================================================ -->
-  <section class="contact contact--glow" id="contact" aria-labelledby="contact-title">
-    <h2 class="contact__title" id="contact-title" data-split>On en <em>parle&nbsp;?</em></h2>
-    <div class="contact__grid">
-      <div class="contact__info">
-        <p class="contact__lead">Un site, des photos, une vidéo, ou simplement une question : écrivez-nous. Réponse sous <span class="todo">[48 h]</span>.</p>
-        <dl class="contact__details">
-          <div><dt>Email</dt><dd><a href="mailto:[EMAIL]" class="todo">[EMAIL]</a></dd></div>
-          <div><dt>Téléphone</dt><dd><a href="tel:[TELEPHONE]" class="todo">[TÉLÉPHONE]</a></dd></div>
-          <div><dt>Zone</dt><dd><span class="todo">[À COMPLÉTER]</span></dd></div>
-        </dl>
+  <section class="contact contact--card theme-ink" id="contact" aria-labelledby="contact-title">
+    <div class="cta-card">
+      <h2 class="cta-card__title" id="contact-title">On lance <br>votre <em class="glow-text">projet&nbsp;?</em></h2>
+      <p class="cta-card__lead">Parlez-nous de votre activité et de ce que vous voulez créer. Réponse rapide, devis gratuit.</p>
+      <div class="cta-card__actions">
+        <a class="btn btn--light cta-card__btn" href="mailto:[EMAIL]"><span class="todo">[EMAIL]</span></a>
+        <a class="cta-card__btn cta-card__btn--ghost" href="[INSTAGRAM]" target="_blank" rel="noopener"><span class="todo">Instagram</span></a>
       </div>
-      <!-- @include partials/contact-form.html preset="site" id="home" submit="Envoyer la demande" placeholder="Votre activité, ce dont vous avez besoin, vos délais…" -->
+      <details class="cta-card__form" data-cta-form>
+        <summary class="cta-card__toggle">Ou remplissez le formulaire de devis</summary>
+        <!-- @include partials/contact-form.html preset="site" id="home" submit="Envoyer la demande" placeholder="Votre activité, ce dont vous avez besoin, vos délais…" -->
+      </details>
     </div>
   </section>
 </main>

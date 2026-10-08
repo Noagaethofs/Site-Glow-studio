@@ -90,6 +90,8 @@ export function initForms() {
   document.querySelectorAll('[data-preset-link]').forEach((link) => {
     link.addEventListener('click', () => {
       forms.forEach((form) => setType(form, link.dataset.presetLink));
+      // formulaire replié dans la carte de contact : on l'ouvre
+      document.querySelectorAll('[data-cta-form]').forEach((d) => { d.open = true; });
     });
   });
 }
