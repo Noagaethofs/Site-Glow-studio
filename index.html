@@ -217,65 +217,70 @@
   </section>
 
   <!-- ============================================================
-       05 · RÉALISATIONS — rail horizontal léger (glisser / flèches)
-       Pour ajouter un projet : dupliquer un <article class="project">
-       et créer sa page avec `npm run new-project` (voir README).
+       05 · RÉALISATIONS — infos du projet à gauche, écran à droite.
+       On fait glisser l'écran (doigt ou souris) pour changer de projet.
+       Pour ajouter un projet : ajouter une diapositive .screen__slide ET
+       un bloc .case-info au même rang, puis créer sa page (npm run new-project).
        ============================================================ -->
-  <section class="work" id="realisations" aria-labelledby="work-title">
+  <section class="work" id="realisations" aria-labelledby="work-title" data-cases>
     <header class="work__head">
-      <div>
-        <p class="tag">Réalisations</p>
-        <h2 class="work__title" id="work-title" data-split>Des projets réels, <em>pour de vrais clients.</em></h2>
-      </div>
-      <div class="work__nav">
-        <button class="work__btn" type="button" data-rail-prev aria-label="Projet précédent">←</button>
-        <button class="work__btn" type="button" data-rail-next aria-label="Projet suivant">→</button>
-      </div>
+      <p class="tag">Réalisations</p>
+      <h2 class="work__title" id="work-title" data-split>Des projets réels, <em>pour de vrais clients.</em></h2>
     </header>
 
-    <div class="rail" data-rail>
-      <article class="project">
-        <a class="project__link" href="/projets/j-clean-auto/" data-cursor-text="Voir">
-          <figure class="project__media">
-            <!-- EMPLACEMENT : visuel principal J-Clean Auto (4:5) -->
-            <div class="ph" data-label="J-Clean Auto · visuel"></div>
-          </figure>
-          <p class="project__meta"><span>01</span> Nettoyage automobile · Site web</p>
-          <h3 class="project__name">J-Clean Auto</h3>
-          <p class="project__desc">Site premium mais accessible : hero vidéo, comparateur avant / après, tarifs, témoignages.</p>
-        </a>
-      </article>
-      <article class="project">
-        <a class="project__link" href="/projets/planning-familial-huy/" data-cursor-text="Voir">
-          <figure class="project__media">
-            <!-- EMPLACEMENT : image extraite de la vidéo Planning Familial de Huy (4:5) -->
-            <div class="ph" data-label="Planning Familial de Huy · extrait vidéo"></div>
-          </figure>
-          <p class="project__meta"><span>02</span> Santé · Association · Vidéo</p>
-          <h3 class="project__name">Planning Familial de Huy</h3>
-          <p class="project__desc">Une vidéo pour présenter le centre, son équipe et ses services, simplement.</p>
-        </a>
-      </article>
-      <article class="project">
-        <a class="project__link" href="/projets/psychologue/" data-cursor-text="Voir">
-          <figure class="project__media">
-            <!-- EMPLACEMENT : visuel du site de la psychologue (4:5) -->
-            <div class="ph" data-label="Site psychologue · visuel"></div>
-          </figure>
-          <p class="project__meta"><span>03</span> Santé · Profession libérale · Site web</p>
-          <h3 class="project__name"><span class="todo">[Nom]</span> — Psychologue</h3>
-          <p class="project__desc">Un site calme et clair, qui met en confiance avant le premier rendez-vous.</p>
-        </a>
-      </article>
-      <article class="project project--next">
-        <a class="project__link" href="#contact">
-          <div class="project__media project__media--next">
-            <p>Votre projet <em>ici&nbsp;?</em></p>
+    <div class="cases">
+      <div class="cases__info" aria-live="polite">
+        <article class="case-info is-active" data-case-info>
+          <p class="case-info__meta"><span>01</span> Nettoyage automobile · Site web</p>
+          <h3 class="case-info__name">J-Clean Auto</h3>
+          <p class="case-info__desc">Un site premium mais accessible : hero vidéo, comparateur avant / après, tarifs et témoignages, pensé d'abord pour le mobile.</p>
+          <a class="link-arrow" href="/projets/j-clean-auto/">Voir le projet</a>
+        </article>
+        <article class="case-info" data-case-info hidden>
+          <p class="case-info__meta"><span>02</span> Santé · Association · Vidéo marketing</p>
+          <h3 class="case-info__name">Planning Familial de Huy</h3>
+          <p class="case-info__desc">Une vidéo pour présenter le centre, son équipe et ses services, de manière simple et rassurante.</p>
+          <a class="link-arrow" href="/projets/planning-familial-huy/">Voir le projet</a>
+        </article>
+        <article class="case-info" data-case-info hidden>
+          <p class="case-info__meta"><span>03</span> Santé · Profession libérale · Site web</p>
+          <h3 class="case-info__name"><span class="todo">[Nom]</span> — Psychologue</h3>
+          <p class="case-info__desc">Un site calme et clair, qui met en confiance avant même le premier rendez-vous.</p>
+          <a class="link-arrow" href="/projets/psychologue/">Voir le projet</a>
+        </article>
+
+        <div class="cases__nav">
+          <button class="cases__btn" type="button" data-case-prev aria-label="Projet précédent">←</button>
+          <p class="cases__count" aria-hidden="true"><span data-case-count>01</span> / 03</p>
+          <button class="cases__btn" type="button" data-case-next aria-label="Projet suivant">→</button>
+        </div>
+        <p class="cases__more">Votre projet ici ? <a href="#contact">Parlons-en</a></p>
+      </div>
+
+      <!-- Écran : fenêtre de navigateur qui affiche le projet -->
+      <div class="screen" data-screen tabindex="0" role="group" aria-roledescription="carrousel" aria-label="Aperçu des projets : faites glisser ou utilisez les flèches">
+        <div class="screen__bar" aria-hidden="true">
+          <span class="screen__dots"><i></i><i></i><i></i></span>
+          <span class="screen__url" data-case-url>j-clean-auto</span>
+        </div>
+        <div class="screen__view">
+          <div class="screen__track" data-screen-track>
+            <figure class="screen__slide" data-url="j-clean-auto">
+              <!-- EMPLACEMENT : capture d'écran du site J-Clean Auto (16:10, 1600×1000) -->
+              <div class="ph" data-label="Capture du site J-Clean Auto · 16:10"></div>
+            </figure>
+            <figure class="screen__slide" data-url="planning-familial-huy">
+              <!-- EMPLACEMENT : image extraite de la vidéo Planning Familial de Huy (16:10) -->
+              <div class="ph" data-label="Planning Familial de Huy · extrait vidéo · 16:10"></div>
+            </figure>
+            <figure class="screen__slide" data-url="psychologue">
+              <!-- EMPLACEMENT : capture d'écran du site de la psychologue (16:10) -->
+              <div class="ph" data-label="Capture du site psychologue · 16:10"></div>
+            </figure>
           </div>
-          <p class="project__meta">Le portfolio complet arrive bientôt</p>
-          <h3 class="project__name">Parlons-en <span aria-hidden="true">→</span></h3>
-        </a>
-      </article>
+        </div>
+        <p class="screen__hint" aria-hidden="true">Glisser pour changer de projet</p>
+      </div>
     </div>
   </section>
 
