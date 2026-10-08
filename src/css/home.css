@@ -163,10 +163,13 @@
 .statement__label { position: relative; font-size: var(--fs-sm); color: var(--muted); }
 .statement__text {
   position: relative;
-  max-width: 17ch;
-  font-size: clamp(2.6rem, 1rem + 6vw, 8rem);
-  line-height: 0.98;
+  max-width: 15ch;
+  font-size: clamp(3rem, 1rem + 7.4vw, 10rem);
+  line-height: 0.95;
 }
+/* les deux phrases sont séparées : une respiration entre le constat et le problème */
+.statement__sentence { display: block; }
+.statement__sentence + .statement__sentence { margin-top: 0.45em; }
 /* Mots mis en évidence : ils s'allument dans la lumière du logo.
    Le dégradé est posé sur chaque mot découpé (.w), pas sur le conteneur,
    sinon la découpe en mots casse le rendu du texte en dégradé. */
