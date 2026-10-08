@@ -163,13 +163,22 @@
 .statement__label { position: relative; font-size: var(--fs-sm); color: var(--muted); }
 .statement__text {
   position: relative;
-  max-width: 24ch;
-  font-size: clamp(2.6rem, 0.8rem + 5vw, 6.5rem); /* desktop : une phrase par ligne */
+  max-width: 17ch;
+  font-size: clamp(2.6rem, 1rem + 6vw, 8rem);
   line-height: 0.98;
 }
-/* une phrase par ligne (ou bloc) : texte plus court, donc plus grand et plus aéré */
-.statement__first, .statement__second { display: block; }
-.statement__second { margin-top: 0.12em; }
+/* Mots mis en évidence : la lumière du logo les balaie de gauche à droite
+   au rythme du scroll (--p piloté en JS, 0 % → 100 %) */
+.hl {
+  --p: 0%;
+  background-image: var(--glow), linear-gradient(var(--fg), var(--fg));
+  background-size: var(--p) 100%, 100% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (prefers-reduced-motion: reduce) { .hl { --p: 100%; } }
 .statement__text .w { display: inline-block; }
 .statement__answer {
   position: relative;
