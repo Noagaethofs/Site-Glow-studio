@@ -218,14 +218,14 @@
 
   <!-- ============================================================
        05 · RÉALISATIONS — infos du projet à gauche, écran à droite.
-       On fait glisser l'écran (doigt ou souris) pour changer de projet.
+       La section reste en place pendant qu'on fait défiler : les projets
+       défilent verticalement dans l'écran (haut ↔ bas).
        Pour ajouter un projet : ajouter une diapositive .screen__slide ET
        un bloc .case-info au même rang, puis créer sa page (npm run new-project).
        ============================================================ -->
   <section class="work" id="realisations" aria-labelledby="work-title" data-cases>
     <header class="work__head">
-      <p class="tag">Réalisations</p>
-      <h2 class="work__title" id="work-title" data-split>Des projets réels, <em>pour de vrais clients.</em></h2>
+      <h2 class="work__title" id="work-title" data-split>Nos <em>réalisations</em></h2>
     </header>
 
     <div class="cases">
@@ -249,16 +249,20 @@
           <a class="link-arrow" href="/projets/psychologue/">Voir le projet</a>
         </article>
 
+        <!-- Indicateur vertical : un trait par projet, cliquable -->
         <div class="cases__nav">
-          <button class="cases__btn" type="button" data-case-prev aria-label="Projet précédent">←</button>
+          <div class="cases__steps" role="tablist" aria-label="Projets">
+            <button type="button" role="tab" aria-label="Projet 1 : J-Clean Auto" data-case-step></button>
+            <button type="button" role="tab" aria-label="Projet 2 : Planning Familial de Huy" data-case-step></button>
+            <button type="button" role="tab" aria-label="Projet 3 : site de psychologue" data-case-step></button>
+          </div>
           <p class="cases__count" aria-hidden="true"><span data-case-count>01</span> / 03</p>
-          <button class="cases__btn" type="button" data-case-next aria-label="Projet suivant">→</button>
         </div>
         <p class="cases__more">Votre projet ici ? <a href="#contact">Parlons-en</a></p>
       </div>
 
       <!-- Écran : fenêtre de navigateur qui affiche le projet -->
-      <div class="screen" data-screen tabindex="0" role="group" aria-roledescription="carrousel" aria-label="Aperçu des projets : faites glisser ou utilisez les flèches">
+      <div class="screen" data-screen role="group" aria-roledescription="carrousel" aria-label="Aperçu des projets">
         <div class="screen__bar" aria-hidden="true">
           <span class="screen__dots"><i></i><i></i><i></i></span>
           <span class="screen__url" data-case-url>j-clean-auto</span>
@@ -279,7 +283,7 @@
             </figure>
           </div>
         </div>
-        <p class="screen__hint" aria-hidden="true">Glisser pour changer de projet</p>
+        <p class="screen__hint" aria-hidden="true"><span>↕</span> Faites défiler pour changer de projet</p>
       </div>
     </div>
   </section>

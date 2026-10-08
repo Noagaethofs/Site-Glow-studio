@@ -361,6 +361,7 @@
    05 · RÉALISATIONS — infos à gauche, écran à droite (glisser pour changer)
    ========================================================================== */
 .work { padding: var(--space-6) var(--gutter); }
+.cases { position: relative; }
 .work__head { display: grid; gap: var(--space-2); justify-items: start; margin-bottom: var(--space-5); }
 .work__title { max-width: 18ch; font-size: clamp(2.25rem, 1rem + 3.6vw, 5rem); line-height: 0.95; }
 
@@ -374,16 +375,17 @@
 .case-info__desc { max-width: 40ch; font-size: var(--fs-md); line-height: 1.45; color: var(--muted); }
 
 .cases__nav { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-2); }
-.cases__btn {
-  display: grid;
-  place-items: center;
-  width: 3rem; height: 3rem;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  font-size: 1.1rem;
-  transition: background var(--dur-fast), border-color var(--dur-fast);
+/* indicateur : un trait par projet, le projet affiché est éclairé */
+.cases__steps { display: flex; gap: 0.4rem; }
+.cases__steps button {
+  width: 1.6rem;
+  height: 4px;
+  padding: 0;
+  border-radius: 4px;
+  background: var(--line);
+  transition: width 0.4s var(--ease-out), background 0.4s;
 }
-@media (hover: hover) { .cases__btn:hover { background: var(--glow); border-color: transparent; } }
+.cases__steps button[aria-selected="true"] { width: 3rem; background: var(--glow); }
 .cases__count { font-size: var(--fs-sm); font-weight: 500; font-variant-numeric: tabular-nums; color: var(--muted); }
 .cases__count span { color: var(--fg); }
 .cases__more { font-size: var(--fs-sm); color: var(--muted); }
@@ -400,9 +402,7 @@
     0 0 0 1px rgba(255, 255, 255, 0.06) inset,
     0 40px 80px -30px rgba(185, 148, 255, 0.45),
     0 20px 40px -20px rgba(10, 9, 10, 0.5);
-  touch-action: pan-y;          /* le swipe horizontal est géré en JS, le scroll vertical reste natif */
   user-select: none;
-  outline-offset: 6px;
 }
 .screen__bar {
   display: flex;
@@ -436,10 +436,8 @@
   border-radius: 0.6rem;
   overflow: hidden;
   background: #1b1a1b;
-  cursor: grab;
 }
-.screen.is-dragging .screen__view { cursor: grabbing; }
-.screen__track { display: flex; height: 100%; will-change: transform; }
+.screen__track { display: flex; flex-direction: column; height: 100%; will-change: transform; }
 .screen__slide { flex: 0 0 100%; height: 100%; }
 .screen__slide .ph { --ph: #ebe5e0; }
 .screen__hint {
@@ -451,6 +449,8 @@
   color: var(--muted);
   white-space: nowrap;
 }
+.screen__hint span { display: inline-block; margin-right: 0.3em; color: var(--coral); animation: hint-bob 1.8s var(--ease-in-out) infinite; }
+@keyframes hint-bob { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(2px); } }
 
 @media (min-width: 64em) {
   .cases { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); column-gap: var(--space-5); align-items: center; }

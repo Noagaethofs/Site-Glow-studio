@@ -1,88 +1,70 @@
 /**
  * Réalisations : un écran (fenêtre de navigateur) affiche un projet.
- * - On fait glisser l'écran (doigt ou souris) pour passer au projet suivant.
- * - Flèches précédent / suivant, et flèches du clavier quand l'écran a le focus.
- * - Les infos à gauche (nom, contexte, lien) changent avec le projet.
+ * La section reste en place pendant qu'on fait défiler la page : chaque
+ * « cran » de défilement (glisser vers le haut / le bas, molette) fait
+ * passer au projet suivant ou précédent, qui arrive verticalement dans
+ * l'écran. Les infos à gauche changent avec le projet.
+ * Les petits traits sous le texte permettent aussi d'aller à un projet.
+ * Sans animation (reduced-motion) : pas de section bloquée, les traits
+ * suffisent pour changer de projet.
  */
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { prefersReducedMotion } from './env.js';
+import { scrollToTarget } from './smooth.js';
 
 export function initWork() {
   const root = document.querySelector('[data-cases]');
   if (!root) return;
 
-  const screen = root.querySelector('[data-screen]');
+  const cases = root.querySelector('.cases');
   const track = root.querySelector('[data-screen-track]');
   const slides = [...track.children];
   const infos = [...root.querySelectorAll('[data-case-info]')];
+  const steps = [...root.querySelectorAll('[data-case-step]')];
   const url = root.querySelector('[data-case-url]');
   const count = root.querySelector('[data-case-count]');
+  const n = slides.length;
   const anim = !prefersReducedMotion();
-  let index = 0;
+  let index = -1;
 
-  const go = (i, dir = 0) => {
-    index = (i + slides.length) % slides.length;
-    gsap.to(track, { xPercent: -100 * index, duration: anim ? 0.8 : 0, ease: 'expo.out' });
+  const show = (i, dir = 1) => {
+    if (i === index) return;
+    index = i;
+    gsap.to(track, { yPercent: -100 * index, duration: anim ? 0.9 : 0, ease: 'expo.inOut', overwrite: true });
     infos.forEach((el, j) => { el.hidden = j !== index; el.classList.toggle('is-active', j === index); });
     if (anim) {
-      gsap.fromTo(infos[index].children, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out', stagger: 0.05 });
+      gsap.fromTo(infos[index].children,
+        { y: 24 * dir, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out', stagger: 0.05 });
     }
+    steps.forEach((b, j) => b.setAttribute('aria-selected', String(j === index)));
     if (url) url.textContent = slides[index].dataset.url || '';
     if (count) count.textContent = String(index + 1).padStart(2, '0');
   };
 
-  root.querySelector('[data-case-prev]')?.addEventListener('click', () => go(index - 1, -1));
-  root.querySelector('[data-case-next]')?.addEventListener('click', () => go(index + 1, 1));
-  screen.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1, 1); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - 1, -1); }
+  show(0);
+
+  if (!anim || n < 2) {
+    steps.forEach((b, j) => b.addEventListener('click', () => show(j, j > index ? 1 : -1)));
+    return;
+  }
+
+  // La section reste en place le temps de parcourir les projets
+  const st = ScrollTrigger.create({
+    trigger: cases,
+    start: 'center center',
+    end: () => `+=${window.innerHeight * 0.75 * (n - 1)}`,
+    pin: true,
+    invalidateOnRefresh: true,
+    onUpdate: (self) => {
+      const i = Math.min(n - 1, Math.round(self.progress * (n - 1)));
+      if (i !== index) show(i, self.direction);
+    },
   });
 
-  // --- Glisser (souris et tactile) --------------------------------------
-  let startX = 0;
-  let startY = 0;
-  let dragging = false;
-  let decided = false;   // on sait si le geste est horizontal (swipe) ou vertical (scroll)
-  let horizontal = false;
-  const width = () => screen.querySelector('.screen__view').getBoundingClientRect().width;
-
-  screen.addEventListener('pointerdown', (e) => {
-    if (e.button !== 0) return;
-    dragging = true;
-    decided = false;
-    horizontal = false;
-    startX = e.clientX;
-    startY = e.clientY;
-  });
-  window.addEventListener('pointermove', (e) => {
-    if (!dragging) return;
-    const dx = e.clientX - startX;
-    const dy = e.clientY - startY;
-    if (!decided && Math.hypot(dx, dy) > 8) {
-      decided = true;
-      horizontal = Math.abs(dx) > Math.abs(dy);
-      if (horizontal) screen.classList.add('is-dragging');
-    }
-    if (horizontal) {
-      // l'écran suit le doigt, avec résistance aux extrémités
-      const edge = (index === 0 && dx > 0) || (index === slides.length - 1 && dx < 0);
-      const offset = (dx / width()) * 100 * (edge ? 0.35 : 1);
-      gsap.set(track, { xPercent: -100 * index + offset });
-    }
-  });
-  const end = (e) => {
-    if (!dragging) return;
-    dragging = false;
-    screen.classList.remove('is-dragging');
-    if (!horizontal) return;
-    const dx = e.clientX - startX;
-    if (dx < -50 && index < slides.length - 1) go(index + 1, 1);
-    else if (dx > 50 && index > 0) go(index - 1, -1);
-    else go(index);
-  };
-  window.addEventListener('pointerup', end);
-  window.addEventListener('pointercancel', end);
-  screen.addEventListener('dragstart', (e) => e.preventDefault());
-
-  go(0);
+  // Les traits : aller directement à un projet
+  steps.forEach((b, j) => b.addEventListener('click', () => {
+    scrollToTarget(st.start + ((st.end - st.start) * j) / (n - 1) + 1);
+  }));
 }
