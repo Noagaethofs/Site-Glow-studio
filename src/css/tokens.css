@@ -35,7 +35,8 @@
   /* --- Couleurs -----------------------------------------------------------
      Base claire et chaude. Le dégradé du logo (corail → pêche → lilas) est
      la « lumière » de GLOW : utilisé très légèrement, jamais en aplat criard. */
-  --ink: #1f1b1c;          /* noir du logo */
+  --ink: #1f1b1c;          /* noir du logo (textes) */
+  --night: #0a090a;        /* noir profond des sections sombres */
   --ink-2: #2a2526;
   --paper: #fbf8f5;        /* blanc chaud */
   --paper-2: #f3eee9;      /* blanc chaud appuyé */
@@ -43,9 +44,9 @@
   --line-dark: rgba(251, 248, 245, 0.14);
   --line-light: rgba(31, 27, 28, 0.12);
 
-  --coral: #ff9f9b;
-  --peach: #f9d3c4;
-  --lilac: #c9a9f8;
+  --coral: #ff8f8a;
+  --peach: #ffc9b3;
+  --lilac: #b994ff;
   --glow: linear-gradient(100deg, var(--coral) 0%, var(--peach) 48%, var(--lilac) 100%);
   /* version adoucie pour les fonds (≈ 35 % d'intensité) */
   --glow-soft: linear-gradient(100deg, #ffe3e1 0%, #fdf0ea 48%, #ece2fd 100%);
@@ -101,11 +102,11 @@
 
 /* Thème sombre appliqué à une section (contraste ponctuel) */
 .theme-ink {
-  --bg: var(--ink);
+  --bg: var(--night);
   --fg: var(--paper);
   --muted: #a69e9c;
   --line: var(--line-dark);
-  --ph: #2c2728;
+  --ph: #1b1a1b;
 }
 /* Ancien nom conservé : le clair est désormais le thème par défaut */
 .theme-paper { --bg: var(--paper); }

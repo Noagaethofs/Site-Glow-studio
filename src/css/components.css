@@ -247,7 +247,7 @@
 .footer {
   position: relative;
   padding: var(--space-5) var(--gutter) 0;
-  background: var(--ink);
+  background: var(--night);
   color: var(--paper);
   overflow: hidden;
 }

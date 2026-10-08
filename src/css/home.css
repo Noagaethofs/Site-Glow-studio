@@ -14,15 +14,6 @@
   background: var(--bg);
   color: var(--fg);
 }
-/* fond sombre légèrement texturé : un grain très fin, comme un tirage photo */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: var(--grain);
-  opacity: 0.5;
-  pointer-events: none;
-}
 
 /* Lumière douce aux couleurs du logo, fixe et discrète */
 .hero__light {
@@ -34,9 +25,9 @@
   transform: translateX(-50%);
   /* dégradés CSS (lisses sur fond sombre, sans effet de bandes) */
   background:
-    radial-gradient(30% 34% at 36% 46%, rgba(255, 159, 155, 0.22), transparent 100%),
-    radial-gradient(30% 34% at 64% 54%, rgba(201, 169, 248, 0.22), transparent 100%),
-    radial-gradient(45% 45% at 50% 50%, rgba(249, 211, 196, 0.10), transparent 100%);
+    radial-gradient(30% 34% at 36% 46%, rgba(255, 143, 138, 0.30), transparent 100%),
+    radial-gradient(30% 34% at 64% 54%, rgba(185, 148, 255, 0.32), transparent 100%),
+    radial-gradient(45% 45% at 50% 50%, rgba(255, 201, 179, 0.10), transparent 100%);
   pointer-events: none;
 }
 /* Petite lumière qui suit le curseur (desktop) : la marque « brille » */
@@ -46,7 +37,7 @@
   width: 34vmax;
   aspect-ratio: 1;
   margin: -17vmax 0 0 -17vmax;
-  background: radial-gradient(closest-side, rgba(249, 211, 196, 0.35), rgba(201, 169, 248, 0.16) 55%, transparent);
+  background: radial-gradient(closest-side, rgba(255, 201, 179, 0.42), rgba(185, 148, 255, 0.22) 55%, transparent);
   opacity: 0;
   pointer-events: none;
   will-change: transform;
@@ -118,8 +109,8 @@
   border-radius: 1.5rem;
   overflow: hidden;
 }
-.hero__media { box-shadow: 0 40px 120px -40px rgba(201, 169, 248, 0.35); }
-.hero__media .ph--hero { --ph: #2b2526; }
+.hero__media { box-shadow: 0 40px 120px -40px rgba(185, 148, 255, 0.45); }
+.hero__media .ph--hero { --ph: #1b1a1b; }
 .hero__media video { width: 100%; height: 100%; }
 .hero__caption {
   position: absolute;
@@ -127,7 +118,7 @@
   top: 1.1rem;
   padding: 0.4em 0.9em;
   border-radius: 999px;
-  background: rgba(31, 27, 28, 0.7);
+  background: rgba(10, 9, 10, 0.7);
   color: var(--paper);
   font-size: var(--fs-sm);
 }
@@ -157,7 +148,7 @@
   left: 50%; top: 55%;
   width: 70vw; aspect-ratio: 2 / 1;
   transform: translate(-50%, -50%);
-  background: radial-gradient(closest-side, rgba(201, 169, 248, 0.14), rgba(255, 159, 155, 0.06) 60%, transparent);
+  background: radial-gradient(closest-side, rgba(185, 148, 255, 0.2), rgba(255, 143, 138, 0.09) 60%, transparent);
   pointer-events: none;
 }
 .statement__label { position: relative; font-size: var(--fs-sm); color: var(--muted); }
