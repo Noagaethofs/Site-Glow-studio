@@ -403,6 +403,8 @@
     0 40px 80px -30px rgba(185, 148, 255, 0.45),
     0 20px 40px -20px rgba(10, 9, 10, 0.5);
   user-select: none;
+  touch-action: none;   /* les glissés sur l'écran sont gérés en JS */
+  outline-offset: 6px;
 }
 .screen__bar {
   display: flex;

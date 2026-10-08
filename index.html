@@ -218,8 +218,8 @@
 
   <!-- ============================================================
        05 · RÉALISATIONS — infos du projet à gauche, écran à droite.
-       La section reste en place pendant qu'on fait défiler : les projets
-       défilent verticalement dans l'écran (haut ↔ bas).
+       On change de projet en glissant (haut ↔ bas) ou en faisant défiler
+       sur l'écran uniquement ; ailleurs la page défile normalement.
        Pour ajouter un projet : ajouter une diapositive .screen__slide ET
        un bloc .case-info au même rang, puis créer sa page (npm run new-project).
        ============================================================ -->
@@ -262,7 +262,7 @@
       </div>
 
       <!-- Écran : fenêtre de navigateur qui affiche le projet -->
-      <div class="screen" data-screen role="group" aria-roledescription="carrousel" aria-label="Aperçu des projets">
+      <div class="screen" data-screen tabindex="0" role="group" aria-roledescription="carrousel" aria-label="Aperçu des projets : faites défiler sur l'écran ou utilisez les flèches haut et bas">
         <div class="screen__bar" aria-hidden="true">
           <span class="screen__dots"><i></i><i></i><i></i></span>
           <span class="screen__url" data-case-url>j-clean-auto</span>
@@ -283,7 +283,7 @@
             </figure>
           </div>
         </div>
-        <p class="screen__hint" aria-hidden="true"><span>↕</span> Faites défiler pour changer de projet</p>
+        <p class="screen__hint" aria-hidden="true"><span>↕</span> Glissez sur l'écran pour changer de projet</p>
       </div>
     </div>
   </section>
