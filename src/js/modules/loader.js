@@ -1,8 +1,8 @@
 /**
  * Intro de chargement.
  *  1. Une lumière douce aux couleurs du logo apparaît.
- *  2. Les contours de tout le logo GLOW STUDIO se tracent d'abord…
- *  3. …puis le logo se remplit.
+ *  2. Les contours de tout le logo GLOW STUDIO se tracent lentement…
+ *  3. …puis le noir arrive d'un coup, sur tout le logo.
  *  4. Le visiteur fait défiler (molette, glissé du doigt, flèche, clic) :
  *     l'écran remonte comme un rideau et le site apparaît.
  * Première visite de la session : on attend le geste du visiteur.
@@ -68,16 +68,16 @@ export function runLoader() {
     const intro = gsap.timeline();
     intro
       .to(light, { opacity: 1, duration: 1.2 * speed, ease: 'power2.out' }, 0)
-      .fromTo(light, { rotate: -8, scale: 0.9 }, { rotate: 8, scale: 1.05, duration: 2.4 * speed, ease: 'sine.inOut' }, 0)
-      // 1. tous les contours d'abord
-      .to(glyphs, { strokeDashoffset: 0, duration: 1.1 * speed, ease: 'power2.inOut', stagger: 0.1 * speed }, 0.15)
-      .to(studio, { strokeDashoffset: 0, duration: 0.6 * speed, ease: 'power1.inOut', stagger: 0.05 * speed }, 0.6 * speed)
-      // 2. puis le remplissage, d'un seul geste
-      .to(all, { fillOpacity: 1, duration: 0.6 * speed, ease: 'power2.out', stagger: 0.03 * speed }, 1.7 * speed)
-      .to(all, { strokeWidth: 0, duration: 0.3 * speed }, '>-0.1')
-      .from(tag, { opacity: 0, y: 12, duration: 0.6, ease: 'expo.out' }, 1.2 * speed)
+      .fromTo(light, { rotate: -8, scale: 0.9 }, { rotate: 8, scale: 1.05, duration: 3.2 * speed, ease: 'sine.inOut' }, 0)
+      // 1. les contours se tracent, lentement, lettre après lettre
+      .to(glyphs, { strokeDashoffset: 0, duration: 2 * speed, ease: 'power1.inOut', stagger: 0.22 * speed }, 0.2)
+      .to(studio, { strokeDashoffset: 0, duration: 1.1 * speed, ease: 'power1.inOut', stagger: 0.08 * speed }, 1.3 * speed)
+      // 2. puis le noir arrive d'un coup, sur tout le logo en même temps
+      .to(all, { fillOpacity: 1, duration: 0.12, ease: 'none' }, 3.1 * speed)
+      .set(all, { strokeWidth: 0 }, '>')
+      .from(tag, { opacity: 0, y: 12, duration: 0.6, ease: 'expo.out' }, 2 * speed)
       .to(counter, {
-        v: 100, duration: 2 * speed, ease: 'power1.inOut',
+        v: 100, duration: 3.1 * speed, ease: 'power1.inOut',
         onUpdate: () => { count.textContent = Math.round(counter.v); },
       }, 0);
 
