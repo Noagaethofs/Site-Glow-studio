@@ -163,10 +163,13 @@
 .statement__label { position: relative; font-size: var(--fs-sm); color: var(--muted); }
 .statement__text {
   position: relative;
-  max-width: 20ch;
-  font-size: clamp(2.5rem, 1rem + 5.4vw, 7.5rem);
+  max-width: 24ch;
+  font-size: clamp(2.6rem, 0.8rem + 5vw, 6.5rem); /* desktop : une phrase par ligne */
   line-height: 0.98;
 }
+/* une phrase par ligne (ou bloc) : texte plus court, donc plus grand et plus aéré */
+.statement__first, .statement__second { display: block; }
+.statement__second { margin-top: 0.12em; }
 .statement__text .w { display: inline-block; }
 .statement__answer {
   position: relative;
