@@ -466,110 +466,96 @@
 }
 
 /* ==========================================================================
-   06 · OFFRES — sélecteur de formule
+   06 · OFFRES — sombre, les trois formules visibles, une ligne chacune
    ========================================================================== */
-.offers { padding: var(--space-6) var(--gutter); background: var(--paper-2); }
-.offers__head { display: grid; justify-items: start; gap: var(--space-2); margin-bottom: var(--space-5); }
-.offers__title { max-width: 16ch; font-size: clamp(2.5rem, 1.2rem + 4.4vw, 6.5rem); }
+.offers { padding: var(--space-6) var(--gutter); }
+.offers__head { display: grid; gap: var(--space-3); margin-bottom: var(--space-5); }
+.offers__title { font-size: clamp(2.5rem, 1.2rem + 4.4vw, 6.5rem); }
 .offers__intro { max-width: 40ch; font-size: var(--fs-md); line-height: 1.4; color: var(--muted); }
-
-.plans { display: grid; gap: var(--space-4); }
-.plans__tabs { display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none; }
-.plans__tabs::-webkit-scrollbar { display: none; }
-.plans__tab {
-  display: flex;
-  flex: none;
-  align-items: baseline;
-  gap: 0.6em;
-  padding: 0.75rem 1.1rem;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  text-align: left;
-  transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast);
+@media (min-width: 64em) {
+  .offers__head { grid-template-columns: 1fr auto; align-items: end; }
+  .offers__intro { text-align: right; }
 }
-.plans__tab-name { font-weight: 500; }
-.plans__tab-price { font-size: var(--fs-sm); color: var(--muted); }
-.plans__tab[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-.plans__tab[aria-selected="true"] .plans__tab-price { color: var(--peach); }
 
-.plans__panels { display: grid; gap: var(--space-3); }
+.plans { display: grid; gap: var(--space-3); }
 .plan {
+  position: relative;
   display: grid;
   gap: var(--space-3);
   padding: var(--space-4);
+  border: 1px solid var(--line);
   border-radius: 1.5rem;
-  background: var(--paper);
-  outline-offset: 4px;
+  background: rgba(255, 255, 255, 0.02);
 }
-.plan--signature { background: var(--paper) var(--glow-soft); }
-.plan[hidden] { display: none; }
-.plan__top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: var(--space-3); }
+.plan__id { display: grid; gap: 0.6rem; align-content: start; justify-items: start; }
+.plan__name { font-size: clamp(2.25rem, 1rem + 2.6vw, 3.75rem); line-height: 0.95; }
+.plan__name em { font-weight: 400; }
+.plan__for { max-width: 34ch; color: var(--muted); line-height: 1.45; }
 .plan__badge {
-  display: inline-block;
-  margin-bottom: 0.75rem;
   padding: 0.35em 0.8em;
   border-radius: 999px;
-  background: var(--paper);
+  background: var(--glow);
+  color: var(--night);
   font-size: var(--fs-xs);
   font-weight: 600;
 }
-.plan__name { font-size: clamp(2.25rem, 1rem + 3vw, 4.5rem); line-height: 0.95; }
-.plan__name em { font-weight: 400; }
-.plan__for { max-width: 36ch; margin-top: 0.6rem; color: var(--muted); line-height: 1.45; }
-.plan__price {
-  display: grid;
-  justify-items: end;
-  font-size: clamp(2.25rem, 1rem + 3vw, 4.5rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: var(--track-display);
-  text-align: right;
+.plan__list { display: grid; gap: 0 var(--space-3); align-content: start; }
+.plan__list li {
+  position: relative;
+  padding: 0.6em 0 0.6em 1.4em;
+  border-bottom: 1px solid var(--line);
+  line-height: 1.35;
 }
-.plan__price span { font-size: var(--fs-sm); font-weight: 400; letter-spacing: 0; color: var(--muted); margin-bottom: 0.4rem; }
-.plan__price small { font-size: var(--fs-xs); font-weight: 400; letter-spacing: 0; color: var(--muted); margin-top: 0.4rem; }
-.plan__list { display: grid; gap: 0 var(--space-4); }
-.plan__list li { position: relative; padding: 0.7em 0 0.7em 1.5em; border-bottom: 1px solid var(--line); line-height: 1.35; }
 .plan__list li::before {
   content: '';
   position: absolute;
-  left: 0; top: 1.15em;
-  width: 0.55em; height: 0.55em;
+  left: 0; top: 1.05em;
+  width: 0.5em; height: 0.5em;
   border-radius: 50%;
   background: var(--glow);
 }
-.plan__foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-3); }
-.plan__note { font-size: var(--fs-sm); color: var(--muted); }
+.plan__buy { display: grid; gap: 0.35rem; align-content: start; justify-items: start; }
+.plan__price {
+  display: grid;
+  font-size: clamp(2.5rem, 1rem + 3vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--track-display);
+}
+.plan__price span { font-size: var(--fs-sm); font-weight: 400; letter-spacing: 0; color: var(--muted); margin-bottom: 0.35rem; }
+.plan__price--text { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: -0.02em; }
+.plan__tax { font-size: var(--fs-xs); color: var(--muted); margin-bottom: var(--space-2); }
 .plan .btn { border-radius: 999px; }
+
+/* Signature : contour lumineux aux couleurs du logo, halo discret */
+.plan--signature {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--night), var(--night)) padding-box,
+    var(--glow) border-box;
+  box-shadow: 0 30px 80px -40px rgba(185, 148, 255, 0.55);
+}
+.plan--signature::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(60% 80% at 20% 0%, rgba(255, 143, 138, 0.1), transparent 70%);
+  pointer-events: none;
+}
 
 @media (min-width: 48em) {
   .plan__list { grid-template-columns: 1fr 1fr; }
 }
 @media (min-width: 64em) {
-  .plans { grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr); column-gap: var(--space-5); align-items: start; }
-  /* à gauche : les formules comme un menu, en grand */
-  .plans__tabs { flex-direction: column; gap: 0; overflow: visible; border-top: 1px solid var(--line); }
-  .plans__tab {
-    justify-content: space-between;
-    padding: var(--space-3) 0;
-    border: 0;
-    border-bottom: 1px solid var(--line);
-    border-radius: 0;
-    color: var(--muted);
+  .plan {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 0.7fr);
+    column-gap: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    align-items: start;
   }
-  .plans__tab-name { font-size: clamp(1.75rem, 1rem + 1.6vw, 2.75rem); letter-spacing: var(--track-tight); }
-  .plans__tab[aria-selected="true"] { background: none; color: var(--ink); }
-  .plans__tab[aria-selected="true"] .plans__tab-price { color: var(--ink); }
-  .plans__tab[aria-selected="true"] .plans__tab-name::before {
-    content: '';
-    display: inline-block;
-    width: 0.32em; height: 0.32em;
-    margin: 0 0.35em 0.12em 0;
-    border-radius: 50%;
-    background: var(--glow);
-    vertical-align: middle;
-  }
-  @media (hover: hover) { .plans__tab:hover { color: var(--ink); } }
-  .plan { padding: var(--space-5); }
+  .plan__buy { justify-items: end; text-align: right; }
+  .plan__price { justify-items: end; }
 }
 .offers__note { margin-top: var(--space-4); font-size: var(--fs-sm); color: var(--muted); }
 
@@ -737,6 +723,5 @@
    les onglets de formules passent à la ligne au lieu de déborder */
 @media (max-width: 63.99em) {
   .work__nav { display: none; }
-  .plans__tabs { flex-wrap: wrap; overflow: visible; }
 }
 .footer__back { white-space: nowrap; }

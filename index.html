@@ -289,100 +289,76 @@
   </section>
 
   <!-- ============================================================
-       06 · OFFRES — sélecteur : on choisit une formule à gauche,
-       le détail s'affiche à droite. Signature ouverte par défaut.
-       Sans JavaScript, les trois formules restent toutes visibles.
+       06 · OFFRES — fond sombre, les trois formules visibles d'un coup,
+       une ligne par formule : nom | ce qui est inclus | prix + bouton.
+       Signature mise en avant par un contour lumineux.
        ============================================================ -->
-  <section class="offers" id="offres" aria-labelledby="offers-title">
+  <section class="offers theme-ink" id="offres" aria-labelledby="offers-title">
     <header class="offers__head">
-      <p class="tag">Offres</p>
-      <h2 class="offers__title" id="offers-title" data-split>Des prix clairs, <em>annoncés dès le départ.</em></h2>
-      <p class="offers__intro" data-reveal>Choisissez un point de départ. Chaque projet reçoit ensuite un devis précis et gratuit.</p>
+      <h2 class="offers__title" id="offers-title" data-split>Nos <em>offres</em></h2>
+      <p class="offers__intro" data-reveal>Des prix clairs, annoncés dès le départ. Chaque projet reçoit ensuite un devis précis et gratuit.</p>
     </header>
 
-    <div class="plans" data-plans>
-      <div class="plans__tabs" role="tablist" aria-label="Formules">
-        <button class="plans__tab" type="button" role="tab" id="tab-essentiel" aria-controls="plan-essentiel" aria-selected="false" tabindex="-1">
-          <span class="plans__tab-name">Essentiel</span>
-          <span class="plans__tab-price">599 €</span>
-        </button>
-        <button class="plans__tab" type="button" role="tab" id="tab-signature" aria-controls="plan-signature" aria-selected="true">
-          <span class="plans__tab-name">Signature</span>
-          <span class="plans__tab-price">999 €</span>
-        </button>
-        <button class="plans__tab" type="button" role="tab" id="tab-mesure" aria-controls="plan-mesure" aria-selected="false" tabindex="-1">
-          <span class="plans__tab-name">Sur mesure</span>
-          <span class="plans__tab-price">Sur devis</span>
-        </button>
-      </div>
+    <div class="plans">
+      <article class="plan" data-reveal>
+        <div class="plan__id">
+          <h3 class="plan__name">Essentiel</h3>
+          <p class="plan__for">Vous avez déjà vos photos. Il vous faut un site net, rapide et efficace.</p>
+        </div>
+        <ul class="plan__list">
+          <li>Site one-page, adapté au mobile</li>
+          <li>Jusqu'à <span class="todo">[5-6]</span> sections</li>
+          <li>Formulaire de contact</li>
+          <li>Référencement de base</li>
+          <li>Mise en ligne</li>
+          <li><span class="todo">[2]</span> allers-retours de corrections</li>
+        </ul>
+        <div class="plan__buy">
+          <p class="plan__price"><span>à partir de</span> 599 €</p>
+          <p class="plan__tax todo">[HTVA / TVAC]</p>
+          <a class="btn btn--light" href="#contact" data-preset-link="site">Demander un devis</a>
+        </div>
+      </article>
 
-      <div class="plans__panels">
-        <article class="plan" role="tabpanel" id="plan-essentiel" aria-labelledby="tab-essentiel" tabindex="0">
-          <div class="plan__top">
-            <div>
-              <h3 class="plan__name">Essentiel</h3>
-              <p class="plan__for">Vous avez déjà vos photos. Il vous faut un site net, rapide et efficace.</p>
-            </div>
-            <p class="plan__price"><span>à partir de</span> 599 € <small class="todo">[HTVA / TVAC]</small></p>
-          </div>
-          <ul class="plan__list">
-            <li>Site one-page, adapté au mobile</li>
-            <li>Jusqu'à <span class="todo">[5-6]</span> sections</li>
-            <li>Formulaire de contact</li>
-            <li>Référencement de base</li>
-            <li>Mise en ligne</li>
-            <li><span class="todo">[2]</span> allers-retours de corrections</li>
-          </ul>
-          <div class="plan__foot">
-            <p class="plan__note">Photos fournies par vos soins.</p>
-            <a class="btn" href="#contact" data-preset-link="site">Demander un devis</a>
-          </div>
-        </article>
+      <article class="plan plan--signature" data-reveal>
+        <div class="plan__id">
+          <p class="plan__badge">Site + photos par Tim</p>
+          <h3 class="plan__name">Signature</h3>
+          <p class="plan__for">Le site et les images qui vont avec. Votre entreprise, montrée telle qu'elle est.</p>
+        </div>
+        <ul class="plan__list">
+          <li>Site jusqu'à <span class="todo">[4-5]</span> pages</li>
+          <li>Shooting photo par Tim : <span class="todo">[durée]</span>, <span class="todo">[nombre]</span> photos retouchées</li>
+          <li>Aide à la rédaction des textes</li>
+          <li>Fiche Google Business Profile</li>
+          <li>Référencement local de base</li>
+        </ul>
+        <div class="plan__buy">
+          <p class="plan__price"><span>à partir de</span> 999 €</p>
+          <p class="plan__tax todo">[HTVA / TVAC]</p>
+          <a class="btn btn--glow" href="#contact" data-preset-link="site">Demander un devis</a>
+        </div>
+      </article>
 
-        <article class="plan plan--signature" role="tabpanel" id="plan-signature" aria-labelledby="tab-signature" tabindex="0">
-          <div class="plan__top">
-            <div>
-              <p class="plan__badge">Site + photos par Tim</p>
-              <h3 class="plan__name">Signature</h3>
-              <p class="plan__for">Le site et les images qui vont avec. Votre entreprise, montrée telle qu'elle est.</p>
-            </div>
-            <p class="plan__price"><span>à partir de</span> 999 € <small class="todo">[HTVA / TVAC]</small></p>
-          </div>
-          <ul class="plan__list">
-            <li>Site jusqu'à <span class="todo">[4-5]</span> pages</li>
-            <li>Shooting photo par Tim : <span class="todo">[durée]</span>, <span class="todo">[nombre]</span> photos retouchées</li>
-            <li>Aide à la rédaction des textes</li>
-            <li>Fiche Google Business Profile</li>
-            <li>Référencement local de base</li>
-          </ul>
-          <div class="plan__foot">
-            <p class="plan__note">La formule la plus complète pour démarrer.</p>
-            <a class="btn" href="#contact" data-preset-link="site">Demander un devis</a>
-          </div>
-        </article>
-
-        <article class="plan" role="tabpanel" id="plan-mesure" aria-labelledby="tab-mesure" tabindex="0">
-          <div class="plan__top">
-            <div>
-              <h3 class="plan__name">Sur <em>mesure</em></h3>
-              <p class="plan__for">Un projet plus ambitieux ou un besoin précis ? On construit l'offre avec vous.</p>
-            </div>
-            <p class="plan__price">Sur devis</p>
-          </div>
-          <ul class="plan__list">
-            <li>Sites plus complets</li>
-            <li>Multilingue</li>
-            <li>Identité visuelle</li>
-            <li>Vidéo</li>
-            <li>Automatisations</li>
-            <li>Besoins spécifiques</li>
-          </ul>
-          <div class="plan__foot">
-            <p class="plan__note">Devis gratuit et sans engagement.</p>
-            <a class="btn" href="#contact" data-preset-link="autre">En parler</a>
-          </div>
-        </article>
-      </div>
+      <article class="plan" data-reveal>
+        <div class="plan__id">
+          <h3 class="plan__name">Sur <em>mesure</em></h3>
+          <p class="plan__for">Un projet plus ambitieux ou un besoin précis ? On construit l'offre avec vous.</p>
+        </div>
+        <ul class="plan__list">
+          <li>Sites plus complets</li>
+          <li>Multilingue</li>
+          <li>Identité visuelle</li>
+          <li>Vidéo</li>
+          <li>Automatisations</li>
+          <li>Besoins spécifiques</li>
+        </ul>
+        <div class="plan__buy">
+          <p class="plan__price plan__price--text">Sur devis</p>
+          <p class="plan__tax">Gratuit et sans engagement</p>
+          <a class="btn btn--light" href="#contact" data-preset-link="autre">En parler</a>
+        </div>
+      </article>
     </div>
 
     <p class="offers__note">Hébergement et maintenance : <span class="todo">[à définir]</span></p>
