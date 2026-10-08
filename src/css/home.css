@@ -469,32 +469,29 @@
    06 · OFFRES — sombre, les trois formules visibles, une ligne chacune
    ========================================================================== */
 .offers { padding: var(--space-6) var(--gutter); }
-.offers__head { display: grid; gap: var(--space-2); margin-bottom: var(--space-4); }
+.offers__head { display: grid; justify-items: center; gap: var(--space-2); margin-bottom: var(--space-4); text-align: center; }
 .offers__title { font-size: clamp(2.25rem, 1rem + 3vw, 4rem); }
 .offers__intro { max-width: 40ch; font-size: var(--fs-base); line-height: 1.45; color: var(--muted); }
-@media (min-width: 64em) {
-  .offers__head { grid-template-columns: 1fr auto; align-items: end; }
-  .offers__intro { text-align: right; }
-}
 
-.plans { display: grid; gap: var(--space-2); }
+
+.plans { display: grid; gap: var(--space-2); max-width: 60rem; margin: 0 auto; }
 .plan {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-3);
+  gap: 0.85rem;
+  padding: 1.4rem;
   border: 1px solid var(--line);
-  border-radius: 1.1rem;
+  border-radius: 1rem;
 }
 .plan__id { display: grid; gap: 0.4rem; justify-items: start; }
-.plan__name { font-size: clamp(1.5rem, 1rem + 1vw, 2rem); line-height: 1; letter-spacing: var(--track-tight); }
+.plan__name { font-size: clamp(1.35rem, 1rem + 0.6vw, 1.6rem); line-height: 1; letter-spacing: var(--track-tight); }
 .plan__name em { font-weight: 400; }
-.plan__for { font-size: var(--fs-sm); color: var(--muted); line-height: 1.45; }
+.plan__for { font-size: var(--fs-xs); color: var(--muted); line-height: 1.45; }
 .plan__badge {
   position: absolute;
-  top: var(--space-3);
-  right: var(--space-3);
+  top: 1.4rem;
+  right: 1.4rem;
   padding: 0.25em 0.7em;
   border-radius: 999px;
   background: var(--glow);
@@ -509,7 +506,7 @@
   display: flex;
   align-items: baseline;
   gap: 0.4rem;
-  font-size: clamp(1.75rem, 1rem + 1.4vw, 2.5rem);
+  font-size: clamp(1.6rem, 1rem + 1vw, 2rem);
   font-weight: 500;
   line-height: 1;
   letter-spacing: var(--track-tight);
@@ -519,7 +516,7 @@
 .plan__tax { order: -1; margin-top: -0.6rem; font-size: 0.6875rem; color: var(--muted); }
 .plan__id { order: -2; }
 .plan__list { flex: 1; display: grid; align-content: start; padding-top: var(--space-2); border-top: 1px solid var(--line); }
-.plan__list li { position: relative; padding: 0.3em 0 0.3em 1.1em; font-size: var(--fs-sm); line-height: 1.4; }
+.plan__list li { position: relative; padding: 0.22em 0 0.22em 1.1em; font-size: var(--fs-xs); line-height: 1.4; }
 .plan__list li::before {
   content: '';
   position: absolute;
@@ -542,7 +539,7 @@
   .plans { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
 }
 
-.offers__note { margin-top: var(--space-3); font-size: var(--fs-xs); color: var(--muted); }
+.offers__note { margin-top: var(--space-3); font-size: var(--fs-xs); color: var(--muted); text-align: center; }
 
 /* ==========================================================================
    07 · PHOTOGRAPHIE (teaser) — bandes de photos défilantes
