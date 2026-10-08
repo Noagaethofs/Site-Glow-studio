@@ -474,7 +474,7 @@
 .offers__intro { max-width: 40ch; font-size: var(--fs-base); line-height: 1.45; color: var(--muted); }
 
 
-.plans { display: grid; gap: var(--space-2); max-width: 60rem; margin: 0 auto; }
+.plans { display: grid; gap: var(--space-2); max-width: 64rem; margin: 0 auto; }
 .plan {
   position: relative;
   display: flex;
@@ -536,7 +536,15 @@
 }
 
 @media (min-width: 48em) {
-  .plans { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+  /* cartes plus hautes ; celle du milieu plus large et qui dépasse en haut et en bas */
+  .plans { grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr) minmax(0, 1fr); align-items: center; gap: var(--space-2); }
+  .plan { min-height: 31rem; padding: 2rem 1.6rem; gap: 1.1rem; }
+  .plan__list li { padding: 0.32em 0 0.32em 1.1em; }
+  .plan--signature { min-height: 36rem; padding: 2.6rem 2rem; box-shadow: 0 40px 90px -45px rgba(185, 148, 255, 0.6); }
+  .plan--signature .plan__name { font-size: clamp(1.6rem, 1rem + 1vw, 2.1rem); }
+  .plan--signature .plan__price { font-size: clamp(2rem, 1rem + 1.6vw, 2.6rem); }
+  .plan--signature .plan__list li { font-size: var(--fs-sm); }
+  .plan--signature .plan__badge { top: 2.6rem; right: 2rem; }
 }
 
 .offers__note { margin-top: var(--space-3); font-size: var(--fs-xs); color: var(--muted); text-align: center; }
