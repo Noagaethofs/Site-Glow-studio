@@ -249,7 +249,7 @@
 }
 
 /* ==========================================================================
-   04 · GLOW METHOD — sombre, piste horizontale
+   04 · GLOW METHOD — sombre, piste horizontale reliée par un fil conducteur
    ========================================================================== */
 .method { overflow: hidden; }
 .method__pin { position: relative; padding: var(--space-6) 0; }
@@ -258,83 +258,103 @@
   gap: var(--space-3);
   padding: 0 var(--gutter) var(--space-5);
 }
-.method__title { font-size: clamp(3.5rem, 1rem + 9vw, 11rem); line-height: 0.85; }
+.method__title { font-size: clamp(2.75rem, 1rem + 5vw, 6rem); line-height: 0.9; }
 .method__intro { max-width: 30ch; font-size: var(--fs-md); line-height: 1.35; color: var(--muted); }
 
-/* Mobile : une ligne par étape */
-.method__track { border-top: 1px solid var(--line); }
+/* --- Mobile : fil vertical à gauche, une étape par ligne ------------------ */
+.method__rail { position: relative; padding: 0 var(--gutter); }
+.method__thread {
+  position: absolute;
+  left: calc(var(--gutter) + 0.45rem);
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 2px;
+  background: var(--line);
+}
+.method__thread span {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(var(--coral), var(--peach), var(--lilac));
+  transform: scaleY(0);
+  transform-origin: top;
+}
+.method__track { position: relative; display: grid; gap: var(--space-4); }
 .step {
+  position: relative;
   display: grid;
-  grid-template-columns: 2.5rem 1fr;
-  gap: 0.5rem var(--space-2);
-  padding: var(--space-4) var(--gutter);
-  border-bottom: 1px solid var(--line);
+  gap: 0.4rem;
+  padding-left: 2.25rem;
 }
-.step__num {
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  padding-top: 0.6em;
+.step__dot {
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--bg);
+  transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+.step.is-reached .step__dot {
+  border-color: transparent;
   background: var(--glow);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  box-shadow: 0 0 0 5px rgba(185, 148, 255, 0.15), 0 0 18px rgba(255, 143, 138, 0.45);
 }
-.step__name { font-size: clamp(3rem, 15vw, 6rem); line-height: 0.9; }
-.step__text { grid-column: 2; max-width: 36ch; color: var(--muted); line-height: 1.45; }
+.step__num { font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.06em; color: var(--muted); transition: color 0.4s; }
+.step.is-reached .step__num { color: var(--peach); }
+.step__name { font-size: clamp(2.25rem, 9vw, 3.5rem); line-height: 0.95; }
+.step__text { max-width: 36ch; color: var(--muted); line-height: 1.45; }
 .step__text strong { color: var(--fg); font-weight: 500; }
-.method__progress { display: none; }
 
+/* --- Desktop : piste horizontale pinnée, fil horizontal en haut --------- */
 @media (min-width: 64em) {
   .method.is-horizontal .method__pin {
     height: 100vh;
     height: 100svh;
     padding: calc(var(--header-h) + var(--space-3)) 0 var(--space-4);
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr;
     grid-template-columns: minmax(0, 1fr);
   }
   .method.is-horizontal .method__head { grid-template-columns: 1fr auto; align-items: end; padding-bottom: 0; }
-  .method.is-horizontal .method__title { font-size: clamp(3rem, 1rem + 5vw, 7rem); }
   .method.is-horizontal .method__intro { text-align: right; }
 
-  .method.is-horizontal .method__track {
-    display: flex;
-    width: max-content;
-    border-top: 0;
+  .method.is-horizontal .method__rail {
     align-self: center;
     justify-self: start;
+    width: max-content;
+    padding: 0 var(--gutter);
     will-change: transform;
   }
-  .method.is-horizontal .step {
-    width: 58vw;
-    grid-template-columns: 1fr;
-    align-content: center;
-    padding: 0 6vw 0 var(--gutter);
-    border-bottom: 0;
-    border-left: 1px solid var(--line);
-  }
-  .method.is-horizontal .step:first-child { border-left: 0; }
-  .method.is-horizontal .step__num { padding: 0; font-size: var(--fs-md); }
-  .method.is-horizontal .step__name { font-size: clamp(5rem, 2rem + 11vw, 15rem); line-height: 0.85; margin: 0.15em 0 0.25em; }
-  .method.is-horizontal .step__text { grid-column: 1; font-size: var(--fs-md); line-height: 1.4; max-width: 30ch; }
-  .method.is-horizontal .step--shine { width: 80vw; }
-  .method.is-horizontal .step--shine .step__name { font-size: clamp(6rem, 2rem + 15vw, 20rem); }
-
-  .method.is-horizontal .method__progress {
-    display: block;
-    margin: 0 var(--gutter);
+  .method.is-horizontal .method__thread {
+    left: var(--gutter);
+    right: var(--gutter);
+    top: 0.45rem;
+    bottom: auto;
+    width: auto;
     height: 2px;
-    border-radius: 2px;
-    background: var(--line);
+    margin: -1px 0 0;
   }
-  .method__progress span {
-    display: block;
-    height: 100%;
-    border-radius: inherit;
+  .method.is-horizontal .method__thread span {
     background: var(--glow);
     transform: scaleX(0);
     transform-origin: left;
   }
+  .method.is-horizontal .method__track { display: flex; gap: 0; }
+  .method.is-horizontal .step {
+    width: clamp(20rem, 32vw, 30rem);
+    padding: 2.25rem 4vw 0 0;
+    align-content: start;
+    gap: 0.6rem;
+  }
+  .method.is-horizontal .step__dot { top: 0; }
+  .method.is-horizontal .step__name { font-size: clamp(2.5rem, 1rem + 3vw, 4.5rem); margin-top: 0.2rem; }
+  .method.is-horizontal .step__text { font-size: var(--fs-base); max-width: 28ch; }
+  .method.is-horizontal .step--shine .step__name { font-size: clamp(3rem, 1rem + 4vw, 5.5rem); }
 }
 
 /* ==========================================================================
