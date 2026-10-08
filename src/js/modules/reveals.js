@@ -79,14 +79,6 @@ export function initReveals(scope = document) {
     });
   });
 
-  // Mots mis en évidence (le constat) : balayage de lumière, l'un après l'autre
-  const hls = scope.querySelectorAll('[data-hl]');
-  if (hls.length) {
-    gsap.timeline({
-      scrollTrigger: { trigger: hls[0].closest('h2') || hls[0], start: 'top 75%', end: 'bottom 40%', scrub: true },
-    }).fromTo(hls, { '--p': '0%' }, { '--p': '100%', ease: 'none', stagger: 0.6, duration: 1 });
-  }
-
   // Texte mot à mot
   scope.querySelectorAll('[data-scrub-words]').forEach((el) => {
     SplitText.create(el, {

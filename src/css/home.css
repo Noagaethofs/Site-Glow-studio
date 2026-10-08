@@ -167,18 +167,16 @@
   font-size: clamp(2.6rem, 1rem + 6vw, 8rem);
   line-height: 0.98;
 }
-/* Mots mis en évidence : la lumière du logo les balaie de gauche à droite
-   au rythme du scroll (--p piloté en JS, 0 % → 100 %) */
-.hl {
-  --p: 0%;
-  background-image: var(--glow), linear-gradient(var(--fg), var(--fg));
-  background-size: var(--p) 100%, 100% 100%;
-  background-repeat: no-repeat;
+/* Mots mis en évidence : ils s'allument dans la lumière du logo.
+   Le dégradé est posé sur chaque mot découpé (.w), pas sur le conteneur,
+   sinon la découpe en mots casse le rendu du texte en dégradé. */
+.hl, .hl .w {
+  background-image: var(--glow);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
-@media (prefers-reduced-motion: reduce) { .hl { --p: 100%; } }
+.hl:has(.w) { background: none; color: inherit; }
 .statement__text .w { display: inline-block; }
 .statement__answer {
   position: relative;
