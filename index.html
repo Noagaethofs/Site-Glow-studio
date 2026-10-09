@@ -125,13 +125,31 @@
         <h2 class="tag" id="services-title">Nos services</h2>
         <div class="services__frame" aria-hidden="true">
           <!-- EMPLACEMENTS : une image par service, dans le même ordre que la liste -->
+          <!-- Illustration : une page d'accueil et sa version téléphone (pas un vrai site) -->
           <figure class="services__img is-active" data-service-img>
-            <div class="svc-window">
-              <div class="svc-window__bar"><span class="svc-window__dots"><span></span><span></span><span></span></span><span class="svc-window__label">Site web · J-Clean Auto</span></div>
-              <video muted loop playsinline preload="none" poster="/media/projets/j-clean-auto/poster.webp" data-autoplay aria-label="Aperçu du site J-Clean Auto" width="1280" height="738">
-                <source src="/media/projets/j-clean-auto/hero.webm" type="video/webm">
-                <source src="/media/projets/j-clean-auto/hero.mp4" type="video/mp4">
-              </video>
+            <div class="web" aria-hidden="true">
+              <div class="svc-window web__desk">
+                <div class="svc-window__bar"><span class="svc-window__dots"><span></span><span></span><span></span></span><span class="svc-window__label">Site web</span></div>
+                <div class="web__page">
+                  <div class="web__nav"><span class="web__logo"></span><span class="web__links"><i></i><i></i><i></i></span><span class="web__cta">Devis</span></div>
+                  <div class="web__hero">
+                    <div class="web__copy">
+                      <p class="web__title">Votre métier,<br><em>bien présenté.</em></p>
+                      <span class="web__line"></span><span class="web__line web__line--short"></span>
+                      <span class="web__btn">Demander un devis</span>
+                    </div>
+                    <div class="web__img"></div>
+                  </div>
+                  <div class="web__cards"><i></i><i></i><i></i></div>
+                </div>
+              </div>
+              <div class="web__phone">
+                <div class="web__notch"></div>
+                <div class="web__img web__img--phone"></div>
+                <p class="web__title web__title--phone">Votre métier,<br><em>bien présenté.</em></p>
+                <span class="web__line"></span><span class="web__line web__line--short"></span>
+                <span class="web__btn">Demander un devis</span>
+              </div>
             </div>
           </figure>
           <figure class="services__img" data-service-img>
@@ -140,13 +158,28 @@
               <img src="/media/services/photo-entreprise.webp" alt="Photo de groupe d'une entreprise lors de son événement d'été" width="1200" height="800" loading="lazy" decoding="async">
             </div>
           </figure>
+          <!-- Illustration : une vidéo verticale et sa timeline de montage -->
           <figure class="services__img" data-service-img>
-            <div class="svc-window">
-              <div class="svc-window__bar"><span class="svc-window__dots"><span></span><span></span><span></span></span><span class="svc-window__label">Vidéo · Planning Familial de Huy</span></div>
-              <video muted loop playsinline preload="none" poster="/media/projets/planning-familial-huy/loop-poster.webp" data-autoplay aria-label="Extrait de la vidéo du Planning Familial de Huy" width="1280" height="720">
-                <source src="/media/projets/planning-familial-huy/loop.webm" type="video/webm">
-                <source src="/media/projets/planning-familial-huy/loop.mp4" type="video/mp4">
-              </video>
+            <div class="vid" aria-hidden="true">
+              <div class="vid__phone">
+                <div class="vid__screen">
+                  <span class="vid__play"><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7.5-4.5z" fill="currentColor"/></svg></span>
+                  <span class="vid__caption"><i></i><i></i></span>
+                  <span class="vid__progress"><span></span></span>
+                </div>
+              </div>
+              <div class="vid__side">
+                <div class="svc-window vid__edit">
+                  <div class="svc-window__bar"><span class="svc-window__dots"><span></span><span></span><span></span></span><span class="svc-window__label">Montage</span></div>
+                  <div class="vid__timeline">
+                    <span class="vid__head"></span>
+                    <div class="vid__track"><i style="flex:3"></i><i style="flex:2"></i><i style="flex:4"></i><i style="flex:2"></i></div>
+                    <div class="vid__track vid__track--b"><i style="flex:5"></i><i style="flex:3"></i><i style="flex:3"></i></div>
+                    <div class="vid__track vid__track--audio"><i></i></div>
+                  </div>
+                </div>
+                <div class="vid__formats"><span><b>9:16</b> Réseaux sociaux</span><span><b>16:9</b> Site web</span></div>
+              </div>
             </div>
           </figure>
           <!-- Illustration : fiche Google, maintenance et demande reçue (pas de vraies données) -->

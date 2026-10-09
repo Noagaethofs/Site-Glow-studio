@@ -242,6 +242,87 @@
   .svc-window__dots { display: flex; gap: 0.35rem; }
   .svc-window__dots span { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: rgba(251, 248, 245, 0.25); }
   .svc-window__label { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  /* Sites web : page d'accueil dessinée + version téléphone (illustration) */
+  .web { position: relative; width: 100%; padding-bottom: 2.5rem; }
+  .web__page { display: grid; gap: 0.9rem; padding: 0.8rem 1rem 1rem; background: var(--paper); color: var(--ink); }
+  .web__nav { display: flex; align-items: center; justify-content: space-between; }
+  .web__logo { width: 2.6rem; height: 0.55rem; border-radius: 999px; background: var(--ink); }
+  .web__links { display: flex; gap: 0.5rem; }
+  .web__links i { width: 1.6rem; height: 0.3rem; border-radius: 999px; background: #d9d1cb; }
+  .web__cta { padding: 0.3em 0.8em; border-radius: 999px; background: var(--ink); color: var(--paper); font-size: 0.6rem; font-weight: 500; }
+  .web__hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0.9rem; align-items: center; }
+  .web__copy { display: grid; gap: 0.4rem; justify-items: start; }
+  .web__title { font-size: 1.35rem; font-weight: 500; line-height: 1; letter-spacing: -0.03em; margin-bottom: 0.2rem; }
+  .web__title em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+  .web__line { width: 90%; height: 0.3rem; border-radius: 999px; background: #e3dcd6; }
+  .web__line--short { width: 60%; }
+  .web__btn { margin-top: 0.35rem; padding: 0.45em 0.9em; border-radius: 999px; background: var(--glow); color: var(--night); font-size: 0.6rem; font-weight: 600; }
+  .web__img { aspect-ratio: 4 / 3.4; border-radius: 0.5rem; background: radial-gradient(60% 60% at 70% 30%, rgba(255, 255, 255, 0.55), transparent 70%), var(--glow); }
+  .web__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+  .web__cards i { height: 2.2rem; border-radius: 0.4rem; background: var(--paper-2); }
+  .web__phone {
+    position: absolute;
+    right: -0.4rem;
+    bottom: 0;
+    width: 32%;
+    display: grid;
+    gap: 0.35rem;
+    justify-items: start;
+    padding: 0.5rem 0.55rem 0.8rem;
+    border-radius: 1.1rem;
+    border: 3px solid #2a2627;
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.55);
+  }
+  .web__notch { justify-self: center; width: 34%; height: 0.32rem; border-radius: 999px; background: #2a2627; margin-bottom: 0.15rem; }
+  .web__img--phone { width: 100%; aspect-ratio: 1; }
+  .web__title--phone { font-size: 0.8rem; margin: 0.15rem 0 0; }
+  .web__phone .web__line { height: 0.22rem; }
+  .web__phone .web__btn { font-size: 0.48rem; }
+
+  /* Vidéo : format vertical + timeline de montage (illustration) */
+  .vid { display: grid; grid-template-columns: 0.75fr 1fr; gap: 1rem; align-items: center; width: 100%; }
+  .vid__phone { padding: 0.35rem; border-radius: 1.4rem; background: #2a2627; box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.55); }
+  .vid__screen {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 9 / 16;
+    border-radius: 1.1rem;
+    overflow: hidden;
+    background:
+      radial-gradient(55% 40% at 30% 25%, rgba(255, 255, 255, 0.5), transparent 70%),
+      radial-gradient(70% 50% at 80% 80%, rgba(185, 148, 255, 0.9), transparent 70%),
+      linear-gradient(160deg, var(--coral), var(--peach) 55%, var(--lilac));
+  }
+  .vid__play { display: grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: 50%; background: rgba(251, 248, 245, 0.92); color: var(--night); box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.2); }
+  .vid__play svg { width: 1rem; height: 1rem; margin-left: 0.15rem; }
+  .vid__caption { position: absolute; left: 0.8rem; right: 0.8rem; bottom: 1.6rem; display: grid; gap: 0.3rem; }
+  .vid__caption i { height: 0.3rem; border-radius: 999px; background: rgba(251, 248, 245, 0.9); width: 80%; }
+  .vid__caption i + i { width: 50%; }
+  .vid__progress { position: absolute; left: 0.8rem; right: 0.8rem; bottom: 0.8rem; height: 0.2rem; border-radius: 999px; background: rgba(251, 248, 245, 0.35); overflow: hidden; }
+  .vid__progress span { display: block; width: 0; height: 100%; background: var(--paper); }
+  .services__img.is-active .vid__progress span { animation: vid-progress 6s linear infinite; }
+  @keyframes vid-progress { to { width: 100%; } }
+  .vid__side { display: grid; gap: 0.8rem; }
+  .vid__timeline { position: relative; display: grid; gap: 0.35rem; padding: 0.8rem 0.75rem; background: #141112; }
+  .vid__track { display: flex; gap: 0.25rem; height: 1.1rem; }
+  .vid__track i { flex: 1; border-radius: 0.25rem; background: linear-gradient(90deg, var(--coral), var(--peach)); opacity: 0.9; }
+  .vid__track--b i { background: linear-gradient(90deg, var(--peach), var(--lilac)); opacity: 0.7; }
+  .vid__track--audio { height: 0.7rem; }
+  .vid__track--audio i { background: repeating-linear-gradient(90deg, rgba(251, 248, 245, 0.35) 0 2px, transparent 2px 5px); }
+  .vid__head { position: absolute; top: 0.4rem; bottom: 0.4rem; left: 42%; width: 2px; background: var(--paper); border-radius: 2px; z-index: 1; }
+  .vid__head::before { content: ''; position: absolute; top: -0.2rem; left: -0.25rem; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--paper); }
+  .services__img.is-active .vid__head { animation: vid-head 6s linear infinite; }
+  @keyframes vid-head { from { left: 4%; } to { left: 96%; } }
+  .vid__formats { display: grid; gap: 0.4rem; }
+  .vid__formats span { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.75rem; border-radius: 0.75rem; background: #1d1a1b; border: 1px solid rgba(251, 248, 245, 0.12); color: #a69e9c; font-size: 0.72rem; }
+  .vid__formats b { color: var(--paper); font-weight: 500; font-variant-numeric: tabular-nums; min-width: 2.2rem; }
+  @media (prefers-reduced-motion: reduce) {
+    .services__img.is-active .vid__progress span, .services__img.is-active .vid__head { animation: none; }
+  }
+
   /* Accompagnement : petite composition d'interfaces (illustration) */
   .care { position: relative; width: 100%; display: grid; gap: 0.8rem; font-size: 0.8rem; }
   .care__card { border-radius: 0.75rem; box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.45); }
