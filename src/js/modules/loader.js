@@ -4,9 +4,9 @@
  *  2. Les contours de tout le logo GLOW STUDIO se tracent lentement…
  *  3. …puis le noir arrive d'un coup, sur tout le logo.
  *  4. Le visiteur fait défiler (molette, glissé du doigt, flèche, clic) :
- *     l'écran remonte comme un rideau et le site apparaît.
+ *     tout l'écran de chargement s'efface en fondu et le site apparaît.
  * Première visite de la session : on attend le geste du visiteur.
- * Visites suivantes : version courte, le rideau se lève tout seul.
+ * Visites suivantes : version courte, le fondu se fait tout seul.
  * La classe `is-loading` est posée par un script inline dans le header.
  */
 import { gsap } from 'gsap';
@@ -91,12 +91,10 @@ export function runLoader() {
           startScroll();
         },
       })
-        .to(hint, { opacity: 0, y: 10, duration: 0.25 })
-        .to(logo, { y: -50, opacity: 0, duration: 0.6, ease: 'power3.in' }, 0)
-        .to([countBox, tag], { opacity: 0, duration: 0.3 }, 0)
-        .to(loader, { yPercent: -100, duration: 0.95, ease: 'expo.inOut' }, 0.25)
-        // le hero démarre son entrée pendant que le rideau se lève
-        .call(resolve, null, 0.6);
+        // tout l'écran s'efface d'un seul bloc, sans mouvement : fondu doux
+        .to(loader, { opacity: 0, duration: 0.8, ease: 'power2.inOut' }, 0)
+        // le hero démarre son entrée pendant le fondu
+        .call(resolve, null, 0.25);
     };
 
     // On attend la fin du dessin ET le chargement de la page (max 3,5 s)
