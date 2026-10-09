@@ -13,7 +13,7 @@
   <meta property="og:title" content="J-Clean Auto — Réalisation GLOW">
   <meta property="og:description" content="Un site premium mais accessible : hero vidéo, comparateur avant / après, tarifs, témoignages, pensé d'abord pour le mobile.">
   <meta property="og:url" content="https://[DOMAINE]/projets/j-clean-auto/">
-  <meta property="og:image" content="https://[DOMAINE]/media/projets/j-clean-auto/og.jpg">
+  <meta property="og:image" content="https://[DOMAINE]/media/projets/j-clean-auto/poster.webp">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/src/css/main.css">
@@ -29,13 +29,16 @@
       <div><dt>Secteur</dt><dd>Nettoyage automobile</dd></div>
       <div><dt>Prestation</dt><dd>Site web</dd></div>
       <div><dt>Année</dt><dd><span class="todo">[Année]</span></dd></div>
-      <div><dt>En ligne</dt><dd><a href="[URL DU PROJET]" class="todo" rel="noopener" target="_blank">[Voir le site]</a></dd></div>
+      <div><dt>Mise en ligne</dt><dd>Bientôt</dd></div>
     </dl>
   </section>
 
-  <figure class="project-cover" data-mask>
-    <!-- EMPLACEMENT : grand visuel du projet (16:9) -->
-    <div class="ph" data-label="J-Clean Auto · visuel principal · 16:9"></div>
+  <figure class="project-cover project-cover--video" data-mask>
+    <!-- Enregistrement d'écran du site J-Clean Auto (8,6 s en boucle, muet) -->
+    <video muted loop playsinline preload="none" poster="/media/projets/j-clean-auto/poster.webp" data-autoplay aria-label="Aperçu du site J-Clean Auto">
+      <source src="/media/projets/j-clean-auto/hero.webm" type="video/webm">
+      <source src="/media/projets/j-clean-auto/hero.mp4" type="video/mp4">
+    </video>
   </figure>
 
   <section class="project-body" aria-labelledby="brief-title">

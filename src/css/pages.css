@@ -274,3 +274,6 @@
 .link-arrow--back::after { content: none; }
 .link-arrow--back::before { content: '←'; transition: transform var(--dur-fast) var(--ease-out); }
 @media (hover: hover) { .link-arrow--back:hover::before { transform: translateX(-0.3em); } }
+
+.project-cover--video { aspect-ratio: 1920 / 1108; }
+.project-cover video { width: 100%; height: 100%; object-fit: cover; }
