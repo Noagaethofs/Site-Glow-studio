@@ -1,7 +1,7 @@
 /**
  * Vidéos complètes (avec le son) :
  * - [data-film-open="/chemin/sans-extension"] ouvre une fenêtre (<dialog>)
- *   qui lit le film (WebM puis MP4) ; fermeture : bouton, Échap ou clic autour.
+ *   qui lit le film (MP4 d'abord pour Safari, WebM sinon) ; fermeture : bouton, Échap ou clic autour.
  */
 export function initFilm() {
   const modal = document.querySelector('[data-film-modal]');
@@ -20,7 +20,7 @@ export function initFilm() {
       opener = btn;
       const base = btn.dataset.filmOpen;
       frame.innerHTML = `<video controls autoplay playsinline aria-label="${btn.dataset.filmTitle || 'Vidéo'}">
-        <source src="${base}.webm" type="video/webm"><source src="${base}.mp4" type="video/mp4"></video>`;
+        <source src="${base}.mp4" type="video/mp4"><source src="${base}.webm" type='video/webm; codecs="vp9, opus"'></video>`;
       modal.showModal();
     });
   });

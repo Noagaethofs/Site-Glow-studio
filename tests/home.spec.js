@@ -108,3 +108,13 @@ test('le menu mobile s’ouvre et se ferme', async ({ page }, testInfo) => {
   await page.keyboard.press('Escape');
   await expect(burger).toHaveAttribute('aria-expanded', 'false');
 });
+
+test('les vidéos proposent le MP4 en premier (Safari, iPhone)', async ({ page }) => {
+  await skipIntro(page);
+  await page.goto('/');
+  const firstTypes = await page
+    .locator('video:has(source)')
+    .evaluateAll((videos) => videos.map((v) => v.querySelector('source').type));
+  expect(firstTypes.length).toBeGreaterThan(0);
+  for (const type of firstTypes) expect(type).toBe('video/mp4');
+});

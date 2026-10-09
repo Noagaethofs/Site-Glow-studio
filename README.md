@@ -79,7 +79,7 @@ Les textes provisoires portent `class="todo"` ; la liste est dans `docs/A-COMPLE
 2. Le placer dans `public/media/…`.
 3. Remplacer l'emplacement `.ph` correspondant (son `data-label` décrit le média attendu) par
    `<img src="/media/…" alt="…" width="…" height="…" loading="lazy">` ou par une `<video>` :
-   WebM en premier, puis MP4, `muted loop playsinline data-autoplay` pour une boucle.
+   MP4 en premier (Safari et iPhone), puis WebM, `muted loop playsinline data-autoplay` pour une boucle.
 
 **Ajouter un projet.** Dans `index.html`, section Projets : une diapositive `.screen__slide` (vidéo ou
 capture), un bloc `.case-info` au même rang et un bouton dans `.cases__steps`. Le compteur suit seul.
