@@ -58,6 +58,10 @@
   position: relative;
   display: grid;
   justify-items: center;
+  align-content: center;
+  /* l'intro remplit le premier écran : la vidéo n'apparaît qu'au défilement */
+  min-height: calc(100vh - var(--header-h) - var(--space-5) * 2);
+  min-height: calc(100svh - var(--header-h) - var(--space-5) * 2);
   gap: var(--space-3);
   max-width: 68rem;
   margin: 0 auto;
@@ -125,7 +129,7 @@
 
 @media (max-width: 47.99em) {
   .hero { padding-top: calc(var(--header-h) + var(--space-4)); }
-  .hero__intro { justify-items: start; text-align: left; }
+  .hero__intro { justify-items: start; text-align: left; min-height: calc(100svh - var(--header-h) - var(--space-4)); }
   .hero__actions, .hero__services { justify-content: flex-start; }
   .hero__media { aspect-ratio: 4 / 5; border-radius: 1.1rem; margin-top: var(--space-4); }
 }
