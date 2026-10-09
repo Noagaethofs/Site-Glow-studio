@@ -26,7 +26,12 @@ export function initFilm() {
   });
   if (modal) {
     modal.querySelector('[data-film-close]').addEventListener('click', close);
-    modal.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
-    modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+    modal.addEventListener('cancel', (e) => {
+      e.preventDefault();
+      close();
+    });
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) close();
+    });
   }
 }

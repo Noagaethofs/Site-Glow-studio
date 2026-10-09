@@ -1,6 +1,33 @@
-/* GLOW — point d'entrée des styles (assemblé et minifié par Vite) */
+/* GLOW — point d'entrée des styles (assemblé et minifié par Vite).
+   L'ordre compte : réglages, base, composants communs, sections, pages. */
 @import './tokens.css';
 @import './base.css';
-@import './components.css';
-@import './home.css';
-@import './pages.css';
+
+/* Composants présents sur toutes les pages */
+@import './components/loader.css';
+@import './components/cursor.css';
+@import './components/header.css';
+@import './components/menu.css';
+@import './components/sticky-cta.css';
+@import './components/footer.css';
+@import './components/form.css';
+
+/* Sections (accueil, et réutilisées sur les autres pages) */
+@import './sections/hero.css';
+@import './sections/statement.css';
+@import './sections/services.css';
+@import './sections/method.css';
+@import './sections/projects.css';
+@import './sections/offers.css';
+@import './sections/team.css';
+@import './sections/contact.css';
+@import './sections/contact-card.css';
+
+/* Pages secondaires */
+@import './pages/photographie.css';
+@import './pages/lightbox.css';
+@import './pages/equipe.css';
+@import './pages/legal.css';
+
+/* Fenêtre vidéo des projets (film complet avec le son) */
+@import './sections/film-modal.css';

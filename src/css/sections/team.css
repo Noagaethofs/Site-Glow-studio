@@ -1,0 +1,104 @@
+/* ==========================================================================
+   08 · ÉQUIPE — accordéon de portraits
+   ========================================================================== */
+.team {
+  padding: var(--space-6) var(--gutter);
+}
+.team--page {
+  padding-top: calc(var(--header-h) + var(--space-5));
+}
+.team__head .tag {
+  grid-column: 1 / -1;
+}
+.team__head {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+.team__title {
+  font-size: clamp(2.75rem, 1.2rem + 5vw, 7.5rem);
+}
+.team__intro {
+  max-width: 34ch;
+  font-size: var(--fs-md);
+  line-height: 1.4;
+  color: var(--muted);
+}
+@media (min-width: 64em) {
+  .team__head {
+    grid-template-columns: 1.6fr 1fr;
+    align-items: end;
+  }
+}
+
+.team__list {
+  display: grid;
+  gap: var(--space-4);
+}
+.member {
+  display: grid;
+  gap: var(--space-2);
+  outline-offset: 6px;
+}
+.member__photo {
+  aspect-ratio: 4 / 5;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+.member__name {
+  font-size: var(--fs-lg);
+  line-height: 1;
+  letter-spacing: var(--track-tight);
+}
+.member__role {
+  font-weight: 500;
+  margin-top: 0.3rem;
+}
+.member__bio {
+  max-width: 34ch;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-top: 0.3rem;
+}
+
+@media (min-width: 64em) {
+  .team__list {
+    display: flex;
+    gap: var(--space-2);
+    height: clamp(30rem, 44vw, 42rem);
+  }
+  .member {
+    flex: 1;
+    min-width: 0;
+    grid-template-rows: minmax(0, 1fr) auto;
+    transition: flex 0.9s var(--ease-out);
+    cursor: default;
+  }
+  .member.is-open {
+    flex: 2.3;
+  }
+  .member__photo {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+  .member__info {
+    height: 8.5rem;
+  }
+  .member__role,
+  .member__bio {
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition:
+      opacity 0.4s,
+      transform 0.6s var(--ease-out);
+  }
+  .member.is-open .member__role,
+  .member.is-open .member__bio {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.25s;
+  }
+  .member__name {
+    white-space: nowrap;
+  }
+}

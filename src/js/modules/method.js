@@ -53,8 +53,12 @@ export function initMethod() {
         invalidateOnRefresh: true,
       },
     });
-    tl.to(rail, { x: () => -distance(), duration: 1 }, 0)
-      .fromTo(fill, { scaleX: 0 }, { scaleX: 1, duration: 1.1 }, 0);
+    tl.to(rail, { x: () => -distance(), duration: 1 }, 0).fromTo(
+      fill,
+      { scaleX: 0 },
+      { scaleX: 1, duration: 1.1 },
+      0,
+    );
 
     syncDots('x');
 
@@ -67,12 +71,16 @@ export function initMethod() {
 
   mm.add(`not all and ${MQ.desktop}`, () => {
     const track = section.querySelector('.method__track');
-    const fillTween = gsap.fromTo(fill, { scaleY: 0 }, {
-      scaleY: 1,
-      ease: 'none',
-      onUpdate: () => syncDots('y'),
-      scrollTrigger: { trigger: track, start: 'top 65%', end: 'bottom 65%', scrub: true },
-    });
+    const fillTween = gsap.fromTo(
+      fill,
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        ease: 'none',
+        onUpdate: () => syncDots('y'),
+        scrollTrigger: { trigger: track, start: 'top 65%', end: 'bottom 65%', scrub: true },
+      },
+    );
     syncDots('y');
     return () => {
       fillTween.scrollTrigger?.kill();

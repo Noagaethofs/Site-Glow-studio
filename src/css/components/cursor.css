@@ -1,0 +1,53 @@
+/* --- Curseur personnalisé ------------------------------------------------ */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 170;
+  display: none;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  transition:
+    width var(--dur-fast) var(--ease-out),
+    height var(--dur-fast) var(--ease-out),
+    margin var(--dur-fast) var(--ease-out);
+}
+.has-cursor .cursor {
+  display: block;
+}
+.cursor.is-link {
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+}
+.cursor.is-text {
+  width: 84px;
+  height: 84px;
+  margin: -42px 0 0 -42px;
+  mix-blend-mode: normal;
+  background: var(--paper);
+}
+.cursor__label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity var(--dur-fast);
+}
+.cursor.is-text .cursor__label {
+  opacity: 1;
+}
+.cursor.is-hidden {
+  width: 0;
+  height: 0;
+  margin: 0;
+}

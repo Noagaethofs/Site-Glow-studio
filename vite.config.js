@@ -1,8 +1,8 @@
 /**
  * Configuration Vite — site multi-pages GLOW.
  *
- * - Toutes les pages `index.html` du projet (hors node_modules / dist / templates)
- *   sont détectées automatiquement : ajouter une page projet = ajouter un dossier.
+ * - Toutes les pages `index.html` du projet (hors dossiers techniques) sont
+ *   détectées automatiquement : ajouter une page = ajouter un dossier avec un index.html.
  * - Plugin `htmlIncludes` : remplace `<!-- @include partials/x.html clé="valeur" -->`
  *   par le contenu du fichier, en substituant les `{{clé}}`. Évite de dupliquer
  *   header, footer et formulaire sur chaque page, sans framework.
@@ -12,7 +12,20 @@ import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { resolve, join, relative } from 'node:path';
 
 const root = import.meta.dirname;
-const IGNORED = new Set(['node_modules', 'dist', 'public', 'templates', 'partials', 'src', 'functions', 'scripts', 'docs', '.git']);
+const IGNORED = new Set([
+  'node_modules',
+  'dist',
+  'public',
+  'partials',
+  'src',
+  'functions',
+  'tests',
+  'playwright-report',
+  'test-results',
+  'docs',
+  '.git',
+  '.github',
+]);
 
 /** Liste récursive des pages HTML à construire. */
 function findPages(dir, pages = {}) {
@@ -49,26 +62,34 @@ const htmlIncludes = () => ({
 });
 
 /**
- * Génère dist/sitemap.xml à partir des pages détectées.
+ * Génère sitemap.xml (dans le dossier de sortie) à partir des pages détectées.
  * Domaine : variable SITE_URL (ex. SITE_URL=https://glow.be npm run build).
  */
 const NO_INDEX = new Set(['merci', 'mentions-legales']);
-const sitemap = (pages) => ({
-  name: 'glow-sitemap',
-  apply: 'build',
-  closeBundle() {
-    const site = (process.env.SITE_URL || 'https://[DOMAINE]').replace(/\/$/, '');
-    const today = new Date().toISOString().slice(0, 10);
-    const urls = Object.keys(pages)
-      .filter((name) => !NO_INDEX.has(name))
-      .map((name) => {
-        const path = name === 'home' ? '/' : `/${name.split('\\').join('/')}/`;
-        return `  <url><loc>${site}${path}</loc><lastmod>${today}</lastmod></url>`;
-      });
-    writeFileSync(resolve(root, 'dist/sitemap.xml'),
-      `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`);
-  },
-});
+const sitemap = (pages) => {
+  let outDir;
+  return {
+    name: 'glow-sitemap',
+    apply: 'build',
+    configResolved(config) {
+      outDir = resolve(config.root, config.build.outDir);
+    },
+    closeBundle() {
+      const site = (process.env.SITE_URL || 'https://[DOMAINE]').replace(/\/$/, '');
+      const today = new Date().toISOString().slice(0, 10);
+      const urls = Object.keys(pages)
+        .filter((name) => !NO_INDEX.has(name))
+        .map((name) => {
+          const path = name === 'home' ? '/' : `/${name.split('\\').join('/')}/`;
+          return `  <url><loc>${site}${path}</loc><lastmod>${today}</lastmod></url>`;
+        });
+      writeFileSync(
+        join(outDir, 'sitemap.xml'),
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`,
+      );
+    },
+  };
+};
 
 const pages = findPages(root);
 

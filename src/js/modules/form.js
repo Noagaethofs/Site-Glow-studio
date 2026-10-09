@@ -27,7 +27,8 @@ function validate(form) {
 
     let error = '';
     if (!input.value.trim()) error = MESSAGES.required;
-    else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(input.value.trim())) error = MESSAGES.email;
+    else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(input.value.trim()))
+      error = MESSAGES.email;
 
     if (error) {
       const msg = document.createElement('p');
@@ -91,7 +92,9 @@ export function initForms() {
     link.addEventListener('click', () => {
       forms.forEach((form) => setType(form, link.dataset.presetLink));
       // formulaire replié dans la carte de contact : on l'ouvre
-      document.querySelectorAll('[data-cta-form]').forEach((d) => { d.open = true; });
+      document.querySelectorAll('[data-cta-form]').forEach((d) => {
+        d.open = true;
+      });
     });
   });
 }

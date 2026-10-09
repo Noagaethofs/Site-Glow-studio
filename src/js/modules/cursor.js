@@ -17,13 +17,17 @@ export function initCursor() {
   const yTo = gsap.quickTo(cursor, 'y', { duration: 0.35, ease: 'power3.out' });
 
   let moved = false;
-  window.addEventListener('pointermove', (e) => {
-    if (e.pointerType !== 'mouse') return;
-    moved = true;
-    xTo(e.clientX);
-    yTo(e.clientY);
-    cursor.classList.remove('is-hidden');
-  }, { passive: true });
+  window.addEventListener(
+    'pointermove',
+    (e) => {
+      if (e.pointerType !== 'mouse') return;
+      moved = true;
+      xTo(e.clientX);
+      yTo(e.clientY);
+      cursor.classList.remove('is-hidden');
+    },
+    { passive: true },
+  );
 
   document.addEventListener('pointerover', (e) => {
     const textTarget = e.target.closest('[data-cursor-text]');

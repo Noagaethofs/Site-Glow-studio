@@ -27,8 +27,6 @@ export function initSmoothScroll() {
   return lenis;
 }
 
-export const getLenis = () => lenis;
-
 /** Défilement vers une cible (élément, sélecteur ou position). */
 export function scrollToTarget(target, { immediate = false } = {}) {
   const el = typeof target === 'string' ? document.querySelector(target) : target;
@@ -41,5 +39,7 @@ export function scrollToTarget(target, { immediate = false } = {}) {
   else el?.scrollIntoView({ behavior, block: 'start' });
 }
 
-export const stopScroll = () => (lenis ? lenis.stop() : document.documentElement.style.setProperty('overflow', 'hidden'));
-export const startScroll = () => (lenis ? lenis.start() : document.documentElement.style.removeProperty('overflow'));
+export const stopScroll = () =>
+  lenis ? lenis.stop() : document.documentElement.style.setProperty('overflow', 'hidden');
+export const startScroll = () =>
+  lenis ? lenis.start() : document.documentElement.style.removeProperty('overflow');

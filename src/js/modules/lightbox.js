@@ -30,7 +30,10 @@ export function initLightbox() {
     const clone = source.cloneNode(true);
     if (clone.tagName === 'IMG') {
       // version haute définition si fournie
-      if (item.dataset.full) { clone.src = item.dataset.full; clone.removeAttribute('srcset'); }
+      if (item.dataset.full) {
+        clone.src = item.dataset.full;
+        clone.removeAttribute('srcset');
+      }
       clone.loading = 'eager';
     }
     const frame = document.createElement('div');
@@ -40,8 +43,18 @@ export function initLightbox() {
     const old = stageEl.firstElementChild;
     stageEl.appendChild(frame);
     if (anim && old) {
-      gsap.fromTo(frame, { xPercent: dir * 12, opacity: 0 }, { xPercent: 0, opacity: 1, duration: 0.6, ease: 'expo.out' });
-      gsap.to(old, { xPercent: -dir * 12, opacity: 0, duration: 0.4, ease: 'power2.in', onComplete: () => old.remove() });
+      gsap.fromTo(
+        frame,
+        { xPercent: dir * 12, opacity: 0 },
+        { xPercent: 0, opacity: 1, duration: 0.6, ease: 'expo.out' },
+      );
+      gsap.to(old, {
+        xPercent: -dir * 12,
+        opacity: 0,
+        duration: 0.4,
+        ease: 'power2.in',
+        onComplete: () => old.remove(),
+      });
     } else old?.remove();
 
     counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
@@ -81,7 +94,9 @@ export function initLightbox() {
   btnPrev.addEventListener('click', () => go(-1));
   btnNext.addEventListener('click', () => go(1));
   btnClose.addEventListener('click', close);
-  box.addEventListener('click', (e) => { if (e.target === box || e.target === stageEl) close(); });
+  box.addEventListener('click', (e) => {
+    if (e.target === box || e.target === stageEl) close();
+  });
 
   document.addEventListener('keydown', (e) => {
     if (box.hidden) return;
@@ -98,18 +113,28 @@ export function initLightbox() {
   });
 
   // Swipe
-  let sx = 0, sy = 0, tracking = false;
-  stageEl.addEventListener('touchstart', (e) => {
-    tracking = true;
-    sx = e.touches[0].clientX;
-    sy = e.touches[0].clientY;
-  }, { passive: true });
-  stageEl.addEventListener('touchend', (e) => {
-    if (!tracking) return;
+  let sx = 0,
+    sy = 0,
     tracking = false;
-    const dx = e.changedTouches[0].clientX - sx;
-    const dy = e.changedTouches[0].clientY - sy;
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
-    else if (dy > 90) close();
-  }, { passive: true });
+  stageEl.addEventListener(
+    'touchstart',
+    (e) => {
+      tracking = true;
+      sx = e.touches[0].clientX;
+      sy = e.touches[0].clientY;
+    },
+    { passive: true },
+  );
+  stageEl.addEventListener(
+    'touchend',
+    (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.changedTouches[0].clientX - sx;
+      const dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+      else if (dy > 90) close();
+    },
+    { passive: true },
+  );
 }

@@ -9,7 +9,6 @@
  * tout le contenu reste visible.
  */
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { isDesktop } from './env.js';
 
@@ -21,7 +20,13 @@ export function initReveals(scope = document) {
     // Mobile, ou titre contenant du texte en dégradé (incompatible avec la découpe) :
     // simple apparition du bloc
     if (!desktop || el.querySelector('.glow-text')) {
-      gsap.from(el, { y: 30, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
+      gsap.from(el, {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        ease: 'expo.out',
+        scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+      });
       return;
     }
     SplitText.create(el, {
@@ -29,13 +34,14 @@ export function initReveals(scope = document) {
       mask: 'lines',
       linesClass: 'split-line',
       autoSplit: true,
-      onSplit: (self) => gsap.from(self.lines, {
-        yPercent: 105,
-        duration: 1.1,
-        ease: 'expo.out',
-        stagger: 0.09,
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-      }),
+      onSplit: (self) =>
+        gsap.from(self.lines, {
+          yPercent: 105,
+          duration: 1.1,
+          ease: 'expo.out',
+          stagger: 0.09,
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+        }),
     });
   });
 
@@ -54,7 +60,11 @@ export function initReveals(scope = document) {
   scope.querySelectorAll('[data-mask]').forEach((el) => {
     const inner = el.firstElementChild;
     const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 85%', once: true } });
-    tl.fromTo(el, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' });
+    tl.fromTo(
+      el,
+      { clipPath: 'inset(100% 0% 0% 0%)' },
+      { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' },
+    );
     if (inner) tl.from(inner, { scale: 1.25, duration: 1.6, ease: 'expo.out' }, 0.1);
   });
 
@@ -62,11 +72,15 @@ export function initReveals(scope = document) {
   scope.querySelectorAll('[data-parallax]').forEach((el) => {
     const speed = parseFloat(el.dataset.parallax) || 0.08;
     const inner = el.firstElementChild;
-    gsap.fromTo(inner, { yPercent: -speed * 100 }, {
-      yPercent: speed * 100,
-      ease: 'none',
-      scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true },
-    });
+    gsap.fromTo(
+      inner,
+      { yPercent: -speed * 100 },
+      {
+        yPercent: speed * 100,
+        ease: 'none',
+        scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true },
+      },
+    );
   });
 
   // Hero de page : léger zoom arrière à l'arrivée puis parallaxe
@@ -85,17 +99,17 @@ export function initReveals(scope = document) {
       type: 'words',
       wordsClass: 'w',
       autoSplit: true,
-      onSplit: (self) => gsap.fromTo(self.words, { opacity: 0.14 }, {
-        opacity: 1,
-        ease: 'none',
-        stagger: 0.1,
-        scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: true },
-      }),
+      onSplit: (self) =>
+        gsap.fromTo(
+          self.words,
+          { opacity: 0.14 },
+          {
+            opacity: 1,
+            ease: 'none',
+            stagger: 0.1,
+            scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: true },
+          },
+        ),
     });
   });
-}
-
-/** Version sans mouvement : on s'assure simplement que tout est visible. */
-export function revealAllStatic() {
-  ScrollTrigger.getAll().forEach((st) => st.kill());
 }

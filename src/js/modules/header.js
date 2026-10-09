@@ -14,15 +14,25 @@ export function initHeader() {
     const delta = y - lastY;
     header.classList.toggle('is-compact', y > 40);
     if (Math.abs(delta) > 4) {
-      header.classList.toggle('is-hidden', delta > 0 && y > 160 && !document.body.classList.contains('menu-open'));
+      header.classList.toggle(
+        'is-hidden',
+        delta > 0 && y > 160 && !document.body.classList.contains('menu-open'),
+      );
       lastY = y;
     }
     ticking = false;
   };
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(update); ticking = true; }
-  }, { passive: true });
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    },
+    { passive: true },
+  );
 
   // Le header réapparaît dès qu'un élément y reçoit le focus clavier
   header.addEventListener('focusin', () => header.classList.remove('is-hidden'));
@@ -32,10 +42,15 @@ export function initHeader() {
   if (cta && 'IntersectionObserver' in window) {
     // masqué tant que le hero (qui a son propre CTA) ou le formulaire est visible
     const hidden = new Set();
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => (e.isIntersecting ? hidden.add(e.target) : hidden.delete(e.target)));
-      cta.classList.toggle('is-hidden', hidden.size > 0);
-    }, { rootMargin: '0px 0px -30% 0px' });
-    [document.querySelector('[data-hero], .page-hero'), contact].filter(Boolean).forEach((el) => io.observe(el));
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => (e.isIntersecting ? hidden.add(e.target) : hidden.delete(e.target)));
+        cta.classList.toggle('is-hidden', hidden.size > 0);
+      },
+      { rootMargin: '0px 0px -30% 0px' },
+    );
+    [document.querySelector('[data-hero], .page-hero'), contact]
+      .filter(Boolean)
+      .forEach((el) => io.observe(el));
   }
 }

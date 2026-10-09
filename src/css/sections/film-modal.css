@@ -1,0 +1,43 @@
+/* --- Fenêtre vidéo (film complet avec le son) ---------------------------- */
+.case-info__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+}
+.case-info__play {
+  border-radius: 999px;
+}
+.case-info__play span {
+  font-size: 0.8em;
+}
+
+.film-modal {
+  width: min(92vw, 72rem);
+  max-width: none;
+  padding: 0;
+  border: 0;
+  border-radius: 1rem;
+  background: #000;
+  overflow: visible;
+}
+.film-modal::backdrop {
+  background: rgba(10, 9, 10, 0.88);
+}
+.film-modal__frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+}
+.film-modal__close {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.75rem);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--night);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}

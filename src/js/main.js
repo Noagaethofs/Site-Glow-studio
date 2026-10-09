@@ -48,7 +48,9 @@ async function boot() {
     if (!url.hash && url.pathname === location.pathname) a.setAttribute('aria-current', 'page');
   });
 
-  document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
+  document.querySelectorAll('[data-year]').forEach((el) => {
+    el.textContent = new Date().getFullYear();
+  });
 
   // L'intro de chargement démarre tout de suite, sans attendre la suite
   const loaded = runLoader();
@@ -75,7 +77,8 @@ async function boot() {
 
   // Repère les contenus encore à compléter (utile avant la mise en ligne)
   const todos = document.querySelectorAll('.todo').length;
-  if (todos && import.meta.env.DEV) console.info(`[GLOW] ${todos} contenu(s) à compléter sur cette page (.todo)`);
+  if (todos && import.meta.env.DEV)
+    console.info(`[GLOW] ${todos} contenu(s) à compléter sur cette page (.todo)`);
 }
 
 boot();

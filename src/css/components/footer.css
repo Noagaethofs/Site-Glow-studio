@@ -1,0 +1,63 @@
+/* --- Footer -------------------------------------------------------------- */
+.footer {
+  position: relative;
+  padding: var(--space-5) var(--gutter) 0;
+  background: var(--night);
+  color: var(--paper);
+  overflow: hidden;
+}
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: var(--space-3);
+  padding-bottom: var(--space-5);
+}
+.footer__slogan {
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--track-tight);
+}
+.footer__cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4) var(--space-3);
+  font-size: var(--fs-sm);
+}
+.footer__cols li {
+  padding: 0.2em 0;
+}
+.footer__cols a {
+  transition: color var(--dur-fast);
+}
+@media (hover: hover) {
+  .footer__cols a:hover {
+    color: var(--grey);
+  }
+}
+.footer__label {
+  margin-bottom: 0.75em;
+  color: var(--muted);
+}
+@media (min-width: 48em) {
+  .footer__cols {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Grand logo, pleine largeur, qui se dessine en arrivant en bas de page */
+.footer__logo {
+  margin-top: var(--space-5);
+  padding-bottom: var(--space-4);
+  line-height: 0;
+}
+.footer__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.footer__back {
+  white-space: nowrap;
+}

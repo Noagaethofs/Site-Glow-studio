@@ -1,0 +1,103 @@
+/* --- Loader -------------------------------------------------------------
+   Fond : lumière douce aux couleurs du logo. Le logo se dessine trait par
+   trait, puis le site apparaît à travers une ouverture qui part du O. */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: none;
+  place-items: center;
+  background: var(--paper);
+  color: var(--ink);
+  pointer-events: none;
+}
+
+.is-loading .loader {
+  display: grid;
+}
+.loader__light {
+  position: absolute;
+  inset: -20%;
+  background: url('/media/glow.webp') center / 100% 100% no-repeat;
+  opacity: 0;
+}
+.loader__logo {
+  position: relative;
+  width: min(64vw, 46rem);
+  height: auto;
+  overflow: visible;
+  opacity: 0;
+}
+.loader.is-drawing .loader__logo {
+  opacity: 1;
+}
+.loader.is-waiting {
+  pointer-events: auto;
+  cursor: pointer;
+}
+.loader__hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  transform: translateX(-50%);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+}
+/* petite molette de souris qui invite à défiler */
+.loader__wheel {
+  position: relative;
+  width: 1.4rem;
+  height: 2.2rem;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+}
+.loader__wheel::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0.4rem;
+  width: 3px;
+  height: 0.45rem;
+  margin-left: -1.5px;
+  border-radius: 3px;
+  background: currentColor;
+  animation: loader-wheel 1.6s var(--ease-in-out) infinite;
+}
+@keyframes loader-wheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(0.7rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+.loader__count {
+  position: absolute;
+  left: var(--gutter);
+  bottom: calc(var(--space-3) + env(safe-area-inset-bottom));
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.loader__count::after {
+  content: ' %';
+  color: var(--muted);
+}
+.loader__tag {
+  position: absolute;
+  right: var(--gutter);
+  bottom: calc(var(--space-3) + env(safe-area-inset-bottom));
+  font-size: var(--fs-md);
+}

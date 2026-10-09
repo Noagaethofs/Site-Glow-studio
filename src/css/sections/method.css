@@ -1,0 +1,166 @@
+/* ==========================================================================
+   04 · GLOW METHOD — sombre, piste horizontale reliée par un fil conducteur
+   ========================================================================== */
+.method {
+  overflow: hidden;
+}
+.method__pin {
+  position: relative;
+  padding: var(--space-6) 0;
+}
+.method__head {
+  display: grid;
+  gap: var(--space-3);
+  padding: 0 var(--gutter) var(--space-5);
+}
+.method__title {
+  font-size: clamp(2.75rem, 1rem + 5vw, 6rem);
+  line-height: 0.9;
+}
+.method__intro {
+  max-width: 30ch;
+  font-size: var(--fs-md);
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+/* --- Mobile : fil vertical à gauche, une étape par ligne ------------------ */
+.method__rail {
+  position: relative;
+  padding: 0 var(--gutter);
+}
+.method__thread {
+  position: absolute;
+  left: calc(var(--gutter) + 0.45rem);
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 2px;
+  background: var(--line);
+}
+.method__thread span {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(var(--coral), var(--peach), var(--lilac));
+  transform: scaleY(0);
+  transform-origin: top;
+}
+.method__track {
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+}
+.step {
+  position: relative;
+  display: grid;
+  gap: 0.4rem;
+  padding-left: 2.25rem;
+}
+.step__dot {
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--bg);
+  transition:
+    background 0.4s,
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+.step.is-reached .step__dot {
+  border-color: transparent;
+  background: var(--glow);
+  box-shadow:
+    0 0 0 5px rgba(185, 148, 255, 0.15),
+    0 0 18px rgba(255, 143, 138, 0.45);
+}
+.step__num {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  transition: color 0.4s;
+}
+.step.is-reached .step__num {
+  color: var(--peach);
+}
+.step__name {
+  font-size: clamp(2.25rem, 9vw, 3.5rem);
+  line-height: 0.95;
+}
+.step__text {
+  max-width: 36ch;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.step__text strong {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+/* --- Desktop : piste horizontale pinnée, fil horizontal en haut --------- */
+@media (min-width: 64em) {
+  .method.is-horizontal .method__pin {
+    height: 100vh;
+    height: 100svh;
+    padding: calc(var(--header-h) + var(--space-3)) 0 var(--space-4);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .method.is-horizontal .method__head {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding-bottom: 0;
+  }
+  .method.is-horizontal .method__intro {
+    text-align: right;
+  }
+
+  .method.is-horizontal .method__rail {
+    place-self: center start;
+    width: max-content;
+    padding: 0 var(--gutter);
+    will-change: transform;
+  }
+  .method.is-horizontal .method__thread {
+    inset: 0.45rem var(--gutter) auto;
+    width: auto;
+    height: 2px;
+    margin: -1px 0 0;
+  }
+  .method.is-horizontal .method__thread span {
+    background: var(--glow);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  .method.is-horizontal .method__track {
+    display: flex;
+    gap: 0;
+  }
+  .method.is-horizontal .step {
+    width: clamp(20rem, 32vw, 30rem);
+    padding: 2.25rem 4vw 0 0;
+    align-content: start;
+    gap: 0.6rem;
+  }
+  .method.is-horizontal .step__dot {
+    top: 0;
+  }
+  .method.is-horizontal .step__name {
+    font-size: clamp(2.5rem, 1rem + 3vw, 4.5rem);
+    margin-top: 0.2rem;
+  }
+  .method.is-horizontal .step__text {
+    font-size: var(--fs-base);
+    max-width: 28ch;
+  }
+  .method.is-horizontal .step--shine .step__name {
+    font-size: clamp(3rem, 1rem + 4vw, 5.5rem);
+  }
+}

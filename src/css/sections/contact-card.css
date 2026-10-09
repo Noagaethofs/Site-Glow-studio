@@ -1,0 +1,107 @@
+/* ==========================================================================
+   10 bis · CONTACT en cadre compact (accueil)
+   ========================================================================== */
+.contact--card {
+  padding: var(--space-5) var(--gutter) var(--space-6);
+}
+.cta-card {
+  position: relative;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 1.5rem + 4vw, 5rem) clamp(1.25rem, 1rem + 3vw, 4rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2rem;
+  overflow: hidden;
+  text-align: center;
+  background:
+    radial-gradient(45% 70% at 40% 15%, rgba(255, 143, 138, 0.22), transparent 70%),
+    radial-gradient(40% 60% at 85% 30%, rgba(185, 148, 255, 0.22), transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+    0 60px 120px -60px rgba(185, 148, 255, 0.35);
+}
+.cta-card__title {
+  font-size: clamp(2.6rem, 1.2rem + 5vw, 5.5rem);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: var(--track-display);
+}
+.cta-card__lead {
+  max-width: 38ch;
+  margin: var(--space-3) auto 0;
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  color: var(--muted);
+}
+.cta-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: var(--space-4);
+}
+.cta-card__btn {
+  border-radius: 999px;
+  padding: 1rem 1.6rem;
+}
+.cta-card__btn .todo,
+.cta-card__btn--ghost .todo {
+  text-decoration-color: currentColor;
+}
+.cta-card__btn--ghost {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--paper);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  line-height: 1;
+  transition:
+    background var(--dur-fast),
+    border-color var(--dur-fast);
+}
+@media (hover: hover) {
+  .cta-card__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Formulaire de devis, replié dans la carte */
+.cta-card__form {
+  margin-top: var(--space-3);
+  text-align: left;
+}
+.cta-card__toggle {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0.4rem 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: var(--coral);
+  text-underline-offset: 0.3em;
+  cursor: pointer;
+  list-style: none;
+}
+.cta-card__toggle::-webkit-details-marker {
+  display: none;
+}
+.cta-card__form[open] .cta-card__toggle {
+  color: var(--fg);
+  margin-bottom: var(--space-3);
+}
+.cta-card__form .form {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-3);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.cta-card__form .form__submit {
+  --btn-bg: var(--paper);
+  --btn-fg: var(--night);
+}

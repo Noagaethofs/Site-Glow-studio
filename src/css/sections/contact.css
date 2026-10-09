@@ -1,0 +1,76 @@
+/* ==========================================================================
+   10 · CONTACT — la lumière du logo en fond
+   ========================================================================== */
+.contact {
+  padding: var(--space-6) var(--gutter);
+}
+.contact--glow {
+  background: var(--paper) var(--glow-soft);
+}
+.contact__title {
+  font-size: clamp(3.5rem, 1rem + 11vw, 14rem);
+  line-height: 0.86;
+  margin-bottom: var(--space-5);
+  text-align: center;
+}
+.contact__grid {
+  display: grid;
+  gap: var(--space-5);
+}
+.contact__lead {
+  max-width: 30ch;
+  font-size: var(--fs-md);
+  line-height: 1.4;
+  margin-bottom: var(--space-4);
+}
+.contact__details {
+  display: grid;
+  gap: var(--space-2);
+}
+.contact__details div {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--line);
+}
+.contact__details dt {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  padding-top: 0.15em;
+}
+.contact__details dd {
+  font-size: var(--fs-md);
+}
+.contact .form {
+  padding: var(--space-4);
+  border-radius: 1.5rem;
+  background: rgba(251, 248, 245, 0.75);
+}
+@media (min-width: 64em) {
+  .contact__grid {
+    grid-template-columns: 1fr 1.6fr;
+    column-gap: var(--space-5);
+    align-items: start;
+  }
+}
+
+/* Équipe sur mobile / tablette : carrousel à faire glisser */
+@media (max-width: 63.99em) {
+  .team__list {
+    display: flex;
+    gap: var(--space-2);
+    margin: 0 calc(var(--gutter) * -1);
+    padding: 0 var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .team__list::-webkit-scrollbar {
+    display: none;
+  }
+  .member {
+    flex: 0 0 min(78%, 22rem);
+    scroll-snap-align: start;
+  }
+}

@@ -1,0 +1,231 @@
+/* ==========================================================================
+   05 · RÉALISATIONS — infos à gauche, écran à droite (glisser pour changer)
+   ========================================================================== */
+.work {
+  padding: var(--space-6) var(--gutter);
+}
+.work__head {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+  margin-bottom: var(--space-5);
+}
+.work__title {
+  max-width: 18ch;
+  font-size: clamp(2.25rem, 1rem + 3.6vw, 5rem);
+  line-height: 0.95;
+}
+
+.cases {
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+}
+.cases__info {
+  display: grid;
+  gap: var(--space-3);
+  align-content: center;
+  order: 2;
+}
+.case-info {
+  display: grid;
+  gap: 0.9rem;
+  justify-items: start;
+}
+.case-info[hidden] {
+  display: none;
+}
+.case-info__meta {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--muted);
+}
+.case-info__meta span {
+  margin-right: 0.5em;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+.case-info__name {
+  font-size: clamp(2rem, 1rem + 3vw, 4rem);
+  line-height: 1;
+}
+.case-info__desc {
+  max-width: 40ch;
+  font-size: var(--fs-md);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.cases__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+/* indicateur : un trait par projet, le projet affiché est éclairé */
+.cases__steps {
+  display: flex;
+  gap: 0.4rem;
+}
+.cases__steps button {
+  width: 1.6rem;
+  height: 4px;
+  padding: 0;
+  border-radius: 4px;
+  background: var(--line);
+  transition:
+    width 0.4s var(--ease-out),
+    background 0.4s;
+}
+.cases__steps button[aria-selected='true'] {
+  width: 3rem;
+  background: var(--glow);
+}
+.cases__count {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.cases__count span {
+  color: var(--fg);
+}
+.cases__more {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.cases__more a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--coral);
+  text-underline-offset: 0.25em;
+}
+
+/* --- L'écran ------------------------------------------------------------- */
+.screen {
+  position: relative;
+  order: 1;
+  padding: 0 0.55rem 0.55rem;
+  border-radius: 1.1rem;
+  background: #111012;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 40px 80px -30px rgba(185, 148, 255, 0.45),
+    0 20px 40px -20px rgba(10, 9, 10, 0.5);
+  user-select: none;
+  touch-action: none; /* les glissés sur l'écran sont gérés en JS */
+  outline-offset: 6px;
+}
+.screen__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 2.2rem;
+  padding: 0 0.35rem;
+}
+.screen__dots {
+  display: flex;
+  gap: 0.35rem;
+}
+.screen__dots i {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+.screen__dots i:first-child {
+  background: var(--coral);
+}
+.screen__dots i:nth-child(2) {
+  background: var(--peach);
+}
+.screen__dots i:nth-child(3) {
+  background: var(--lilac);
+}
+.screen__url {
+  flex: 1;
+  max-width: 18rem;
+  margin: 0 auto;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: var(--fs-xs);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.screen__view {
+  position: relative;
+  aspect-ratio: 1920 / 1108; /* format des enregistrements d'écran fournis */
+  border-radius: 0.6rem;
+  overflow: hidden;
+  background: #1b1a1b;
+}
+.screen__track {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  will-change: transform;
+}
+.screen__slide {
+  flex: 0 0 100%;
+  height: 100%;
+}
+.screen__slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.screen__slide .ph {
+  --ph: #ebe5e0;
+}
+.screen__hint {
+  position: absolute;
+  left: 50%;
+  bottom: -2.2rem;
+  transform: translateX(-50%);
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.screen__hint span {
+  display: inline-block;
+  margin-right: 0.3em;
+  color: var(--coral);
+  animation: hint-bob 1.8s var(--ease-in-out) infinite;
+}
+@keyframes hint-bob {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
+@media (min-width: 64em) {
+  .cases {
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    column-gap: var(--space-5);
+    align-items: center;
+  }
+  .cases__info {
+    order: 0;
+  }
+  /* hauteur réservée : les flèches ne bougent pas d'un projet à l'autre */
+  .case-info {
+    min-height: 20rem;
+    align-content: end;
+  }
+  .screen {
+    order: 0;
+  }
+}
+@media (max-width: 63.99em) {
+  .screen {
+    margin-bottom: var(--space-3);
+  }
+}

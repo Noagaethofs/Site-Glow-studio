@@ -1,0 +1,181 @@
+/* --- Formulaire ---------------------------------------------------------- */
+.form {
+  display: grid;
+  gap: var(--space-4);
+}
+.form__types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.form__legend {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.chip {
+  position: relative;
+  cursor: pointer;
+}
+.chip input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  cursor: pointer;
+}
+.chip span {
+  display: block;
+  padding: 0.75em 1.15em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  transition:
+    background var(--dur-fast),
+    color var(--dur-fast),
+    border-color var(--dur-fast);
+}
+.chip input:checked + span {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+.chip input:focus-visible + span {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
+@media (hover: hover) {
+  .chip:hover span {
+    border-color: var(--fg);
+  }
+}
+
+.form__grid {
+  display: grid;
+  gap: var(--space-3) var(--space-4);
+}
+@media (min-width: 48em) {
+  .form__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .field--full {
+    grid-column: 1 / -1;
+  }
+}
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+.field label {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.55rem 0 0.7rem;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  font-size: var(--fs-md);
+  outline: none;
+  transition: border-color var(--dur-fast);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field textarea {
+  resize: vertical;
+  min-height: 7rem;
+}
+.field input:focus,
+.field textarea:focus {
+  border-bottom-color: var(--fg);
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: color-mix(in srgb, var(--fg) 30%, transparent);
+}
+.field.is-invalid input,
+.field.is-invalid textarea {
+  border-bottom-color: currentColor;
+  border-bottom-style: dashed;
+}
+.field__error {
+  font-size: var(--fs-xs);
+}
+
+.form__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.form__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.form__legal {
+  max-width: 40ch;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.form__legal a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.form__status {
+  min-height: 1.5em;
+  font-size: var(--fs-sm);
+}
+.form.is-sending button {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.form.is-sent .form__types,
+.form.is-sent .form__grid,
+.form.is-sent .form__foot {
+  display: none;
+}
+.form.is-sent .form__status {
+  font-size: var(--fs-lg);
+  line-height: 1.2;
+  letter-spacing: var(--track-tight);
+}
+
+/* Le curseur natif est masqué quand le curseur personnalisé est actif,
+   sauf dans les champs de saisie */
+.has-cursor,
+.has-cursor * {
+  cursor: none;
+}
+.has-cursor input,
+.has-cursor textarea,
+.has-cursor select {
+  cursor: text;
+}
+.form__submit {
+  border-radius: 999px;
+}
+
+/* Pages qui s'ouvrent sur une photo sombre : header clair tant qu'on est en haut */
+:is(.page-home, .page-photo, .page-thanks) .header:not(.is-compact) {
+  color: var(--paper);
+}
+:is(.page-home, .page-photo, .page-thanks) .header:not(.is-compact) .header__cta {
+  --btn-bg: var(--paper);
+  --btn-fg: var(--ink);
+}
+@media (max-width: 47.99em) {
+  .loader__tag {
+    display: none;
+  }
+}

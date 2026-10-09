@@ -1,0 +1,28 @@
+/* --- CTA devis fixe (mobile) -------------------------------------------- */
+.sticky-cta {
+  position: fixed;
+  right: var(--gutter);
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  z-index: 80;
+  display: none;
+  padding: 1rem 1.4rem;
+  background: var(--glow);
+  color: var(--ink);
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 6px 20px rgba(31, 27, 28, 0.12);
+  transition:
+    transform var(--dur) var(--ease-out),
+    opacity var(--dur);
+}
+.sticky-cta.is-hidden {
+  transform: translateY(150%);
+  opacity: 0;
+}
+@media (max-width: 63.99em) {
+  .sticky-cta {
+    display: block;
+  }
+}

@@ -21,12 +21,16 @@ export function initServices() {
 
   gsap.matchMedia().add(MQ.desktop, () => {
     activate(0);
-    const triggers = items.map((el, i) => ScrollTrigger.create({
-      trigger: el,
-      start: 'top 55%',
-      end: 'bottom 55%',
-      onToggle: (self) => { if (self.isActive) activate(i); },
-    }));
+    const triggers = items.map((el, i) =>
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 55%',
+        end: 'bottom 55%',
+        onToggle: (self) => {
+          if (self.isActive) activate(i);
+        },
+      }),
+    );
     return () => triggers.forEach((t) => t.kill());
   });
 }

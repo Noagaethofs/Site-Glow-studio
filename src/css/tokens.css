@@ -8,38 +8,48 @@
 @font-face {
   font-family: 'General Sans';
   src: url('/fonts/GeneralSans-400.woff2') format('woff2');
-  font-weight: 400; font-style: normal; font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'General Sans';
   src: url('/fonts/GeneralSans-500.woff2') format('woff2');
-  font-weight: 500; font-style: normal; font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'General Sans';
   src: url('/fonts/GeneralSans-600.woff2') format('woff2');
-  font-weight: 600; font-style: normal; font-display: swap;
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Instrument Serif';
   src: url('/fonts/InstrumentSerif-Italic.woff2') format('woff2');
-  font-weight: 400; font-style: italic; font-display: swap;
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Instrument Serif';
   src: url('/fonts/InstrumentSerif-Regular.woff2') format('woff2');
-  font-weight: 400; font-style: normal; font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
   /* --- Couleurs -----------------------------------------------------------
      Base claire et chaude. Le dégradé du logo (corail → pêche → lilas) est
      la « lumière » de GLOW : utilisé très légèrement, jamais en aplat criard. */
-  --ink: #1f1b1c;          /* noir du logo (textes) */
-  --night: #0a090a;        /* noir profond des sections sombres */
+  --ink: #1f1b1c; /* noir du logo (textes) */
+  --night: #0a090a; /* noir profond des sections sombres */
   --ink-2: #2a2526;
-  --paper: #fbf8f5;        /* blanc chaud */
-  --paper-2: #f3eee9;      /* blanc chaud appuyé */
+  --paper: #fbf8f5; /* blanc chaud */
+  --paper-2: #f3eee9; /* blanc chaud appuyé */
   --grey: #8f8786;
   --line-dark: rgba(251, 248, 245, 0.14);
   --line-light: rgba(31, 27, 28, 0.12);
@@ -56,7 +66,7 @@
   --fg: var(--ink);
   --muted: #6f6767;
   --line: var(--line-light);
-  --ph: #ece6e1;           /* fond des emplacements photo */
+  --ph: #ece6e1; /* fond des emplacements photo */
 
   /* --- Typographies ------------------------------------------------------ */
   --font-sans: 'General Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -80,13 +90,13 @@
   --track-display: -0.055em;
 
   /* --- Espacements ------------------------------------------------------- */
-  --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem);   /* marge latérale */
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem); /* marge latérale */
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
   --space-4: clamp(2rem, 1.6rem + 1.5vw, 3rem);
   --space-5: clamp(3rem, 2rem + 4vw, 6rem);
-  --space-6: clamp(4.5rem, 2.5rem + 8vw, 11rem);  /* respiration entre sections */
+  --space-6: clamp(4.5rem, 2.5rem + 8vw, 11rem); /* respiration entre sections */
   --header-h: 4.5rem;
 
   /* --- Mouvement --------------------------------------------------------- */
@@ -109,4 +119,6 @@
   --ph: #1b1a1b;
 }
 /* Ancien nom conservé : le clair est désormais le thème par défaut */
-.theme-paper { --bg: var(--paper); }
+.theme-paper {
+  --bg: var(--paper);
+}

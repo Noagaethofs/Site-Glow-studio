@@ -1,0 +1,41 @@
+/* --- Mentions légales ----------------------------------------------------- */
+.legal {
+  padding: calc(var(--header-h) + var(--space-5)) var(--gutter) var(--space-6);
+}
+.legal__title {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-5);
+}
+.legal__body {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 68ch;
+}
+.legal__body h2 {
+  font-size: var(--fs-lg);
+  line-height: 1.1;
+  letter-spacing: var(--track-tight);
+  margin-bottom: 0.5em;
+}
+.legal__body p,
+.legal__body li {
+  color: var(--muted);
+}
+.legal__body ul {
+  display: grid;
+  gap: 0.3em;
+  padding-left: 1.2em;
+  list-style: disc;
+}
+.legal__body a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+@media (min-width: 64em) {
+  .legal {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: var(--space-5);
+  }
+}

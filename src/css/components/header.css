@@ -1,0 +1,99 @@
+/* --- Header -------------------------------------------------------------
+   Transparent sur le hero, puis fond clair quand on descend. Se rétracte
+   au scroll vers le bas. */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: var(--header-h);
+  padding: 0 var(--gutter);
+  color: var(--ink);
+  transition:
+    transform var(--dur) var(--ease-out),
+    height var(--dur) var(--ease-out),
+    background-color var(--dur),
+    box-shadow var(--dur);
+}
+.header.is-hidden {
+  transform: translateY(-100%);
+}
+.header.is-compact {
+  height: 3.75rem;
+  background-color: rgba(251, 248, 245, 0.94);
+  box-shadow: 0 1px 0 var(--line-light);
+}
+.menu-open .header {
+  color: var(--ink);
+  background-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.header__logo {
+  display: block;
+  line-height: 0;
+}
+.header__svg {
+  width: 7rem;
+  height: auto;
+}
+.header__nav {
+  margin-left: auto;
+}
+.header__nav ul {
+  display: flex;
+  gap: clamp(1rem, 2vw, 2rem);
+}
+.header__nav a {
+  position: relative;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+.header__nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.3em;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--glow);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.header__nav a[aria-current='page']::after {
+  transform: scaleX(1);
+}
+@media (hover: hover) {
+  .header__nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+.header__cta {
+  border-radius: 999px;
+}
+
+.header__burger {
+  display: none;
+  margin-left: auto;
+  padding: 0.75rem 0 0.75rem 0.75rem;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+@media (max-width: 63.99em) {
+  .header__nav,
+  .header__cta {
+    display: none;
+  }
+  .header__burger {
+    display: block;
+  }
+}

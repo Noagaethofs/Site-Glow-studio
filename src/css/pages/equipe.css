@@ -1,0 +1,23 @@
+/* --- Lien d'appel en bas de page (page Équipe) ------------------------- */
+.project-next {
+  display: block;
+  padding: var(--space-6) var(--gutter);
+  background: var(--paper) var(--glow-soft);
+}
+.project-next__label {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.project-next__name {
+  display: block;
+  font-size: var(--fs-3xl);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: var(--track-display);
+  transition: transform var(--dur) var(--ease-out);
+}
+@media (hover: hover) {
+  .project-next:hover .project-next__name {
+    transform: translateX(0.1em);
+  }
+}

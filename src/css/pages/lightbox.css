@@ -1,0 +1,71 @@
+/* --- Lightbox ------------------------------------------------------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 160;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: rgba(31, 27, 28, 0.97);
+  color: var(--paper);
+  --fg: var(--paper);
+  --ph: #262626;
+}
+.lightbox[hidden] {
+  display: none;
+}
+.lightbox__bar,
+.lightbox__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--gutter);
+  font-size: var(--fs-sm);
+}
+.lightbox__foot {
+  padding-bottom: calc(var(--space-2) + env(safe-area-inset-bottom));
+}
+.lightbox__close,
+.lightbox__nav button {
+  padding: 0.6rem 0;
+  font-weight: 500;
+}
+.lightbox__nav {
+  display: flex;
+  gap: var(--space-3);
+  font-size: var(--fs-lg);
+}
+.lightbox__caption {
+  color: var(--grey);
+}
+.lightbox__stage {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+.lightbox__frame {
+  position: absolute;
+  inset: 0 var(--gutter);
+  display: grid;
+  place-items: center;
+}
+.lightbox__frame > img,
+.lightbox__frame > picture,
+.lightbox__frame > video {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.lightbox__frame > .ph {
+  width: min(100%, 70vh);
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 4 / 5;
+  transform: none !important;
+}
+.lightbox-open .header,
+.lightbox-open .sticky-cta {
+  visibility: hidden;
+}

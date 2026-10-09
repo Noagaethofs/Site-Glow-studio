@@ -17,13 +17,18 @@ const TYPES = { site: 'Site web', photo: 'Photo', video: 'Vidéo', autre: 'Autre
 const MAX = { name: 120, company: 160, email: 200, phone: 40, message: 5000 };
 
 const json = (body, status = 200) =>
-  new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json; charset=utf-8' } });
+  new Response(JSON.stringify(body), {
+    status,
+    headers: { 'content-type': 'application/json; charset=utf-8' },
+  });
 
-const escape = (s) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const escape = (s) =>
+  s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 export async function onRequestPost({ request, env }) {
   const wantsJson = (request.headers.get('accept') || '').includes('application/json');
-  const fail = (error, status = 400) => (wantsJson ? json({ ok: false, error }, status) : new Response(error, { status }));
+  const fail = (error, status = 400) =>
+    wantsJson ? json({ ok: false, error }, status) : new Response(error, { status });
 
   let form;
   try {
@@ -32,7 +37,10 @@ export async function onRequestPost({ request, env }) {
     return fail('Requête invalide');
   }
 
-  const get = (k) => String(form.get(k) ?? '').trim().slice(0, MAX[k] ?? 200);
+  const get = (k) =>
+    String(form.get(k) ?? '')
+      .trim()
+      .slice(0, MAX[k] ?? 200);
   const data = {
     type: TYPES[get('type')] ?? 'Autre',
     name: get('name'),
@@ -43,7 +51,8 @@ export async function onRequestPost({ request, env }) {
   };
 
   // Piège anti-spam : un robot remplit le champ caché → on fait semblant d'accepter
-  if (get('website')) return wantsJson ? json({ ok: true }) : Response.redirect(new URL('/merci/', request.url), 303);
+  if (get('website'))
+    return wantsJson ? json({ ok: true }) : Response.redirect(new URL('/merci/', request.url), 303);
 
   if (!data.name || !data.message || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) {
     return fail('Champs obligatoires manquants ou invalides');
