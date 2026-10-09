@@ -218,40 +218,7 @@
 .lightbox__frame > .ph { width: min(100%, 70vh); height: auto; min-height: 0; aspect-ratio: 4 / 5; transform: none !important; }
 .lightbox-open .header, .lightbox-open .sticky-cta { visibility: hidden; }
 
-/* --- Page projet ---------------------------------------------------------- */
-.project-hero {
-  padding: calc(var(--header-h) + var(--space-5)) var(--gutter) var(--space-4);
-}
-.project-hero__title { font-size: var(--fs-3xl); line-height: 0.86; margin: var(--space-3) 0 var(--space-4); }
-.project-meta {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-3);
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--line);
-}
-.project-meta dt { font-size: var(--fs-sm); color: var(--muted); margin-bottom: 0.3em; }
-.project-meta dd { font-weight: 500; }
-@media (min-width: 64em) { .project-meta { grid-template-columns: repeat(4, 1fr); } }
-.project-cover { aspect-ratio: 16 / 9; margin: 0 var(--gutter); overflow: hidden; border-radius: 1.25rem; }
-.project-body {
-  display: grid;
-  gap: var(--space-4);
-  padding: var(--space-6) var(--gutter);
-}
-.project-body h2 { font-size: var(--fs-xl); }
-.project-body__text { display: grid; gap: var(--space-2); max-width: 58ch; font-size: var(--fs-md); line-height: 1.5; }
-.project-body__text ul { display: grid; gap: 0.4em; }
-.project-body__text li { padding-left: 1.2em; position: relative; }
-.project-body__text li::before { content: '—'; position: absolute; left: 0; color: var(--muted); }
-@media (min-width: 64em) { .project-body { grid-template-columns: 1fr 1.6fr; } }
-.project-gallery { display: grid; gap: var(--space-3); padding: 0 var(--gutter) var(--space-6); }
-.project-gallery figure { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 1rem; }
-@media (min-width: 64em) {
-  .project-gallery { grid-template-columns: 1fr 1fr; }
-  .project-gallery figure:nth-child(3n) { grid-column: 1 / -1; aspect-ratio: 21 / 9; }
-  .project-gallery figure:nth-child(2) { margin-top: var(--space-6); }
-}
+/* --- Lien d'appel en bas de page (page Équipe) ------------------------- */
 .project-next {
   display: block;
   padding: var(--space-6) var(--gutter);
@@ -275,38 +242,8 @@
 .link-arrow--back::before { content: '←'; transition: transform var(--dur-fast) var(--ease-out); }
 @media (hover: hover) { .link-arrow--back:hover::before { transform: translateX(-0.3em); } }
 
-.project-cover--video { aspect-ratio: 1920 / 1108; }
-.project-cover video { width: 100%; height: 100%; object-fit: cover; }
-.project-cover--film { aspect-ratio: 16 / 9; background: #000; }
-.project-cover--film video { object-fit: contain; }
 
-/* --- Lecture vidéo : gros bouton ▶ et fenêtre plein écran ------------------ */
-.project-cover--film { position: relative; }
-.film-play {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  background: rgba(10, 9, 10, 0.12);
-  transition: background var(--dur-fast);
-}
-.film-play span {
-  display: grid;
-  place-items: center;
-  width: clamp(4rem, 3rem + 3vw, 6rem);
-  aspect-ratio: 1;
-  padding-left: 0.3em;
-  border-radius: 50%;
-  background: var(--glow);
-  color: var(--night);
-  font-size: clamp(1.25rem, 1rem + 1vw, 2rem);
-  box-shadow: 0 20px 50px -15px rgba(10, 9, 10, 0.45);
-  transition: transform var(--dur) var(--ease-out);
-}
-@media (hover: hover) { .film-play:hover span { transform: scale(1.08); } }
-.film-play[hidden] { display: none; }
-
+/* --- Fenêtre vidéo (film complet avec le son) ---------------------------- */
 .case-info__links { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
 .case-info__play { border-radius: 999px; }
 .case-info__play span { font-size: 0.8em; }

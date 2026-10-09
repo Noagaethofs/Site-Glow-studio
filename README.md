@@ -10,17 +10,14 @@ npm run build      # → dist/ (SITE_URL=https://domaine.be npm run build pour l
 ```
 
 ## Structure
-- `index.html` accueil · `photographie/` page de Tim · `mentions-legales/` · `merci/` · `projets/<slug>/`
+- `index.html` accueil · `photographie/` page de Tim · `equipe/` · `mentions-legales/` · `merci/`
 - `partials/` header, footer, formulaire (inclus au build via `<!-- @include … -->`)
 - `src/css/` `tokens.css` (couleurs, typos, espacements) · `base.css` · `components.css` · `home.css` · `pages.css`
 - `src/js/modules/` un module par comportement (hero, méthode, réalisations, lightbox…)
 - `functions/api/contact.js` envoi du formulaire (Cloudflare Pages Function + Resend)
 
 ## Ajouter un projet
-```bash
-npm run new-project -- mon-slug "Nom du client" "Secteur" "Prestation" "Résumé en une phrase"
-```
-Puis ajouter la ligne correspondante dans la liste « Réalisations » de `index.html`.
+Dans `index.html`, section Projets : ajouter une diapositive `.screen__slide` (capture ou vidéo dans `public/media/projets/`), un bloc `.case-info` au même rang et un trait dans `.cases__steps`.
 
 ## Photos et vidéos
 Les emplacements sont des blocs `.ph` avec un libellé (`data-label`) qui décrit le média attendu. Les remplacer par `<img>` / `<picture>` / `<video>` (commentaires dans le HTML).

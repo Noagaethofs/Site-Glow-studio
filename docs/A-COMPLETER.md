@@ -10,7 +10,7 @@ Repérables dans le code par `class="todo"` ou `[CROCHETS]`.
 - [ ] FAQ : délais, maintenance, modification du site par le client
 - [ ] Délai de réponse au formulaire (48 h ?)
 - [ ] Nom du cabinet de la psychologue (+ accord pour le portfolio)
-- [ ] Liens, année et contexte des 3 projets
+- [ ] Contexte des 3 projets (texte court affiché dans la section Projets)
 - [ ] Email, téléphone, zone d'intervention, réseaux sociaux
 - [ ] Mentions légales : raison sociale, adresse, BCE/TVA, responsable, durée de conservation
 - [ ] Page Photographie : bio de Tim, tarifs, délai de livraison, légendes de la galerie

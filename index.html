@@ -221,7 +221,7 @@
        On change de projet en glissant (haut ↔ bas) ou en faisant défiler
        sur l'écran uniquement ; ailleurs la page défile normalement.
        Pour ajouter un projet : ajouter une diapositive .screen__slide ET
-       un bloc .case-info au même rang, puis créer sa page (npm run new-project).
+       un bloc .case-info au même rang (et un trait dans .cases__steps).
        ============================================================ -->
   <section class="work" id="realisations" aria-labelledby="work-title" data-cases>
     <header class="work__head">
@@ -234,22 +234,19 @@
           <p class="case-info__meta"><span>01</span> Nettoyage automobile · Site web</p>
           <h3 class="case-info__name">J-Clean Auto</h3>
           <p class="case-info__desc">Un site premium mais accessible : hero vidéo, comparateur avant / après, tarifs et témoignages, pensé d'abord pour le mobile.</p>
-          <a class="link-arrow" href="/projets/j-clean-auto/">Voir le projet</a>
         </article>
         <article class="case-info" data-case-info hidden>
           <p class="case-info__meta"><span>02</span> Santé · Association · Vidéo marketing</p>
           <h3 class="case-info__name">Planning Familial de Huy</h3>
           <p class="case-info__desc">Une vidéo pour présenter le centre, son équipe et ses services, de manière simple et rassurante.</p>
           <div class="case-info__links">
-            <button class="btn btn--sm case-info__play" type="button" data-film-open="/media/projets/planning-familial-huy/film" data-film-title="Vidéo du Planning Familial de Huy"><span aria-hidden="true">▶</span> Regarder la vidéo</button>
-            <a class="link-arrow" href="/projets/planning-familial-huy/">Voir le projet</a>
+            <button class="btn btn--sm case-info__play" type="button" data-film-open="/media/projets/planning-familial-huy/film" data-film-title="Vidéo du Planning Familial de Huy"><span aria-hidden="true">▶</span> Regarder la vidéo avec le son</button>
           </div>
         </article>
         <article class="case-info" data-case-info hidden>
           <p class="case-info__meta"><span>03</span> Santé · Profession libérale · Site web</p>
           <h3 class="case-info__name"><span class="todo">[Nom]</span> — Psychologue</h3>
           <p class="case-info__desc">Un site calme et clair, qui met en confiance avant même le premier rendez-vous.</p>
-          <a class="link-arrow" href="/projets/psychologue/">Voir le projet</a>
         </article>
 
         <!-- Indicateur vertical : un trait par projet, cliquable -->
@@ -280,7 +277,7 @@
               </video>
             </figure>
             <figure class="screen__slide" data-url="planning-familial-huy">
-              <!-- Extrait de la vidéo Choisir Huy – Planning familial (12,5 s en boucle, muet) -->
+              <!-- Extrait de la vidéo Choisir Huy – Planning familial (33 s en boucle, muet) -->
               <video muted loop playsinline preload="none" poster="/media/projets/planning-familial-huy/loop-poster.webp" data-autoplay aria-label="Extrait de la vidéo du Planning Familial de Huy">
                 <source src="/media/projets/planning-familial-huy/loop.webm" type="video/webm">
                 <source src="/media/projets/planning-familial-huy/loop.mp4" type="video/mp4">

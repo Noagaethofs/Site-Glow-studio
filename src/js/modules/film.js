@@ -2,7 +2,6 @@
  * Vidéos complètes (avec le son) :
  * - [data-film-open="/chemin/sans-extension"] ouvre une fenêtre (<dialog>)
  *   qui lit le film (WebM puis MP4) ; fermeture : bouton, Échap ou clic autour.
- * - [data-film-cover] : gros bouton ▶ sur une vidéo intégrée, qui lance la lecture.
  */
 export function initFilm() {
   const modal = document.querySelector('[data-film-modal]');
@@ -30,12 +29,4 @@ export function initFilm() {
     modal.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
     modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
   }
-
-  document.querySelectorAll('[data-film-cover]').forEach((cover) => {
-    const video = cover.querySelector('video');
-    const play = cover.querySelector('[data-film-play]');
-    if (!video || !play) return;
-    play.addEventListener('click', () => { play.hidden = true; video.play().catch(() => {}); video.focus(); });
-    video.addEventListener('play', () => { play.hidden = true; });
-  });
 }
