@@ -125,7 +125,15 @@
         <h2 class="tag" id="services-title">Nos services</h2>
         <div class="services__frame" aria-hidden="true">
           <!-- EMPLACEMENTS : une image par service, dans le même ordre que la liste -->
-          <figure class="services__img is-active" data-service-img><div class="ph" data-label="Capture d'un site réalisé"></div></figure>
+          <figure class="services__img services__img--site is-active" data-service-img>
+            <div class="mini-screen">
+              <div class="mini-screen__bar" aria-hidden="true"><span></span><span></span><span></span></div>
+              <video muted loop playsinline preload="none" poster="/media/projets/j-clean-auto/poster.webp" data-autoplay aria-label="Aperçu du site J-Clean Auto">
+                <source src="/media/projets/j-clean-auto/hero.webm" type="video/webm">
+                <source src="/media/projets/j-clean-auto/hero.mp4" type="video/mp4">
+              </video>
+            </div>
+          </figure>
           <figure class="services__img" data-service-img><img src="/media/services/photo-entreprise.webp" alt="Photo de groupe d'une entreprise lors de son événement d'été" width="960" height="1200" loading="lazy" decoding="async"></figure>
           <figure class="services__img" data-service-img><div class="ph" data-label="Extrait vidéo"></div></figure>
           <figure class="services__img" data-service-img><div class="ph" data-label="Équipe GLOW au travail"></div></figure>

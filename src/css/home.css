@@ -234,6 +234,12 @@
   }
   .services__img.is-active { opacity: 1; transform: none; }
   .services__img > img { width: 100%; height: 100%; object-fit: cover; }
+  /* Sites web : le site J-Clean dans une petite fenêtre de navigateur */
+  .services__img--site { display: grid; place-items: center; padding: 1.5rem; background: var(--night) var(--glow); }
+  .mini-screen { width: 100%; border-radius: 0.75rem; overflow: hidden; background: var(--night); box-shadow: 0 1.5rem 3rem rgba(10, 9, 10, 0.35); }
+  .mini-screen__bar { display: flex; gap: 0.35rem; padding: 0.55rem 0.7rem; background: #1c191a; }
+  .mini-screen__bar span { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: rgba(251, 248, 245, 0.25); }
+  .mini-screen video { display: block; width: 100%; height: auto; aspect-ratio: 1280 / 738; object-fit: cover; }
   .services__count {
     position: absolute;
     left: 1.1rem;
