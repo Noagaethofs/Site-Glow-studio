@@ -74,7 +74,7 @@
     max-height: calc(100svh - var(--header-h) - 8rem);
     border-radius: 1.25rem;
     overflow: hidden;
-    background: radial-gradient(70% 55% at 50% 45%, rgba(251, 248, 245, 0.06), transparent 70%), var(--night);
+    background: radial-gradient(70% 55% at 50% 45%, rgba(255, 201, 179, 0.08), transparent 70%), var(--night);
   }
   /* Les quatre visuels suivent la même règle : une fenêtre posée sur le fond noir du cadre */
   .services__img {
@@ -125,7 +125,7 @@
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 50%;
-    background: rgba(251, 248, 245, 0.25);
+    background: rgba(185, 148, 255, 0.35);
   }
   .svc-window__label {
     overflow: hidden;
@@ -220,7 +220,7 @@
     border-radius: 0.5rem;
     background:
       radial-gradient(60% 60% at 70% 30%, rgba(255, 255, 255, 0.5), transparent 70%),
-      linear-gradient(160deg, #e6ddd5, #cfc3b9);
+      linear-gradient(150deg, #f3d9cf, #e8dcd6 50%, #ddd2ec);
   }
   .web__cards {
     display: grid;
@@ -292,7 +292,8 @@
     border-radius: 1.1rem;
     overflow: hidden;
     background:
-      radial-gradient(60% 45% at 30% 25%, rgba(251, 248, 245, 0.14), transparent 70%),
+      radial-gradient(60% 45% at 30% 25%, rgba(255, 201, 179, 0.22), transparent 70%),
+      radial-gradient(70% 50% at 80% 85%, rgba(185, 148, 255, 0.18), transparent 70%),
       linear-gradient(170deg, #4a4244, #241f21 60%, #161314);
   }
   .vid__play {
@@ -370,10 +371,10 @@
   .vid__track i {
     flex: 1;
     border-radius: 0.25rem;
-    background: rgba(251, 248, 245, 0.55);
+    background: rgba(255, 201, 179, 0.6);
   }
   .vid__track--b i {
-    background: rgba(251, 248, 245, 0.25);
+    background: rgba(185, 148, 255, 0.35);
   }
   .vid__track--audio {
     height: 0.7rem;
@@ -479,9 +480,9 @@
     width: 1.4rem;
     height: 1.4rem;
     border-radius: 50% 50% 50% 0;
-    background: var(--ink);
+    background: var(--coral);
     transform: rotate(-45deg);
-    box-shadow: 0 0.4rem 0.8rem rgba(31, 27, 28, 0.3);
+    box-shadow: 0 0.4rem 0.8rem rgba(255, 143, 138, 0.35);
   }
   .care__pin::after {
     content: '';
@@ -553,7 +554,7 @@
     height: 1rem;
   }
   .care__icon--glow {
-    background: var(--paper);
+    background: var(--glow-soft);
     color: var(--night);
   }
   .care__chip--check {
