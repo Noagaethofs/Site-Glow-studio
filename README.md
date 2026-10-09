@@ -99,6 +99,16 @@ capture), un bloc `.case-info` au même rang et un bouton dans `.cases__steps`. 
   l'enregistrement DNS indiqué par Cloudflare.
 - Avant la mise en ligne : remplacer `[DOMAINE]` dans les pages et `public/robots.txt`.
 
+## Sécurité
+
+- `public/_headers` : en-têtes envoyés par Cloudflare, dont une Content-Security-Policy stricte.
+  L'empreinte du script inline du header y est ajoutée automatiquement au build ; un test vérifie que
+  la politique ne bloque rien.
+- Formulaire (`functions/api/contact.js`) : origine vérifiée, taille limitée, champ piège anti-robots,
+  champs nettoyés et HTML échappé dans l'email. Testé dans `tests/contact.spec.js`.
+- En cas de spam malgré tout : activer Cloudflare Turnstile ou une règle de limitation de débit
+  sur `/api/contact` dans le tableau de bord Cloudflare.
+
 ## Bonnes pratiques
 
 - Pas de librairie en plus sans raison : le site doit rester rapide.

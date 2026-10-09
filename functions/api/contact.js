@@ -12,9 +12,15 @@
  *
  * Répond en JSON quand la requête vient du JavaScript du site,
  * ou redirige vers /merci/ pour un envoi classique (sans JS).
+ *
+ * Protections : origine vérifiée (seul le site peut envoyer), taille limitée,
+ * champ piège anti-robots, longueurs bornées, retours à la ligne retirés des
+ * champs d'une ligne (pas d'injection dans le sujet), HTML échappé dans l'email.
  */
 const TYPES = { site: 'Site web', photo: 'Photo', video: 'Vidéo', autre: 'Autre' };
 const MAX = { name: 120, company: 160, email: 200, phone: 40, message: 5000 };
+const MAX_BODY = 32 * 1024; // octets
+const MULTILINE = new Set(['message']);
 
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -30,6 +36,12 @@ export async function onRequestPost({ request, env }) {
   const fail = (error, status = 400) =>
     wantsJson ? json({ ok: false, error }, status) : new Response(error, { status });
 
+  // Un autre site ne peut pas utiliser ce formulaire depuis le navigateur de ses visiteurs
+  const origin = request.headers.get('origin');
+  if (origin && origin !== new URL(request.url).origin) return fail('Origine refusée', 403);
+
+  if (Number(request.headers.get('content-length') || 0) > MAX_BODY) return fail('Message trop long', 413);
+
   let form;
   try {
     form = await request.formData();
@@ -37,10 +49,12 @@ export async function onRequestPost({ request, env }) {
     return fail('Requête invalide');
   }
 
-  const get = (k) =>
-    String(form.get(k) ?? '')
-      .trim()
-      .slice(0, MAX[k] ?? 200);
+  const get = (k) => {
+    let value = String(form.get(k) ?? '');
+    // caractères de contrôle retirés ; retours à la ligne gardés seulement dans le message
+    value = MULTILINE.has(k) ? value.replace(/[^\P{Cc}\n\t]/gu, '') : value.replace(/\p{Cc}+/gu, ' ');
+    return value.trim().slice(0, MAX[k] ?? 200);
+  };
   const data = {
     type: TYPES[get('type')] ?? 'Autre',
     name: get('name'),

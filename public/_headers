@@ -1,9 +1,13 @@
 # En-têtes Cloudflare Pages
+# Le marqueur CSP_SCRIPT_HASHES (entre doubles accolades) est remplacé au build par l'empreinte
+# des scripts inline (voir vite.config.js) : si on modifie le script du header, elle suit toute seule.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=31536000
+  Content-Security-Policy: default-src 'self'; script-src 'self' {{CSP_SCRIPT_HASHES}}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'
 
 # Fichiers versionnés par Vite : cache long
 /assets/*

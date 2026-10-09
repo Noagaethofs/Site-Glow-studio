@@ -17,7 +17,8 @@ export default defineConfig({
   },
   projects: [
     { name: 'ordinateur', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
-    { name: 'mobile', use: { ...devices['Pixel 7'] } },
+    // les tests de la fonction d'envoi n'ont pas de page : une seule fois suffit
+    { name: 'mobile', use: { ...devices['Pixel 7'] }, testIgnore: /contact\.spec/ },
   ],
   webServer: {
     command: `npm run build && npm run preview -- --port ${PORT} --strictPort`,

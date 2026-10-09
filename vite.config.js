@@ -8,7 +8,8 @@
  *   header, footer et formulaire sur chaque page, sans framework.
  */
 import { defineConfig } from 'vite';
-import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync, writeFileSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { resolve, join, relative } from 'node:path';
 
 const root = import.meta.dirname;
@@ -91,10 +92,50 @@ const sitemap = (pages) => {
   };
 };
 
+/**
+ * Content-Security-Policy : calcule l'empreinte (sha256) de chaque script inline
+ * des pages construites et l'écrit dans dist/_headers. Ainsi la politique
+ * autorise exactement nos scripts, et rien d'autre.
+ */
+const cspHashes = () => {
+  let outDir;
+  return {
+    name: 'glow-csp-hashes',
+    apply: 'build',
+    configResolved(config) {
+      outDir = resolve(config.root, config.build.outDir);
+    },
+    closeBundle() {
+      const headersFile = join(outDir, '_headers');
+      if (!existsSync(headersFile)) return;
+      const hashes = new Set();
+      const walk = (dir) => {
+        for (const entry of readdirSync(dir)) {
+          const full = join(dir, entry);
+          if (statSync(full).isDirectory()) walk(full);
+          else if (entry.endsWith('.html')) {
+            const html = readFileSync(full, 'utf8');
+            for (const [, attrs, code] of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)) {
+              if (/\bsrc=|application\/ld\+json/.test(attrs)) continue;
+              hashes.add(`'sha256-${createHash('sha256').update(code).digest('base64')}'`);
+            }
+          }
+        }
+      };
+      walk(outDir);
+      const headers = readFileSync(headersFile, 'utf8').replace(
+        '{{CSP_SCRIPT_HASHES}}',
+        [...hashes].join(' '),
+      );
+      writeFileSync(headersFile, headers);
+    },
+  };
+};
+
 const pages = findPages(root);
 
 export default defineConfig({
-  plugins: [htmlIncludes(), sitemap(pages)],
+  plugins: [htmlIncludes(), sitemap(pages), cspHashes()],
   build: {
     rollupOptions: { input: pages },
     assetsInlineLimit: 0,
