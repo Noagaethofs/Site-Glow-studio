@@ -13,7 +13,7 @@
   <meta property="og:title" content="Planning Familial de Huy — Réalisation GLOW">
   <meta property="og:description" content="Une vidéo pour présenter le centre, son équipe et ses services, de manière simple et rassurante.">
   <meta property="og:url" content="https://[DOMAINE]/projets/planning-familial-huy/">
-  <meta property="og:image" content="https://[DOMAINE]/media/projets/planning-familial-huy/og.jpg">
+  <meta property="og:image" content="https://[DOMAINE]/media/projets/planning-familial-huy/poster.webp">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/src/css/main.css">
@@ -33,13 +33,12 @@
     </dl>
   </section>
 
-  <figure class="project-cover" data-mask>
-    <!-- EMPLACEMENT : la vidéo elle-même (16:9). Remplacer le .ph par :
-         <video controls playsinline preload="none" poster="/media/projets/planning-familial-huy/poster.webp">
-           <source src="/media/projets/planning-familial-huy/video.mp4" type="video/mp4">
-         </video>
-         ou par l'intégration YouTube / Vimeo. -->
-    <div class="ph" data-label="Planning Familial de Huy · visuel principal · 16:9"></div>
+  <figure class="project-cover project-cover--film" data-mask>
+    <!-- Vidéo complète (51 s) avec le son ; lecture à la demande -->
+    <video controls playsinline preload="none" poster="/media/projets/planning-familial-huy/poster.webp" aria-label="Vidéo de présentation du Planning Familial de Huy">
+      <source src="/media/projets/planning-familial-huy/film.webm" type="video/webm">
+      <source src="/media/projets/planning-familial-huy/film.mp4" type="video/mp4">
+    </video>
   </figure>
 
   <section class="project-body" aria-labelledby="brief-title">
