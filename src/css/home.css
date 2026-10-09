@@ -233,14 +233,18 @@
     transition: opacity 0.6s var(--ease-out), transform 1.2s var(--ease-out);
   }
   .services__img.is-active { opacity: 1; transform: none; }
-  .services__img > img, .services__img > video { width: 100%; height: 100%; object-fit: cover; }
-  /* Sites web : le site J-Clean dans une petite fenêtre de navigateur */
-  .services__img--site { display: grid; place-items: center; padding: 1.5rem; background: radial-gradient(70% 55% at 50% 50%, rgba(185, 148, 255, 0.16), transparent 70%), var(--night); }
-  .services__img--site > .services__film { width: 100%; height: auto; border-radius: 0.75rem; box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.5); }
-  .mini-screen { width: 100%; border-radius: 0.75rem; overflow: hidden; background: var(--night); box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.5); }
+  /* Les quatre visuels suivent la même règle : une fenêtre posée sur le fond noir du cadre */
+  .services__frame { background: radial-gradient(70% 55% at 50% 50%, rgba(185, 148, 255, 0.16), transparent 70%), var(--night); }
+  .services__img { display: grid; place-items: center; padding: 1.5rem; }
+  .svc-window { width: 100%; border-radius: 0.75rem; overflow: hidden; background: var(--night); border: 1px solid rgba(251, 248, 245, 0.1); box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.5); }
+  .svc-window > img, .svc-window > video { display: block; width: 100%; height: auto; }
+  .svc-window__bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.55rem 0.75rem; background: #1c191a; color: #a69e9c; font-size: 0.7rem; line-height: 1; }
+  .svc-window__dots { display: flex; gap: 0.35rem; }
+  .svc-window__dots span { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: rgba(251, 248, 245, 0.25); }
+  .svc-window__label { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   /* Accompagnement : petite composition d'interfaces (illustration) */
-  .care { position: relative; width: 100%; max-width: 22rem; display: grid; gap: 0.8rem; font-size: 0.8rem; }
-  .care__card { border-radius: 0.9rem; box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.45); }
+  .care { position: relative; width: 100%; display: grid; gap: 0.8rem; font-size: 0.8rem; }
+  .care__card { border-radius: 0.75rem; box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.45); }
   .care__gmb { overflow: hidden; background: var(--paper); color: var(--ink); }
   .care__map {
     position: relative;
@@ -276,9 +280,6 @@
     .services__img.is-active .care__card:nth-child(4) { animation-delay: 0.45s; }
   }
   @keyframes care-in { from { opacity: 0; transform: translateY(0.8rem); } }
-  .mini-screen__bar { display: flex; gap: 0.35rem; padding: 0.55rem 0.7rem; background: #1c191a; }
-  .mini-screen__bar span { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: rgba(251, 248, 245, 0.25); }
-  .mini-screen video { display: block; width: 100%; height: auto; aspect-ratio: 1280 / 738; object-fit: cover; }
   .services__count {
     position: absolute;
     left: 1.1rem;

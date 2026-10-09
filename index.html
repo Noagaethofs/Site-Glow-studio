@@ -125,26 +125,35 @@
         <h2 class="tag" id="services-title">Nos services</h2>
         <div class="services__frame" aria-hidden="true">
           <!-- EMPLACEMENTS : une image par service, dans le même ordre que la liste -->
-          <figure class="services__img services__img--site is-active" data-service-img>
-            <div class="mini-screen">
-              <div class="mini-screen__bar" aria-hidden="true"><span></span><span></span><span></span></div>
-              <video muted loop playsinline preload="none" poster="/media/projets/j-clean-auto/poster.webp" data-autoplay aria-label="Aperçu du site J-Clean Auto">
+          <figure class="services__img is-active" data-service-img>
+            <div class="svc-window">
+              <div class="svc-window__bar"><span class="svc-window__dots"><span></span><span></span><span></span></span><span class="svc-window__label">Site web · J-Clean Auto</span></div>
+              <video muted loop playsinline preload="none" poster="/media/projets/j-clean-auto/poster.webp" data-autoplay aria-label="Aperçu du site J-Clean Auto" width="1280" height="738">
                 <source src="/media/projets/j-clean-auto/hero.webm" type="video/webm">
                 <source src="/media/projets/j-clean-auto/hero.mp4" type="video/mp4">
               </video>
             </div>
           </figure>
-          <figure class="services__img" data-service-img><img src="/media/services/photo-entreprise.webp" alt="Photo de groupe d'une entreprise lors de son événement d'été" width="960" height="1200" loading="lazy" decoding="async"></figure>
-          <figure class="services__img services__img--site" data-service-img>
-            <video class="services__film" muted loop playsinline preload="none" poster="/media/projets/planning-familial-huy/loop-poster.webp" data-autoplay aria-label="Extrait de la vidéo du Planning Familial de Huy">
-              <source src="/media/projets/planning-familial-huy/loop.webm" type="video/webm">
-              <source src="/media/projets/planning-familial-huy/loop.mp4" type="video/mp4">
-            </video>
+          <figure class="services__img" data-service-img>
+            <div class="svc-window">
+              <div class="svc-window__bar"><span class="svc-window__dots"><span></span><span></span><span></span></span><span class="svc-window__label">Photo · Événement d'entreprise</span></div>
+              <img src="/media/services/photo-entreprise.webp" alt="Photo de groupe d'une entreprise lors de son événement d'été" width="1200" height="800" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="services__img" data-service-img>
+            <div class="svc-window">
+              <div class="svc-window__bar"><span class="svc-window__dots"><span></span><span></span><span></span></span><span class="svc-window__label">Vidéo · Planning Familial de Huy</span></div>
+              <video muted loop playsinline preload="none" poster="/media/projets/planning-familial-huy/loop-poster.webp" data-autoplay aria-label="Extrait de la vidéo du Planning Familial de Huy" width="1280" height="720">
+                <source src="/media/projets/planning-familial-huy/loop.webm" type="video/webm">
+                <source src="/media/projets/planning-familial-huy/loop.mp4" type="video/mp4">
+              </video>
+            </div>
           </figure>
           <!-- Illustration : fiche Google, maintenance et demande reçue (pas de vraies données) -->
-          <figure class="services__img services__img--site" data-service-img aria-label="Illustration : une fiche Google à jour, la maintenance du site et une nouvelle demande de devis">
+          <figure class="services__img" data-service-img aria-label="Illustration : une fiche Google à jour, la maintenance du site et une nouvelle demande de devis">
             <div class="care" aria-hidden="true">
               <div class="care__card care__gmb">
+                <div class="svc-window__bar"><span class="svc-window__dots"><span></span><span></span><span></span></span><span class="svc-window__label">Fiche Google</span></div>
                 <div class="care__map"><span class="care__pin"></span></div>
                 <div class="care__body">
                   <p class="care__name">Votre entreprise</p>
