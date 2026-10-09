@@ -240,7 +240,10 @@
           <p class="case-info__meta"><span>02</span> Santé · Association · Vidéo marketing</p>
           <h3 class="case-info__name">Planning Familial de Huy</h3>
           <p class="case-info__desc">Une vidéo pour présenter le centre, son équipe et ses services, de manière simple et rassurante.</p>
-          <a class="link-arrow" href="/projets/planning-familial-huy/">Voir le projet</a>
+          <div class="case-info__links">
+            <button class="btn btn--sm case-info__play" type="button" data-film-open="/media/projets/planning-familial-huy/film" data-film-title="Vidéo du Planning Familial de Huy"><span aria-hidden="true">▶</span> Regarder la vidéo</button>
+            <a class="link-arrow" href="/projets/planning-familial-huy/">Voir le projet</a>
+          </div>
         </article>
         <article class="case-info" data-case-info hidden>
           <p class="case-info__meta"><span>03</span> Santé · Profession libérale · Site web</p>
@@ -389,6 +392,11 @@
       </details>
     </div>
   </section>
+  <!-- Fenêtre vidéo (film complet avec le son), ouverte par [data-film-open] -->
+  <dialog class="film-modal" data-film-modal aria-label="Vidéo">
+    <button class="film-modal__close" type="button" data-film-close>Fermer ✕</button>
+    <div class="film-modal__frame" data-film-frame></div>
+  </dialog>
 </main>
 
 <!-- @include partials/footer.html -->

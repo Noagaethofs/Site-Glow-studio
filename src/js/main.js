@@ -24,6 +24,7 @@ import { initFooterLogo } from './modules/footer.js';
 import { initForms } from './modules/form.js';
 import { initLightbox } from './modules/lightbox.js';
 import { initVideos } from './modules/videos.js';
+import { initFilm } from './modules/film.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 history.scrollRestoration = 'manual';
@@ -39,6 +40,7 @@ async function boot() {
   initForms();
   initLightbox();
   initVideos();
+  initFilm();
 
   // Lien de navigation de la page courante
   document.querySelectorAll('.header__nav a, .menu__list a').forEach((a) => {
