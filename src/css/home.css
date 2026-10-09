@@ -233,7 +233,7 @@
     transition: opacity 0.6s var(--ease-out), transform 1.2s var(--ease-out);
   }
   .services__img.is-active { opacity: 1; transform: none; }
-  .services__img > img { width: 100%; height: 100%; object-fit: cover; }
+  .services__img > img, .services__img > video { width: 100%; height: 100%; object-fit: cover; }
   /* Sites web : le site J-Clean dans une petite fenêtre de navigateur */
   .services__img--site { display: grid; place-items: center; padding: 1.5rem; background: var(--night) var(--glow); }
   .mini-screen { width: 100%; border-radius: 0.75rem; overflow: hidden; background: var(--night); box-shadow: 0 1.5rem 3rem rgba(10, 9, 10, 0.35); }
