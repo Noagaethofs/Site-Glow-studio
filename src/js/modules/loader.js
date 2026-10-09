@@ -25,17 +25,21 @@ const waitForScrollIntent = (target) => new Promise((resolve) => {
     window.removeEventListener('wheel', onWheel);
     window.removeEventListener('touchstart', onTouchStart);
     window.removeEventListener('touchmove', onTouchMove);
+    window.removeEventListener('touchend', onTouchEnd);
     window.removeEventListener('keydown', onKey);
     target.removeEventListener('click', done);
     resolve();
   };
-  const onWheel = (e) => { if (e.deltaY > 4) done(); };
+  // n'importe quel sens : molette, glissé du doigt vers le haut ou le bas
+  const onWheel = (e) => { if (Math.abs(e.deltaY) > 4) done(); };
   const onTouchStart = (e) => { touchY = e.touches[0].clientY; };
-  const onTouchMove = (e) => { if (touchY !== null && touchY - e.touches[0].clientY > 24) done(); };
+  const onTouchMove = (e) => { if (touchY !== null && Math.abs(touchY - e.touches[0].clientY) > 20) done(); };
+  const onTouchEnd = (e) => { if (touchY !== null && Math.abs(touchY - e.changedTouches[0].clientY) > 20) done(); };
   const onKey = (e) => { if (['ArrowDown', 'PageDown', ' ', 'Enter', 'Spacebar'].includes(e.key)) { e.preventDefault(); done(); } };
   window.addEventListener('wheel', onWheel, { passive: true });
   window.addEventListener('touchstart', onTouchStart, { passive: true });
   window.addEventListener('touchmove', onTouchMove, { passive: true });
+  window.addEventListener('touchend', onTouchEnd, { passive: true });
   window.addEventListener('keydown', onKey);
   target.addEventListener('click', done);
 });
@@ -99,13 +103,29 @@ export function runLoader() {
 
     // On attend la fin du dessin ET le chargement de la page (max 3,5 s)
     const ready = Promise.race([pageLoaded(), new Promise((r) => setTimeout(r, 3500))]);
-    Promise.all([ready, new Promise((r) => intro.eventCallback('onComplete', r))]).then(() => {
-      if (short) { exit(); return; }
-      // Première visite : on invite à défiler, et on entre au premier geste
-      loader.classList.add('is-waiting');
+    const drawn = new Promise((r) => intro.eventCallback('onComplete', r));
+
+    if (short) {
+      Promise.all([ready, drawn]).then(exit);
+      return;
+    }
+
+    // Première visite : on entre au premier geste (swipe, molette, clic, clavier),
+    // même pendant le dessin du logo — il se termine alors en accéléré.
+    loader.classList.add('is-waiting');
+    let left = false;
+    const leave = () => { if (!left) { left = true; exit(); } };
+    waitForScrollIntent(loader).then(() => {
+      if (intro.progress() < 1) {
+        intro.timeScale(6);
+        drawn.then(leave);
+      } else leave();
+    });
+    // dessin terminé sans geste : on affiche l'invitation à défiler
+    Promise.all([ready, drawn]).then(() => {
+      if (left) return;
       gsap.to(countBox, { opacity: 0, duration: 0.4 });
       gsap.fromTo(hint, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8, ease: 'expo.out' });
-      waitForScrollIntent(loader).then(exit);
     });
   });
 }
