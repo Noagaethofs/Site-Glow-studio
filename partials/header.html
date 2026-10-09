@@ -1,16 +1,18 @@
 <script>
-  /* Intro de chargement : décidée avant le premier affichage pour éviter tout flash.
-     Version complète à la première visite de la session, version courte ensuite.
-     Jamais en reduced-motion ; retirée de force après 5 s quoi qu'il arrive. */
+  /* Intro GLOW : uniquement à l'arrivée sur le site, jamais en changeant de page.
+     On la saute si elle a déjà été vue pendant la session, ou si l'on vient
+     d'une autre page du site (secours quand le stockage est bloqué).
+     Jamais en reduced-motion ; retirée de force après 5 s si le JS ne démarre pas. */
   (function () {
     try {
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var d = document.documentElement;
       var seen = false;
       try { seen = !!sessionStorage.getItem('glow-intro'); sessionStorage.setItem('glow-intro', '1'); } catch (e) {}
+      try { if (document.referrer && new URL(document.referrer).host === location.host) seen = true; } catch (e) {}
+      if (seen) return;
+      var d = document.documentElement;
       d.classList.add('is-loading');
-      d.setAttribute('data-intro', seen ? 'short' : 'full');
-      // filet de sécurité si le JavaScript ne démarre pas (annulé par loader.js)
+      d.setAttribute('data-intro', 'full');
       window.__glowIntroSafety = setTimeout(function () { d.classList.remove('is-loading'); }, 5000);
     } catch (e) {}
   })();
