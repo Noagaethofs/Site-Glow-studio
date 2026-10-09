@@ -113,7 +113,8 @@
     0 40px 80px -30px rgba(185, 148, 255, 0.45),
     0 20px 40px -20px rgba(10, 9, 10, 0.5);
   user-select: none;
-  touch-action: none; /* les glissés sur l'écran sont gérés en JS */
+  touch-action: pan-y; /* le défilement vertical reste à la page ; l'horizontal change de projet */
+  cursor: grab;
   outline-offset: 6px;
 }
 .screen__bar {
@@ -165,7 +166,6 @@
 }
 .screen__track {
   display: flex;
-  flex-direction: column;
   height: 100%;
   will-change: transform;
 }
@@ -199,11 +199,46 @@
 @keyframes hint-bob {
   0%,
   100% {
-    transform: translateY(-2px);
+    transform: translateX(-2px);
   }
   50% {
-    transform: translateY(2px);
+    transform: translateX(2px);
   }
+}
+.screen.is-dragging {
+  cursor: grabbing;
+}
+.screen__slide video,
+.screen__slide .ph {
+  pointer-events: none; /* le glisser à la souris ne sélectionne pas la vidéo */
+}
+
+/* flèches précédent / suivant */
+.cases__arrow {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: var(--fs-sm);
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    opacity 0.3s;
+}
+.cases__arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+@media (hover: hover) {
+  .cases__arrow:not(:disabled):hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+}
+.cases__arrow + .cases__arrow {
+  margin-right: 0.4rem;
 }
 
 @media (min-width: 64em) {

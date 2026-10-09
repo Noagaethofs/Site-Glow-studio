@@ -328,8 +328,10 @@
           <p class="case-info__desc">Un site calme et clair, qui met en confiance avant même le premier rendez-vous.</p>
         </article>
 
-        <!-- Indicateur vertical : un trait par projet, cliquable -->
+        <!-- Navigation : flèches + un trait par projet, cliquable -->
         <div class="cases__nav">
+          <button class="cases__arrow" type="button" aria-label="Projet précédent" data-case-prev><span aria-hidden="true">←</span></button>
+          <button class="cases__arrow" type="button" aria-label="Projet suivant" data-case-next><span aria-hidden="true">→</span></button>
           <div class="cases__steps" role="tablist" aria-label="Projets">
             <button type="button" role="tab" aria-label="Projet 1 : J-Clean Auto" data-case-step></button>
             <button type="button" role="tab" aria-label="Projet 2 : Planning Familial de Huy" data-case-step></button>
@@ -341,7 +343,7 @@
       </div>
 
       <!-- Écran : fenêtre de navigateur qui affiche le projet -->
-      <div class="screen" data-screen tabindex="0" role="group" aria-roledescription="carrousel" aria-label="Aperçu des projets : faites défiler sur l'écran ou utilisez les flèches haut et bas">
+      <div class="screen" data-screen tabindex="0" role="group" aria-roledescription="carrousel" aria-label="Aperçu des projets : glissez vers la gauche ou la droite, ou utilisez les flèches">
         <div class="screen__bar" aria-hidden="true">
           <span class="screen__dots"><i></i><i></i><i></i></span>
           <span class="screen__url" data-case-url>j-clean-auto</span>
@@ -370,7 +372,7 @@
             </figure>
           </div>
         </div>
-        <p class="screen__hint" aria-hidden="true"><span>↕</span> Glissez sur l'écran pour changer de projet</p>
+        <p class="screen__hint" aria-hidden="true"><span>↔</span> Glissez l'écran pour changer de projet</p>
       </div>
     </div>
   </section>

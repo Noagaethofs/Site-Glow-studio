@@ -44,8 +44,7 @@ test('les services changent d’image au défilement', async ({ page }, testInfo
   await expect(imgs.nth(2)).toHaveClass(/is-active/, { timeout: 5_000 });
 });
 
-test('les projets changent au geste sur l’écran', async ({ page }, testInfo) => {
-  test.skip(isMobile(testInfo), 'le glisser tactile est vérifié à la main sur téléphone');
+test('les projets changent au glisser horizontal, aux flèches et au clavier', async ({ page }) => {
   await skipIntro(page);
   await page.goto('/');
   const screen = page.locator('[data-screen]');
@@ -53,15 +52,40 @@ test('les projets changent au geste sur l’écran', async ({ page }, testInfo) 
   await screen.scrollIntoViewIfNeeded();
   await expect(infos.nth(0)).toHaveClass(/is-active/);
 
-  await screen.hover();
-  await page.mouse.wheel(0, 120);
-  await expect(infos.nth(1)).toHaveClass(/is-active/, { timeout: 3_000 });
+  // glisser vers la gauche sur l'écran → projet suivant
+  const box = await screen.boundingBox();
+  const y = box.y + box.height / 2;
+  await page.mouse.move(box.x + box.width * 0.7, y);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width * 0.5, y, { steps: 5 });
+  await page.mouse.move(box.x + box.width * 0.2, y, { steps: 5 });
+  await page.mouse.up();
+  await expect(infos.nth(1)).toHaveClass(/is-active/);
 
-  // flèches du clavier sur l'écran
-  await page.waitForTimeout(900);
+  // flèche suivante, puis la flèche est désactivée au dernier projet
+  await page.locator('[data-case-next]').click();
+  await expect(infos.nth(2)).toHaveClass(/is-active/);
+  await expect(page.locator('[data-case-next]')).toBeDisabled();
+
+  // clavier
   await screen.focus();
-  await page.keyboard.press('ArrowUp');
-  await expect(infos.nth(0)).toHaveClass(/is-active/, { timeout: 3_000 });
+  await page.keyboard.press('ArrowLeft');
+  await expect(infos.nth(1)).toHaveClass(/is-active/);
+});
+
+test('la molette sur l’écran fait défiler la page, pas les projets', async ({ page }, testInfo) => {
+  test.skip(isMobile(testInfo), 'molette : ordinateur');
+  await skipIntro(page);
+  await page.goto('/');
+  const screen = page.locator('[data-screen]');
+  await screen.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(300);
+  const before = await page.evaluate(() => scrollY);
+  await screen.hover();
+  await page.mouse.wheel(0, 400);
+  await page.waitForTimeout(800);
+  expect(await page.evaluate(() => scrollY)).toBeGreaterThan(before);
+  await expect(page.locator('[data-case-info]').nth(0)).toHaveClass(/is-active/);
 });
 
 test('la vidéo du Planning Familial s’ouvre avec le son et se ferme', async ({ page }) => {
