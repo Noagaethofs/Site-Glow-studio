@@ -132,6 +132,106 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+  /* Photographie : la vraie photo dans une interface de retouche */
+  .photo {
+    position: relative;
+    width: 100%;
+    padding-bottom: 2.8rem;
+  }
+  .photo__stage {
+    position: relative;
+    padding: 0.9rem 0.9rem 0.6rem;
+    background: #141112;
+  }
+  .photo__stage img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.3rem;
+  }
+  /* repères de cadrage aux quatre coins */
+  .photo__frame i {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    border: 0 solid rgba(251, 248, 245, 0.85);
+  }
+  .photo__frame i:nth-child(1) {
+    top: 1.3rem;
+    left: 1.3rem;
+    border-width: 2px 0 0 2px;
+  }
+  .photo__frame i:nth-child(2) {
+    top: 1.3rem;
+    right: 1.3rem;
+    border-width: 2px 2px 0 0;
+  }
+  .photo__frame i:nth-child(3) {
+    bottom: 1rem;
+    left: 1.3rem;
+    border-width: 0 0 2px 2px;
+  }
+  .photo__frame i:nth-child(4) {
+    bottom: 1rem;
+    right: 1.3rem;
+    border-width: 0 2px 2px 0;
+  }
+  /* pellicule : d'autres cadrages de la même série */
+  .photo__strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
+    padding: 0 0.9rem 0.9rem;
+    background: #141112;
+  }
+  .photo__strip span {
+    aspect-ratio: 3 / 2;
+    border-radius: 0.2rem;
+    background: url('/media/services/photo-entreprise.webp') center / 260% auto no-repeat;
+    opacity: 0.45;
+  }
+  .photo__strip span:nth-child(2) {
+    background-position: 15% 70%;
+  }
+  .photo__strip span:nth-child(3) {
+    background-position: 50% 30%;
+  }
+  .photo__strip span:nth-child(4) {
+    background-position: 85% 60%;
+  }
+  .photo__strip span:nth-child(5) {
+    background-position: 35% 90%;
+  }
+  .photo__strip .is-current {
+    background-size: cover;
+    opacity: 1;
+    box-shadow: 0 0 0 2px var(--peach);
+  }
+  .photo__chip {
+    position: absolute;
+    right: -0.4rem;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.75rem;
+    background: #1d1a1b;
+    border: 1px solid rgba(251, 248, 245, 0.12);
+    color: var(--paper);
+    font-size: 0.8rem;
+    box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.45);
+  }
+  .photo__chip b {
+    display: block;
+    font-weight: 500;
+  }
+  .photo__chip small {
+    display: block;
+    color: #a69e9c;
+    font-size: 0.72rem;
+  }
+
   /* Sites web : page d'accueil dessinée + version téléphone (illustration) */
   .web {
     position: relative;
