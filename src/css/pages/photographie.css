@@ -275,3 +275,126 @@
     column-gap: var(--space-4);
   }
 }
+
+/* --- Version compacte de la page --------------------------------------- */
+.page-photo .page-hero {
+  min-height: 70vh;
+  min-height: 70svh;
+}
+.page-photo .page-hero__title {
+  font-size: clamp(3.5rem, 1rem + 10vw, 12rem);
+}
+.page-photo .section-head {
+  gap: var(--space-2);
+  padding: var(--space-5) var(--gutter) var(--space-3);
+}
+.page-photo .section-title {
+  font-size: clamp(2.25rem, 1rem + 3vw, 4rem);
+}
+
+/* Tim : petit portrait à côté du texte */
+.page-photo .about {
+  grid-template-columns: minmax(0, 7rem) minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+  padding: var(--space-5) var(--gutter);
+}
+.page-photo .about__photo {
+  border-radius: 0.75rem;
+}
+.page-photo .about__text {
+  gap: var(--space-2);
+}
+.page-photo .about__lead {
+  font-size: var(--fs-md);
+}
+
+/* Prestations : grille de petites cartes au lieu d'une longue liste */
+.page-photo .services--photo {
+  padding-bottom: var(--space-5);
+}
+.page-photo .presta-list {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0 var(--gutter);
+  border-top: 0;
+}
+.page-photo .presta {
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  gap: 0.2rem 0.5rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+}
+.page-photo .presta__num {
+  padding-top: 0.15em;
+}
+.page-photo .presta__name {
+  font-size: var(--fs-md);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.page-photo .presta__desc {
+  grid-column: 2;
+  font-size: var(--fs-sm);
+}
+
+/* Déroulement : 4 étapes alignées, sans décalage */
+.page-photo .process {
+  padding-bottom: var(--space-5);
+}
+.page-photo .process__list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+.page-photo .process__step {
+  gap: 0.4rem;
+  margin-top: 0;
+  padding: var(--space-2) 0 0;
+}
+.page-photo .process__num {
+  font-size: 2.5rem;
+}
+.page-photo .process__step h3 {
+  font-size: var(--fs-md);
+}
+.page-photo .process__step p {
+  font-size: var(--fs-sm);
+}
+.page-photo .pricing {
+  padding-bottom: var(--space-5);
+}
+.page-photo .pricing__inner {
+  padding-top: var(--space-4);
+}
+.page-photo .pricing__title {
+  font-size: clamp(2rem, 1rem + 2.5vw, 3.5rem);
+}
+
+@media (min-width: 64em) {
+  .page-photo .about {
+    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+    column-gap: var(--space-5);
+    align-items: center;
+    max-width: 64rem;
+    margin-inline: auto;
+  }
+  .page-photo .about__photo {
+    margin-top: 0;
+  }
+  .page-photo .presta-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .page-photo .presta {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+  .page-photo .presta__desc {
+    grid-column: 2;
+  }
+  .page-photo .process__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .page-photo .process__step:nth-child(n) {
+    margin-top: 0;
+  }
+}

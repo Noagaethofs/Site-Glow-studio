@@ -165,18 +165,18 @@
   <!-- ============================================================
        RÉSERVER — formulaire pré-rempli sur « Photo »
        ============================================================ -->
-  <section class="contact contact--glow" id="reserver" aria-labelledby="contact-title">
-    <h2 class="contact__title" id="contact-title" data-split>Réserver <em>un shooting.</em></h2>
-    <div class="contact__grid">
-      <div class="contact__info">
-        <p class="contact__lead">Dites-nous ce que vous voulez montrer. On revient vers vous avec une proposition et des dates.</p>
-        <dl class="contact__details">
-          <div><dt>Email</dt><dd><a href="mailto:[EMAIL]" class="todo">[EMAIL]</a></dd></div>
-          <div><dt>Téléphone</dt><dd><a href="tel:[TELEPHONE]" class="todo">[TÉLÉPHONE]</a></dd></div>
-          <div><dt>Zone</dt><dd><span class="todo">[À COMPLÉTER]</span></dd></div>
-        </dl>
+  <section class="contact contact--card theme-ink" id="reserver" aria-labelledby="contact-title">
+    <div class="cta-card">
+      <h2 class="cta-card__title" id="contact-title">Réserver <br>un <em class="glow-text">shooting&nbsp;?</em></h2>
+      <p class="cta-card__lead">Dites-nous ce que vous voulez montrer. On revient vers vous avec une proposition et des dates.</p>
+      <div class="cta-card__actions">
+        <a class="btn btn--light cta-card__btn" href="mailto:[EMAIL]"><span class="todo">[EMAIL]</span></a>
+        <a class="cta-card__btn cta-card__btn--ghost" href="https://www.instagram.com/tc.photo__/" target="_blank" rel="noopener">Instagram de Tim</a>
       </div>
-      <!-- @include partials/contact-form.html preset="photo" id="photo" submit="Réserver un shooting" placeholder="Type de photos, lieu, nombre de personnes, date souhaitée…" -->
+      <details class="cta-card__form" data-cta-form>
+        <summary class="cta-card__toggle">Ou remplissez le formulaire de réservation</summary>
+        <!-- @include partials/contact-form.html preset="photo" id="photo" submit="Réserver un shooting" placeholder="Type de photos, lieu, nombre de personnes, date souhaitée…" -->
+      </details>
     </div>
   </section>
 </main>

@@ -102,3 +102,24 @@
     white-space: nowrap;
   }
 }
+
+/* Équipe sur mobile / tablette : carrousel à faire glisser */
+@media (max-width: 63.99em) {
+  .team__list {
+    display: flex;
+    gap: var(--space-2);
+    margin: 0 calc(var(--gutter) * -1);
+    padding: 0 var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .team__list::-webkit-scrollbar {
+    display: none;
+  }
+  .member {
+    flex: 0 0 min(78%, 22rem);
+    scroll-snap-align: start;
+  }
+}
