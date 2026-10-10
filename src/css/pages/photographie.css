@@ -1,4 +1,4 @@
-/* --- Hero de page (photo plein écran) ------------------------------------ */
+/* --- Hero de page (utilisé par la page Merci) ------------------------------------ */
 .page-hero {
   position: relative;
   min-height: 100vh;
@@ -56,345 +56,219 @@
   line-height: 1.35;
 }
 
-/* --- Présentation de Tim ------------------------------------------------- */
-.about {
-  display: grid;
-  gap: var(--space-5);
-  padding: var(--space-6) var(--gutter);
-}
-.about__photo {
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border-radius: 1.25rem;
-}
-.about__text {
-  display: grid;
-  gap: var(--space-3);
-  align-content: center;
-}
-.about__lead {
-  max-width: 34ch;
-  font-size: var(--fs-lg);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-}
-.about__body {
-  max-width: 52ch;
-  color: var(--muted);
-}
-@media (min-width: 64em) {
-  .about {
-    grid-template-columns: 5fr 7fr;
-    column-gap: var(--space-6);
-    align-items: center;
-  }
-  .about__photo {
-    margin-top: calc(var(--space-6) * -1.6);
-  } /* chevauche le hero : asymétrie */
+/* ==========================================================================
+   Page Photographie — inspirée d'un profil Instagram
+   ========================================================================== */
+.ig {
+  --ig-max: 58rem;
+  padding: calc(var(--header-h) + var(--space-4)) var(--gutter) 0;
+  background: var(--bg);
+  color: var(--fg);
 }
 
-/* --- Prestations photo : liste en deux colonnes typographiques ----------- */
-.services--photo {
-  padding-bottom: var(--space-6);
-}
-.presta-list {
-  border-top: 1px solid var(--line);
-}
-.presta {
+/* --- Profil ------------------------------------------------------------- */
+.ig-profile {
   display: grid;
-  grid-template-columns: 2rem minmax(0, 1fr);
-  gap: 0.35rem var(--space-2);
-  padding: var(--space-3) var(--gutter);
-  border-bottom: 1px solid var(--line);
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: center;
+  max-width: var(--ig-max);
+  margin: 0 auto;
 }
-.presta__num {
+.ig-profile__avatar {
+  /* anneau aux couleurs GLOW, comme une story */
+  width: 6rem;
+  aspect-ratio: 1;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--glow);
+}
+.ig-profile__avatar .ph {
+  border: 3px solid var(--bg);
+  border-radius: 50%;
+}
+.ig-profile__avatar .ph::before,
+.ig-profile__avatar .ph::after {
+  display: none;
+}
+.ig-profile__info {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: start;
+}
+.ig-profile__handle {
   font-size: var(--fs-sm);
+  font-weight: 500;
   color: var(--muted);
-  padding-top: 0.5em;
 }
-.presta__name {
-  font-size: clamp(1.75rem, 1rem + 2.6vw, 3.75rem);
+.ig-profile__name {
+  font-size: clamp(1.6rem, 1rem + 2.4vw, 3rem);
   line-height: 1;
   letter-spacing: var(--track-tight);
 }
-.presta__desc {
-  grid-column: 2;
-  color: var(--muted);
-  max-width: 44ch;
+.ig-profile__name em {
+  font-family: var(--font-serif);
+  font-weight: 400;
 }
-@media (min-width: 64em) {
-  .presta {
-    grid-template-columns: 4rem minmax(0, 1.5fr) minmax(0, 1fr);
-    align-items: center;
+.ig-profile__bio {
+  max-width: 44ch;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.ig-profile__price {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.ig-profile__price a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.ig-profile__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+.ig-profile__ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 1.3rem;
+  border: 1px solid rgba(251, 248, 245, 0.18);
+  border-radius: 999px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+@media (hover: hover) {
+  .ig-profile__ghost:hover {
+    background: rgba(251, 248, 245, 0.08);
   }
-  .presta__desc {
-    grid-column: 3;
+}
+/* sur téléphone, le texte passe sous la photo (comme sur Instagram) */
+@media (max-width: 39.99em) {
+  .ig-profile {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  .ig-profile__avatar {
+    width: 5rem;
+  }
+}
+@media (min-width: 48em) {
+  .ig-profile {
+    gap: var(--space-5);
+  }
+  .ig-profile__avatar {
+    width: 9.5rem;
   }
 }
 
-/* --- Galerie compacte : 8 photos 4:5, 2 colonnes sur mobile, 4 sur ordinateur */
-.gallery {
-  padding: var(--space-5) var(--gutter);
+/* --- Stories à la une : ce que Tim photographie ------------------------- */
+.ig-highlights {
+  max-width: var(--ig-max);
+  margin: var(--space-4) auto 0;
 }
-.gallery__head {
+.ig-highlights__list {
+  display: flex;
+  gap: var(--space-3);
+  margin: 0 calc(var(--gutter) * -1);
+  padding: 0 var(--gutter) 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ig-highlights__list::-webkit-scrollbar {
+  display: none;
+}
+.ig-highlight {
   display: grid;
-  gap: var(--space-2);
-  max-width: 64rem;
-  margin: 0 auto var(--space-4);
+  flex: none;
+  justify-items: center;
+  gap: 0.45rem;
+  width: 4.6rem;
 }
-.gallery__grid {
+.ig-highlight__ring {
+  width: 4.2rem;
+  aspect-ratio: 1;
+  padding: 2px;
+  border: 1px solid rgba(251, 248, 245, 0.22);
+  border-radius: 50%;
+}
+.ig-highlight__ring .ph {
+  border-radius: 50%;
+}
+.ig-highlight__ring .ph::before,
+.ig-highlight__ring .ph::after {
+  display: none;
+}
+.ig-highlight__name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: var(--fs-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Grille de photos --------------------------------------------------- */
+.ig-grid {
+  max-width: var(--ig-max);
+  margin: var(--space-4) auto 0;
+  border-top: 1px solid rgba(251, 248, 245, 0.12);
+}
+.ig-grid__tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  width: max-content;
+  margin: -1px auto 0;
+  padding: 0.8rem 0.2rem;
+  border-top: 1px solid var(--fg);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.ig-grid__tab svg {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+.ig-grid__posts {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
-  max-width: 64rem;
-  margin-inline: auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3px;
+  margin: 0 calc(var(--gutter) * -1);
 }
-.g {
+.ig-post {
   position: relative;
   display: block;
   aspect-ratio: 4 / 5;
   overflow: hidden;
   cursor: zoom-in;
-  text-align: left;
-  border-radius: 0.6rem;
 }
-.g > * {
-  transition: transform 1.2s var(--ease-out);
-}
-.g > img {
+.ig-post > img,
+.ig-post > .ph {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition:
+    transform 0.8s var(--ease-out),
+    filter 0.4s;
+}
+.ig-post .ph {
+  --ph: #1a1718;
 }
 @media (hover: hover) {
-  .g:hover > * {
-    transform: scale(1.04);
+  .ig-post:hover > * {
+    transform: scale(1.03);
+    filter: brightness(0.85);
   }
 }
-.g:focus-visible {
-  outline-offset: 6px;
+.ig-post:focus-visible {
+  outline-offset: -3px;
 }
 @media (min-width: 48em) {
-  .gallery__grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.75rem;
-  }
-}
-@media (min-width: 64em) {
-  .gallery__head {
-    grid-template-columns: auto 1fr;
-    column-gap: var(--space-4);
-    align-items: baseline;
-  }
-  .gallery__head .section-title {
-    font-size: clamp(2.5rem, 1rem + 3vw, 4rem);
-  }
-}
-
-/* --- Déroulement ---------------------------------------------------------- */
-.process {
-  padding-bottom: var(--space-6);
-}
-.process__list {
-  display: grid;
-  gap: 0;
-  padding: 0 var(--gutter);
-  counter-reset: step;
-}
-.process__step {
-  display: grid;
-  gap: var(--space-2);
-  padding: var(--space-4) 0;
-  border-top: 1px solid var(--line);
-}
-.process__num {
-  font-family: var(--font-serif);
-  font-style: italic;
-  background: linear-gradient(100deg, #e9726c, #e0927a 45%, #9b77e3);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  padding-right: 0.1em;
-  font-size: clamp(4rem, 2rem + 6vw, 9rem);
-  line-height: 0.8;
-}
-.process__step h3 {
-  font-size: var(--fs-lg);
-  line-height: 1.05;
-  letter-spacing: var(--track-tight);
-}
-.process__step p {
-  max-width: 32ch;
-  color: var(--muted);
-}
-@media (min-width: 64em) {
-  .process__list {
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: var(--space-3);
-  }
-  .process__step:nth-child(2) {
-    margin-top: var(--space-4);
-  }
-  .process__step:nth-child(3) {
-    margin-top: calc(var(--space-4) * 2);
-  }
-  .process__step:nth-child(4) {
-    margin-top: calc(var(--space-4) * 3);
-  }
-}
-
-/* --- Tarifs --------------------------------------------------------------- */
-.pricing {
-  padding: 0 var(--gutter) var(--space-6);
-}
-.pricing__inner {
-  display: grid;
-  gap: var(--space-3);
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--line);
-}
-.pricing__title {
-  font-size: var(--fs-2xl);
-  line-height: 0.9;
-}
-.pricing__text {
-  display: grid;
-  gap: var(--space-2);
-  max-width: 44ch;
-  font-size: var(--fs-md);
-  line-height: 1.4;
-}
-.pricing__text a {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
-@media (min-width: 64em) {
-  .pricing__inner {
-    grid-template-columns: 1fr 1.4fr 1fr;
-    align-items: end;
-    column-gap: var(--space-4);
-  }
-}
-
-/* --- Version compacte de la page --------------------------------------- */
-.page-photo .page-hero {
-  min-height: 70vh;
-  min-height: 70svh;
-}
-.page-photo .page-hero__title {
-  font-size: clamp(3.5rem, 1rem + 10vw, 12rem);
-}
-.page-photo .section-head {
-  gap: var(--space-2);
-  padding: var(--space-5) var(--gutter) var(--space-3);
-}
-.page-photo .section-title {
-  font-size: clamp(2.25rem, 1rem + 3vw, 4rem);
-}
-
-/* Tim : petit portrait à côté du texte */
-.page-photo .about {
-  grid-template-columns: minmax(0, 7rem) minmax(0, 1fr);
-  gap: var(--space-3);
-  align-items: start;
-  padding: var(--space-5) var(--gutter);
-}
-.page-photo .about__photo {
-  border-radius: 0.75rem;
-}
-.page-photo .about__text {
-  gap: var(--space-2);
-}
-.page-photo .about__lead {
-  font-size: var(--fs-md);
-}
-
-/* Prestations : grille de petites cartes au lieu d'une longue liste */
-.page-photo .services--photo {
-  padding-bottom: var(--space-5);
-}
-.page-photo .presta-list {
-  display: grid;
-  gap: 0.5rem;
-  padding: 0 var(--gutter);
-  border-top: 0;
-}
-.page-photo .presta {
-  grid-template-columns: 1.75rem minmax(0, 1fr);
-  gap: 0.2rem 0.5rem;
-  padding: 0.9rem 1rem;
-  border: 1px solid var(--line);
-  border-radius: 0.75rem;
-}
-.page-photo .presta__num {
-  padding-top: 0.15em;
-}
-.page-photo .presta__name {
-  font-size: var(--fs-md);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-.page-photo .presta__desc {
-  grid-column: 2;
-  font-size: var(--fs-sm);
-}
-
-/* Déroulement : 4 étapes alignées, sans décalage */
-.page-photo .process {
-  padding-bottom: var(--space-5);
-}
-.page-photo .process__list {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-3);
-}
-.page-photo .process__step {
-  gap: 0.4rem;
-  margin-top: 0;
-  padding: var(--space-2) 0 0;
-}
-.page-photo .process__num {
-  font-size: 2.5rem;
-}
-.page-photo .process__step h3 {
-  font-size: var(--fs-md);
-}
-.page-photo .process__step p {
-  font-size: var(--fs-sm);
-}
-.page-photo .pricing {
-  padding-bottom: var(--space-5);
-}
-.page-photo .pricing__inner {
-  padding-top: var(--space-4);
-}
-.page-photo .pricing__title {
-  font-size: clamp(2rem, 1rem + 2.5vw, 3.5rem);
-}
-
-@media (min-width: 64em) {
-  .page-photo .about {
-    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
-    column-gap: var(--space-5);
-    align-items: center;
-    max-width: 64rem;
-    margin-inline: auto;
-  }
-  .page-photo .about__photo {
-    margin-top: 0;
-  }
-  .page-photo .presta-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  .page-photo .presta {
-    grid-template-columns: 2rem minmax(0, 1fr);
-  }
-  .page-photo .presta__desc {
-    grid-column: 2;
-  }
-  .page-photo .process__list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-  .page-photo .process__step:nth-child(n) {
-    margin-top: 0;
+  .ig-grid__posts {
+    gap: 4px;
+    margin: 0;
   }
 }

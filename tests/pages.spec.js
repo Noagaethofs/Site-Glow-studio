@@ -51,3 +51,14 @@ test('aucune image sans texte alternatif', async ({ page }) => {
     expect(missing, path).toBe(0);
   }
 });
+
+test('page Photographie : une photo de la grille s’ouvre en grand', async ({ page }) => {
+  await skipIntro(page);
+  await page.goto('/photographie/');
+  await expect(page.locator('.ig-post')).toHaveCount(12);
+  await page.locator('.ig-post').nth(4).click();
+  await expect(page.locator('[data-lightbox]')).toBeVisible();
+  await expect(page.locator('[data-lightbox-counter]')).toContainText('05');
+  await page.keyboard.press('Escape');
+  await expect(page.locator('[data-lightbox]')).toBeHidden();
+});

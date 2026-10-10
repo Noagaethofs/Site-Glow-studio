@@ -36,129 +36,63 @@
 <body class="page-photo">
 <!-- @include partials/header.html contact_href="#reserver" cta_label="Réserver un shooting" sticky_label="Réserver" -->
 
-<main id="main">
-
+<main id="main" class="ig theme-ink">
   <!-- ============================================================
-       HERO — photo forte plein écran + titre court
+       PROFIL — la page reprend les codes d'un profil Instagram :
+       photo de Tim, nom, courte bio, boutons, « stories à la une »
+       (ce que Tim photographie), puis la grille de photos.
        ============================================================ -->
-  <section class="page-hero" id="top">
-    <figure class="page-hero__media" data-hero-zoom>
-      <!-- EMPLACEMENT : la photo la plus forte de Tim, plein écran (paysage, ≥ 2400 px de large) -->
-      <div class="ph" data-label="Photo hero · la plus forte de Tim · paysage plein écran"></div>
-    </figure>
-    <div class="page-hero__inner">
-      <p class="eyebrow">Photographie — par Tim <span class="todo">[Nom]</span></p>
-      <h1 class="page-hero__title" data-split>L'image <em class="glow-text">juste.</em></h1>
-      <div class="page-hero__bottom">
-        <p class="page-hero__lead">Des photos vraies de votre entreprise : vos visages, vos lieux, votre travail. Avec ou sans site web.</p>
+  <section class="ig-profile" id="top" aria-labelledby="ig-name">
+    <div class="ig-profile__avatar">
+      <!-- EMPLACEMENT : portrait carré de Tim (≥ 600 px) -->
+      <span class="ph" data-label="Tim"></span>
+    </div>
+    <div class="ig-profile__info">
+      <p class="ig-profile__handle">tc.photo__</p>
+      <h1 class="ig-profile__name" id="ig-name">Tim <span class="todo">[Nom]</span>, <em>photographe.</em></h1>
+      <p class="ig-profile__bio">Des photos vraies de votre entreprise : vos visages, vos lieux, votre travail. Photographe chez GLOW Studio, en Belgique.</p>
+      <p class="ig-profile__price"><span class="todo">[À partir de X €]</span> · Inclus dans l'<a href="/#offres">offre Signature</a></p>
+      <div class="ig-profile__actions">
         <a class="btn btn--glow" href="#reserver" data-preset-link="photo">Réserver un shooting</a>
+        <a class="ig-profile__ghost" href="https://www.instagram.com/tc.photo__/" target="_blank" rel="noopener">Voir sur Instagram</a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       TIM — qui il est, son approche
-       ============================================================ -->
-  <section class="about theme-paper" aria-labelledby="about-title">
-    <figure class="about__photo" data-mask>
-      <!-- EMPLACEMENT : portrait de Tim au travail (4:5) -->
-      <div class="ph" data-label="Portrait Tim au travail · 4:5"></div>
-    </figure>
-    <div class="about__text">
-      <p class="eyebrow">Le photographe</p>
-      <h2 class="section-title" id="about-title" data-split>Pas de pose forcée. <em>Pas de banque d'images.</em></h2>
-      <p class="about__lead" data-reveal>Tim est le photographe de GLOW. Il photographie votre entreprise telle qu'elle est, pour que vos clients sachent à qui ils ont affaire avant même de vous appeler.</p>
-      <p class="about__body todo" data-reveal>[Quelques lignes sur Tim : son parcours, ce qu'il aime photographier, sa façon de travailler sur place.]</p>
-    </div>
+  <!-- Ce que Tim photographie, en « stories à la une » -->
+  <section class="ig-highlights" aria-label="Ce que Tim photographie">
+    <ul class="ig-highlights__list">
+        <li class="ig-highlight"><span class="ig-highlight__ring"><span class="ph" data-label=""></span></span><span class="ig-highlight__name" title="Portraits professionnels">Portraits</span></li>
+        <li class="ig-highlight"><span class="ig-highlight__ring"><span class="ph" data-label=""></span></span><span class="ig-highlight__name" title="Photos d'équipe">Équipe</span></li>
+        <li class="ig-highlight"><span class="ig-highlight__ring"><span class="ph" data-label=""></span></span><span class="ig-highlight__name" title="Entreprise et locaux">Locaux</span></li>
+        <li class="ig-highlight"><span class="ig-highlight__ring"><span class="ph" data-label=""></span></span><span class="ig-highlight__name" title="Produits">Produits</span></li>
+        <li class="ig-highlight"><span class="ig-highlight__ring"><span class="ph" data-label=""></span></span><span class="ig-highlight__name" title="Réalisations et chantiers">Chantiers</span></li>
+        <li class="ig-highlight"><span class="ig-highlight__ring"><span class="ph" data-label=""></span></span><span class="ig-highlight__name" title="Événements">Événements</span></li>
+    </ul>
   </section>
 
   <!-- ============================================================
-       PRESTATIONS
-       ============================================================ -->
-  <section class="services services--photo" aria-labelledby="presta-title">
-    <div class="section-head">
-      <p class="eyebrow"><span class="eyebrow__num">(01)</span> Prestations</p>
-      <h2 class="section-title" id="presta-title" data-split>Ce que Tim <em>photographie.</em></h2>
-      <p class="section-intro" data-reveal>Pour votre site, vos réseaux, vos documents ou la presse. Chaque shooting est préparé avec vous.</p>
-    </div>
-    <ol class="presta-list">
-      <li class="presta" data-reveal><span class="presta__num">01</span><h3 class="presta__name">Portraits professionnels</h3><p class="presta__desc">Pour votre site, LinkedIn, la presse. Naturels, pas figés.</p></li>
-      <li class="presta" data-reveal><span class="presta__num">02</span><h3 class="presta__name">Photos d'équipe</h3><p class="presta__desc">Montrer les personnes derrière l'entreprise. C'est ce qui rassure le plus.</p></li>
-      <li class="presta" data-reveal><span class="presta__num">03</span><h3 class="presta__name">Entreprise et locaux</h3><p class="presta__desc">Votre magasin, votre cabinet, votre atelier, sous leur meilleur jour.</p></li>
-      <li class="presta" data-reveal><span class="presta__num">04</span><h3 class="presta__name">Produits</h3><p class="presta__desc">Des images nettes et cohérentes, pour votre site ou votre boutique en ligne.</p></li>
-      <li class="presta" data-reveal><span class="presta__num">05</span><h3 class="presta__name">Réalisations et chantiers</h3><p class="presta__desc">Avant, pendant, après. La meilleure preuve de la qualité de votre travail.</p></li>
-      <li class="presta" data-reveal><span class="presta__num">06</span><h3 class="presta__name">Événements</h3><p class="presta__desc">Inaugurations, conférences, soirées clients. Les bons moments, sans déranger.</p></li>
-      <li class="presta" data-reveal><span class="presta__num">07</span><h3 class="presta__name">Contenu réseaux sociaux</h3><p class="presta__desc">Une série d'images pensée pour alimenter vos publications pendant des semaines.</p></li>
-    </ol>
-  </section>
-
-  <!-- ============================================================
-       GALERIE — grille compacte de 8 photos au format 4:5 (comme Instagram) + lightbox
-       Chaque item est un <button data-gallery-item>. Pour une vraie photo :
-         <button class="g" data-gallery-item data-caption="Légende" data-full="/media/photographie/photo-1-2000.webp">
+       GRILLE — 12 photos, 3 colonnes, format 4:5 comme Instagram.
+       Clic = agrandir (lightbox). Pour une vraie photo :
+         <button class="ig-post" type="button" data-gallery-item data-caption="Légende" data-full="/media/photographie/photo-1-2000.webp">
            <img src="/media/photographie/photo-1-800.webp" alt="Description précise" width="800" height="1000" loading="lazy" decoding="async">
          </button>
        ============================================================ -->
-  <section class="gallery theme-ink" aria-labelledby="gallery-title">
-    <div class="gallery__head">
-      <p class="eyebrow"><span class="eyebrow__num">(02)</span> Galerie</p>
-      <h2 class="section-title" id="gallery-title" data-split>Quelques <em>images.</em></h2>
-    </div>
-    <div class="gallery__grid">
-      <button class="g" type="button" data-gallery-item data-caption="[Légende photo 1]" aria-label="Agrandir la photo 1" data-mask><span class="ph" data-label="Photo 01 · 4:5"></span></button>
-      <button class="g" type="button" data-gallery-item data-caption="[Légende photo 2]" aria-label="Agrandir la photo 2" data-mask><span class="ph" data-label="Photo 02 · 4:5"></span></button>
-      <button class="g" type="button" data-gallery-item data-caption="[Légende photo 3]" aria-label="Agrandir la photo 3" data-mask><span class="ph" data-label="Photo 03 · 4:5"></span></button>
-      <button class="g" type="button" data-gallery-item data-caption="[Légende photo 4]" aria-label="Agrandir la photo 4" data-mask><span class="ph" data-label="Photo 04 · 4:5"></span></button>
-      <button class="g" type="button" data-gallery-item data-caption="[Légende photo 5]" aria-label="Agrandir la photo 5" data-mask><span class="ph" data-label="Photo 05 · 4:5"></span></button>
-      <button class="g" type="button" data-gallery-item data-caption="[Légende photo 6]" aria-label="Agrandir la photo 6" data-mask><span class="ph" data-label="Photo 06 · 4:5"></span></button>
-      <button class="g" type="button" data-gallery-item data-caption="[Légende photo 7]" aria-label="Agrandir la photo 7" data-mask><span class="ph" data-label="Photo 07 · 4:5"></span></button>
-      <button class="g" type="button" data-gallery-item data-caption="[Légende photo 8]" aria-label="Agrandir la photo 8" data-mask><span class="ph" data-label="Photo 08 · 4:5"></span></button>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       COMMENT ÇA SE PASSE
-       ============================================================ -->
-  <section class="process theme-paper" aria-labelledby="process-title">
-    <div class="section-head">
-      <p class="eyebrow"><span class="eyebrow__num">(03)</span> Déroulement</p>
-      <h2 class="section-title" id="process-title" data-split>Simple, <em>du début à la fin.</em></h2>
-    </div>
-    <ol class="process__list">
-      <li class="process__step" data-reveal>
-        <span class="process__num">1</span>
-        <h3>Prise de contact</h3>
-        <p>Vous nous dites ce dont vous avez besoin. On vous répond avec une proposition claire.</p>
-      </li>
-      <li class="process__step" data-reveal>
-        <span class="process__num">2</span>
-        <h3>Préparation</h3>
-        <p>On fixe ensemble le lieu, le moment, les photos à faire. Vous savez exactement à quoi vous attendre.</p>
-      </li>
-      <li class="process__step" data-reveal>
-        <span class="process__num">3</span>
-        <h3>Shooting</h3>
-        <p>Tim vient chez vous. L'ambiance reste détendue, même pour ceux qui n'aiment pas être photographiés.</p>
-      </li>
-      <li class="process__step" data-reveal>
-        <span class="process__num">4</span>
-        <h3>Livraison retouchée</h3>
-        <p>Vous recevez vos photos retouchées, prêtes pour le web et l'impression, sous <span class="todo">[X jours]</span>.</p>
-      </li>
-    </ol>
-  </section>
-
-  <!-- ============================================================
-       TARIFS
-       ============================================================ -->
-  <section class="pricing theme-paper" aria-labelledby="pricing-title">
-    <div class="pricing__inner">
-      <p class="eyebrow">Tarifs</p>
-      <h2 class="pricing__title" id="pricing-title"><span class="todo">[À partir de X €]</span></h2>
-      <div class="pricing__text">
-        <p><span class="todo">[Ou : sur devis, selon la durée et le nombre de photos.]</span></p>
-        <p>Besoin d'un site en plus ? Le shooting est inclus dans l'<a href="/#offres">offre Signature</a>.</p>
-      </div>
+  <section class="ig-grid" aria-label="Photos de Tim">
+    <p class="ig-grid__tab"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2h12v12H2zM6 2v12M10 2v12M2 6h12M2 10h12" fill="none" stroke="currentColor" stroke-width="1.2"/></svg> Publications</p>
+    <div class="ig-grid__posts">
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 1]" aria-label="Agrandir la photo 1"><span class="ph" data-label="Photo 01"></span></button>
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 2]" aria-label="Agrandir la photo 2"><span class="ph" data-label="Photo 02"></span></button>
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 3]" aria-label="Agrandir la photo 3"><span class="ph" data-label="Photo 03"></span></button>
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 4]" aria-label="Agrandir la photo 4"><span class="ph" data-label="Photo 04"></span></button>
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 5]" aria-label="Agrandir la photo 5"><span class="ph" data-label="Photo 05"></span></button>
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 6]" aria-label="Agrandir la photo 6"><span class="ph" data-label="Photo 06"></span></button>
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 7]" aria-label="Agrandir la photo 7"><span class="ph" data-label="Photo 07"></span></button>
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 8]" aria-label="Agrandir la photo 8"><span class="ph" data-label="Photo 08"></span></button>
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 9]" aria-label="Agrandir la photo 9"><span class="ph" data-label="Photo 09"></span></button>
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 10]" aria-label="Agrandir la photo 10"><span class="ph" data-label="Photo 10"></span></button>
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 11]" aria-label="Agrandir la photo 11"><span class="ph" data-label="Photo 11"></span></button>
+      <button class="ig-post" type="button" data-gallery-item data-caption="[Légende photo 12]" aria-label="Agrandir la photo 12"><span class="ph" data-label="Photo 12"></span></button>
     </div>
   </section>
 

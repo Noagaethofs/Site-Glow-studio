@@ -189,9 +189,6 @@ section {
   letter-spacing: 0.01em;
   color: var(--muted);
 }
-.eyebrow__num {
-  color: var(--fg);
-}
 
 /* --- Emplacements photo / vidéo ----------------------------------------
    Bloc neutre avec grain et repères de cadrage. Le libellé (data-label)
@@ -352,42 +349,6 @@ figure > video {
   }
   .link-arrow--up:hover::after {
     transform: translateY(-0.2em);
-  }
-}
-
-/* --- Titres de section --------------------------------------------------- */
-.section-head {
-  display: grid;
-  gap: var(--space-3);
-  padding: var(--space-6) var(--gutter) var(--space-5);
-}
-.section-title {
-  max-width: 16ch;
-  font-size: clamp(2.75rem, 1.4rem + 5.4vw, 7.5rem);
-}
-.section-title em {
-  display: inline;
-}
-.section-intro {
-  max-width: 34ch;
-  font-size: var(--fs-md);
-  line-height: 1.4;
-  color: var(--muted);
-}
-@media (min-width: 64em) {
-  .section-head {
-    grid-template-columns: 1fr minmax(0, 2.4fr);
-    column-gap: var(--space-4);
-    align-items: end;
-  }
-  .section-head .eyebrow {
-    grid-row: 1 / span 2;
-    align-self: start;
-    padding-top: 0.6em;
-  }
-  .section-head .section-intro {
-    grid-column: 2;
-    margin-left: auto;
   }
 }
 
